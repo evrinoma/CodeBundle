@@ -1,0 +1,3 @@
+code_api:
+  resource: "@CodeBundle/Controller/CodeApiController.php"
+  type: annotation

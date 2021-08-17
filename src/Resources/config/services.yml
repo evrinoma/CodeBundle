@@ -1,0 +1,12 @@
+services:
+  Evrinoma\CodeBundle\Controller\CodeApiController:
+    alias: evrinoma.code.api.controller
+    public: true
+
+  evrinoma.code.api.controller:
+    class: Evrinoma\CodeBundle\Controller\CodeApiController
+    arguments:
+      - '@jms_serializer'
+      - '@request_stack'
+      - '@evrinoma.dto.factory'
+    autowire: true

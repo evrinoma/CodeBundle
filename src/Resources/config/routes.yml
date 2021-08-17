@@ -1,0 +1,3 @@
+codeapi:
+  resource: "@CodeBundle/Resources/config/routing/api.yml"
+  prefix: evrinoma
