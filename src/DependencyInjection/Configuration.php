@@ -20,8 +20,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder      = new TreeBuilder(CodeBundle::CODE_BUNDLE);
-        $rootNode         = $treeBuilder->getRootNode();
+        $treeBuilder = new TreeBuilder(CodeBundle::CODE_BUNDLE);
+        $rootNode    = $treeBuilder->getRootNode();
 
         return $treeBuilder;
     }

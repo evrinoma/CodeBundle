@@ -4,7 +4,6 @@
 namespace Evrinoma\CodeBundle;
 
 use Evrinoma\CodeBundle\DependencyInjection\CodeExtension;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 

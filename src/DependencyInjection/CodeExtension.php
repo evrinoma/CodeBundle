@@ -4,15 +4,10 @@
 namespace Evrinoma\CodeBundle\DependencyInjection;
 
 use Evrinoma\CodeBundle\CodeBundle;
-use Evrinoma\CodeBundle\DependencyInjection\Compiler\ConstraintPass;
-use Evrinoma\CodeBundle\Dto\CodeApiDto;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class CodeExtension
