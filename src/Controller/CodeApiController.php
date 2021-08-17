@@ -30,7 +30,7 @@ final class CodeApiController extends AbstractApiController
     public function __construct(
         SerializerInterface $serializer,
         RequestStack $requestStack,
-        FactoryDtoInterface $factoryDto,
+        FactoryDtoInterface $factoryDto
     ) {
         parent::__construct($serializer);
         $this->request    = $requestStack->getCurrentRequest();
