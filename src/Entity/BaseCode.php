@@ -3,7 +3,7 @@
 
 namespace Evrinoma\CodeBundle\Entity;
 
-
+use Doctrine\ORM\Mapping as ORM;
 use Evrinoma\CodeBundle\Model\AbstractCode;
 
 /**

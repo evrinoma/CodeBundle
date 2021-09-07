@@ -2,6 +2,7 @@
 
 namespace Evrinoma\CodeBundle\Model;
 
+use Doctrine\ORM\Mapping as ORM;
 use Evrinoma\UtilsBundle\Entity\ActiveTrait;
 use Evrinoma\UtilsBundle\Entity\CreateUpdateAtTrait;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
@@ -10,7 +11,7 @@ use Evrinoma\UtilsBundle\Entity\IdTrait;
  * Class AbstractCode
  *
  * @ORM\MappedSuperclass
- * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_coder", columns={"brief", "description", "bunch_id"})})
+ * ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_code", columns={"brief", "description", "bunch_id"})})
  */
 abstract class AbstractCode implements CodeInterface
 {

@@ -3,14 +3,14 @@
 
 namespace Evrinoma\CodeBundle\Model;
 
-
+use Doctrine\ORM\Mapping as ORM;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
 
 /**
  * Class AbstractOwner
  *
  * @ORM\MappedSuperclass
- * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_coder", columns={"brief"})})
+ * ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_brief", columns={"brief"})})
  */
 abstract class AbstractOwner implements OwnerInterface
 {

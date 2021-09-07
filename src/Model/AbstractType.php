@@ -3,9 +3,15 @@
 
 namespace Evrinoma\CodeBundle\Model;
 
-
+use Doctrine\ORM\Mapping as ORM;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
 
+/**
+ * Class AbstractType
+ *
+ * @ORM\MappedSuperclass
+ * ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_brief", columns={"brief"})})
+ */
 abstract class AbstractType implements TypeInterface
 {
     use IdTrait;
