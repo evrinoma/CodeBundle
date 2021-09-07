@@ -3,7 +3,7 @@
 
 namespace Evrinoma\CodeBundle\DependencyInjection;
 
-use Evrinoma\CodeBundle\CodeBundle;
+use Evrinoma\CodeBundle\EvrinomaCodeBundle;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -20,7 +20,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder(CodeBundle::CODE_BUNDLE);
+        $treeBuilder = new TreeBuilder(EvrinomaCodeBundle::CODE_BUNDLE);
         $rootNode    = $treeBuilder->getRootNode();
         $supportedDrivers = ['orm'];
 
@@ -35,9 +35,9 @@ class Configuration implements ConfigurationInterface
             ->cannotBeOverwritten()
             ->defaultValue('orm')
             ->end()
-            ->scalarNode('factory')->cannotBeEmpty()->defaultValue(CodeExtension::ENTITY_FACTORY)->end()
-            ->scalarNode('entity_code')->cannotBeEmpty()->defaultValue(CodeExtension::ENTITY_BASE_CODE)->end()
-            ->scalarNode('entity_bunch')->cannotBeEmpty()->defaultValue(CodeExtension::ENTITY_BASE_BUNCH)->end()
+            ->scalarNode('factory')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::ENTITY_FACTORY)->end()
+            ->scalarNode('entity_code')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::ENTITY_BASE_CODE)->end()
+            ->scalarNode('entity_bunch')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::ENTITY_BASE_BUNCH)->end()
             ->scalarNode('constraints')->defaultTrue()->info('This option is used for enable/disable basic constraints')->end()
             ->scalarNode('dto')->defaultNull()->info('This option is used for dto class override')->end()
             ->arrayNode('decorates')->addDefaultsIfNotSet()->children()

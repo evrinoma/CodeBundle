@@ -3,7 +3,7 @@
 
 namespace Evrinoma\CodeBundle\DependencyInjection;
 
-use Evrinoma\CodeBundle\CodeBundle;
+use Evrinoma\CodeBundle\EvrinomaCodeBundle;
 use Evrinoma\CodeBundle\Dto\CodeApiDto;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Alias;
@@ -12,12 +12,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-/**
- * Class CodeExtension
- *
- * @package Evrinoma\CodeBundle\DependencyInjection
- */
-class CodeExtension extends Extension
+class EvrinomaCodeExtension extends Extension
 {
     public const ENTITY_FACTORY           = 'Evrinoma\CodeBundle\Factory\CodeFactory';
     public const ENTITY_BASE_CODE         = 'Evrinoma\CodeBundle\Entity\Basic\BaseCode';
@@ -49,7 +44,7 @@ class CodeExtension extends Extension
 //region SECTION: Getters/Setters
     public function getAlias()
     {
-        return CodeBundle::CODE_BUNDLE;
+        return EvrinomaCodeBundle::CODE_BUNDLE;
     }
 //endregion Getters/Setters
 }

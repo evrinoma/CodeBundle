@@ -3,7 +3,7 @@
 
 namespace Evrinoma\CodeBundle;
 
-use Evrinoma\CodeBundle\DependencyInjection\CodeExtension;
+use Evrinoma\CodeBundle\DependencyInjection\EvrinomaCodeExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 
@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * @package Evrinoma\CodeBundle
  */
-class CodeBundle extends Bundle
+class EvrinomaCodeBundle extends Bundle
 {
 //region SECTION: Fields
     public const CODE_BUNDLE = 'code';
@@ -22,7 +22,7 @@ class CodeBundle extends Bundle
     public function getContainerExtension()
     {
         if (null === $this->extension) {
-            $this->extension = new CodeExtension();
+            $this->extension = new EvrinomaCodeExtension();
         }
 
         return $this->extension;
