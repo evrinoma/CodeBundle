@@ -22,6 +22,28 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder(CodeBundle::CODE_BUNDLE);
         $rootNode    = $treeBuilder->getRootNode();
+        $supportedDrivers = ['orm'];
+
+        $rootNode
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->scalarNode('db_driver')
+            ->validate()
+            ->ifNotInArray($supportedDrivers)
+            ->thenInvalid('The driver %s is not supported. Please choose one of '.json_encode($supportedDrivers))
+            ->end()
+            ->cannotBeOverwritten()
+            ->defaultValue('orm')
+            ->end()
+            ->scalarNode('factory')->cannotBeEmpty()->defaultValue(CodeExtension::ENTITY_FACTORY)->end()
+            ->scalarNode('entity_code')->cannotBeEmpty()->defaultValue(CodeExtension::ENTITY_BASE_CODE)->end()
+            ->scalarNode('entity_bunch')->cannotBeEmpty()->defaultValue(CodeExtension::ENTITY_BASE_BUNCH)->end()
+            ->scalarNode('constraints')->defaultTrue()->info('This option is used for enable/disable basic constraints')->end()
+            ->scalarNode('dto')->defaultNull()->info('This option is used for dto class override')->end()
+            ->arrayNode('decorates')->addDefaultsIfNotSet()->children()
+            ->scalarNode('command')->defaultNull()->info('This option is used for command decoration')->end()
+            ->scalarNode('query')->defaultNull()->info('This option is used for query decoration')->end()
+            ->end()->end()->end();
 
         return $treeBuilder;
     }
