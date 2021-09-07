@@ -1,3 +1,3 @@
 code_api:
-  resource: "@CodeBundle/Controller/CodeApiController.php"
+  resource: "@EvrinomaCodeBundle/Controller/CodeApiController.php"
   type: annotation
