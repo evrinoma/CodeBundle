@@ -3,7 +3,7 @@
 namespace Evrinoma\CodeBundle\Controller;
 
 use Evrinoma\CodeBundle\Manager\CommandManagerInterface;
-use Evrinoma\ContractorBundle\Manager\QueryManagerInterface;
+use Evrinoma\CodeBundle\Manager\QueryManagerInterface;
 use Evrinoma\DtoBundle\Factory\FactoryDtoInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractApiController;
 use Evrinoma\UtilsBundle\Rest\RestInterface;

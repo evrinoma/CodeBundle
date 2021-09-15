@@ -35,10 +35,10 @@ Actions в контроллере разбиты на две группы
     получение:
         код(ы) найдены HTTP_OK 200
     ошибки:
-        если код не найден ContractorNotFoundException возвращает HTTP_NOT_FOUND 404
+        если код не найден CodeNotFoundException возвращает HTTP_NOT_FOUND 404
         если код не уникален UniqueConstraintViolationException возвращает HTTP_CONFLICT 409
-        если код не прошел валидацию ContractorInvalidException возвращает HTTP_UNPROCESSABLE_ENTITY 422
-        если код не может быть сохранен ContractorCannotBeSavedException возвращает HTTP_NOT_IMPLEMENTED 501
+        если код не прошел валидацию CodeInvalidException возвращает HTTP_UNPROCESSABLE_ENTITY 422
+        если код не может быть сохранен CodeCannotBeSavedException возвращает HTTP_NOT_IMPLEMENTED 501
         все остальные ошибки возвращаются как HTTP_BAD_REQUEST 400
 
 

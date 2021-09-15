@@ -13,7 +13,7 @@ https://schema.phpunit.de/9.3/phpunit.xsd" backupGlobals="false" colors="true" b
         <ini name="memory_limit" value="-1"/>
     </php>
     <testsuites>
-        <testsuite name="ContractorBundle Test Suite">
+        <testsuite name="CodeBundle Test Suite">
             <directory>./Tests/</directory>
         </testsuite>
     </testsuites>
