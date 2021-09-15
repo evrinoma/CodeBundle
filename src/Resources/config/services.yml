@@ -9,4 +9,12 @@ services:
       - '@jms_serializer'
       - '@request_stack'
       - '@evrinoma.dto.factory'
-    autowire: true
+      - '@evrinoma.code.command.manager'
+      - '@evrinoma.code.query.manager'
+
+  evrinoma.code.command.manager:
+    class: Evrinoma\CodeBundle\Manager\CommandManager
+
+  evrinoma.code.query.manager:
+    class: Evrinoma\CodeBundle\Manager\QueryManager
+
