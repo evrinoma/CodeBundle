@@ -11,7 +11,7 @@ use Evrinoma\UtilsBundle\Entity\IdTrait;
  * Class AbstractCode
  *
  * @ORM\MappedSuperclass
- * ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_code", columns={"brief", "description", "bunch_id"})})
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_code", columns={"brief", "description", "bunch_id"})})
  */
 abstract class AbstractCode implements CodeInterface
 {

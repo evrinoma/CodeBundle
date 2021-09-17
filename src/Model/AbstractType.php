@@ -10,7 +10,7 @@ use Evrinoma\UtilsBundle\Entity\IdTrait;
  * Class AbstractType
  *
  * @ORM\MappedSuperclass
- * ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_brief", columns={"brief"})})
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_brief", columns={"brief"})})
  */
 abstract class AbstractType implements TypeInterface
 {

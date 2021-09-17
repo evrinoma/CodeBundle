@@ -10,7 +10,7 @@ use Evrinoma\UtilsBundle\Entity\IdTrait;
  * Class AbstractOwner
  *
  * @ORM\MappedSuperclass
- * ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_brief", columns={"brief"})})
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_brief", columns={"brief"})})
  */
 abstract class AbstractOwner implements OwnerInterface
 {
