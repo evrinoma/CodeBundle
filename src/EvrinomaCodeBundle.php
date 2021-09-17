@@ -3,7 +3,9 @@
 
 namespace Evrinoma\CodeBundle;
 
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\MapEntityPass;
 use Evrinoma\CodeBundle\DependencyInjection\EvrinomaCodeExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 
@@ -16,6 +18,14 @@ class EvrinomaCodeBundle extends Bundle
 {
 //region SECTION: Fields
     public const CODE_BUNDLE = 'code';
+
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+        $container
+            ->addCompilerPass(new MapEntityPass($this->getNamespace(), $this->getPath()))
+        ;
+    }
 //endregion Fields
 
 //region SECTION: Getters/Setters
