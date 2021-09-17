@@ -37,8 +37,14 @@ class MapEntityPass implements CompilerPassInterface
         $driver                    = $container->findDefinition('doctrine.orm.default_metadata_driver');
         $referenceAnnotationReader = new Reference('annotations.reader');
 
-        $this->loadMetadata($container, $driver, $referenceAnnotationReader, '%s/Model/Basic', '%s/Entity/Basic');
-        $this->remapEntity($driver, 'Basic');
+
+        $entityBunch = $container->getParameter('evrinoma.code.entity_code');
+        $entityCode  = $container->getParameter('evrinoma.code.entity_bunch');
+        if ((strpos($entityBunch, EvrinomaCodeExtension::ENTITY) !== false) && (strpos($entityCode, EvrinomaCodeExtension::ENTITY) !== false)) {
+            $this->loadMetadata($container, $driver, $referenceAnnotationReader, '%s/Model', '%s/Entity');
+        } else {
+            $this->cleanMetadata($driver, [EvrinomaCodeExtension::ENTITY]);
+        }
     }
 
 //region SECTION: Private
@@ -46,19 +52,14 @@ class MapEntityPass implements CompilerPassInterface
     {
         $definitionAnnotationDriver = new Definition(AnnotationDriver::class, [$referenceAnnotationReader, sprintf($formatterModel, $this->path)]);
         $driver->addMethodCall('addDriver', [$definitionAnnotationDriver, sprintf(str_replace('/', '\\', $formatterModel), $this->nameSpace)]);
-
-        if (in_array($container->getParameter('evrinoma.code.entity'), [EvrinomaCodeExtension::ENTITY_BASE_BUNCH, EvrinomaCodeExtension::ENTITY_BASE_CODE], true)) {
-            $definitionAnnotationDriver = new Definition(AnnotationDriver::class, [$referenceAnnotationReader, sprintf($formatterEntity, $this->path)]);
-            $driver->addMethodCall('addDriver', [$definitionAnnotationDriver, sprintf(str_replace('/', '\\', $formatterEntity), $this->nameSpace)]);
-        }
     }
 
-    private function remapEntity(Definition $driver, string $mapFolder): void
+    private function cleanMetadata(Definition $driver, array $namesSpaces)
     {
         $calls = [];
         foreach ($driver->getMethodCalls() as $i => $call) {
-            if ($call[1][1] && $call[1][1] === 'Evrinoma\CodeBundle\Entity') {
-                $call[1][1] = 'Evrinoma\CodeBundle\Entity\\'.$mapFolder;
+            if ($call[1][1] && in_array($call[1][1], $namesSpaces)) {
+                continue;
             }
             $calls[] = $call;
         }
