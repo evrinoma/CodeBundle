@@ -3,7 +3,6 @@
 
 namespace Evrinoma\CodeBundle\Model;
 
-use Doctrine\ORM\Mapping as ORM;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
 
 /**
@@ -31,6 +30,7 @@ abstract class AbstractOwner implements OwnerInterface
      */
     protected string $description;
 
+//region SECTION: Getters/Setters
     /**
      * @return string
      */
@@ -46,4 +46,29 @@ abstract class AbstractOwner implements OwnerInterface
     {
         return $this->description;
     }
+
+    /**
+     * @param string $brief
+     *
+     * @return AbstractOwner
+     */
+    public function setBrief(string $brief): self
+    {
+        $this->brief = $brief;
+
+        return $this;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return AbstractOwner
+     */
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+//endregion Getters/Setters
 }
