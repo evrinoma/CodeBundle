@@ -11,6 +11,7 @@ use Evrinoma\CodeBundle\Model\AbstractOwner;
  *
  * @package Evrinoma\CodeBundle\Entity
  * @ORM\Table(name="code_owner")
+ * @ORM\Entity()
  */
 class BaseOwner extends AbstractOwner
 {

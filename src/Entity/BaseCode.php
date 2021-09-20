@@ -11,6 +11,7 @@ use Evrinoma\CodeBundle\Model\AbstractCode;
  *
  * @package Evrinoma\CodeBundle\Entity
  * @ORM\Table(name="code")
+ * @ORM\Entity()
  */
 class BaseCode extends AbstractCode
 {

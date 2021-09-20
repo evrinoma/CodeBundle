@@ -11,6 +11,7 @@ use Evrinoma\CodeBundle\Model\AbstractType;
  *
  * @package Evrinoma\CodeBundle\Entity
  * @ORM\Table(name="code_type")
+ * @ORM\Entity()
  */
 class BaseType extends AbstractType
 {

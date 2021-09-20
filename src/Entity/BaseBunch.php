@@ -11,6 +11,7 @@ use Evrinoma\CodeBundle\Model\AbstractBunch;
  *
  * @package Evrinoma\CodeBundle\Entity
  * @ORM\Table(name="code_bunch")
+ * @ORM\Entity()
  */
 class BaseBunch extends AbstractBunch
 {
