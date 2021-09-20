@@ -3,14 +3,14 @@
 namespace Evrinoma\CodeBundle\Manager\Owner;
 
 
-use Evrinoma\CodeBundle\Dto\CodeOwnerApiDtoInterface;
+use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
 use Evrinoma\CodeBundle\Model\OwnerInterface;
 
 interface CommandManagerInterface
 {
-    public function post(CodeOwnerApiDtoInterface $dto): OwnerInterface;
+    public function post(OwnerApiDtoInterface $dto): OwnerInterface;
 
-    public function put(CodeOwnerApiDtoInterface $dto): OwnerInterface;
+    public function put(OwnerApiDtoInterface $dto): OwnerInterface;
 
-    public function delete(CodeOwnerApiDtoInterface $dto): void;
+    public function delete(OwnerApiDtoInterface $dto): void;
 }
