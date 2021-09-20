@@ -6,7 +6,7 @@ use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class CodeOwnerApiDto extends AbstractDto implements CodeOwnerApiDtoInterface
+final class OwnerApiDto extends AbstractDto implements OwnerApiDtoInterface
 {
 
     public function toDto(Request $request): DtoInterface
@@ -17,5 +17,21 @@ final class CodeOwnerApiDto extends AbstractDto implements CodeOwnerApiDtoInterf
     public function hasId(): bool
     {
         // TODO: Implement hasId() method.
+    }
+
+    public function getId(): string
+    {
+        // TODO: Implement getId() method.
+    }
+
+
+    public function getBrief():string
+    {
+
+    }
+
+    public function getDescription():string
+    {
+
     }
 }
