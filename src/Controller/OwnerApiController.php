@@ -3,7 +3,7 @@
 namespace Evrinoma\CodeBundle\Controller;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Evrinoma\CodeBundle\Dto\CodeOwnerApiDtoInterface;
+use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
 use Evrinoma\CodeBundle\Entity\BaseOwner;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerInvalidException;
@@ -97,7 +97,7 @@ final class OwnerApiController extends AbstractApiController
      */
     public function postAction(): JsonResponse
     {
-        /** @var CodeOwnerApiDtoInterface $codeOwnerApiDto */
+        /** @var OwnerApiDtoInterface $codeOwnerApiDto */
         $codeOwnerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
         $commandManager   = $this->commandManager;
 
@@ -148,7 +148,7 @@ final class OwnerApiController extends AbstractApiController
      */
     public function putAction(): JsonResponse
     {
-        /** @var CodeOwnerApiDtoInterface $codeOwnerApiDto */
+        /** @var OwnerApiDtoInterface $codeOwnerApiDto */
         $codeOwnerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
         $commandManager   = $this->commandManager;
 
@@ -204,7 +204,7 @@ final class OwnerApiController extends AbstractApiController
      */
     public function deleteAction(): JsonResponse
     {
-        /** @var CodeOwnerApiDtoInterface $codeOwnerApiDto */
+        /** @var OwnerApiDtoInterface $codeOwnerApiDto */
         $codeOwnerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         $commandManager   = $this->commandManager;
@@ -278,7 +278,7 @@ final class OwnerApiController extends AbstractApiController
     public function criteriaAction(): JsonResponse
     {
 
-        /** @var CodeOwnerApiDtoInterface $codeOwnerApiDto */
+        /** @var OwnerApiDtoInterface $codeOwnerApiDto */
         $codeOwnerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         try {
@@ -348,7 +348,7 @@ final class OwnerApiController extends AbstractApiController
      */
     public function getAction(): JsonResponse
     {
-        /** @var CodeOwnerApiDtoInterface $codeOwnerApiDto */
+        /** @var OwnerApiDtoInterface $codeOwnerApiDto */
         $codeOwnerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         try {
