@@ -4,6 +4,7 @@ namespace Evrinoma\CodeBundle\DependencyInjection\Compiler;
 
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Evrinoma\CodeBundle\DependencyInjection\EvrinomaCodeExtension;
+use Evrinoma\ContractorBundle\DependencyInjection\EvrinomaContractorExtension;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -41,17 +42,20 @@ class MapEntityPass implements CompilerPassInterface
         $entityBunch = $container->getParameter('evrinoma.code.entity_code');
         $entityCode  = $container->getParameter('evrinoma.code.entity_bunch');
         if ((strpos($entityBunch, EvrinomaCodeExtension::ENTITY) !== false) && (strpos($entityCode, EvrinomaCodeExtension::ENTITY) !== false)) {
-            $this->loadMetadata($container, $driver, $referenceAnnotationReader, '%s/Model', '%s/Entity');
+            $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model', '%s/Entity');
         } else {
             $this->cleanMetadata($driver, [EvrinomaCodeExtension::ENTITY]);
         }
     }
 
 //region SECTION: Private
-    private function loadMetadata(ContainerBuilder $container, Definition $driver, Reference $referenceAnnotationReader, $formatterModel, $formatterEntity): void
+    private function loadMetadata(Definition $driver, Reference $referenceAnnotationReader, $formatterModel, $formatterEntity): void
     {
         $definitionAnnotationDriver = new Definition(AnnotationDriver::class, [$referenceAnnotationReader, sprintf($formatterModel, $this->path)]);
         $driver->addMethodCall('addDriver', [$definitionAnnotationDriver, sprintf(str_replace('/', '\\', $formatterModel), $this->nameSpace)]);
+
+        $definitionAnnotationDriver = new Definition(AnnotationDriver::class, [$referenceAnnotationReader, sprintf($formatterEntity, $this->path)]);
+        $driver->addMethodCall('addDriver', [$definitionAnnotationDriver, sprintf(str_replace('/', '\\', $formatterEntity), $this->nameSpace)]);
     }
 
     private function cleanMetadata(Definition $driver, array $namesSpaces)
