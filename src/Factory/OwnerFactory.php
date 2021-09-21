@@ -11,13 +11,13 @@ final class OwnerFactory implements OwnerFactoryInterface
 
     public function create(OwnerApiDtoInterface $dto): OwnerInterface
     {
-        /** @var BaseOwner $contractor */
-        $contractor = new self::$entityClass;
+        /** @var BaseOwner $owner */
+        $owner = new self::$entityClass;
 
-        $contractor
+        $owner
             ->setBrief($dto->getBrief())
             ->setDescription($dto->getDescription());
 
-        return $contractor;
+        return $owner;
     }
 }
