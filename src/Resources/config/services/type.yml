@@ -1,0 +1,43 @@
+services:
+  Evrinoma\CodeBundle\Controller\TypeApiController:
+    alias: evrinoma.code.type.api.controller
+    public: true
+
+  evrinoma.code.type.api.controller:
+    class: Evrinoma\CodeBundle\Controller\TypeApiController
+    arguments:
+      - '@jms_serializer'
+      - '@request_stack'
+      - '@evrinoma.dto.factory'
+      - '@evrinoma.code.type.command.manager'
+      - '@evrinoma.code.type.query.manager'
+
+  evrinoma.code.type.factory:
+    class: Evrinoma\CodeBundle\Factory\TypeFactory
+    public: true
+    arguments:
+
+  evrinoma.code.type.repository:
+    class: Evrinoma\CodeBundle\Repository\Type\TypeRepository
+    public: true
+    arguments:
+
+  evrinoma.code.type.command.manager:
+    class: Evrinoma\CodeBundle\Manager\Type\CommandManager
+    arguments:
+      - '@evrinoma.code.type.validator'
+      - '@evrinoma.code.type.repository'
+      - '@evrinoma.code.type.factory'
+
+  evrinoma.code.type.query.manager:
+    class: Evrinoma\CodeBundle\Manager\Type\QueryManager
+    arguments:
+      - '@evrinoma.code.type.repository'
+
+  evrinoma.code.type.validator:
+    class: Evrinoma\CodeBundle\Validator\TypeValidator
+    public: true
+    arguments:
+
+  Evrinoma\CodeBundle\Validator\TypeValidator:
+    alias: evrinoma.code.type.validator
