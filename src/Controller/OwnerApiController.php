@@ -17,6 +17,8 @@ use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use OpenApi\Annotations as OA;
 
 final class OwnerApiController extends AbstractApiController
 {
@@ -91,7 +93,7 @@ final class OwnerApiController extends AbstractApiController
      *         )
      *     )
      * )
-     * @OA\Response(response=200,description="Create contractor")
+     * @OA\Response(response=200,description="Create code owner")
      *
      * @return JsonResponse
      */
@@ -142,7 +144,7 @@ final class OwnerApiController extends AbstractApiController
      *         )
      *     )
      * )
-     * @OA\Response(response=200,description="Save contractor")
+     * @OA\Response(response=200,description="Save code owner")
      *
      * @return JsonResponse
      */
@@ -271,7 +273,7 @@ final class OwnerApiController extends AbstractApiController
      *         )
      *     )
      * )
-     * @OA\Response(response=200,description="Return contractors")
+     * @OA\Response(response=200,description="Return code owners")
      *
      * @return JsonResponse
      */
@@ -342,7 +344,7 @@ final class OwnerApiController extends AbstractApiController
      *         )
      *     )
      * )
-     * @OA\Response(response=200,description="Return contractors")
+     * @OA\Response(response=200,description="Return code owners")
      *
      * @return JsonResponse
      */

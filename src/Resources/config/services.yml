@@ -1,5 +1,5 @@
 imports:
-  - { resource: services/ }
+  - { resource: services/owner.yml }
 
 services:
   Evrinoma\CodeBundle\Controller\CodeApiController:
