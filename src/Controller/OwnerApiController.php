@@ -5,7 +5,6 @@ namespace Evrinoma\CodeBundle\Controller;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Evrinoma\CodeBundle\Dto\OwnerApiDto;
 use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
-use Evrinoma\CodeBundle\Entity\BaseOwner;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerInvalidException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerNotFoundException;
