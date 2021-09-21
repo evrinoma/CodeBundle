@@ -1,0 +1,25 @@
+<?php
+
+namespace Evrinoma\CodeBundle\Dto;
+
+interface TypeApiDtoInterface
+{
+    /**
+     * @return bool
+     */
+    public function hasId(): bool;
+
+    /**
+     * @return bool
+     */
+    public function hasBrief(): bool;
+    /**
+     * @return string
+     */
+    public function getId(): string;
+
+    /**
+     * @return string
+     */
+    public function getBrief(): string;
+}
