@@ -5,7 +5,7 @@ namespace Evrinoma\CodeBundle\Manager\Owner;
 use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerNotFoundException;
 use Evrinoma\CodeBundle\Model\OwnerInterface;
-use Evrinoma\CodeBundle\Repository\Owner\OwnerRepositoryInterface;
+use Evrinoma\CodeBundle\Repository\Owner\OwnerQueryRepositoryInterface;
 use Evrinoma\UtilsBundle\Rest\RestInterface;
 use Evrinoma\UtilsBundle\Rest\RestTrait;
 
@@ -14,11 +14,11 @@ final class QueryManager implements QueryManagerInterface, RestInterface
     use RestTrait;
 
 //region SECTION: Fields
-    private OwnerRepositoryInterface $repository;
+    private OwnerQueryRepositoryInterface $repository;
 //endregion Fields
 
 //region SECTION: Constructor
-    public function __construct(OwnerRepositoryInterface $repository)
+    public function __construct(OwnerQueryRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
@@ -41,12 +41,12 @@ final class QueryManager implements QueryManagerInterface, RestInterface
     public function get(OwnerApiDtoInterface $dto): OwnerInterface
     {
         try {
-            $contractor = $this->repository->find($dto->getId());
+            $owner = $this->repository->find($dto->getId());
         } catch (OwnerNotFoundException $e) {
             throw $e;
         }
 
-        return $contractor;
+        return $owner;
     }
 
     public function getRestStatus(): int

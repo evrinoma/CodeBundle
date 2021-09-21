@@ -8,7 +8,7 @@ use Evrinoma\CodeBundle\Exception\Owner\OwnerInvalidException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerNotFoundException;
 use Evrinoma\CodeBundle\Factory\OwnerFactoryInterface;
 use Evrinoma\CodeBundle\Model\OwnerInterface;
-use Evrinoma\CodeBundle\Repository\Owner\OwnerRepositoryInterface;
+use Evrinoma\CodeBundle\Repository\Owner\OwnerCommandRepositoryInterface;
 use Evrinoma\UtilsBundle\Rest\RestInterface;
 use Evrinoma\UtilsBundle\Rest\RestTrait;
 use Evrinoma\UtilsBundle\Validator\ValidatorInterface;
@@ -18,7 +18,7 @@ final class CommandManager implements CommandManagerInterface, RestInterface
     use RestTrait;
 
 //region SECTION: Fields
-    private OwnerRepositoryInterface $repository;
+    private OwnerCommandRepositoryInterface $repository;
     private OwnerFactoryInterface    $factory;
     private ValidatorInterface       $validator;
 //endregion Fields
@@ -28,10 +28,10 @@ final class CommandManager implements CommandManagerInterface, RestInterface
      * CommandManager constructor.
      *
      * @param ValidatorInterface       $validator
-     * @param OwnerRepositoryInterface $repository
+     * @param OwnerCommandRepositoryInterface $repository
      * @param OwnerFactoryInterface    $factory
      */
-    public function __construct(ValidatorInterface $validator, OwnerRepositoryInterface $repository, OwnerFactoryInterface $factory)
+    public function __construct(ValidatorInterface $validator, OwnerCommandRepositoryInterface $repository, OwnerFactoryInterface $factory)
     {
         $this->validator  = $validator;
         $this->repository = $repository;
