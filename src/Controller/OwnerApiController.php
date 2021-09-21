@@ -3,6 +3,7 @@
 namespace Evrinoma\CodeBundle\Controller;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Evrinoma\CodeBundle\Dto\OwnerApiDto;
 use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
 use Evrinoma\CodeBundle\Entity\BaseOwner;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeSavedException;
@@ -42,7 +43,7 @@ final class OwnerApiController extends AbstractApiController
     /**
      * @var string
      */
-    private string $dtoClass = BaseOwner::class;
+    private string $dtoClass = OwnerApiDto::class;
 //endregion Fields
 
 //region SECTION: Constructor
@@ -259,7 +260,7 @@ final class OwnerApiController extends AbstractApiController
      *      @OA\Parameter(
      *         description="brief",
      *         in="query",
-     *         name="identity",
+     *         name="brief",
      *         @OA\Schema(
      *           type="string",
      *         )
@@ -267,7 +268,7 @@ final class OwnerApiController extends AbstractApiController
      *      @OA\Parameter(
      *         description="description",
      *         in="query",
-     *         name="dependency",
+     *         name="description",
      *         @OA\Schema(
      *           type="string",
      *         )
