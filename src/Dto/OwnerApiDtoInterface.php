@@ -4,10 +4,24 @@ namespace Evrinoma\CodeBundle\Dto;
 
 interface OwnerApiDtoInterface
 {
+//region SECTION: Public
     /**
      * @return bool
      */
     public function hasId(): bool;
+
+    /**
+     * @return bool
+     */
+    public function hasBrief(): bool;
+
+    /**
+     * @return bool
+     */
+    public function hasDescription(): bool;
+//endregion Public
+
+//region SECTION: Getters/Setters
     /**
      * @return string
      */
@@ -16,10 +30,11 @@ interface OwnerApiDtoInterface
     /**
      * @return string
      */
-    public function getBrief():string;
+    public function getBrief(): string;
 
     /**
      * @return string
      */
-    public function getDescription():string;
+    public function getDescription(): string;
+//endregion Getters/Setters
 }

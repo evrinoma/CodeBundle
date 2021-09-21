@@ -1,0 +1,43 @@
+services:
+  Evrinoma\CodeBundle\Controller\OwnerApiController:
+    alias: evrinoma.code.owner.api.controller
+    public: true
+
+  evrinoma.code.owner.api.controller:
+    class: Evrinoma\CodeBundle\Controller\OwnerApiController
+    arguments:
+      - '@jms_serializer'
+      - '@request_stack'
+      - '@evrinoma.dto.factory'
+      - '@evrinoma.code.owner.command.manager'
+      - '@evrinoma.code.owner.query.manager'
+
+  evrinoma.code.owner.factory:
+    class: Evrinoma\CodeBundle\Factory\OwnerFactory
+    public: true
+    arguments:
+
+  evrinoma.code.owner.repository:
+    class: Evrinoma\CodeBundle\Repository\Owner\OwnerRepository
+    public: true
+    arguments:
+
+  evrinoma.code.owner.command.manager:
+    class: Evrinoma\CodeBundle\Manager\Owner\CommandManager
+    arguments:
+      - '@evrinoma.code.owner.validator'
+      - '@evrinoma.code.owner.repository'
+      - '@evrinoma.code.owner.factory'
+
+  evrinoma.code.owner.query.manager:
+    class: Evrinoma\CodeBundle\Manager\Owner\QueryManager
+    arguments:
+      - '@evrinoma.code.owner.repository'
+
+  evrinoma.code.owner.validator:
+    class: Evrinoma\CodeBundle\Validator\OwnerValidator
+    public: true
+    arguments:
+
+  Evrinoma\CodeBundle\Validator\OwnerValidator:
+    alias: evrinoma.code.owner.validator
