@@ -33,6 +33,18 @@ abstract class AbstractType implements TypeInterface
     {
         return $this->brief;
     }
+
+    /**
+     * @param string $brief
+     *
+     * @return AbstractType
+     */
+    public function setBrief(string $brief): self
+    {
+        $this->brief = $brief;
+
+        return $this;
+    }
 //endregion Getters/Setters
 
 }
