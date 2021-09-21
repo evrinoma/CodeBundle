@@ -11,28 +11,33 @@ use Evrinoma\CodeBundle\Model\OwnerInterface;
 use Evrinoma\CodeBundle\Repository\Owner\OwnerRepositoryInterface;
 use Evrinoma\UtilsBundle\Rest\RestInterface;
 use Evrinoma\UtilsBundle\Rest\RestTrait;
+use Evrinoma\UtilsBundle\Validator\ValidatorInterface;
 
 final class CommandManager implements CommandManagerInterface, RestInterface
 {
     use RestTrait;
 
+//region SECTION: Fields
     private OwnerRepositoryInterface $repository;
     private OwnerFactoryInterface    $factory;
-    private OwnerValidatorInterface  $validator;
+    private ValidatorInterface       $validator;
+//endregion Fields
 
+//region SECTION: Constructor
     /**
      * CommandManager constructor.
      *
-     * @param OwnerValidatorInterface  $validator
+     * @param ValidatorInterface       $validator
      * @param OwnerRepositoryInterface $repository
      * @param OwnerFactoryInterface    $factory
      */
-    public function __construct(OwnerValidatorInterface $validator, OwnerRepositoryInterface $repository, OwnerFactoryInterface $factory)
+    public function __construct(ValidatorInterface $validator, OwnerRepositoryInterface $repository, OwnerFactoryInterface $factory)
     {
         $this->validator  = $validator;
         $this->repository = $repository;
         $this->factory    = $factory;
     }
+//endregion Constructor
 
 //region SECTION: Public
     public function post(OwnerApiDtoInterface $dto): OwnerInterface
@@ -63,8 +68,7 @@ final class CommandManager implements CommandManagerInterface, RestInterface
 
         $owner
             ->setBrief($dto->getBrief())
-            ->setDescription($dto->getDescription())
-        ;
+            ->setDescription($dto->getDescription());
 
         $errors = $this->validator->validate($owner);
 
@@ -96,8 +100,10 @@ final class CommandManager implements CommandManagerInterface, RestInterface
 
 
 //endregion Public
+//region SECTION: Getters/Setters
     public function getRestStatus(): int
     {
         return $this->status;
     }
+//endregion Getters/Setters
 }

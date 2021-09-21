@@ -18,3 +18,10 @@ services:
   evrinoma.code.query.manager:
     class: Evrinoma\CodeBundle\Manager\QueryManager
 
+  evrinoma.code.validator.owner:
+    class: Evrinoma\CodeBundle\Validator\OwnerValidator
+    public: true
+    arguments:
+
+  Evrinoma\CodeBundle\Validator\OwnerValidator:
+    alias: evrinoma.code.validator.owner
