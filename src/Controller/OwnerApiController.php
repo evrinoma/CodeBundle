@@ -12,6 +12,7 @@ use Evrinoma\CodeBundle\Manager\Owner\CommandManagerInterface;
 use Evrinoma\CodeBundle\Manager\Owner\QueryManagerInterface;
 use Evrinoma\DtoBundle\Factory\FactoryDtoInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractApiController;
+use Evrinoma\UtilsBundle\Controller\ApiControllerInterface;
 use Evrinoma\UtilsBundle\Rest\RestInterface;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,7 +21,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use OpenApi\Annotations as OA;
 
-final class OwnerApiController extends AbstractApiController
+final class OwnerApiController extends AbstractApiController implements ApiControllerInterface
 {
 //region SECTION: Fields
     /**
@@ -294,7 +295,7 @@ final class OwnerApiController extends AbstractApiController
 //endregion Public
 
 //region SECTION: Private
-    private function setRestStatus(RestInterface $manager, \Exception $e): array
+    public function setRestStatus(RestInterface $manager, \Exception $e): array
     {
         switch (true) {
             case $e instanceof OwnerCannotBeSavedException:

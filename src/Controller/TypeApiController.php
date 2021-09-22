@@ -13,6 +13,7 @@ use Evrinoma\CodeBundle\Manager\Type\CommandManagerInterface;
 use Evrinoma\CodeBundle\Manager\Type\QueryManagerInterface;
 use Evrinoma\DtoBundle\Factory\FactoryDtoInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractApiController;
+use Evrinoma\UtilsBundle\Controller\ApiControllerInterface;
 use Evrinoma\UtilsBundle\Rest\RestInterface;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,7 +22,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use OpenApi\Annotations as OA;
 
-final class TypeApiController extends AbstractApiController
+final class TypeApiController extends AbstractApiController implements ApiControllerInterface
 {
 
 //region SECTION: Fields
@@ -310,7 +311,7 @@ final class TypeApiController extends AbstractApiController
         return $this->setSerializeGroup('api_get_code_type')->json(['message' => 'Get code type', 'data' => $json], $this->queryManager->getRestStatus());
     }
 
-    private function setRestStatus(RestInterface $manager, \Exception $e): array
+    public function setRestStatus(RestInterface $manager, \Exception $e): array
     {
         switch (true) {
             case $e instanceof TypeCannotBeSavedException:

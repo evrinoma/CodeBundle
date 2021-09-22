@@ -2,8 +2,8 @@
 
 namespace Evrinoma\CodeBundle\Controller;
 
-use Evrinoma\CodeBundle\Manager\CommandManagerInterface;
-use Evrinoma\CodeBundle\Manager\QueryManagerInterface;
+use Evrinoma\CodeBundle\Manager\Group\CommandManagerInterface;
+use Evrinoma\CodeBundle\Manager\Group\QueryManagerInterface;
 use Evrinoma\DtoBundle\Factory\FactoryDtoInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractApiController;
 use Evrinoma\UtilsBundle\Controller\ApiControllerInterface;
@@ -13,42 +13,17 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final class CodeApiController extends AbstractApiController implements ApiControllerInterface
+final class GroupApiController extends AbstractApiController implements ApiControllerInterface
 {
 //region SECTION: Fields
-    /**
-     * @var ?Request
-     */
-    private ?Request $request;
-    /**
-     * @var FactoryDtoInterface
-     */
-    private FactoryDtoInterface $factoryDto;
-    /**
-     * @var CommandManagerInterface|RestInterface
-     */
+    private string                  $dtoClass;
+    private QueryManagerInterface   $queryManager;
     private CommandManagerInterface $commandManager;
-    /**
-     * @var QueryManagerInterface|RestInterface
-     */
-    private QueryManagerInterface $queryManager;
-    /**
-     * @var string
-     */
-    private string $dtoClass;
+    private FactoryDtoInterface     $factoryDto;
+    private ?Request                $request;
 //endregion Fields
 
 //region SECTION: Constructor
-    /**
-     * ApiController constructor.
-     *
-     * @param SerializerInterface     $serializer
-     * @param RequestStack            $requestStack
-     * @param FactoryDtoInterface     $factoryDto
-     * @param CommandManagerInterface $commandManager
-     * @param QueryManagerInterface   $queryManager
-     * @param string                  $dtoClass
-     */
     public function __construct(
         SerializerInterface $serializer,
         RequestStack $requestStack,
@@ -65,33 +40,35 @@ final class CodeApiController extends AbstractApiController implements ApiContro
         $this->dtoClass       = $dtoClass;
     }
 //endregion Constructor
+
+
+    public function getAction(): JsonResponse
+    {
+
+    }
+
     public function putAction(): JsonResponse
     {
-        // TODO: Implement putAction() method.
+
     }
 
     public function postAction(): JsonResponse
     {
-        // TODO: Implement postAction() method.
+
     }
 
     public function deleteAction(): JsonResponse
     {
-        // TODO: Implement deleteAction() method.
+
     }
 
     public function criteriaAction(): JsonResponse
     {
-        // TODO: Implement criteriaAction() method.
-    }
 
-    public function getAction(): JsonResponse
-    {
-        // TODO: Implement getAction() method.
     }
 
     public function setRestStatus(RestInterface $manager, \Exception $e): array
     {
-        // TODO: Implement setRestStatus() method.
+
     }
 }
