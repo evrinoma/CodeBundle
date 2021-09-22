@@ -8,6 +8,7 @@ use Evrinoma\CodeBundle\Dto\TypeApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Type\TypeCannotBeRemovedException;
 use Evrinoma\Codebundle\Exception\Type\TypeCannotBeSavedException;
 use Evrinoma\Codebundle\Exception\Type\TypeNotFoundException;
+use Evrinoma\Codebundle\Exception\Type\TypeProxyException;
 use Evrinoma\CodeBundle\Model\TypeInterface;
 
 class TypeRepository extends ServiceEntityRepository implements TypeRepositoryInterface
@@ -34,6 +35,19 @@ class TypeRepository extends ServiceEntityRepository implements TypeRepositoryIn
         }
 
         return true;
+    }
+
+    public function proxy(string $id): TypeInterface
+    {
+        $em = $this->getEntityManager();
+
+        $type = $em->getReference($this->getEntityName(), $id);
+
+        if (!$em->contains($type)) {
+            throw new TypeProxyException("Proxy doesn't exist with $id");
+        }
+
+        return $type;
     }
 //endregion Public
 

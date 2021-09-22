@@ -4,6 +4,8 @@ namespace Evrinoma\CodeBundle\Repository\Type;
 
 use Evrinoma\CodeBundle\Dto\TypeApiDtoInterface;
 use Evrinoma\Codebundle\Exception\Type\TypeNotFoundException;
+use Evrinoma\Codebundle\Exception\Type\TypeProxyException;
+use Evrinoma\CodeBundle\Model\TypeInterface;
 
 interface TypeQueryRepositoryInterface
 {
@@ -25,5 +27,13 @@ interface TypeQueryRepositoryInterface
      * @throws TypeNotFoundException
      */
     public function find(string $id, $lockMode = null, $lockVersion = null);
+
+    /**
+     * @param string $id
+     *
+     * @return TypeInterface
+     * @throws TypeProxyException
+     */
+    public function proxy(string $id): TypeInterface;
 //endregion Find Filters Repository
 }
