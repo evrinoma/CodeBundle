@@ -10,5 +10,13 @@ use Evrinoma\UtilsBundle\Entity\IdInterface;
 
 interface BunchInterface extends ActiveInterface, CreateUpdateAtInterface, IdInterface
 {
+    /**
+     * @return TypeInterface
+     */
+    public function getType(): TypeInterface;
 
+    /**
+     * @return string
+     */
+    public function getDescription(): string;
 }
