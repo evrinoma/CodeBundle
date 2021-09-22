@@ -25,6 +25,7 @@ interface QueryManagerInterface
      * @param OwnerApiDtoInterface $dto
      *
      * @return OwnerInterface
+     * @throws OwnerNotFoundException
      */
     public function get(OwnerApiDtoInterface $dto): OwnerInterface;
 //endregion Getters/Setters
