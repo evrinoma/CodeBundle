@@ -12,4 +12,24 @@ final class TypeApiDto extends AbstractDto implements TypeApiDtoInterface
     {
         return $this;
     }
+
+    public function hasId(): bool
+    {
+        // TODO: Implement hasId() method.
+    }
+
+    public function hasBrief(): bool
+    {
+        // TODO: Implement hasBrief() method.
+    }
+
+    public function getId(): string
+    {
+        // TODO: Implement getId() method.
+    }
+
+    public function getBrief(): string
+    {
+        // TODO: Implement getBrief() method.
+    }
 }
