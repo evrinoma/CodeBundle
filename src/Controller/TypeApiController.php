@@ -68,11 +68,11 @@ final class TypeApiController extends AbstractApiController implements ApiContro
      *             mediaType="application/json",
      *             @OA\Schema(
      *               example={
-     *                  "class":"Evrinoma\CodeBundle\Dto\CodeTypeApiDto",
+     *                  "class":"Evrinoma\CodeBundle\Dto\TypeApiDto",
      *                  "brief":"draft"
      *                  },
      *               type="object",
-     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\CodeTypeApiDto"),
+     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\TypeApiDto"),
      *               @OA\Property(property="brief",type="string"),
      *            )
      *         )
@@ -84,8 +84,8 @@ final class TypeApiController extends AbstractApiController implements ApiContro
      */
     public function postAction(): JsonResponse
     {
-        /** @var TypeApiDtoInterface $codeTypeApiDto */
-        $codeTypeApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var TypeApiDtoInterface $typeApiDto */
+        $typeApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
         $commandManager = $this->commandManager;
 
         $this->commandManager->setRestCreated();
@@ -94,8 +94,8 @@ final class TypeApiController extends AbstractApiController implements ApiContro
             $em   = $this->getDoctrine()->getManager();
 
             $em->transactional(
-                function () use ($codeTypeApiDto, $commandManager, &$json) {
-                    $json = $commandManager->post($codeTypeApiDto);
+                function () use ($typeApiDto, $commandManager, &$json) {
+                    $json = $commandManager->post($typeApiDto);
                 }
             );
         } catch (\Exception $e) {
@@ -115,12 +115,12 @@ final class TypeApiController extends AbstractApiController implements ApiContro
      *             mediaType="application/json",
      *             @OA\Schema(
      *               example={
-     *                  "class":"Evrinoma\CodeBundle\Dto\CodeTypeApiDto",
+     *                  "class":"Evrinoma\CodeBundle\Dto\TypeApiDto",
      *                  "id":"3",
      *                  "brief":"draft"
      *                  },
      *               type="object",
-     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\CodeTypeApiDto"),
+     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\TypeApiDto"),
      *               @OA\Property(property="id",type="string"),
      *               @OA\Property(property="brief",type="string")
      *            )
@@ -133,18 +133,18 @@ final class TypeApiController extends AbstractApiController implements ApiContro
      */
     public function putAction(): JsonResponse
     {
-        /** @var TypeApiDtoInterface $codeTypeApiDto */
-        $codeTypeApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var TypeApiDtoInterface $typeApiDto */
+        $typeApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
         $commandManager = $this->commandManager;
 
         try {
-            if ($codeTypeApiDto->hasId()) {
+            if ($typeApiDto->hasId()) {
                 $json = [];
                 $em   = $this->getDoctrine()->getManager();
 
                 $em->transactional(
-                    function () use ($codeTypeApiDto, $commandManager, &$json) {
-                        $json = $commandManager->put($codeTypeApiDto);
+                    function () use ($typeApiDto, $commandManager, &$json) {
+                        $json = $commandManager->put($typeApiDto);
                     }
                 );
             } else {
@@ -168,7 +168,7 @@ final class TypeApiController extends AbstractApiController implements ApiContro
      *         required=true,
      *         @OA\Schema(
      *           type="string",
-     *           default="Evrinoma\CodeBundle\Dto\CodeTypeApiDto",
+     *           default="Evrinoma\CodeBundle\Dto\TypeApiDto",
      *           readOnly=true
      *         )
      *     ),
@@ -196,11 +196,11 @@ final class TypeApiController extends AbstractApiController implements ApiContro
     public function criteriaAction(): JsonResponse
     {
 
-        /** @var TypeApiDtoInterface $codeTypeApiDto */
-        $codeTypeApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var TypeApiDtoInterface $typeApiDto */
+        $typeApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         try {
-            $json = $this->queryManager->criteria($codeTypeApiDto);
+            $json = $this->queryManager->criteria($typeApiDto);
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->queryManager, $e);
         }
@@ -219,7 +219,7 @@ final class TypeApiController extends AbstractApiController implements ApiContro
      *         required=true,
      *         @OA\Schema(
      *           type="string",
-     *           default="Evrinoma\CodeBundle\Dto\CodeTypeApiDto",
+     *           default="Evrinoma\CodeBundle\Dto\TypeApiDto",
      *           readOnly=true
      *         )
      *     ),
@@ -240,20 +240,20 @@ final class TypeApiController extends AbstractApiController implements ApiContro
      */
     public function deleteAction(): JsonResponse
     {
-        /** @var TypeApiDtoInterface $codeTypeApiDto */
-        $codeTypeApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var TypeApiDtoInterface $typeApiDto */
+        $typeApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         $commandManager   = $this->commandManager;
         $this->commandManager->setRestAccepted();
 
         try {
-            if ($codeTypeApiDto->hasId()) {
+            if ($typeApiDto->hasId()) {
                 $json = [];
                 $em   = $this->getDoctrine()->getManager();
 
                 $em->transactional(
-                    function () use ($codeTypeApiDto, $commandManager, &$json) {
-                        $commandManager->delete($codeTypeApiDto);
+                    function () use ($typeApiDto, $commandManager, &$json) {
+                        $commandManager->delete($typeApiDto);
                         $json = ['OK'];
                     }
                 );
@@ -278,7 +278,7 @@ final class TypeApiController extends AbstractApiController implements ApiContro
      *         required=true,
      *         @OA\Schema(
      *           type="string",
-     *           default="Evrinoma\CodeBundle\Dto\CodeTypeApiDto",
+     *           default="Evrinoma\CodeBundle\Dto\TypeApiDto",
      *           readOnly=true
      *         )
      *     ),
@@ -299,11 +299,11 @@ final class TypeApiController extends AbstractApiController implements ApiContro
      */
     public function getAction(): JsonResponse
     {
-        /** @var TypeApiDtoInterface $codeTypeApiDto */
-        $codeTypeApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var TypeApiDtoInterface $typeApiDto */
+        $typeApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         try {
-            $json = $this->queryManager->get($codeTypeApiDto);
+            $json = $this->queryManager->get($typeApiDto);
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->queryManager, $e);
         }

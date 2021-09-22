@@ -82,12 +82,12 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
      *             mediaType="application/json",
      *             @OA\Schema(
      *               example={
-     *                  "class":"Evrinoma\CodeBundle\Dto\CodeOwnerApiDto",
+     *                  "class":"Evrinoma\CodeBundle\Dto\OwnerApiDto",
      *                  "brief":"ipc",
      *                  "description": "ИПЦ"
      *                  },
      *               type="object",
-     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\CodeOwnerApiDto"),
+     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\OwnerApiDto"),
      *               @OA\Property(property="brief",type="string"),
      *               @OA\Property(property="description",type="string")
      *            )
@@ -100,8 +100,8 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
      */
     public function postAction(): JsonResponse
     {
-        /** @var OwnerApiDtoInterface $codeOwnerApiDto */
-        $codeOwnerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var OwnerApiDtoInterface $ownerApiDto */
+        $ownerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
         $commandManager   = $this->commandManager;
 
         $this->commandManager->setRestCreated();
@@ -110,8 +110,8 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
             $em   = $this->getDoctrine()->getManager();
 
             $em->transactional(
-                function () use ($codeOwnerApiDto, $commandManager, &$json) {
-                    $json = $commandManager->post($codeOwnerApiDto);
+                function () use ($ownerApiDto, $commandManager, &$json) {
+                    $json = $commandManager->post($ownerApiDto);
                 }
             );
         } catch (\Exception $e) {
@@ -131,13 +131,13 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
      *             mediaType="application/json",
      *             @OA\Schema(
      *               example={
-     *                  "class":"Evrinoma\CodeBundle\Dto\CodeOwnerApiDto",
+     *                  "class":"Evrinoma\CodeBundle\Dto\OwnerApiDto",
      *                  "id":"3",
      *                  "brief":"ipc",
      *                  "description": "ИПЦ"
      *                  },
      *               type="object",
-     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\CodeOwnerApiDto"),
+     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\OwnerApiDto"),
      *               @OA\Property(property="id",type="string"),
      *               @OA\Property(property="brief",type="string"),
      *               @OA\Property(property="description",type="string")
@@ -151,18 +151,18 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
      */
     public function putAction(): JsonResponse
     {
-        /** @var OwnerApiDtoInterface $codeOwnerApiDto */
-        $codeOwnerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var OwnerApiDtoInterface $ownerApiDto */
+        $ownerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
         $commandManager   = $this->commandManager;
 
         try {
-            if ($codeOwnerApiDto->hasId()) {
+            if ($ownerApiDto->hasId()) {
                 $json = [];
                 $em   = $this->getDoctrine()->getManager();
 
                 $em->transactional(
-                    function () use ($codeOwnerApiDto, $commandManager, &$json) {
-                        $json = $commandManager->put($codeOwnerApiDto);
+                    function () use ($ownerApiDto, $commandManager, &$json) {
+                        $json = $commandManager->put($ownerApiDto);
                     }
                 );
             } else {
@@ -186,7 +186,7 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
      *         required=true,
      *         @OA\Schema(
      *           type="string",
-     *           default="Evrinoma\CodeBundle\Dto\CodeOwnerApiDto",
+     *           default="Evrinoma\CodeBundle\Dto\OwnerApiDto",
      *           readOnly=true
      *         )
      *     ),
@@ -207,20 +207,20 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
      */
     public function deleteAction(): JsonResponse
     {
-        /** @var OwnerApiDtoInterface $codeOwnerApiDto */
-        $codeOwnerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var OwnerApiDtoInterface $ownerApiDto */
+        $ownerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         $commandManager   = $this->commandManager;
         $this->commandManager->setRestAccepted();
 
         try {
-            if ($codeOwnerApiDto->hasId()) {
+            if ($ownerApiDto->hasId()) {
                 $json = [];
                 $em   = $this->getDoctrine()->getManager();
 
                 $em->transactional(
-                    function () use ($codeOwnerApiDto, $commandManager, &$json) {
-                        $commandManager->delete($codeOwnerApiDto);
+                    function () use ($ownerApiDto, $commandManager, &$json) {
+                        $commandManager->delete($ownerApiDto);
                         $json = ['OK'];
                     }
                 );
@@ -245,7 +245,7 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
      *         required=true,
      *         @OA\Schema(
      *           type="string",
-     *           default="Evrinoma\CodeBundle\Dto\CodeOwnerApiDto",
+     *           default="Evrinoma\CodeBundle\Dto\OwnerApiDto",
      *           readOnly=true
      *         )
      *     ),
@@ -281,11 +281,11 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
     public function criteriaAction(): JsonResponse
     {
 
-        /** @var OwnerApiDtoInterface $codeOwnerApiDto */
-        $codeOwnerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var OwnerApiDtoInterface $ownerApiDto */
+        $ownerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         try {
-            $json = $this->queryManager->criteria($codeOwnerApiDto);
+            $json = $this->queryManager->criteria($ownerApiDto);
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->queryManager, $e);
         }
@@ -330,7 +330,7 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
      *         required=true,
      *         @OA\Schema(
      *           type="string",
-     *           default="Evrinoma\CodeBundle\Dto\CodeOwnerApiDto",
+     *           default="Evrinoma\CodeBundle\Dto\OwnerApiDto",
      *           readOnly=true
      *         )
      *     ),
@@ -351,11 +351,11 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
      */
     public function getAction(): JsonResponse
     {
-        /** @var OwnerApiDtoInterface $codeOwnerApiDto */
-        $codeOwnerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var OwnerApiDtoInterface $ownerApiDto */
+        $ownerApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         try {
-            $json = $this->queryManager->get($codeOwnerApiDto);
+            $json = $this->queryManager->get($ownerApiDto);
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->queryManager, $e);
         }
