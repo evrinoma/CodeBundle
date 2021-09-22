@@ -4,6 +4,7 @@ namespace Evrinoma\CodeBundle\Manager\Type;
 
 use Evrinoma\CodeBundle\Dto\TypeApiDtoInterface;
 use Evrinoma\Codebundle\Exception\Type\TypeNotFoundException;
+use Evrinoma\Codebundle\Exception\Type\TypeProxyException;
 use Evrinoma\CodeBundle\Model\TypeInterface;
 use Evrinoma\CodeBundle\Repository\Type\TypeQueryRepositoryInterface;
 use Evrinoma\UtilsBundle\Rest\RestInterface;
@@ -60,6 +61,23 @@ final class QueryManager implements QueryManagerInterface, RestInterface
         try {
             $type = $this->repository->find($dto->getId());
         } catch (TypeNotFoundException $e) {
+            throw $e;
+        }
+
+        return $type;
+    }
+
+    /**
+     * @param TypeApiDtoInterface $dto
+     *
+     * @return TypeInterface
+     * @throws TypeProxyException
+     */
+    public function proxy(TypeApiDtoInterface $dto): TypeInterface
+    {
+        try {
+            $type = $this->repository->proxy($dto->getId());
+        } catch (TypeProxyException $e) {
             throw $e;
         }
 

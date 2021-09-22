@@ -40,7 +40,7 @@ final class QueryManager implements QueryManagerInterface, RestInterface
 //region SECTION: Getters/Setters
     public function get(OwnerApiDtoInterface $dto): OwnerInterface
     {
-        try {
+        try {$this->repository->
             $owner = $this->repository->find($dto->getId());
         } catch (OwnerNotFoundException $e) {
             throw $e;
