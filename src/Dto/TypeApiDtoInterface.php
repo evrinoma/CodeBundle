@@ -2,7 +2,9 @@
 
 namespace Evrinoma\CodeBundle\Dto;
 
-interface TypeApiDtoInterface
+use Evrinoma\DtoBundle\Dto\DtoInterface;
+
+interface TypeApiDtoInterface extends DtoInterface
 {
     /**
      * @return bool

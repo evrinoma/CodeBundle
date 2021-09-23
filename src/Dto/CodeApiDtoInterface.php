@@ -2,7 +2,9 @@
 
 namespace Evrinoma\CodeBundle\Dto;
 
-interface CodeApiDtoInterface
+use Evrinoma\DtoBundle\Dto\DtoInterface;
+
+interface CodeApiDtoInterface extends DtoInterface
 {
 
 }

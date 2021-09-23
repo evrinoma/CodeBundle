@@ -2,7 +2,9 @@
 
 namespace Evrinoma\CodeBundle\Dto;
 
-interface OwnerApiDtoInterface
+use Evrinoma\DtoBundle\Dto\DtoInterface;
+
+interface OwnerApiDtoInterface extends DtoInterface
 {
 //region SECTION: Public
     /**

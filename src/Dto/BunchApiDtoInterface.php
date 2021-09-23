@@ -2,7 +2,9 @@
 
 namespace Evrinoma\CodeBundle\Dto;
 
-interface BunchApiDtoInterface
+use Evrinoma\DtoBundle\Dto\DtoInterface;
+
+interface BunchApiDtoInterface extends DtoInterface
 {
 //region SECTION: Public
     public function hasId(): bool;
