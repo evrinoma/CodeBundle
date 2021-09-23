@@ -9,12 +9,12 @@ use Evrinoma\CodeBundle\Entity\BaseType;
 use Evrinoma\CodeBundle\Model\BunchInterface;
 use Evrinoma\CodeBundle\Model\OwnerInterface;
 use Evrinoma\CodeBundle\Model\TypeInterface;
-use Evrinoma\UtilsBundle\DependencyInjection\Compiler\MapEntityAbstract;
+use Evrinoma\UtilsBundle\DependencyInjection\Compiler\AbstractMapEntity;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class MapEntityPass extends MapEntityAbstract implements CompilerPassInterface
+class PassMapEntity extends AbstractMapEntity implements CompilerPassInterface
 {
 //region SECTION: Public
     /**
