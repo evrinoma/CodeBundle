@@ -9,3 +9,7 @@ code_owner_api:
 code_type_api:
   resource: "@EvrinomaCodeBundle/Controller/TypeApiController.php"
   type: annotation
+
+code_bunch_api:
+  resource: "@EvrinomaCodeBundle/Controller/BunchApiController.php"
+  type: annotation

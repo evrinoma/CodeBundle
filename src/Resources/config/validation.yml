@@ -5,3 +5,6 @@ services:
   evrinoma.code.constraint.owner.description:
     class: Evrinoma\CodeBundle\Constraint\Owner\Description
 
+  evrinoma.code.constraint.type.brief:
+    class: Evrinoma\CodeBundle\Constraint\Type\Brief
+

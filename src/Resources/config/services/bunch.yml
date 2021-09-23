@@ -1,0 +1,61 @@
+services:
+  Evrinoma\CodeBundle\Controller\BunchApiController:
+    alias: evrinoma.code.bunch.api.controller
+    public: true
+
+  evrinoma.code.bunch.api.controller:
+    class: Evrinoma\CodeBundle\Controller\BunchApiController
+    arguments:
+      - '@jms_serializer'
+      - '@request_stack'
+      - '@evrinoma.dto.factory'
+      - '@evrinoma.code.bunch.command.manager'
+      - '@evrinoma.code.bunch.query.manager'
+
+  evrinoma.code.bunch.factory:
+    class: Evrinoma\CodeBundle\Factory\BunchFactory
+    public: true
+    arguments:
+
+  evrinoma.code.bunch.repository:
+    class: Evrinoma\CodeBundle\Repository\Bunch\BunchRepository
+    public: true
+    arguments:
+
+  evrinoma.code.bunch.command.manager:
+    class: Evrinoma\CodeBundle\Manager\Bunch\CommandManager
+    arguments:
+      - '@evrinoma.code.bunch.validator'
+      - '@evrinoma.code.bunch.repository'
+      - '@evrinoma.code.bunch.factory'
+      - '@evrinoma.code.bunch.query.mediator'
+      - '@evrinoma.code.type.query.manager'
+
+  evrinoma.code.bunch.query.manager:
+    class: Evrinoma\CodeBundle\Manager\Bunch\QueryManager
+    arguments:
+      - '@evrinoma.code.bunch.repository'
+
+  evrinoma.code.bunch.validator:
+    class: Evrinoma\CodeBundle\Validator\BunchValidator
+    public: true
+    arguments:
+
+  Evrinoma\CodeBundle\Validator\BunchValidator:
+    alias: evrinoma.code.bunch.validator
+
+  evrinoma.code.bunch.query.mediator:
+    class: Evrinoma\CodeBundle\Mediator\Bunch\QueryMediator
+    public: true
+    arguments:
+
+  Evrinoma\CodeBundle\Mediator\Bunch\QueryMediator:
+    alias: evrinoma.code.bunch.query.mediator
+
+  evrinoma.code.bunch.command.mediator:
+    class: Evrinoma\CodeBundle\Mediator\Bunch\CommandMediator
+    public: true
+    arguments:
+
+  Evrinoma\CodeBundle\Mediator\Bunch\CommandMediator:
+    alias: evrinoma.code.bunch.command.mediator

@@ -1,6 +1,7 @@
 imports:
   - { resource: services/owner.yml }
   - { resource: services/type.yml }
+  - { resource: services/bunch.yml }
 
 services:
   Evrinoma\CodeBundle\Controller\CodeApiController:
