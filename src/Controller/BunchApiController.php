@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use OpenApi\Annotations as OA;
+use Nelmio\ApiDocBundle\Annotation\Model;
 
 final class BunchApiController extends AbstractApiController implements ApiControllerInterface
 {
@@ -75,10 +76,9 @@ final class BunchApiController extends AbstractApiController implements ApiContr
      *               type="object",
      *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\BunchApiDto"),
      *               @OA\Property(property="id",type="string"),
-     *               @OA\Property(property="description",type="string")
+     *               @OA\Property(property="description",type="string"),
      *               @OA\Property(property="type",type="string"),
      *               @OA\Property(property="active",type="string")
-     *
      *            )
      *         )
      *     )
@@ -253,13 +253,13 @@ final class BunchApiController extends AbstractApiController implements ApiContr
      *     @OA\Parameter(
      *         name="type",
      *         in="query",
-     *         description="TypeBunch",
+     *         description="Type Bunch",
      *         required=true,
      *         @OA\Schema(
      *              type="array",
      *              @OA\Items(
      *                  type="string",
-     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\TypeBunchType::class),
+     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\TypeChoiceType::class)
      *              ),
      *          ),
      *         style="form"
