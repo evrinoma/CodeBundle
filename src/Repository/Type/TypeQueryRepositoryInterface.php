@@ -23,7 +23,7 @@ interface TypeQueryRepositoryInterface
      * @param null   $lockMode
      * @param null   $lockVersion
      *
-     * @return
+     * @return mixed
      * @throws TypeNotFoundException
      */
     public function find(string $id, $lockMode = null, $lockVersion = null);
