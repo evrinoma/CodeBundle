@@ -4,10 +4,10 @@ namespace Evrinoma\CodeBindle\Mediator\Bunch;
 
 
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
+use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeCreatedException;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeRemovedException;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeSavedException;
 use Evrinoma\CodeBundle\Model\BunchInterface;
-
 
 interface CommandMediatorInterface
 {
@@ -35,6 +35,7 @@ interface CommandMediatorInterface
      *
      * @return BunchInterface
      * @throws BunchCannotBeSavedException
+     * @throws BunchCannotBeCreatedException
      */
     public function onCreate(BunchApiDtoInterface $dto, BunchInterface $entity): BunchInterface;
 //endregion Public

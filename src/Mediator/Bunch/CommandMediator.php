@@ -2,26 +2,25 @@
 
 namespace Evrinoma\CodeBindle\Mediator\Bunch;
 
-use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
+use Evinoma\UtilsBundle\Mediator\AbstractCommandMediator;
 use Evrinoma\CodeBundle\Model\BunchInterface;
+use Evrinoma\DtoBundle\Dto\DtoInterface;
 
-class CommandMediator implements CommandMediatorInterface
+class CommandMediator extends AbstractCommandMediator implements CommandMediatorInterface
 {
 //region SECTION: Public
-
-//endregion Public
-    public function onUpdate(BunchApiDtoInterface $dto, BunchInterface $entity): BunchInterface
-    {
-       return $entity;
-    }
-
-    public function onDelete(BunchApiDtoInterface $dto, BunchInterface $entity): void
-    {
-        // TODO: Implement onDelete() method.
-    }
-
-    public function onCreate(BunchApiDtoInterface $dto, BunchInterface $entity): BunchInterface
+    public function onUpdate(DtoInterface $dto, $entity): BunchInterface
     {
         return $entity;
     }
+
+    public function onDelete(DtoInterface $dto, $entity): void
+    {
+    }
+
+    public function onCreate(DtoInterface $dto, $entity): BunchInterface
+    {
+        return $entity;
+    }
+//endregion Public
 }
