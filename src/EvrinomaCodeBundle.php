@@ -3,7 +3,7 @@
 
 namespace Evrinoma\CodeBundle;
 
-use Evrinoma\CodeBundle\DependencyInjection\Compiler\PassMapEntity;
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\MapEntityPass;
 use Evrinoma\CodeBundle\DependencyInjection\EvrinomaCodeExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -23,7 +23,7 @@ class EvrinomaCodeBundle extends Bundle
     {
         parent::build($container);
         $container
-            ->addCompilerPass(new PassMapEntity($this->getNamespace(), $this->getPath()))
+            ->addCompilerPass(new MapEntityPass($this->getNamespace(), $this->getPath()))
         ;
     }
 //endregion Fields
