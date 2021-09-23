@@ -4,6 +4,7 @@ namespace Evrinoma\CodeBindle\Mediator\Bunch;
 
 use Doctrine\ORM\QueryBuilder;
 use Evinoma\UtilsBundle\Mediator\AbstractQueryMediator;
+use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 
 class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterface
@@ -15,7 +16,24 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
 //region SECTION: Public
     public function createQuery(DtoInterface $dto, QueryBuilder $builder): void
     {
+        $alias = $this->alias();
 
+        /** @var $dto BunchApiDtoInterface */
+        $dto->getTypeApiDto()->getBrief();
+
+        if ($dto->hasActive()) {
+            $builder
+                ->andWhere($alias.'.active = :active')
+                ->setParameter('active', $dto->getActive());
+        }
+        if ($dto->hasDescription()) {
+            $builder->andWhere($alias.'.description like :description')
+                ->setParameter('description', '%'.$dto->getDescription().'%');
+        }
+        if ($dto->hasTypeApiDto() && $dto->getTypeApiDto()->hasId()) {
+            $builder->andWhere($alias.'.name = :name')
+                ->setParameter('name', '%'. $dto->getTypeApiDto()->getId().'%');
+        }
     }
 //endregion Public
 }
