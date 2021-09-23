@@ -79,7 +79,7 @@ class BunchRepository extends ServiceEntityRepository implements BunchRepository
         $bunches = $this->mediator->getResult($dto, $builder);
 
         if (count($bunches) === 0) {
-            throw new BunchNotFoundException("Cannot find buncch by findByCriteria");
+            throw new BunchNotFoundException("Cannot find bunch by findByCriteria");
         }
 
         return $bunches;
