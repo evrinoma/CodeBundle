@@ -41,3 +41,11 @@ services:
 
   Evrinoma\CodeBundle\Validator\TypeValidator:
     alias: evrinoma.code.type.validator
+
+  evrinoma.code.form.rest.type:
+    class: Evrinoma\CodeBundle\Form\Rest\TypeChoiceType
+    tags: { - name: form.type }
+
+  Evrinoma\CodeBundle\Form\Rest\TypeChoiceType:
+    alias: evrinoma.code.form.rest.type
+    public: true
