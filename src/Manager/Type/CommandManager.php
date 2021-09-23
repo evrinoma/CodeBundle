@@ -38,6 +38,12 @@ final class CommandManager implements CommandManagerInterface, RestInterface
 //endregion Constructor
 
 //region SECTION: Public
+    /**
+     * @param TypeApiDtoInterface $dto
+     *
+     * @return TypeInterface
+     * @throws TypeInvalidException
+     */
     public function post(TypeApiDtoInterface $dto): TypeInterface
     {
         $type = $this->factory->create($dto);
@@ -56,6 +62,13 @@ final class CommandManager implements CommandManagerInterface, RestInterface
         return $type;
     }
 
+    /**
+     * @param TypeApiDtoInterface $dto
+     *
+     * @return TypeInterface
+     * @throws TypeInvalidException
+     * @throws TypeNotFoundException
+     */
     public function put(TypeApiDtoInterface $dto): TypeInterface
     {
         try {
@@ -80,6 +93,12 @@ final class CommandManager implements CommandManagerInterface, RestInterface
         return $type;
     }
 
+    /**
+     * @param TypeApiDtoInterface $dto
+     *
+     * @throws TypeCannotBeRemovedException
+     * @throws TypeNotFoundException
+     */
     public function delete(TypeApiDtoInterface $dto): void
     {
         try {
