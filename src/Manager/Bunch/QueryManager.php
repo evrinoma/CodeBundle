@@ -5,6 +5,7 @@ namespace Evrinoma\CodeBundle\Manager\Bunch;
 use Evrinoma\CodeBundle\Dto\BunchApiDto;
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
+use Evrinoma\CodeBundle\Repository\Bunch\BunchQueryRepositoryInterface;
 use Evrinoma\UtilsBundle\Rest\RestInterface;
 use Evrinoma\UtilsBundle\Rest\RestTrait;
 
@@ -12,18 +13,18 @@ final class QueryManager implements QueryManagerInterface, RestInterface
 {
     use RestTrait;
 
+//region SECTION: Fields
     private BunchQueryRepositoryInterface $repository;
+//endregion Fields
 
+//region SECTION: Constructor
     public function __construct(BunchQueryRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
+//endregion Constructor
 
-    public function getRestStatus(): int
-    {
-        return $this->status;
-    }
-
+//region SECTION: Public
     /**
      * @param BunchApiDtoInterface $dto
      *
@@ -34,11 +35,18 @@ final class QueryManager implements QueryManagerInterface, RestInterface
     {
         try {
             $bunch = $this->repository->findByCriteria($dto);
-        }catch (BunchNotFoundException $e) {
+        } catch (BunchNotFoundException $e) {
             throw $e;
         }
 
         return $bunch;
+    }
+//endregion Public
+
+//region SECTION: Getters/Setters
+    public function getRestStatus(): int
+    {
+        return $this->status;
     }
 
     /**
@@ -54,6 +62,8 @@ final class QueryManager implements QueryManagerInterface, RestInterface
         } catch (BunchNotFoundException $e) {
             throw $e;
         }
+
         return $bunch;
     }
+//endregion Getters/Setters
 }
