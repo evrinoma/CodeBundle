@@ -8,21 +8,28 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class OwnerApiDto extends AbstractDto implements OwnerApiDtoInterface
 {
+//region SECTION: Fields
+    private string $id = '';
+
+    private string $brief = '';
+
+    private string $description = '';
+//endregion Fields
 
 //region SECTION: Public
     public function hasId(): bool
     {
-        return false;
+        return $this->id !== '';
     }
 
     public function hasBrief(): bool
     {
-        return false;
+        return $this->brief !== '';
     }
 
     public function hasDescription(): bool
     {
-        return false;
+        return $this->description !== '';
     }
 //endregion Public
 
@@ -34,19 +41,28 @@ final class OwnerApiDto extends AbstractDto implements OwnerApiDtoInterface
 //endregion SECTION: Dto
 
 //region SECTION: Getters/Setters
+    /**
+     * @return string
+     */
     public function getId(): string
     {
-        return '';
+        return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getBrief(): string
     {
-        return '';
+        return $this->brief;
     }
 
+    /**
+     * @return string
+     */
     public function getDescription(): string
     {
-        return '';
+        return $this->description;
     }
 //endregion Getters/Setters
 }

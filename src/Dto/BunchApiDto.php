@@ -11,9 +11,13 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
 //region SECTION: Fields
     /**
      * @Dto(class="Evrinoma\CodeBundle\Dto\TypeApiDto", generator="genRequestTypeApiDto")
-     * @var TypeApiDto
+     * @var TypeApiDto|null
      */
-    private $typeApiDto;
+    private ?TypeApiDto $typeApiDto = null;
+
+    private string $id = '';
+
+    private string $description = '';
 
     private string $active = '';
 //endregion Fields
@@ -35,7 +39,17 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
 //region SECTION: Public
     public function hasId(): bool
     {
-        // TODO: Implement hasId() method.
+        return $this->id !== '';
+    }
+
+    public function hasActive(): bool
+    {
+        return $this->active !== '';
+    }
+
+    public function hasDescription(): bool
+    {
+        return $this->description !== '';
     }
 //endregion Public
 
@@ -81,17 +95,31 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
             }
         }
     }
+
+    /**
+     * @return bool
+     */
+    public function hasTypeApiDto(): bool
+    {
+        return $this->typeApiDto !== null;
+    }
 //endregion SECTION: Dto
 
 //region SECTION: Getters/Setters
+    /**
+     * @return string
+     */
     public function getId(): string
     {
-        // TODO: Implement getId() method.
+        return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getDescription(): string
     {
-        // TODO: Implement getDescription() method.
+        return $this->description;
     }
 
     /**
