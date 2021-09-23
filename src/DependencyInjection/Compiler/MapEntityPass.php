@@ -4,9 +4,11 @@ namespace Evrinoma\CodeBundle\DependencyInjection\Compiler;
 
 use Evrinoma\CodeBundle\DependencyInjection\EvrinomaCodeExtension;
 use Evrinoma\CodeBundle\Entity\BaseBunch;
+use Evrinoma\CodeBundle\Entity\BaseCode;
 use Evrinoma\CodeBundle\Entity\BaseOwner;
 use Evrinoma\CodeBundle\Entity\BaseType;
 use Evrinoma\CodeBundle\Model\BunchInterface;
+use Evrinoma\CodeBundle\Model\CodeInterface;
 use Evrinoma\CodeBundle\Model\OwnerInterface;
 use Evrinoma\CodeBundle\Model\TypeInterface;
 use Evrinoma\UtilsBundle\DependencyInjection\Compiler\AbstractMapEntity;
@@ -33,6 +35,7 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
             $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model', '%s/Entity');
             $this->addResolveTargetEntity(
                 [
+                    BaseCode::class  => CodeInterface::class,
                     BaseBunch::class => BunchInterface::class,
                     BaseOwner::class => OwnerInterface::class,
                     BaseType::class  => TypeInterface::class,
