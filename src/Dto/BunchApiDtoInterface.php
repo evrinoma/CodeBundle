@@ -19,5 +19,10 @@ interface BunchApiDtoInterface
      * @return string
      */
     public function getDescription(): string;
+
+    /**
+     * @return string
+     */
+    public function getActive(): string;
 //endregion Getters/Setters
 }

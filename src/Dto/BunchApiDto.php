@@ -8,25 +8,53 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
 {
+//region SECTION: Fields
     /**
      * @Dto(class="Evrinoma\CodeBundle\Dto\TypeApiDto", generator="genRequestTypeApiDto")
      * @var TypeApiDto
      */
     private $typeApiDto;
 
-    public function toDto(Request $request): DtoInterface
+    private string $active = '';
+//endregion Fields
+
+//region SECTION: Protected
+    /**
+     * @param string $active
+     *
+     * @return BunchApiDto
+     */
+    protected function setActive(string $active): BunchApiDto
     {
+        $this->active = $active;
+
         return $this;
     }
+//endregion Protected
 
+//region SECTION: Public
     public function hasId(): bool
     {
         // TODO: Implement hasId() method.
     }
+//endregion Public
 
-    public function getId(): string
+//region SECTION: Dto
+    /**
+     * @param TypeApiDto $typeApiDto
+     *
+     * @return BunchApiDto
+     */
+    protected function setTypeApiDto(TypeApiDto $typeApiDto): BunchApiDto
     {
-        // TODO: Implement getId() method.
+        $this->typeApiDto = $typeApiDto;
+
+        return $this;
+    }
+
+    public function toDto(Request $request): DtoInterface
+    {
+        return $this;
     }
 
     /**
@@ -35,20 +63,6 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
     public function getTypeApiDto(): TypeApiDto
     {
         return $this->typeApiDto;
-    }
-
-    /**
-     * @param TypeApiDto $typeApiDto
-     */
-    private function setTypeApiDto(TypeApiDto $typeApiDto): void
-    {
-        $this->typeApiDto = $typeApiDto;
-    }
-
-
-    public function getDescription(): string
-    {
-        // TODO: Implement getDescription() method.
     }
 
     /**
@@ -67,4 +81,25 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
             }
         }
     }
+//endregion SECTION: Dto
+
+//region SECTION: Getters/Setters
+    public function getId(): string
+    {
+        // TODO: Implement getId() method.
+    }
+
+    public function getDescription(): string
+    {
+        // TODO: Implement getDescription() method.
+    }
+
+    /**
+     * @return string
+     */
+    public function getActive(): string
+    {
+        return $this->active;
+    }
+//endregion Getters/Setters
 }
