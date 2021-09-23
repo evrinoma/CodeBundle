@@ -1,11 +1,13 @@
 <?php
 
+namespace Evrinoma\CodeBundle\Form\Rest;
+
 use Evrinoma\UtilsBundle\Form\Rest\RestChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TypeBunchType extends AbstractType
+class TypeChoiceType extends AbstractType
 {
 
 
@@ -15,8 +17,8 @@ class TypeBunchType extends AbstractType
         $callback = function (Options $options) {
             return ['1', '2', '3', '4'];
         };
-        $resolver->setDefault(RestChoiceType::REST_COMPONENT_NAME, 'typeBunch');
-        $resolver->setDefault(RestChoiceType::REST_DESCRIPTION, 'typeBunchList');
+        $resolver->setDefault(RestChoiceType::REST_COMPONENT_NAME, 'type');
+        $resolver->setDefault(RestChoiceType::REST_DESCRIPTION, 'typeList');
         $resolver->setDefault(RestChoiceType::REST_CHOICES, $callback);
     }
 //endregion Public
