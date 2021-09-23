@@ -4,6 +4,7 @@ namespace Evrinoma\CodeBundle\Repository\Bunch;
 
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
+use Evrinoma\CodeBundle\Model\BunchInterface;
 
 interface BunchQueryRepositoryInterface
 {
@@ -21,9 +22,9 @@ interface BunchQueryRepositoryInterface
      * @param null $lockMode
      * @param null $lockVersion
      *
-     * @return mixed
+     * @return BunchInterface
      * @throws BunchNotFoundException
      */
-    public function find($id, $lockMode = null, $lockVersion = null);
+    public function find($id, $lockMode = null, $lockVersion = null):BunchInterface;
 //endregion Find Filters Repository
 }

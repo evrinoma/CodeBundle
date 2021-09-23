@@ -4,6 +4,7 @@ namespace Evrinoma\CodeBundle\Repository\Owner;
 
 use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerNotFoundException;
+use Evrinoma\CodeBundle\Model\OwnerInterface;
 
 interface OwnerQueryRepositoryInterface
 {
@@ -21,9 +22,9 @@ interface OwnerQueryRepositoryInterface
      * @param null   $lockMode
      * @param null   $lockVersion
      *
-     * @return mixed
+     * @return OwnerInterface
      * @throws OwnerNotFoundException
      */
-    public function find(string $id, $lockMode = null, $lockVersion = null);
+    public function find(string $id, $lockMode = null, $lockVersion = null):OwnerInterface;
 //endregion Find Filters Repository
 }

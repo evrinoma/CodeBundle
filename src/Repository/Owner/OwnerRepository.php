@@ -62,7 +62,7 @@ class OwnerRepository extends ServiceEntityRepository implements OwnerRepository
         return $owner;
     }
 
-    public function find($id, $lockMode = null, $lockVersion = null)
+    public function find($id, $lockMode = null, $lockVersion = null): OwnerInterface
     {
         /** @var OwnerInterface $owner */
         $owner = parent::find($id);

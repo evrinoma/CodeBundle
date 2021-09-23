@@ -71,7 +71,7 @@ class TypeRepository extends ServiceEntityRepository implements TypeRepositoryIn
         return $type;
     }
 
-    public function find($id, $lockMode = null, $lockVersion = null)
+    public function find($id, $lockMode = null, $lockVersion = null): TypeInterface
     {
         /** @var TypeInterface $type */
         $type = parent::find($id);
