@@ -5,7 +5,6 @@ namespace Evrinoma\CodeBundle\Factory;
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\CodeBundle\Entity\BaseBunch;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeCreatedException;
-use Evrinoma\Codebundle\Exception\Type\TypeProxyException;
 use Evrinoma\CodeBundle\Manager\Type\QueryManagerInterface;
 use Evrinoma\CodeBundle\Model\BunchInterface;
 
@@ -38,8 +37,8 @@ class BunchFactory implements BunchFactoryInterface
 
         try {
             $type = $this->queryManager->proxy($dto->getTypeApiDto());
-        } catch (TypeProxyException $e) {
-            throw new BunchCannotBeCreatedException();
+        } catch (\Exception $e) {
+            throw new BunchCannotBeCreatedException($e->getMessage());
         }
 
         $bunch
