@@ -17,14 +17,9 @@ final class OwnerValidator extends AbstractValidator
 //endregion Fields
 
 //region SECTION: Constructor
-    /**
-     * ContractorValidator constructor.
-     *
-     * @param string $entityClass
-     */
-    public function __construct(string $entityClass)
+    public function __construct()
     {
-        parent::__construct($entityClass);
+        parent::__construct(self::$entityClass);
     }
 //endregion Constructor
 }

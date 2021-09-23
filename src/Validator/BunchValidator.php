@@ -4,25 +4,27 @@
 namespace Evrinoma\CodeBundle\Validator;
 
 
-use Evrinoma\CodeBundle\Entity\BaseType;
+use Evrinoma\CodeBundle\Entity\BaseBunch;
 use Evrinoma\UtilsBundle\Validator\AbstractValidator;
 
-final class TypeValidator extends AbstractValidator
+final class BunchValidator extends AbstractValidator
 {
 //region SECTION: Fields
     /**
      * @var string|null
      */
-    protected static ?string $entityClass = BaseType::class;
+    protected static ?string $entityClass = BaseBunch::class;
 //endregion Fields
 
 //region SECTION: Constructor
     /**
      * ContractorValidator constructor.
+     *
+     * @param string $entityClass
      */
-    public function __construct()
+    public function __construct(string $entityClass)
     {
-        parent::__construct(self::$entityClass);
+        parent::__construct($entityClass);
     }
 //endregion Constructor
 }
