@@ -19,4 +19,18 @@ interface BunchInterface extends ActiveInterface, CreateUpdateAtInterface, IdInt
      * @return string
      */
     public function getDescription(): string;
+
+    /**
+     * @param string $description
+     *
+     * @return BunchInterface
+     */
+    public function setDescription(string $description): BunchInterface;
+
+    /**
+     * @param TypeInterface $type
+     *
+     * @return BunchInterface
+     */
+    public function setType(TypeInterface $type): BunchInterface;
 }
