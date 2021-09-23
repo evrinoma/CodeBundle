@@ -3,9 +3,12 @@
 namespace Evrinoma\CodeBundle\Repository\Bunch;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\ORMException;
+use Doctrine\ORM\ORMInvalidArgumentException;
 use Doctrine\Persistence\ManagerRegistry;
 use Evrinoma\CodeBindle\Mediator\Bunch\QueryMediatorInterface;
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
+use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
 use Evrinoma\CodeBundle\Model\BunchInterface;
 
@@ -29,14 +32,34 @@ class BunchRepository extends ServiceEntityRepository implements BunchRepository
 //endregion Constructor
 
 //region SECTION: Public
+    /**
+     * @param BunchInterface $owner
+     *
+     * @return bool
+     * @throws BunchCannotBeSavedException
+     * @throws ORMException
+     */
     public function save(BunchInterface $owner): bool
     {
-        // TODO: Implement save() method.
+        try {
+            $this->getEntityManager()->persist($owner);
+        } catch (ORMInvalidArgumentException $e) {
+            throw new BunchCannotBeSavedException($e->getMessage());
+        }
+
+        return true;
     }
 
+    /**
+     * @param BunchInterface $owner
+     *
+     * @return bool
+     */
     public function remove(BunchInterface $owner): bool
     {
-        // TODO: Implement remove() method.
+        $owner->setActiveToDelete();
+
+        return true;
     }
 //endregion Public
 
