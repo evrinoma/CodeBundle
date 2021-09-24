@@ -8,6 +8,7 @@ use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeRemovedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerNotFoundException;
+use Evrinoma\CodeBundle\Exception\Owner\OwnerProxyException;
 use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 
 class OwnerRepository extends ServiceEntityRepository implements OwnerRepositoryInterface
@@ -74,4 +75,16 @@ class OwnerRepository extends ServiceEntityRepository implements OwnerRepository
         return $owner;
     }
 //endregion Find Filters Repository
+    public function proxy(string $id): OwnerInterface
+    {
+        $em = $this->getEntityManager();
+
+        $owner = $em->getReference($this->getEntityName(), $id);
+
+        if (!$em->contains($owner)) {
+            throw new OwnerProxyException("Proxy doesn't exist with $id");
+        }
+
+        return $owner;
+    }
 }

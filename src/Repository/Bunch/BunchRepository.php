@@ -6,6 +6,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\ORMInvalidArgumentException;
 use Doctrine\Persistence\ManagerRegistry;
+use Evrinoma\CodeBundle\Exception\Bunch\BunchProxyException;
 use Evrinoma\CodeBundle\Mediator\Bunch\QueryMediatorInterface;
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeSavedException;
@@ -100,6 +101,25 @@ class BunchRepository extends ServiceEntityRepository implements BunchRepository
 
         if ($bunch === null) {
             throw new BunchNotFoundException("Cannot find bunch with id $id");
+        }
+
+        return $bunch;
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return BunchInterface
+     * @throws BunchProxyException
+     */
+    public function proxy(string $id): BunchInterface
+    {
+        $em = $this->getEntityManager();
+
+        $bunch = $em->getReference($this->getEntityName(), $id);
+
+        if (!$em->contains($bunch)) {
+            throw new BunchProxyException("Proxy doesn't exist with $id");
         }
 
         return $bunch;
