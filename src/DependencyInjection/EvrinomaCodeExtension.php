@@ -49,12 +49,19 @@ class EvrinomaCodeExtension extends Extension
         $config        = $this->processConfiguration($configuration, $configs);
 
         if ($config['factory_code'] !== self::ENTITY_FACTORY_CODE) {
-            $this->wireFactory($container, 'code', $config['factory_code']);
+            $this->wireFactory($container, 'code', $config['factory_code'], $config['entity_code']);
+        } else {
+            $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.code.factory');
+            $definitionFactory->setArgument(0, $config['entity_code']);
         }
 
         if ($config['factory_bunch'] !== self::ENTITY_FACTORY_CODE) {
-            $this->wireFactory($container, 'bunch', $config['factory_bunch']);
+            $this->wireFactory($container, 'bunch', $config['factory_bunch'], $config['entity_bunch']);
+        } else {
+            $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.bunch.factory');
+            $definitionFactory->setArgument(0, $config['entity_bunch']);
         }
+
 
         $doctrineRegistry = null;
 
@@ -83,25 +90,28 @@ class EvrinomaCodeExtension extends Extension
             $this->wineRepository($container, $doctrineRegistry, 'type', BaseType::class);
             $this->wineRepository($container, $doctrineRegistry, 'owner', BaseOwner::class);
             $this->wineRepository($container, $doctrineRegistry, 'bunch', $config['entity_bunch']);
-            //  $this->injectRepository($container, $doctrineRegistry, 'code', $config['entity_code']);
+            $this->wineRepository($container, $doctrineRegistry, 'code', $config['entity_code']);
         }
 
         $this->wireController($container, 'bunch', $config['dto_bunch']);
         $this->wireController($container, 'code', $config['dto_code']);
 
         $this->wireValidator($container, 'bunch', $config['entity_bunch']);
+        $this->wireValidator($container, 'code', $config['entity_code']);
     }
 //endregion Public
 
 //region SECTION: Private
-    private function wireFactory(ContainerBuilder $container, string $name, string $class)
+    private function wireFactory(ContainerBuilder $container, string $name, string $class, string $paramClass)
     {
         $container->removeDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.factory');
         $definitionFactory = new Definition($class);
-        $alias             = new Alias('evrinoma.'.$this->getAlias().'.'.$name.'.factory');
+        $definitionFactory->addArgument($paramClass);
+        $alias = new Alias('evrinoma.'.$this->getAlias().'.'.$name.'.factory');
         $container->addDefinitions(['evrinoma.'.$this->getAlias().'.'.$name.'.factory' => $definitionFactory]);
         $container->addAliases([$class => $alias]);
     }
+
 
     private function wireController(ContainerBuilder $container, string $name, string $class)
     {
