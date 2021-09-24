@@ -5,6 +5,7 @@ namespace Evrinoma\CodeBundle\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Evrinoma\DtoBundle\Annotation\Dto;
 
 class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
 {
