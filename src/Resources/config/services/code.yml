@@ -29,7 +29,7 @@ services:
 #      - '@evrinoma.code.code.validator'
 #      - '@evrinoma.code.code.repository'
 #      - '@evrinoma.code.code.factory'
-#      - '@evrinoma.code.code.query.mediator'
+#      - '@evrinoma.code.code.command.mediator'
 #      - '@evrinoma.code.type.query.manager'
 
   evrinoma.code.code.query.manager:
@@ -53,10 +53,16 @@ services:
 #  Evrinoma\CodeBundle\Mediator\Code\QueryMediator:
 #    alias: evrinoma.code.code.query.mediator
 #
+#  Evrinoma\CodeBundle\Mediator\Code\QueryMediatorInterface:
+#    alias: evrinoma.code.code.query.mediator
+#
 #  evrinoma.code.code.command.mediator:
 #    class: Evrinoma\CodeBundle\Mediator\Code\CommandMediator
 #    public: true
 #    arguments:
 #
 #  Evrinoma\CodeBundle\Mediator\Code\CommandMediator:
+#    alias: evrinoma.code.code.command.mediator
+#
+#  Evrinoma\CodeBundle\Mediator\Code\CommandMediatorInterface:
 #    alias: evrinoma.code.code.command.mediator
