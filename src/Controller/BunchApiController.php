@@ -132,7 +132,7 @@ final class BunchApiController extends AbstractApiController implements ApiContr
      *         )
      *     )
      * )
-     * @OA\Response(response=200,description="Save code type")
+     * @OA\Response(response=200,description="Save code bunch")
      *
      * @return JsonResponse
      */
@@ -274,7 +274,7 @@ final class BunchApiController extends AbstractApiController implements ApiContr
         $bunchApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         try {
-            $this->queryManager->criteria($bunchApiDto);
+            $json = $this->queryManager->criteria($bunchApiDto);
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->queryManager, $e);
         }
@@ -321,7 +321,7 @@ final class BunchApiController extends AbstractApiController implements ApiContr
         $bunchApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         try {
-            $this->queryManager->get($bunchApiDto);
+            $json = $this->queryManager->get($bunchApiDto);
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->queryManager, $e);
         }
