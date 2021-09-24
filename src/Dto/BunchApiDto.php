@@ -5,6 +5,7 @@ namespace Evrinoma\CodeBundle\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Evrinoma\DtoBundle\Annotation\Dto;
 
 class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
 {
@@ -85,11 +86,11 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
     public function genRequestTypeApiDto(?Request $request): ?\Generator
     {
         if ($request) {
-            $domain = $request->get('type');
-            if ($domain) {
+            $type = $request->get('type');
+            if ($type) {
                 $newRequest                      = $this->getCloneRequest();
-                $domain[DtoInterface::DTO_CLASS] = TypeApiDto::class;
-                $newRequest->request->add($domain);
+                $type[DtoInterface::DTO_CLASS] = TypeApiDto::class;
+                $newRequest->request->add($type);
 
                 yield $newRequest;
             }
