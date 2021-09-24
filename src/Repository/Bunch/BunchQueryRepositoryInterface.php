@@ -2,6 +2,7 @@
 
 namespace Evrinoma\CodeBundle\Repository\Bunch;
 
+use Doctrine\ORM\ORMException;
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchProxyException;
@@ -33,6 +34,7 @@ interface BunchQueryRepositoryInterface
      *
      * @return BunchInterface
      * @throws BunchProxyException
+     * @throws ORMException
      */
     public function proxy(string $id): BunchInterface;
 //endregion Find Filters Repository

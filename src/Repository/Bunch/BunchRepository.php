@@ -111,6 +111,7 @@ class BunchRepository extends ServiceEntityRepository implements BunchRepository
      *
      * @return BunchInterface
      * @throws BunchProxyException
+     * @throws ORMException
      */
     public function proxy(string $id): BunchInterface
     {

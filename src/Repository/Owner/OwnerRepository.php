@@ -3,6 +3,7 @@
 namespace Evrinoma\CodeBundle\Repository\Owner;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\ORMInvalidArgumentException;
 use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeRemovedException;
@@ -15,6 +16,12 @@ class OwnerRepository extends ServiceEntityRepository implements OwnerRepository
 {
 
 //region SECTION: Public
+    /**
+     * @param OwnerInterface $owner
+     *
+     * @return bool
+     * @throws OwnerCannotBeRemovedException
+     */
     public function save(OwnerInterface $owner): bool
     {
         try {
@@ -26,6 +33,12 @@ class OwnerRepository extends ServiceEntityRepository implements OwnerRepository
         return true;
     }
 
+    /**
+     * @param OwnerInterface $owner
+     *
+     * @return bool
+     * @throws OwnerCannotBeSavedException
+     */
     public function remove(OwnerInterface $owner): bool
     {
         try {
@@ -36,9 +49,35 @@ class OwnerRepository extends ServiceEntityRepository implements OwnerRepository
 
         return true;
     }
+
+    /**
+     * @param string $id
+     *
+     * @return OwnerInterface
+     * @throws OwnerProxyException
+     * @throws ORMException
+     */
+    public function proxy(string $id): OwnerInterface
+    {
+        $em = $this->getEntityManager();
+
+        $owner = $em->getReference($this->getEntityName(), $id);
+
+        if (!$em->contains($owner)) {
+            throw new OwnerProxyException("Proxy doesn't exist with $id");
+        }
+
+        return $owner;
+    }
 //endregion Public
 
 //region SECTION: Find Filters Repository
+    /**
+     * @param OwnerApiDtoInterface $dto
+     *
+     * @return array
+     * @throws OwnerNotFoundException
+     */
     public function findByCriteria(OwnerApiDtoInterface $dto): array
     {
         $builder = $this->createQueryBuilder('owner');
@@ -63,6 +102,14 @@ class OwnerRepository extends ServiceEntityRepository implements OwnerRepository
         return $owner;
     }
 
+    /**
+     * @param string $id
+     * @param null   $lockMode
+     * @param null   $lockVersion
+     *
+     * @return OwnerInterface
+     * @throws OwnerNotFoundException
+     */
     public function find($id, $lockMode = null, $lockVersion = null): OwnerInterface
     {
         /** @var OwnerInterface $owner */
@@ -75,16 +122,4 @@ class OwnerRepository extends ServiceEntityRepository implements OwnerRepository
         return $owner;
     }
 //endregion Find Filters Repository
-    public function proxy(string $id): OwnerInterface
-    {
-        $em = $this->getEntityManager();
-
-        $owner = $em->getReference($this->getEntityName(), $id);
-
-        if (!$em->contains($owner)) {
-            throw new OwnerProxyException("Proxy doesn't exist with $id");
-        }
-
-        return $owner;
-    }
 }

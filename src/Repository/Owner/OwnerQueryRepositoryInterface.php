@@ -2,6 +2,7 @@
 
 namespace Evrinoma\CodeBundle\Repository\Owner;
 
+use Doctrine\ORM\ORMException;
 use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerNotFoundException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerProxyException;
@@ -15,6 +16,7 @@ interface OwnerQueryRepositoryInterface
      *
      * @return OwnerInterface
      * @throws OwnerProxyException
+     * @throws ORMException
      */
     public function proxy(string $id): OwnerInterface;
 //endregion Public
