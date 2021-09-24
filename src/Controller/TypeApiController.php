@@ -5,10 +5,9 @@ namespace Evrinoma\CodeBundle\Controller;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Evrinoma\CodeBundle\Dto\TypeApiDto;
 use Evrinoma\CodeBundle\Dto\TypeApiDtoInterface;
-use Evrinoma\CodeBundle\Exception\Owner\OwnerInvalidException;
-use Evrinoma\Codebundle\Exception\Type\TypeCannotBeSavedException;
-use Evrinoma\Codebundle\Exception\Type\TypeInvalidException;
-use Evrinoma\Codebundle\Exception\Type\TypeNotFoundException;
+use Evrinoma\CodeBundle\Exception\Type\TypeCannotBeSavedException;
+use Evrinoma\CodeBundle\Exception\Type\TypeInvalidException;
+use Evrinoma\CodeBundle\Exception\Type\TypeNotFoundException;
 use Evrinoma\CodeBundle\Manager\Type\CommandManagerInterface;
 use Evrinoma\CodeBundle\Manager\Type\QueryManagerInterface;
 use Evrinoma\DtoBundle\Factory\FactoryDtoInterface;
@@ -207,7 +206,7 @@ final class TypeApiController extends AbstractApiController implements ApiContro
                     }
                 );
             } else {
-                throw new OwnerInvalidException('The Dto has\'t ID or class invalid');
+                throw new TypeInvalidException('The Dto has\'t ID or class invalid');
             }
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->commandManager, $e);

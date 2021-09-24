@@ -6,9 +6,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMInvalidArgumentException;
 use Evrinoma\CodeBundle\Dto\TypeApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Type\TypeCannotBeRemovedException;
-use Evrinoma\Codebundle\Exception\Type\TypeCannotBeSavedException;
-use Evrinoma\Codebundle\Exception\Type\TypeNotFoundException;
-use Evrinoma\Codebundle\Exception\Type\TypeProxyException;
+use Evrinoma\CodeBundle\Exception\Type\TypeCannotBeSavedException;
+use Evrinoma\CodeBundle\Exception\Type\TypeNotFoundException;
+use Evrinoma\CodeBundle\Exception\Type\TypeProxyException;
 use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 
 class TypeRepository extends ServiceEntityRepository implements TypeRepositoryInterface

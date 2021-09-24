@@ -1,6 +1,6 @@
 <?php
 
-namespace Evrinoma\Codebundle\Exception\Type;
+namespace Evrinoma\CodeBundle\Exception\Type;
 
 class TypeInvalidException extends \Exception
 {

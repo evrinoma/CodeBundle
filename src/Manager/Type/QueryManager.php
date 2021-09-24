@@ -3,8 +3,8 @@
 namespace Evrinoma\CodeBundle\Manager\Type;
 
 use Evrinoma\CodeBundle\Dto\TypeApiDtoInterface;
-use Evrinoma\Codebundle\Exception\Type\TypeNotFoundException;
-use Evrinoma\Codebundle\Exception\Type\TypeProxyException;
+use Evrinoma\CodeBundle\Exception\Type\TypeNotFoundException;
+use Evrinoma\CodeBundle\Exception\Type\TypeProxyException;
 use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 use Evrinoma\CodeBundle\Repository\Type\TypeQueryRepositoryInterface;
 use Evrinoma\UtilsBundle\Rest\RestInterface;
