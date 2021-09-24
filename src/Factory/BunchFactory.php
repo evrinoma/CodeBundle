@@ -6,10 +6,15 @@ use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\CodeBundle\Entity\Bunch\BaseBunch;
 use Evrinoma\CodeBundle\Model\Bunch\BunchInterface;
 
-final class BunchFactory implements BunchFactoryInterface
+class BunchFactory implements BunchFactoryInterface
 {
 //region SECTION: Fields
     private static string $entityClass = BaseBunch::class;
+
+    public function __construct(string $entityClass)
+    {
+        self::$entityClass = $entityClass;
+    }
 //endregion Fields
 
 //region SECTION: Public
