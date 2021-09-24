@@ -254,7 +254,6 @@ final class BunchApiController extends AbstractApiController implements ApiContr
      *         name="type",
      *         in="query",
      *         description="Type Bunch",
-     *         required=true,
      *         @OA\Schema(
      *              type="array",
      *              @OA\Items(
