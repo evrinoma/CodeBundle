@@ -69,7 +69,9 @@ final class BunchApiController extends AbstractApiController implements ApiContr
      *               example={
      *                  "class":"Evrinoma\CodeBundle\Dto\BunchApiDto",
      *                  "description":"Код типа чертежа",
-     *                  "type":"2"
+     *                  "type": {
+     *                            "id":"3"
+     *                       }
      *                  },
      *               type="object",
      *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\BunchApiDto"),
@@ -120,7 +122,7 @@ final class BunchApiController extends AbstractApiController implements ApiContr
      *                  "id":"3",
      *                  "description":"Код типа чертежа",
      *                  "active": "b",
-     *                  "type":"2"
+     *                  "type":{"id":"3"}
      *                  },
      *               type="object",
      *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\BunchApiDto"),
@@ -152,6 +154,8 @@ final class BunchApiController extends AbstractApiController implements ApiContr
                         $json = $commandManager->put($bunchApiDto);
                     }
                 );
+            } else {
+                throw new BunchInvalidException('The Dto has\'t ID or class invalid');
             }
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->commandManager, $e);

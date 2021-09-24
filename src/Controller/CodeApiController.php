@@ -88,8 +88,8 @@ final class CodeApiController extends AbstractApiController implements ApiContro
      *                  "class":"Evrinoma\CodeBundle\Dto\CodeApiDto",
      *                  "brief":"DR",
      *                  "description":"Пылеудаление.",
-     *                  "owner":"1",
-     *                  "bunch":"2",
+     *                  "owner":{ "id":"3" },
+     *                  "bunch":{ "id":"2" },
      *                  },
      *               type="object",
      *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\CodeApiDto"),     *
@@ -144,8 +144,8 @@ final class CodeApiController extends AbstractApiController implements ApiContro
      *                  "active": "b",
      *                  "brief":"DR",
      *                  "description":"Пылеудаление.",
-     *                  "owner":"1",
-     *                  "bunch":"2",
+     *                  "owner":{ "id":"3" },
+     *                  "bunch":{ "id":"2" },
      *                  },
      *               type="object",
      *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\CodeApiDto"),
@@ -179,6 +179,8 @@ final class CodeApiController extends AbstractApiController implements ApiContro
                         $json = $commandManager->put($codeApiDto);
                     }
                 );
+            } else {
+                    throw new CodeInvalidException('The Dto has\'t ID or class invalid');
             }
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->commandManager, $e);
