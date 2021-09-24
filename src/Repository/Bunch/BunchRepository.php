@@ -10,7 +10,7 @@ use Evrinoma\CodeBindle\Mediator\Bunch\QueryMediatorInterface;
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
-use Evrinoma\CodeBundle\Model\Revoke\BunchInterface;
+use Evrinoma\CodeBundle\Model\Bunch\BunchInterface;
 
 class BunchRepository extends ServiceEntityRepository implements BunchRepositoryInterface
 {

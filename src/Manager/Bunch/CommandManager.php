@@ -11,7 +11,7 @@ use Evrinoma\CodeBundle\Exception\Bunch\BunchInvalidException;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
 use Evrinoma\CodeBundle\Factory\BunchFactoryInterface;
 use Evrinoma\CodeBundle\Manager\Type\QueryManagerInterface;
-use Evrinoma\CodeBundle\Model\Revoke\BunchInterface;
+use Evrinoma\CodeBundle\Model\Bunch\BunchInterface;
 use Evrinoma\CodeBundle\Repository\Bunch\BunchCommandRepositoryInterface;
 use Evrinoma\UtilsBundle\Rest\RestInterface;
 use Evrinoma\UtilsBundle\Rest\RestTrait;

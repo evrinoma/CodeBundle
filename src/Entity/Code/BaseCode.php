@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Evrinoma\CodeBundle\Entity\Revoke;
+namespace Evrinoma\CodeBundle\Entity\Code;
 
 use Doctrine\ORM\Mapping as ORM;
-use Evrinoma\CodeBundle\Model\Revoke\AbstractCode;
+use Evrinoma\CodeBundle\Model\Code\AbstractCode;
 
 /**
  * Class BaseCode

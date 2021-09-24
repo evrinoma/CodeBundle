@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Evrinoma\CodeBundle\Model\Revoke;
+namespace Evrinoma\CodeBundle\Model\Bunch;
 
 use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 use Evrinoma\UtilsBundle\Entity\ActiveTrait;

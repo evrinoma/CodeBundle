@@ -21,8 +21,8 @@ class EvrinomaCodeExtension extends Extension
 //region SECTION: Fields
     public const ENTITY            = 'Evrinoma\CodeBundle\Entity';
     public const ENTITY_FACTORY    = 'Evrinoma\CodeBundle\Factory\CodeFactory';
-    public const ENTITY_BASE_CODE  = self::ENTITY.'\Basic\BaseCode';
-    public const ENTITY_BASE_BUNCH = self::ENTITY.'\Basic\BaseBunch';
+    public const ENTITY_BASE_CODE  = self::ENTITY.'\Basic\Code\BaseCode';
+    public const ENTITY_BASE_BUNCH = self::ENTITY.'\Basic\Bunch\BaseBunch';
 
     /**
      * @var array

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Evrinoma\CodeBundle\Entity;
+namespace Evrinoma\CodeBundle\Entity\Bunch;
 
 use Doctrine\ORM\Mapping as ORM;
-use Evrinoma\CodeBundle\Model\Revoke\AbstractBunch;
+use Evrinoma\CodeBundle\Model\Bunch\AbstractBunch;
 
 /**
  * Class BaseCode

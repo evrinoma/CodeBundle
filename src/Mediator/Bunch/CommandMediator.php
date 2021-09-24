@@ -3,7 +3,7 @@
 namespace Evrinoma\CodeBindle\Mediator\Bunch;
 
 use Evinoma\UtilsBundle\Mediator\AbstractCommandMediator;
-use Evrinoma\CodeBundle\Model\Revoke\BunchInterface;
+use Evrinoma\CodeBundle\Model\Bunch\BunchInterface;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 
 class CommandMediator extends AbstractCommandMediator implements CommandMediatorInterface

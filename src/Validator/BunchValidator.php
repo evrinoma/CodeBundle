@@ -4,7 +4,7 @@
 namespace Evrinoma\CodeBundle\Validator;
 
 
-use Evrinoma\CodeBundle\Entity\BaseBunch;
+use Evrinoma\CodeBundle\Entity\Bunch\BaseBunch;
 use Evrinoma\UtilsBundle\Validator\AbstractValidator;
 
 final class BunchValidator extends AbstractValidator

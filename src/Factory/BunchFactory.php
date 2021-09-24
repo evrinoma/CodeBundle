@@ -3,8 +3,8 @@
 namespace Evrinoma\CodeBundle\Factory;
 
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
-use Evrinoma\CodeBundle\Entity\BaseBunch;
-use Evrinoma\CodeBundle\Model\Revoke\BunchInterface;
+use Evrinoma\CodeBundle\Entity\Bunch\BaseBunch;
+use Evrinoma\CodeBundle\Model\Bunch\BunchInterface;
 
 final class BunchFactory implements BunchFactoryInterface
 {
