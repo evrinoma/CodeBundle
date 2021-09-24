@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Evrinoma\CodeBundle\Exception;
+namespace Evrinoma\CodeBundle\Exception\Code;
 
 
 class CodeCannotBeRemovedException extends \Exception

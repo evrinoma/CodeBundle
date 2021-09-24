@@ -1,0 +1,62 @@
+services:
+  Evrinoma\CodeBundle\Controller\CodeApiController:
+    alias: evrinoma.code.code.api.controller
+    public: true
+
+  evrinoma.code.code.api.controller:
+    class: Evrinoma\CodeBundle\Controller\CodeApiController
+    arguments:
+      - '@jms_serializer'
+      - '@request_stack'
+      - '@evrinoma.dto.factory'
+      - '@evrinoma.code.code.command.manager'
+      - '@evrinoma.code.code.query.manager'
+    autowire: true
+
+#  evrinoma.code.code.factory:
+#    class: Evrinoma\CodeBundle\Factory\CodeFactory
+#    public: true
+#    arguments:
+#
+#  evrinoma.code.code.repository:
+#    class: Evrinoma\CodeBundle\Repository\Code\CodeRepository
+#    public: true
+#    arguments:
+
+  evrinoma.code.code.command.manager:
+    class: Evrinoma\CodeBundle\Manager\Code\CommandManager
+#    arguments:
+#      - '@evrinoma.code.code.validator'
+#      - '@evrinoma.code.code.repository'
+#      - '@evrinoma.code.code.factory'
+#      - '@evrinoma.code.code.query.mediator'
+#      - '@evrinoma.code.type.query.manager'
+
+  evrinoma.code.code.query.manager:
+    class: Evrinoma\CodeBundle\Manager\Code\QueryManager
+#    arguments:
+#      - '@evrinoma.code.code.repository'
+#
+#  evrinoma.code.code.validator:
+#    class: Evrinoma\CodeBundle\Validator\CodeValidator
+#    public: true
+#    arguments:
+#
+#  Evrinoma\CodeBundle\Validator\CodeValidator:
+#    alias: evrinoma.code.code.validator
+#
+#  evrinoma.code.code.query.mediator:
+#    class: Evrinoma\CodeBundle\Mediator\Code\QueryMediator
+#    public: true
+#    arguments:
+#
+#  Evrinoma\CodeBundle\Mediator\Code\QueryMediator:
+#    alias: evrinoma.code.code.query.mediator
+#
+#  evrinoma.code.code.command.mediator:
+#    class: Evrinoma\CodeBundle\Mediator\Code\CommandMediator
+#    public: true
+#    arguments:
+#
+#  Evrinoma\CodeBundle\Mediator\Code\CommandMediator:
+#    alias: evrinoma.code.code.command.mediator

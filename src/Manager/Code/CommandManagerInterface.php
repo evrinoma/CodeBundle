@@ -1,6 +1,6 @@
 <?php
 
-namespace Evrinoma\CodeBundle\Manager;
+namespace Evrinoma\CodeBundle\Manager\Code;
 
 interface CommandManagerInterface
 {
