@@ -2,7 +2,6 @@
 
 namespace Evrinoma\CodeBundle\Model\Code;
 
-use Doctrine\ORM\Mapping as ORM;
 use Evrinoma\CodeBundle\Model\Bunch\BunchInterface;
 use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 use Evrinoma\UtilsBundle\Entity\ActiveTrait;
@@ -83,7 +82,53 @@ abstract class AbstractCode implements CodeInterface
     {
         return $this->owner;
     }
+
+    /**
+     * @param string $brief
+     *
+     * @return CodeInterface
+     */
+    public function setBrief(string $brief): CodeInterface
+    {
+        $this->brief = $brief;
+
+        return $this;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return CodeInterface
+     */
+    public function setDescription(string $description): CodeInterface
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @param BunchInterface $bunch
+     *
+     * @return CodeInterface
+     */
+    public function setBunch(BunchInterface $bunch): CodeInterface
+    {
+        $this->bunch = $bunch;
+
+        return $this;
+    }
+
+    /**
+     * @param OwnerInterface $owner
+     *
+     * @return CodeInterface
+     */
+    public function setOwner(OwnerInterface $owner): CodeInterface
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
 //endregion Getters/Setters
-
-
 }
