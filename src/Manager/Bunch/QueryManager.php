@@ -2,9 +2,10 @@
 
 namespace Evrinoma\CodeBundle\Manager\Bunch;
 
-use Evrinoma\CodeBundle\Dto\BunchApiDto;
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
+use Evrinoma\CodeBundle\Exception\Bunch\BunchProxyException;
+use Evrinoma\CodeBundle\Model\Bunch\BunchInterface;
 use Evrinoma\CodeBundle\Repository\Bunch\BunchQueryRepositoryInterface;
 use Evrinoma\UtilsBundle\Rest\RestInterface;
 use Evrinoma\UtilsBundle\Rest\RestTrait;
@@ -41,6 +42,23 @@ final class QueryManager implements QueryManagerInterface, RestInterface
 
         return $bunch;
     }
+
+    /**
+     * @param BunchApiDtoInterface $dto
+     *
+     * @return BunchInterface
+     * @throws BunchProxyException
+     */
+    public function proxy(BunchApiDtoInterface $dto): BunchInterface
+    {
+        try {
+            $type = $this->repository->proxy($dto->getId());
+        } catch (BunchProxyException $e) {
+            throw $e;
+        }
+
+        return $type;
+    }
 //endregion Public
 
 //region SECTION: Getters/Setters
@@ -52,10 +70,10 @@ final class QueryManager implements QueryManagerInterface, RestInterface
     /**
      * @param BunchApiDtoInterface $dto
      *
-     * @return BunchApiDto
+     * @return BunchInterface
      * @throws BunchNotFoundException
      */
-    public function get(BunchApiDtoInterface $dto): BunchApiDto
+    public function get(BunchApiDtoInterface $dto): BunchInterface
     {
         try {
             $bunch = $this->repository->find($dto->getId());

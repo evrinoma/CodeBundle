@@ -4,6 +4,7 @@ namespace Evrinoma\CodeBundle\Manager\Owner;
 
 use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerNotFoundException;
+use Evrinoma\CodeBundle\Exception\Owner\OwnerProxyException;
 use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 use Evrinoma\CodeBundle\Repository\Owner\OwnerQueryRepositoryInterface;
 use Evrinoma\UtilsBundle\Rest\RestInterface;
@@ -40,7 +41,7 @@ final class QueryManager implements QueryManagerInterface, RestInterface
 //region SECTION: Getters/Setters
     public function get(OwnerApiDtoInterface $dto): OwnerInterface
     {
-        try {$this->repository->
+        try {
             $owner = $this->repository->find($dto->getId());
         } catch (OwnerNotFoundException $e) {
             throw $e;
@@ -54,4 +55,20 @@ final class QueryManager implements QueryManagerInterface, RestInterface
         return $this->status;
     }
 //endregion Getters/Setters
+    /**
+     * @param OwnerApiDtoInterface $dto
+     *
+     * @return OwnerInterface
+     * @throws OwnerProxyException
+     */
+    public function proxy(OwnerApiDtoInterface $dto): OwnerInterface
+    {
+        try {
+            $type = $this->repository->proxy($dto->getId());
+        } catch (OwnerProxyException $e) {
+            throw $e;
+        }
+
+        return $type;
+    }
 }
