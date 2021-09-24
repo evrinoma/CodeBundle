@@ -1,8 +1,8 @@
 <?php
 
-namespace Evrinoma\CodeBindle\Mediator\Bunch;
+namespace Evrinoma\CodeBundle\Mediator\Bunch;
 
-use Evinoma\UtilsBundle\Mediator\AbstractCommandMediator;
+use Evrinoma\UtilsBundle\Mediator\AbstractCommandMediator;
 use Evrinoma\CodeBundle\Model\Bunch\BunchInterface;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 

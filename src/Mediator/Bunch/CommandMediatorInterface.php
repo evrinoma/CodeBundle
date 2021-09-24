@@ -1,6 +1,6 @@
 <?php
 
-namespace Evrinoma\CodeBindle\Mediator\Bunch;
+namespace Evrinoma\CodeBundle\Mediator\Bunch;
 
 
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;

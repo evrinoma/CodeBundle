@@ -1,9 +1,9 @@
 <?php
 
-namespace Evrinoma\CodeBindle\Mediator\Bunch;
+namespace Evrinoma\CodeBundle\Mediator\Bunch;
 
 use Doctrine\ORM\QueryBuilder;
-use Evinoma\UtilsBundle\Mediator\AbstractQueryMediator;
+use Evrinoma\UtilsBundle\Mediator\AbstractQueryMediator;
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 
