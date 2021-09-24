@@ -3,7 +3,10 @@
 
 namespace Evrinoma\CodeBundle\DependencyInjection;
 
+use Evrinoma\CodeBundle\Dto\BunchApiDto;
 use Evrinoma\CodeBundle\Dto\CodeApiDto;
+use Evrinoma\CodeBundle\Entity\Define\BaseOwner;
+use Evrinoma\CodeBundle\Entity\Define\BaseType;
 use Evrinoma\CodeBundle\EvrinomaCodeBundle;
 use Evrinoma\UtilsBundle\DependencyInjection\HelperTrait;
 use Symfony\Component\Config\FileLocator;
@@ -19,11 +22,13 @@ class EvrinomaCodeExtension extends Extension
     use HelperTrait;
 
 //region SECTION: Fields
-    public const ENTITY            = 'Evrinoma\CodeBundle\Entity';
-    public const ENTITY_FACTORY    = 'Evrinoma\CodeBundle\Factory\CodeFactory';
-    public const ENTITY_BASE_CODE  = self::ENTITY.'\Basic\Code\BaseCode';
-    public const ENTITY_BASE_BUNCH = self::ENTITY.'\Basic\Bunch\BaseBunch';
-
+    public const ENTITY               = 'Evrinoma\CodeBundle\Entity';
+    public const ENTITY_FACTORY_CODE  = 'Evrinoma\CodeBundle\Factory\CodeFactory';
+    public const ENTITY_FACTORY_BUNCH = 'Evrinoma\CodeBundle\Factory\BunchFactory';
+    public const ENTITY_BASE_CODE     = self::ENTITY.'\Code\BaseCode';
+    public const ENTITY_BASE_BUNCH    = self::ENTITY.'\Bunch\BaseBunch';
+    public const DTO_BASE_CODE        = CodeApiDto::class;
+    public const DTO_BASE_BUNCH       = BunchApiDto::class;
     /**
      * @var array
      */
@@ -43,26 +48,23 @@ class EvrinomaCodeExtension extends Extension
         $configuration = $this->getConfiguration($configs, $container);
         $config        = $this->processConfiguration($configuration, $configs);
 
-        $definitionApiController = $container->getDefinition('evrinoma.'.$this->getAlias().'.api.controller');
-        $definitionApiController->setArgument(5, $config['dto'] ?? CodeApiDto::class);
-
-        if ($config['factory'] !== self::ENTITY_FACTORY) {
-            $container->removeDefinition('evrinoma.'.$this->getAlias().'.factory');
-            $definitionFactory = new Definition($config['factory']);
-            $alias             = new Alias('evrinoma.'.$this->getAlias().'.factory');
-            $container->addDefinitions(['evrinoma.'.$this->getAlias().'.factory' => $definitionFactory]);
-            $container->addAliases([$config['factory'] => $alias]);
+        if ($config['factory_code'] !== self::ENTITY_FACTORY_CODE) {
+            $this->wireFactory($container, 'code', $config['factory_code']);
         }
+
+        if ($config['factory_bunch'] !== self::ENTITY_FACTORY_CODE) {
+            $this->wireFactory($container, 'bunch', $config['factory_bunch']);
+        }
+
+        $doctrineRegistry = null;
 
         if (isset(self::$doctrineDrivers[$config['db_driver']])) {
             $loader->load('doctrine.yml');
             $container->setAlias('evrinoma.'.$this->getAlias().'.doctrine_registry', new Alias(self::$doctrineDrivers[$config['db_driver']]['registry'], false));
-
-
+            $doctrineRegistry = new Reference('evrinoma.'.$this->getAlias().'.doctrine_registry');
             $container->setParameter('evrinoma.'.$this->getAlias().'.backend_type_'.$config['db_driver'], true);
-
-            $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.object_manager');
-            $definitionRepository->setFactory([new Reference('evrinoma.'.$this->getAlias().'.doctrine_registry'), 'getManager']);
+            $objectManager = $container->getDefinition('evrinoma.'.$this->getAlias().'.object_manager');
+            $objectManager->setFactory([$doctrineRegistry, 'getManager']);
         }
 
         $this->remapParametersNamespaces(
@@ -77,8 +79,63 @@ class EvrinomaCodeExtension extends Extension
             ]
         );
 
+        if ($doctrineRegistry) {
+            $this->wineRepository($container, $doctrineRegistry, 'type', BaseType::class);
+            $this->wineRepository($container, $doctrineRegistry, 'owner', BaseOwner::class);
+            $this->wineRepository($container, $doctrineRegistry, 'bunch', $config['entity_bunch']);
+            //  $this->injectRepository($container, $doctrineRegistry, 'code', $config['entity_code']);
+        }
+
+        $this->wireController($container, 'bunch', $config['dto_bunch']);
+        $this->wireController($container, 'code', $config['dto_code']);
+
+        $this->wireValidator($container, 'bunch', $config['entity_bunch']);
     }
 //endregion Public
+
+//region SECTION: Private
+    private function wireFactory(ContainerBuilder $container, string $name, string $class)
+    {
+        $container->removeDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.factory');
+        $definitionFactory = new Definition($class);
+        $alias             = new Alias('evrinoma.'.$this->getAlias().'.'.$name.'.factory');
+        $container->addDefinitions(['evrinoma.'.$this->getAlias().'.'.$name.'.factory' => $definitionFactory]);
+        $container->addAliases([$class => $alias]);
+    }
+
+    private function wireController(ContainerBuilder $container, string $name, string $class)
+    {
+        $definitionApiController = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.api.controller');
+        $definitionApiController->setArgument(5, $class);
+    }
+
+    private function wireValidator(ContainerBuilder $container, string $name, string $class)
+    {
+        $definitionApiController = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.validator');
+        $definitionApiController->setArgument(0, $class);
+    }
+
+    private function wineRepository(ContainerBuilder $container, Reference $doctrineRegistry, string $name, string $class): void
+    {
+        $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.repository');
+
+        switch ($name) {
+            case 'code':
+            case 'bunch':
+                $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.mediator');
+                $definitionRepository->setArgument(2, $definitionQueryMediator);
+            case 'type':
+            case 'owner':
+                $definitionRepository->setArgument(1, $class);
+            default:
+                $definitionRepository->setArgument(0, $doctrineRegistry);
+        }
+        $array = $definitionRepository->getArguments();
+        ksort($array);
+        $definitionRepository->setArguments($array);
+
+    }
+//endregion Private
 
 //region SECTION: Getters/Setters
     public function getAlias()

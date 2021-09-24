@@ -41,13 +41,13 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
             false
         );
 
-        $entityBunch = $container->getParameter('evrinoma.code.entity_code');
+        $entityBunch = $container->getParameter('evrinoma.code.entity_bunch');
         if ((strpos($entityBunch, EvrinomaCodeExtension::ENTITY) !== false)) {
             $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Bunch', '%s/Entity/Bunch');
             $this->addResolveTargetEntity([BaseBunch::class => BunchInterface::class,], false);
         }
 
-        $entityCode = $container->getParameter('evrinoma.code.entity_bunch');
+        $entityCode = $container->getParameter('evrinoma.code.entity_code');
 
         if ((strpos($entityCode, EvrinomaCodeExtension::ENTITY) !== false)) {
             $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Code', '%s/Entity/Code');
