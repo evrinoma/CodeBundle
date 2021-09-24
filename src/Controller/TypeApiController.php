@@ -158,57 +158,6 @@ final class TypeApiController extends AbstractApiController implements ApiContro
     }
 
     /**
-     * @Rest\Get("/api/code/type/criteria", options={"expose"=true}, name="api_code_type_criteria")
-     * @OA\Get(
-     *     tags={"code"},
-     *     @OA\Parameter(
-     *         description="class",
-     *         in="query",
-     *         name="class",
-     *         required=true,
-     *         @OA\Schema(
-     *           type="string",
-     *           default="Evrinoma\CodeBundle\Dto\TypeApiDto",
-     *           readOnly=true
-     *         )
-     *     ),
-     *      @OA\Parameter(
-     *         description="id Entity",
-     *         in="query",
-     *         name="id",
-     *         @OA\Schema(
-     *           type="string",
-     *         )
-     *     ),
-     *      @OA\Parameter(
-     *         description="brief",
-     *         in="query",
-     *         name="brief",
-     *         @OA\Schema(
-     *           type="string",
-     *         )
-     *     )
-     * )
-     * @OA\Response(response=200,description="Return code owners")
-     *
-     * @return JsonResponse
-     */
-    public function criteriaAction(): JsonResponse
-    {
-
-        /** @var TypeApiDtoInterface $typeApiDto */
-        $typeApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
-
-        try {
-            $json = $this->queryManager->criteria($typeApiDto);
-        } catch (\Exception $e) {
-            $json = $this->setRestStatus($this->queryManager, $e);
-        }
-
-        return $this->setSerializeGroup('api_get_code_type')->json(['message' => 'Get code type', 'data' => $json], $this->queryManager->getRestStatus());
-    }
-
-    /**
      * @Rest\Delete("/api/code/type/delete", options={"expose"=true}, name="api_delete_code_type")
      * @OA\Delete(
      *     tags={"code"},
@@ -265,6 +214,57 @@ final class TypeApiController extends AbstractApiController implements ApiContro
         }
 
         return $this->json(['message' => 'Delete code type', 'data' => $json], $this->commandManager->getRestStatus());
+    }
+
+    /**
+     * @Rest\Get("/api/code/type/criteria", options={"expose"=true}, name="api_code_type_criteria")
+     * @OA\Get(
+     *     tags={"code"},
+     *     @OA\Parameter(
+     *         description="class",
+     *         in="query",
+     *         name="class",
+     *         required=true,
+     *         @OA\Schema(
+     *           type="string",
+     *           default="Evrinoma\CodeBundle\Dto\TypeApiDto",
+     *           readOnly=true
+     *         )
+     *     ),
+     *      @OA\Parameter(
+     *         description="id Entity",
+     *         in="query",
+     *         name="id",
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     ),
+     *      @OA\Parameter(
+     *         description="brief",
+     *         in="query",
+     *         name="brief",
+     *         @OA\Schema(
+     *           type="string",
+     *         )
+     *     )
+     * )
+     * @OA\Response(response=200,description="Return code owners")
+     *
+     * @return JsonResponse
+     */
+    public function criteriaAction(): JsonResponse
+    {
+
+        /** @var TypeApiDtoInterface $typeApiDto */
+        $typeApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+
+        try {
+            $json = $this->queryManager->criteria($typeApiDto);
+        } catch (\Exception $e) {
+            $json = $this->setRestStatus($this->queryManager, $e);
+        }
+
+        return $this->setSerializeGroup('api_get_code_type')->json(['message' => 'Get code type', 'data' => $json], $this->queryManager->getRestStatus());
     }
 
     /**

@@ -58,6 +58,55 @@ final class BunchApiController extends AbstractApiController implements ApiContr
 
 //region SECTION: Public
     /**
+     * @Rest\Post("/api/code/bunch/create", options={"expose"=true}, name="api_create_code_bunch")
+     * @OA\Post(
+     *     tags={"code"},
+     *     description="the method perform create code type",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *               example={
+     *                  "class":"Evrinoma\CodeBundle\Dto\BunchApiDto",
+     *                  "description":"Код типа чертежа",
+     *                  "type":"2"
+     *                  },
+     *               type="object",
+     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\BunchApiDto"),
+     *               @OA\Property(property="description",type="string"),
+     *               @OA\Property(property="type",type="string"),
+     *            )
+     *         )
+     *     )
+     * )
+     * @OA\Response(response=200,description="Create code type")
+     *
+     * @return JsonResponse
+     */
+    public function postAction(): JsonResponse
+    {
+        /** @var BunchApiDtoInterface $bunchApiDto */
+        $bunchApiDto    = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        $commandManager = $this->commandManager;
+
+        $this->commandManager->setRestCreated();
+        try {
+            $json = [];
+            $em   = $this->getDoctrine()->getManager();
+
+            $em->transactional(
+                function () use ($bunchApiDto, $commandManager, &$json) {
+                    $json = $commandManager->post($bunchApiDto);
+                }
+            );
+        } catch (\Exception $e) {
+            $json = $this->setRestStatus($this->commandManager, $e);
+        }
+
+        return $this->setSerializeGroup('api_post_code_bunch')->json(['message' => 'Create code bunch', 'data' => $json], $this->commandManager->getRestStatus());
+    }
+
+    /**
      * @Rest\Put("/api/code/bunch/save", options={"expose"=true}, name="api_save_code_bunch")
      * @OA\Put(
      *     tags={"code"},
@@ -109,55 +158,6 @@ final class BunchApiController extends AbstractApiController implements ApiContr
         }
 
         return $this->setSerializeGroup('api_put_code_bunch')->json(['message' => 'Save code bunch', 'data' => $json], $this->commandManager->getRestStatus());
-    }
-
-    /**
-     * @Rest\Post("/api/code/bunch/create", options={"expose"=true}, name="api_create_code_bunch")
-     * @OA\Post(
-     *     tags={"code"},
-     *     description="the method perform create code type",
-     *     @OA\RequestBody(
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *               example={
-     *                  "class":"Evrinoma\CodeBundle\Dto\BunchApiDto",
-     *                  "description":"Код типа чертежа",
-     *                  "type":"2"
-     *                  },
-     *               type="object",
-     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\BunchApiDto"),
-     *               @OA\Property(property="description",type="string"),
-     *               @OA\Property(property="type",type="string"),
-     *            )
-     *         )
-     *     )
-     * )
-     * @OA\Response(response=200,description="Create code type")
-     *
-     * @return JsonResponse
-     */
-    public function postAction(): JsonResponse
-    {
-        /** @var BunchApiDtoInterface $bunchApiDto */
-        $bunchApiDto    = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
-        $commandManager = $this->commandManager;
-
-        $this->commandManager->setRestCreated();
-        try {
-            $json = [];
-            $em   = $this->getDoctrine()->getManager();
-
-            $em->transactional(
-                function () use ($bunchApiDto, $commandManager, &$json) {
-                    $json = $commandManager->post($bunchApiDto);
-                }
-            );
-        } catch (\Exception $e) {
-            $json = $this->setRestStatus($this->commandManager, $e);
-        }
-
-        return $this->setSerializeGroup('api_post_code_bunch')->json(['message' => 'Create code bunch', 'data' => $json], $this->commandManager->getRestStatus());
     }
 
     /**
