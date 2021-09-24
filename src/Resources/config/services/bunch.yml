@@ -11,6 +11,7 @@ services:
       - '@evrinoma.dto.factory'
       - '@evrinoma.code.bunch.command.manager'
       - '@evrinoma.code.bunch.query.manager'
+    autowire: true
 
   evrinoma.code.bunch.factory:
     class: Evrinoma\CodeBundle\Factory\BunchFactory

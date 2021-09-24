@@ -11,6 +11,7 @@ services:
       - '@evrinoma.dto.factory'
       - '@evrinoma.code.owner.command.manager'
       - '@evrinoma.code.owner.query.manager'
+    autowire: true
 
   evrinoma.code.owner.factory:
     class: Evrinoma\CodeBundle\Factory\OwnerFactory

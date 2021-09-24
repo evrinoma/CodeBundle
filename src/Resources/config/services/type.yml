@@ -11,6 +11,7 @@ services:
       - '@evrinoma.dto.factory'
       - '@evrinoma.code.type.command.manager'
       - '@evrinoma.code.type.query.manager'
+    autowire: true
 
   evrinoma.code.type.factory:
     class: Evrinoma\CodeBundle\Factory\TypeFactory
