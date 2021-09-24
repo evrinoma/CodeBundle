@@ -6,7 +6,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\ORMInvalidArgumentException;
 use Doctrine\Persistence\ManagerRegistry;
-use Evrinoma\CodeBindle\Mediator\Bunch\QueryMediatorInterface;
+use Evrinoma\CodeBundle\Mediator\Bunch\QueryMediatorInterface;
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
