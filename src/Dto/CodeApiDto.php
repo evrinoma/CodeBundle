@@ -72,7 +72,7 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
      *
      * @return CodeApiDto
      */
-    protected function setOwnerApiDto(OwnerApiDto $ownerApiDto): CodeApiDto
+    public function setOwnerApiDto(OwnerApiDto $ownerApiDto): CodeApiDto
     {
         $this->ownerApiDto = $ownerApiDto;
 
@@ -84,7 +84,7 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
      *
      * @return CodeApiDto
      */
-    protected function setBunchApiDto(BunchApiDto $bunchApiDto): CodeApiDto
+    public function setBunchApiDto(BunchApiDto $bunchApiDto): CodeApiDto
     {
         $this->bunchApiDto = $bunchApiDto;
 

@@ -60,7 +60,7 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
      *
      * @return BunchApiDto
      */
-    protected function setTypeApiDto(TypeApiDto $typeApiDto): BunchApiDto
+    public function setTypeApiDto(TypeApiDto $typeApiDto): BunchApiDto
     {
         $this->typeApiDto = $typeApiDto;
 
