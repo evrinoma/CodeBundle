@@ -3,8 +3,8 @@
 namespace Evrinoma\CodeBundle\Factory;
 
 use Evrinoma\CodeBundle\Dto\TypeApiDtoInterface;
-use Evrinoma\CodeBundle\Entity\BaseType;
-use Evrinoma\CodeBundle\Model\TypeInterface;
+use Evrinoma\CodeBundle\Entity\Define\BaseType;
+use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 
 final class TypeFactory implements TypeFactoryInterface
 {

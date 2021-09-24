@@ -4,7 +4,7 @@ namespace Evrinoma\CodeBundle\Repository\Owner;
 
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeRemovedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeSavedException;
-use Evrinoma\CodeBundle\Model\OwnerInterface;
+use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 
 interface OwnerCommandRepositoryInterface
 {

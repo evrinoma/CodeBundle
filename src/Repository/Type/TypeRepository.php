@@ -9,7 +9,7 @@ use Evrinoma\CodeBundle\Exception\Type\TypeCannotBeRemovedException;
 use Evrinoma\Codebundle\Exception\Type\TypeCannotBeSavedException;
 use Evrinoma\Codebundle\Exception\Type\TypeNotFoundException;
 use Evrinoma\Codebundle\Exception\Type\TypeProxyException;
-use Evrinoma\CodeBundle\Model\TypeInterface;
+use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 
 class TypeRepository extends ServiceEntityRepository implements TypeRepositoryInterface
 {

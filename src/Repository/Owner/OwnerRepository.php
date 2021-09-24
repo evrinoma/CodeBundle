@@ -8,7 +8,7 @@ use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeRemovedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerNotFoundException;
-use Evrinoma\CodeBundle\Model\OwnerInterface;
+use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 
 class OwnerRepository extends ServiceEntityRepository implements OwnerRepositoryInterface
 {

@@ -2,7 +2,7 @@
 
 namespace Evrinoma\CodeBundle\Repository\Type;
 
-use Evrinoma\CodeBundle\Model\TypeInterface;
+use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 
 interface TypeCommandRepositoryInterface
 {

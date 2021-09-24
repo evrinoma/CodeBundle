@@ -1,15 +1,14 @@
 <?php
 
 
-namespace Evrinoma\CodeBundle\Entity;
+namespace Evrinoma\CodeBundle\Entity\Define;
 
 use Doctrine\ORM\Mapping as ORM;
-use Evrinoma\CodeBundle\Model\AbstractOwner;
+use Evrinoma\CodeBundle\Model\Define\AbstractOwner;
 
 /**
  * Class BaseCode
  *
- * @package Evrinoma\CodeBundle\Entity
  * @ORM\Table(name="code_owner")
  * @ORM\Entity()
  */

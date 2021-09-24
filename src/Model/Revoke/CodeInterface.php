@@ -1,9 +1,10 @@
 <?php
 
 
-namespace Evrinoma\CodeBundle\Model;
+namespace Evrinoma\CodeBundle\Model\Revoke;
 
 
+use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 use Evrinoma\UtilsBundle\Entity\ActiveInterface;
 use Evrinoma\UtilsBundle\Entity\CreateUpdateAtInterface;
 use Evrinoma\UtilsBundle\Entity\IdInterface;

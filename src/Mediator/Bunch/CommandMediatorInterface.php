@@ -7,7 +7,7 @@ use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeCreatedException;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeRemovedException;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeSavedException;
-use Evrinoma\CodeBundle\Model\BunchInterface;
+use Evrinoma\CodeBundle\Model\Revoke\BunchInterface;
 
 interface CommandMediatorInterface
 {

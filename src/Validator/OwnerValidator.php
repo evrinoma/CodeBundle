@@ -4,7 +4,7 @@
 namespace Evrinoma\CodeBundle\Validator;
 
 
-use Evrinoma\CodeBundle\Entity\BaseOwner;
+use Evrinoma\CodeBundle\Entity\Define\BaseOwner;
 use Evrinoma\UtilsBundle\Validator\AbstractValidator;
 
 final class OwnerValidator extends AbstractValidator

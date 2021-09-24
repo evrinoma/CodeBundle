@@ -1,15 +1,15 @@
 <?php
 
 
-namespace Evrinoma\CodeBundle\Entity;
+namespace Evrinoma\CodeBundle\Entity\Define;
 
 use Doctrine\ORM\Mapping as ORM;
-use Evrinoma\CodeBundle\Model\AbstractType;
+use Evrinoma\CodeBundle\Model\Define\AbstractType;
 
 /**
  * Class BaseCode
  *
- * @package Evrinoma\CodeBundle\Entity
+ * @package Evrinoma\CodeBundle\Entity\Define
  * @ORM\Table(name="code_type")
  * @ORM\Entity()
  */

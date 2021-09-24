@@ -4,7 +4,7 @@ namespace Evrinoma\CodeBundle\Repository\Owner;
 
 use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerNotFoundException;
-use Evrinoma\CodeBundle\Model\OwnerInterface;
+use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 
 interface OwnerQueryRepositoryInterface
 {

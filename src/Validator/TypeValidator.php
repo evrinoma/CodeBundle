@@ -4,7 +4,7 @@
 namespace Evrinoma\CodeBundle\Validator;
 
 
-use Evrinoma\CodeBundle\Entity\BaseType;
+use Evrinoma\CodeBundle\Entity\Define\BaseType;
 use Evrinoma\UtilsBundle\Validator\AbstractValidator;
 
 final class TypeValidator extends AbstractValidator

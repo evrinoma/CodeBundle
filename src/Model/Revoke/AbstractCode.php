@@ -1,8 +1,9 @@
 <?php
 
-namespace Evrinoma\CodeBundle\Model;
+namespace Evrinoma\CodeBundle\Model\Revoke;
 
 use Doctrine\ORM\Mapping as ORM;
+use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 use Evrinoma\UtilsBundle\Entity\ActiveTrait;
 use Evrinoma\UtilsBundle\Entity\CreateUpdateAtTrait;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
@@ -35,7 +36,7 @@ abstract class AbstractCode implements CodeInterface
     /**
      * @var BunchInterface
      *
-     * @ORM\ManyToOne(targetEntity="Evrinoma\CodeBundle\Model\BunchInterface")
+     * @ORM\ManyToOne(targetEntity="Evrinoma\CodeBundle\Model\Revoke\BunchInterface")
      * @ORM\JoinColumn(name="bunch_id", referencedColumnName="id")
      */
     protected BunchInterface $bunch;
@@ -43,7 +44,7 @@ abstract class AbstractCode implements CodeInterface
     /**
      * @var OwnerInterface
      *
-     * @ORM\ManyToOne(targetEntity="Evrinoma\CodeBundle\Model\OwnerInterface")
+     * @ORM\ManyToOne(targetEntity="Evrinoma\CodeBundle\Model\Define\OwnerInterface")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
      */
     protected OwnerInterface $owner;

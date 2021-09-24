@@ -2,8 +2,8 @@
 namespace Evrinoma\CodeBundle\Factory;
 
 use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
-use Evrinoma\CodeBundle\Entity\BaseOwner;
-use Evrinoma\CodeBundle\Model\OwnerInterface;
+use Evrinoma\CodeBundle\Entity\Define\BaseOwner;
+use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 
 final class OwnerFactory implements OwnerFactoryInterface
 {

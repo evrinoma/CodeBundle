@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Evrinoma\CodeBundle\Model;
+namespace Evrinoma\CodeBundle\Model\Define;
 
 use Evrinoma\UtilsBundle\Entity\IdInterface;
 

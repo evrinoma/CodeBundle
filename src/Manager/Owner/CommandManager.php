@@ -8,7 +8,7 @@ use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerInvalidException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerNotFoundException;
 use Evrinoma\CodeBundle\Factory\OwnerFactoryInterface;
-use Evrinoma\CodeBundle\Model\OwnerInterface;
+use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 use Evrinoma\CodeBundle\Repository\Owner\OwnerCommandRepositoryInterface;
 use Evrinoma\UtilsBundle\Rest\RestInterface;
 use Evrinoma\UtilsBundle\Rest\RestTrait;

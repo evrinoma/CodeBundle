@@ -3,7 +3,7 @@
 namespace Evrinoma\CodeBundle\Factory;
 
 use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
-use Evrinoma\CodeBundle\Model\OwnerInterface;
+use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 
 interface OwnerFactoryInterface
 {

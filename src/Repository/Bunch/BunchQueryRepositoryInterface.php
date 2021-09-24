@@ -4,7 +4,7 @@ namespace Evrinoma\CodeBundle\Repository\Bunch;
 
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
-use Evrinoma\CodeBundle\Model\BunchInterface;
+use Evrinoma\CodeBundle\Model\Revoke\BunchInterface;
 
 interface BunchQueryRepositoryInterface
 {

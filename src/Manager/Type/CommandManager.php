@@ -7,7 +7,7 @@ use Evrinoma\CodeBundle\Exception\Type\TypeCannotBeRemovedException;
 use Evrinoma\Codebundle\Exception\Type\TypeInvalidException;
 use Evrinoma\Codebundle\Exception\Type\TypeNotFoundException;
 use Evrinoma\CodeBundle\Factory\TypeFactoryInterface;
-use Evrinoma\CodeBundle\Model\TypeInterface;
+use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 use Evrinoma\CodeBundle\Repository\Type\TypeCommandRepositoryInterface;
 use Evrinoma\UtilsBundle\Rest\RestInterface;
 use Evrinoma\UtilsBundle\Rest\RestTrait;
