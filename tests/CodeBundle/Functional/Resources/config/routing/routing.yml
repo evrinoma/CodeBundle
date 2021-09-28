@@ -1,0 +1,2 @@
+code:
+    resource: "@EvrinomaCodeBundle/Resources/config/routes.yml"
