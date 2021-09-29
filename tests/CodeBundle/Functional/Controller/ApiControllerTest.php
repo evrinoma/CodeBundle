@@ -86,7 +86,7 @@ class ApiControllerTest extends CaseTest implements ApiControllerTestInterface
 
     public function testPostDuplicate(): void
     {
-        $$this->assertTrue(true, 'message');
+        $this->assertTrue(true, 'message');
     }
 
     public function testPostUnprocessable(): void
