@@ -4,6 +4,7 @@ namespace Evrinoma\CodeBundle\Tests\Functional\Controller;
 
 
 use Evrinoma\CodeBundle\Dto\CodeApiDto;
+use Evrinoma\CodeBundle\Dto\OwnerApiDto;
 use Evrinoma\CodeBundle\Tests\Functional\CaseTest;
 use Evrinoma\TestUtilsBundle\Controller\ApiControllerTestInterface;
 use Evrinoma\UtilsBundle\Model\ActiveModel;
@@ -12,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @group functional
  */
-class ApiControllerTest extends CaseTest implements ApiControllerTestInterface
+class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterface
 {
 //region SECTION: Fields
     private array $default = [];
@@ -21,7 +22,7 @@ class ApiControllerTest extends CaseTest implements ApiControllerTestInterface
 //region SECTION: Protected
     protected function getDtoClass(): string
     {
-        return CodeApiDto::class;
+        return OwnerApiDto::class;
     }
 
     protected function getDefault(array $extend): array
