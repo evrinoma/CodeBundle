@@ -1,28 +1,3 @@
-services:
-  evrinoma.code.constraint.owner.brief:
-    class: Evrinoma\CodeBundle\Constraint\Owner\Brief
-
-  evrinoma.code.constraint.owner.description:
-    class: Evrinoma\CodeBundle\Constraint\Owner\Description
-
-  evrinoma.code.constraint.type.brief:
-    class: Evrinoma\CodeBundle\Constraint\Type\Brief
-
-  evrinoma.code.constraint.bunch.description:
-    class: Evrinoma\CodeBundle\Constraint\Bunch\Description
-
-  evrinoma.code.constraint.bunch.type:
-    class: Evrinoma\CodeBundle\Constraint\Bunch\Type
-
-  evrinoma.code.constraint.code.description:
-    class: Evrinoma\CodeBundle\Constraint\Code\Description
-
-  evrinoma.code.constraint.code.brief:
-    class: Evrinoma\CodeBundle\Constraint\Code\Brief
-
-  evrinoma.code.constraint.code.bunch:
-    class: Evrinoma\CodeBundle\Constraint\Code\Bunch
-
-  evrinoma.code.constraint.code.owner:
-    class: Evrinoma\CodeBundle\Constraint\Code\Owner
-
+imports:
+  - { resource: constraint/owner.yml }
+  - { resource: constraint/type.yml }

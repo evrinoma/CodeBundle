@@ -5,7 +5,7 @@ namespace Evrinoma\CodeBundle;
 
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\MapEntityPass;
 use Evrinoma\CodeBundle\DependencyInjection\EvrinomaCodeExtension;
-use Evrinoma\CoderBundle\DependencyInjection\Compiler\Constraint\TypetPass;
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\TypetPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

@@ -98,6 +98,16 @@ class EvrinomaCodeExtension extends Extension
 
         $this->wireValidator($container, 'bunch', $config['entity_bunch']);
         $this->wireValidator($container, 'code', $config['entity_code']);
+
+        $loader->load('validation.yml');
+
+        if ($config['constraints_bunch']) {
+            $loader->load('constraint/bunch.yml');
+        }
+
+        if ($config['constraints_code']) {
+            $loader->load('constraint/code.yml');
+        }
     }
 //endregion Public
 

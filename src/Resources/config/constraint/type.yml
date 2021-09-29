@@ -1,0 +1,3 @@
+services:
+  evrinoma.code.constraint.type.brief:
+    class: Evrinoma\CodeBundle\Constraint\Type\Brief

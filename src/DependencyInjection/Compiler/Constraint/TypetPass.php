@@ -1,6 +1,6 @@
 <?php
 
-namespace Evrinoma\CoderBundle\DependencyInjection\Compiler\Constraint;
+namespace Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint;
 
 
 use Evrinoma\CodeBundle\Validator\TypeValidator;
