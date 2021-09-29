@@ -9,7 +9,20 @@ use Evrinoma\TestUtilsBundle\Web\AbstractWebCaseTest;
  */
 abstract class CaseTest extends AbstractWebCaseTest
 {
+
+//region SECTION: Fields
+    protected array $default = [];
+//endregion Fields
+
 //region SECTION: Protected
+
+    protected function getDefault(array $extend): array
+    {
+        return array_merge($extend, unserialize(serialize($this->default)));
+    }
+
+    abstract protected function getDtoClass(): string;
+
     /**
      * {@inheritdoc}
      */

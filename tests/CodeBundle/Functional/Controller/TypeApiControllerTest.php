@@ -15,21 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterface
 {
-//region SECTION: Fields
-    private array $default = [];
-//endregion Fields
-
 //region SECTION: Protected
     protected function getDtoClass(): string
     {
         return TypeApiDto::class;
     }
-
-    protected function getDefault(array $extend): array
-    {
-        return array_merge($extend, unserialize(serialize($this->default)));
-    }
-
 //endregion Protected
 
 //region SECTION: Public
