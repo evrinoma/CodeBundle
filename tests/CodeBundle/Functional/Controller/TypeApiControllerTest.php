@@ -77,7 +77,11 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 
     public function testPostDuplicate(): void
     {
-        $this->assertTrue(true, 'message');
+        $this->createType();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+
+        $this->createType();
+        $this->assertEquals(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
     }
 
     public function testPostUnprocessable(): void
@@ -85,4 +89,19 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $this->assertTrue(true, 'message');
     }
 //endregion Public
+    protected function queryCreateType(array $query): void
+    {
+        $this->client->restart();
+
+        $this->client->request('POST', 'evrinoma/api/code/type/create', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($query));
+    }
+
+    private function createType(): array
+    {
+        $query = $this->getDefault(["class" => $this->getDtoClass(), "brief" => "draft",]);
+
+        $this->queryCreateType($query);
+
+        return $query;
+    }
 }
