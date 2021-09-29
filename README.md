@@ -45,6 +45,5 @@ Actions в контроллере разбиты на две группы
 Тесты:
     
     composer install --dev
-    /usr/bin/php vendor/phpunit/phpunit/phpunit --bootstrap tests/bootstrap.php --configuration phpunit.xml.dist tests --teamcity
-
+    /usr/bin/php vendor/phpunit/phpunit/phpunit --bootstrap src/Tests/bootstrap.php --configuration phpunit.xml.dist src/Tests --teamcity
 
