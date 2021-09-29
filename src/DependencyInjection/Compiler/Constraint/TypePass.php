@@ -7,7 +7,7 @@ use Evrinoma\CodeBundle\Validator\TypeValidator;
 use Evrinoma\UtilsBundle\DependencyInjection\Compiler\AbstractConstraint;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
-class TypetPass extends AbstractConstraint implements CompilerPassInterface
+class TypePass extends AbstractConstraint implements CompilerPassInterface
 {
     public const CODE_TYPE_CONSTRAINT = 'evrinoma.code.constraint.type';
 

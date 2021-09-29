@@ -5,7 +5,7 @@ namespace Evrinoma\CodeBundle;
 
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\MapEntityPass;
 use Evrinoma\CodeBundle\DependencyInjection\EvrinomaCodeExtension;
-use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\TypetPass;
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\TypePass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -25,7 +25,7 @@ class EvrinomaCodeBundle extends Bundle
         parent::build($container);
         $container
             ->addCompilerPass(new MapEntityPass($this->getNamespace(), $this->getPath()))
-            ->addCompilerPass(new TypetPass())
+            ->addCompilerPass(new TypePass())
         ;
     }
 //endregion Fields

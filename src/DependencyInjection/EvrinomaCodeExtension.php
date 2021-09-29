@@ -3,6 +3,7 @@
 
 namespace Evrinoma\CodeBundle\DependencyInjection;
 
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\TypePass;
 use Evrinoma\CodeBundle\Dto\BunchApiDto;
 use Evrinoma\CodeBundle\Dto\CodeApiDto;
 use Evrinoma\CodeBundle\Entity\Define\BaseOwner;
@@ -108,11 +109,25 @@ class EvrinomaCodeExtension extends Extension
         if ($config['constraints_code']) {
             $loader->load('constraint/code.yml');
         }
+
+        $this->wireConstraintTag($container);
     }
 //endregion Public
 
 //region SECTION: Private
-    private function wireFactory(ContainerBuilder $container, string $name, string $class, string $paramClass)
+
+    private function wireConstraintTag(ContainerBuilder $container): void
+    {
+        foreach ($container->getDefinitions() as $key => $definition) {
+            switch (true) {
+                case strpos($key, TypePass::CODE_TYPE_CONSTRAINT) !== false :
+                    $definition->addTag(TypePass::CODE_TYPE_CONSTRAINT);
+                    break;
+            }
+        }
+    }
+
+    private function wireFactory(ContainerBuilder $container, string $name, string $class, string $paramClass): void
     {
         $container->removeDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.factory');
         $definitionFactory = new Definition($class);
@@ -123,13 +138,13 @@ class EvrinomaCodeExtension extends Extension
     }
 
 
-    private function wireController(ContainerBuilder $container, string $name, string $class)
+    private function wireController(ContainerBuilder $container, string $name, string $class): void
     {
         $definitionApiController = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.api.controller');
         $definitionApiController->setArgument(5, $class);
     }
 
-    private function wireValidator(ContainerBuilder $container, string $name, string $class)
+    private function wireValidator(ContainerBuilder $container, string $name, string $class): void
     {
         $definitionApiController = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.validator');
         $definitionApiController->setArgument(0, $class);
