@@ -3,6 +3,7 @@
 
 namespace Evrinoma\CodeBundle;
 
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\OwnerPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\MapEntityPass;
 use Evrinoma\CodeBundle\DependencyInjection\EvrinomaCodeExtension;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\TypePass;
@@ -26,6 +27,7 @@ class EvrinomaCodeBundle extends Bundle
         $container
             ->addCompilerPass(new MapEntityPass($this->getNamespace(), $this->getPath()))
             ->addCompilerPass(new TypePass())
+            ->addCompilerPass(new OwnerPass())
         ;
     }
 //endregion Fields
