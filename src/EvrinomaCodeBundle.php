@@ -3,10 +3,11 @@
 
 namespace Evrinoma\CodeBundle;
 
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\BunchPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\OwnerPass;
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\TypePass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\MapEntityPass;
 use Evrinoma\CodeBundle\DependencyInjection\EvrinomaCodeExtension;
-use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\TypePass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -20,7 +21,9 @@ class EvrinomaCodeBundle extends Bundle
 {
 //region SECTION: Fields
     public const CODE_BUNDLE = 'code';
+//endregion Fields
 
+//region SECTION: Public
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
@@ -28,9 +31,9 @@ class EvrinomaCodeBundle extends Bundle
             ->addCompilerPass(new MapEntityPass($this->getNamespace(), $this->getPath()))
             ->addCompilerPass(new TypePass())
             ->addCompilerPass(new OwnerPass())
-        ;
+            ->addCompilerPass(new BunchPass());
     }
-//endregion Fields
+//endregion Public
 
 //region SECTION: Getters/Setters
     public function getContainerExtension()
