@@ -72,7 +72,6 @@ final class TypeApiDto extends AbstractDto implements TypeApiDtoInterface
                 $this->setBrief($brief);
             }
 
-
             if ($id) {
                 $this->setId($id);
             }
