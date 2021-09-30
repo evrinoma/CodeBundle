@@ -101,6 +101,11 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
         if ($class === $this->getClass()) {
             $id          = $request->get(ModelInterface::ID);
             $description = $request->get(ModelInterface::DESCRIPTION);
+            $active      = $request->get(ModelInterface::ACTIVE);
+
+            if ($active) {
+                $this->setActive($active);
+            }
 
             if ($description) {
                 $this->setDescription($description);

@@ -2,6 +2,7 @@
 
 namespace Evrinoma\CodeBundle\Dto;
 
+use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -93,6 +94,67 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
 
     public function toDto(Request $request): DtoInterface
     {
+        $class = $request->get(DtoInterface::DTO_CLASS);
+
+        if ($class === $this->getClass()) {
+            $id          = $request->get(ModelInterface::ID);
+            $brief       = $request->get(ModelInterface::BRIEF);
+            $description = $request->get(ModelInterface::DESCRIPTION);
+            $active      = $request->get(ModelInterface::ACTIVE);
+
+            if ($active) {
+                $this->setActive($active);
+            }
+
+            if ($brief) {
+                $this->setBrief($brief);
+            }
+
+            if ($description) {
+                $this->setDescription($description);
+            }
+
+            if ($id) {
+                $this->setId($id);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return CodeApiDto
+     */
+    private function setDescription(string $description): CodeApiDto
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return CodeApiDto
+     */
+    private function setId(string $id): CodeApiDto
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @param string $brief
+     *
+     * @return CodeApiDto
+     */
+    private function setBrief(string $brief): CodeApiDto
+    {
+        $this->brief = $brief;
+
         return $this;
     }
 
