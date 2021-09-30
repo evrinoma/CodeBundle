@@ -2,6 +2,7 @@
 
 namespace Evrinoma\CodeBundle\Dto;
 
+use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,6 +55,32 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
     }
 //endregion Public
 
+//region SECTION: Private
+    /**
+     * @param string $id
+     *
+     * @return BunchApiDto
+     */
+    private function setId(string $id): BunchApiDto
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return BunchApiDto
+     */
+    private function setDescription(string $description): BunchApiDto
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+//endregion Private
+
 //region SECTION: Dto
     /**
      * @param TypeApiDto $typeApiDto
@@ -69,6 +96,21 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
 
     public function toDto(Request $request): DtoInterface
     {
+        $class = $request->get(DtoInterface::DTO_CLASS);
+
+        if ($class === $this->getClass()) {
+            $id          = $request->get(ModelInterface::ID);
+            $description = $request->get(ModelInterface::DESCRIPTION);
+
+            if ($description) {
+                $this->setDescription($description);
+            }
+
+            if ($id) {
+                $this->setId($id);
+            }
+        }
+
         return $this;
     }
 
@@ -88,7 +130,7 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
         if ($request) {
             $type = $request->get('type');
             if ($type) {
-                $newRequest                      = $this->getCloneRequest();
+                $newRequest                    = $this->getCloneRequest();
                 $type[DtoInterface::DTO_CLASS] = TypeApiDto::class;
                 $newRequest->request->add($type);
 

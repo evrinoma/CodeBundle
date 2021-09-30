@@ -1,0 +1,22 @@
+Evrinoma\CodeBundle\Model\Bunch\AbstractBunch:
+  exclusion_policy: ALL
+  properties:
+    id:
+      groups: [ api_get_code_owner, api_post_code_owner, api_put_code_owner ]
+      expose: true
+    type:
+      type: Evrinoma\CodeBundle\Model\Define\AbstractType
+      groups: [ api_get_code_owner, api_post_code_owner, api_put_code_owner ]
+      expose: true
+    description:
+      groups: [ api_get_code_owner, api_post_code_owner, api_put_code_owner ]
+      expose: true
+    createdAt:
+      type: DateTimeImmutable<'Y-m-d H:i'>
+      groups: [ api_get_code_owner, api_post_code_owner, api_put_code_owner  ]
+    updatedAt:
+      type: DateTimeImmutable<'Y-m-d H:i'>
+      groups: [ api_get_code_owner, api_post_code_owner, api_put_code_owner ]
+    active:
+      groups: [ api_get_code_owner, api_post_code_owner, api_put_code_owner ]
+      expose: true
