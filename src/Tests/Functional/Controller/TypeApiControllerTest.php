@@ -3,11 +3,9 @@
 namespace Evrinoma\CodeBundle\Tests\Functional\Controller;
 
 
-use Evrinoma\CodeBundle\Dto\CodeApiDto;
 use Evrinoma\CodeBundle\Dto\TypeApiDto;
 use Evrinoma\CodeBundle\Tests\Functional\CaseTest;
 use Evrinoma\TestUtilsBundle\Controller\ApiControllerTestInterface;
-use Evrinoma\UtilsBundle\Model\ActiveModel;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -19,6 +17,15 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     protected function getDtoClass(): string
     {
         return TypeApiDto::class;
+    }
+
+    protected function setDefault(): array
+    {
+        return [
+            "id"         => 1,
+            "brief"     => "doc"
+
+        ];
     }
 //endregion Protected
 
@@ -86,7 +93,11 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 
     public function testPostUnprocessable(): void
     {
-        $this->assertTrue(true, 'message');
+        $this->createWrong();
+        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+
+        $this->createConstraintBlank();
+        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
     }
 //endregion Public
     protected function queryCreateType(array $query): void
@@ -103,5 +114,30 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $this->queryCreateType($query);
 
         return $query;
+    }
+
+    private function createWrong(): array
+    {
+        $query = $this->getDefault([]);
+
+        $this->queryCreateType($query);
+
+        return $query;
+    }
+
+    private function createConstraintBlank(): array
+    {
+        $query = $this->getDefault(["class" => $this->getDtoClass()]);
+
+        $this->queryCreateType($query);
+
+        return $query;
+    }
+
+    public function setUp(): void
+    {
+        $this->default = $this->randomType();
+
+        parent::setUp();
     }
 }
