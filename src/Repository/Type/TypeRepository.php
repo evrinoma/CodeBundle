@@ -58,8 +58,8 @@ class TypeRepository extends ServiceEntityRepository implements TypeRepositoryIn
 
         if ($dto->hasBrief()) {
             $builder
-                ->andWhere('owner.brief = :brief')
-                ->setParameter('brief', $dto->getBrief());
+                ->andWhere('type.brief like :brief')
+                ->setParameter('brief', '%'.$dto->getBrief().'%');
         }
 
         $type = $builder->getQuery()->getResult();

@@ -5,14 +5,21 @@ namespace Evrinoma\CodeBundle\Tests\Functional\Controller;
 
 use Evrinoma\CodeBundle\Dto\TypeApiDto;
 use Evrinoma\CodeBundle\Tests\Functional\CaseTest;
+use Evrinoma\TestUtilsBundle\Browser\ApiBrowserTestInterface;
+use Evrinoma\TestUtilsBundle\Browser\ApiBrowserTestTrait;
 use Evrinoma\TestUtilsBundle\Controller\ApiControllerTestInterface;
+use Evrinoma\TestUtilsBundle\Helper\ApiHelperTestInterface;
+use Evrinoma\TestUtilsBundle\Helper\ApiHelperTestTrait;
+use Evrinoma\UtilsBundle\Model\ActiveModel;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @group functional
  */
-class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterface
+class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiHelperTestInterface
 {
+    use ApiBrowserTestTrait, ApiHelperTestTrait;
+
 //region SECTION: Protected
     protected function getDtoClass(): string
     {
@@ -22,9 +29,9 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     protected function setDefault(): array
     {
         return [
-            "id"         => 1,
-            "brief"     => "doc"
-
+            "id"    => 1,
+            "brief" => "doc",
+            "class" => $this->getDtoClass(),
         ];
     }
 //endregion Protected
@@ -32,54 +39,152 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 //region SECTION: Public
     public function testCriteria(): void
     {
-        $this->assertTrue(true, 'message');
+        $query = $this->getDefault();
+
+        $this->createType();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->createTypeSecond();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+
+        $response = $this->criteria(["class" => $this->getDtoClass(), "brief" => "doc"]);
+        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertArrayHasKey('data', $response);
+        $this->assertCount(2, $response['data']);
+
+        $response = $this->criteria(["class" => $this->getDtoClass(), "brief" => "document"]);
+        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertArrayHasKey('data', $response);
+        $this->assertCount(1, $response['data']);
     }
 
     public function testCriteriaNotFound(): void
     {
-        $this->assertTrue(true, 'message');
+        $this->createType();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->createTypeSecond();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+
+        $response = $this->criteria(["class" => $this->getDtoClass(), "brief" => "ddoc"]);
+        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->assertArrayHasKey('data', $response);
     }
+
+    public function testDelete(): void
+    {
+        $created = $this->createType();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+
+        $find = $this->get(1);
+        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+
+        $this->assertArrayHasKey('data', $created);
+        $this->assertArrayHasKey('data', $find);
+
+        $response = $this->delete('1');
+        $this->assertEquals(Response::HTTP_ACCEPTED, $this->client->getResponse()->getStatusCode());
+
+        $delete = $this->get(1);
+        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+
+        $this->assertArrayHasKey('data', $delete);
+        $this->assertArrayHasKey('data', $response);
+    }
+
+    public function testGet(): void
+    {
+        $created = $this->createType();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+
+        $find = $this->get(1);
+        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertArrayHasKey('data', $find);
+
+        $this->assertArrayHasKey('data', $created);
+        $this->assertArrayHasKey('data', $find);
+
+        $this->assertCount(0, array_diff($created['data'], $find['data']));
+    }
+
 
     public function testPut(): void
     {
-        $this->assertTrue(true, 'message');
+        $created = $this->createType();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+
+        $find = $this->get(1);
+        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertArrayHasKey('data', $find);
+
+        $this->assertArrayHasKey('data', $created);
+        $this->assertArrayHasKey('data', $find);
+
+        $this->assertCount(0, array_diff($created['data'], $find['data']));
+
+        $query = [
+            "class"    => $this->getDtoClass(),
+            "id"       => $find['data']['id'],
+            "brief"     => "brief",
+        ];
+
+        $this->put($query);
+        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
     }
 
     public function testPutNotFound(): void
     {
-        $this->assertTrue(true, 'message');
+        $query = [
+            "class"    => $this->getDtoClass(),
+            "id"       => "1",
+            "identity" => "0987654321",
+            "active"   => ActiveModel::BLOCKED,
+        ];
+
+        $this->put($query);
+        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
     public function testPutUnprocessable(): void
     {
-        $this->assertTrue(true, 'message');
-    }
+        $query = [
+            "class" => $this->getDtoClass(),
+            "id"    => "",
+            "brief" => "draft",
+        ];
 
+        $this->put($query);
+        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
 
-    public function testDelete(): void
-    {
-        $this->assertTrue(true, 'message');
+        $this->createType();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+
+        $query = [
+            "id"    => "1",
+        ];
+
+        $this->put($query);
+        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+
     }
 
     public function testDeleteNotFound(): void
     {
-        $this->assertTrue(true, 'message');
+        $response = $this->delete('1');
+        $this->assertArrayHasKey('data', $response);
+        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
     public function testDeleteUnprocessable(): void
     {
-        $this->assertTrue(true, 'message');
-    }
-
-
-    public function testGet(): void
-    {
-        $this->assertTrue(true, 'message');
+        $response = $this->delete('');
+        $this->assertArrayHasKey('data', $response);
+        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
     }
 
     public function testGetNotFound(): void
     {
-        $this->assertTrue(true, 'message');
+        $response = $this->get(1);
+        $this->assertArrayHasKey('data', $response);
+        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
     public function testPostDuplicate(): void
@@ -93,51 +198,47 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 
     public function testPostUnprocessable(): void
     {
-        $this->createWrong();
+        $this->postWrong();
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
 
         $this->createConstraintBlank();
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
     }
 //endregion Public
-    protected function queryCreateType(array $query): void
-    {
-        $this->client->restart();
 
-        $this->client->request('POST', 'evrinoma/api/code/type/create', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode($query));
-    }
-
+//region SECTION: Private
     private function createType(): array
     {
-        $query = $this->getDefault(["class" => $this->getDtoClass(), "brief" => "draft",]);
+        $query = $this->getDefault();
 
-        $this->queryCreateType($query);
-
-        return $query;
+        return $this->post($query);
     }
 
-    private function createWrong(): array
+    private function createTypeSecond(): array
     {
-        $query = $this->getDefault([]);
+        $query = $this->getDefault(['brief' => 'document']);
 
-        $this->queryCreateType($query);
-
-        return $query;
+        return $this->post($query);
     }
+
+
+
 
     private function createConstraintBlank(): array
     {
-        $query = $this->getDefault(["class" => $this->getDtoClass()]);
-
-        $this->queryCreateType($query);
-
-        return $query;
+        return $this->postWrong();
     }
+//endregion Private
 
+//region SECTION: Getters/Setters
     public function setUp(): void
     {
-        $this->default = $this->randomType();
-
         parent::setUp();
+        $this->getUrl      = 'evrinoma/api/code/type';
+        $this->criteriaUrl = 'evrinoma/api/code/type/criteria';
+        $this->deleteUrl   = 'evrinoma/api/code/type/delete';
+        $this->putUrl      = 'evrinoma/api/code/type/save';
+        $this->postUrl     = 'evrinoma/api/code/type/create';
     }
+//endregion Getters/Setters
 }

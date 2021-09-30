@@ -1,0 +1,10 @@
+Evrinoma\CodeBundle\Model\Define\AbstractType:
+  exclusion_policy: ALL
+  properties:
+    id:
+      groups: [ api_get_code_type, api_post_code_type, api_put_code_type ]
+      expose: true
+    brief:
+      groups: [ api_get_code_type, api_post_code_type, api_put_code_type ]
+      expose: true
+
