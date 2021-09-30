@@ -17,6 +17,12 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiHelperTestInterface
 {
+    public const API_GET      = 'evrinoma/api/code/owner';
+    public const API_CRITERIA = 'evrinoma/api/code/owner/criteria';
+    public const API_DELETE   = 'evrinoma/api/code/owner/delete';
+    public const API_PUT      = 'evrinoma/api/code/owner/save';
+    public const API_POST     = 'evrinoma/api/code/owner/create';
+
     use ApiBrowserTestTrait, ApiHelperTestTrait;
 
 //region SECTION: Protected
@@ -45,7 +51,6 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
 
         $find = $this->get(1);
         $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-        $this->assertArrayHasKey('data', $find);
 
         $this->assertArrayHasKey('data', $created);
         $this->assertArrayHasKey('data', $find);
@@ -65,8 +70,6 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
 
     public function testCriteria(): void
     {
-        $query = $this->getDefault();
-
         $this->createOwner();
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
         $this->createOwnerSecond();
@@ -241,16 +244,4 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
         return $this->post($query);
     }
 //endregion Private
-
-//region SECTION: Getters/Setters
-    public function setUp(): void
-    {
-        parent::setUp();
-        static::$getUrl      = 'evrinoma/api/code/owner';
-        static::$criteriaUrl = 'evrinoma/api/code/owner/criteria';
-        static::$deleteUrl   = 'evrinoma/api/code/owner/delete';
-        static::$putUrl      = 'evrinoma/api/code/owner/save';
-        static::$postUrl     = 'evrinoma/api/code/owner/create';
-    }
-//endregion Getters/Setters
 }

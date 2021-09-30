@@ -17,6 +17,14 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiHelperTestInterface
 {
+//region SECTION: Fields
+    public const API_GET      = 'evrinoma/api/code/type';
+    public const API_CRITERIA = 'evrinoma/api/code/type/criteria';
+    public const API_DELETE   = 'evrinoma/api/code/type/delete';
+    public const API_PUT      = 'evrinoma/api/code/type/save';
+    public const API_POST     = 'evrinoma/api/code/type/create';
+//endregion Fields
+
     use ApiBrowserTestTrait, ApiHelperTestTrait;
 
 //region SECTION: Protected
@@ -38,8 +46,6 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 //region SECTION: Public
     public function testCriteria(): void
     {
-        $query = $this->getDefault();
-
         $this->createType();
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
         $this->createTypeSecond();
@@ -132,9 +138,9 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     public function testPutNotFound(): void
     {
         $query = [
-            "class"    => static::getDtoClass(),
-            "id"       => "1",
-            "brief" => "0987654321"
+            "class" => static::getDtoClass(),
+            "id"    => "1",
+            "brief" => "0987654321",
         ];
 
         $this->put($query);
@@ -226,16 +232,4 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         return $this->post($query);
     }
 //endregion Private
-
-//region SECTION: Getters/Setters
-    public function setUp(): void
-    {
-        parent::setUp();
-        static::$getUrl      = 'evrinoma/api/code/type';
-        static::$criteriaUrl = 'evrinoma/api/code/type/criteria';
-        static::$deleteUrl   = 'evrinoma/api/code/type/delete';
-        static::$putUrl      = 'evrinoma/api/code/type/save';
-        static::$postUrl     = 'evrinoma/api/code/type/create';
-    }
-//endregion Getters/Setters
 }
