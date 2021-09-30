@@ -93,14 +93,18 @@ final class BunchApiController extends AbstractApiController implements ApiContr
 
         $this->commandManager->setRestCreated();
         try {
-            $json = [];
-            $em   = $this->getDoctrine()->getManager();
+            if ($bunchApiDto->hasId() && $bunchApiDto->hasTypeApiDto() && $bunchApiDto->getTypeApiDto()->hasId()) {
+                $json = [];
+                $em   = $this->getDoctrine()->getManager();
 
-            $em->transactional(
-                function () use ($bunchApiDto, $commandManager, &$json) {
-                    $json = $commandManager->post($bunchApiDto);
-                }
-            );
+                $em->transactional(
+                    function () use ($bunchApiDto, $commandManager, &$json) {
+                        $json = $commandManager->post($bunchApiDto);
+                    }
+                );
+            } else {
+                throw new BunchInvalidException('The Dto has\'t ID or class invalid');
+            }
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->commandManager, $e);
         }
@@ -145,7 +149,7 @@ final class BunchApiController extends AbstractApiController implements ApiContr
         $commandManager = $this->commandManager;
 
         try {
-            if ($bunchApiDto->hasId()) {
+            if ($bunchApiDto->hasId() && $bunchApiDto->hasTypeApiDto() && $bunchApiDto->getTypeApiDto()->hasId()) {
                 $json = [];
                 $em   = $this->getDoctrine()->getManager();
 
