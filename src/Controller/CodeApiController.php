@@ -113,6 +113,7 @@ final class CodeApiController extends AbstractApiController implements ApiContro
 
         $this->commandManager->setRestCreated();
         try {
+            if ($codeApiDto->hasId() && $codeApiDto->hasBunchApiDto() && $codeApiDto->getBunchApiDto()->hasId() && $codeApiDto->hasOwnerApiDto() && $codeApiDto->getOwnerApiDto()->hasId()) {
             $json = [];
             $em   = $this->getDoctrine()->getManager();
 
@@ -121,11 +122,14 @@ final class CodeApiController extends AbstractApiController implements ApiContro
                     $json = $commandManager->post($codeApiDto);
                 }
             );
+            } else {
+                throw new CodeInvalidException('The Dto has\'t ID or class invalid');
+            }
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->commandManager, $e);
         }
 
-        return $this->setSerializeGroup('api_post_code_bunch')->json(['message' => 'Create code bunch', 'data' => $json], $this->commandManager->getRestStatus());
+        return $this->setSerializeGroup('api_post_code_code')->json(['message' => 'Create code code', 'data' => $json], $this->commandManager->getRestStatus());
 
     }
 
@@ -170,7 +174,7 @@ final class CodeApiController extends AbstractApiController implements ApiContro
         $commandManager = $this->commandManager;
 
         try {
-            if ($codeApiDto->hasId()) {
+            if ($codeApiDto->hasId() && $codeApiDto->hasBunchApiDto() && $codeApiDto->getBunchApiDto()->hasId() && $codeApiDto->hasOwnerApiDto() && $codeApiDto->getOwnerApiDto()->hasId()) {
                 $json = [];
                 $em   = $this->getDoctrine()->getManager();
 
