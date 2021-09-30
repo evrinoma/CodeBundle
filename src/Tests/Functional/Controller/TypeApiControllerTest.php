@@ -25,7 +25,7 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         return TypeApiDto::class;
     }
 
-    protected static function setDefault(): array
+    protected static function defaultData(): array
     {
         return [
             "id"    => 1,
@@ -231,11 +231,11 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     public function setUp(): void
     {
         parent::setUp();
-        $this->getUrl      = 'evrinoma/api/code/type';
-        $this->criteriaUrl = 'evrinoma/api/code/type/criteria';
-        $this->deleteUrl   = 'evrinoma/api/code/type/delete';
-        $this->putUrl      = 'evrinoma/api/code/type/save';
-        $this->postUrl     = 'evrinoma/api/code/type/create';
+        static::$getUrl      = 'evrinoma/api/code/type';
+        static::$criteriaUrl = 'evrinoma/api/code/type/criteria';
+        static::$deleteUrl   = 'evrinoma/api/code/type/delete';
+        static::$putUrl      = 'evrinoma/api/code/type/save';
+        static::$postUrl     = 'evrinoma/api/code/type/create';
     }
 //endregion Getters/Setters
 }

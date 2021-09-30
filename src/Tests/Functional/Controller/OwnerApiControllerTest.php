@@ -25,7 +25,7 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
         return OwnerApiDto::class;
     }
 
-    protected static function setDefault(): array
+    protected static function defaultData(): array
     {
         return [
             "id"          => 1,
@@ -40,7 +40,7 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
 //region SECTION: Public
     public function testPut(): void
     {
-        $created = $this->createType();
+        $created = $this->createOwner();
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
         $find = $this->get(1);
@@ -67,9 +67,9 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
     {
         $query = $this->getDefault();
 
-        $this->createType();
+        $this->createOwner();
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
-        $this->createTypeSecond();
+        $this->createOwnerSecond();
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
         $response = $this->criteria(["class" => static::getDtoClass(), "brief" => "ipc"]);
@@ -95,7 +95,7 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
         $this->put($query);
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
 
-        $this->createType();
+        $this->createOwner();
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
         $query = [
@@ -110,9 +110,9 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
 
     public function testCriteriaNotFound(): void
     {
-        $this->createType();
+        $this->createOwner();
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
-        $this->createTypeSecond();
+        $this->createOwnerSecond();
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
         $response = $this->criteria(["class" => static::getDtoClass(), "brief" => "ddoc"]);
@@ -122,7 +122,7 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
 
     public function testDelete(): void
     {
-        $created = $this->createType();
+        $created = $this->createOwner();
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
         $find = $this->get(1);
@@ -143,7 +143,7 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
 
     public function testGet(): void
     {
-        $created = $this->createType();
+        $created = $this->createOwner();
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
         $find = $this->get(1);
@@ -192,10 +192,10 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
 
     public function testPostDuplicate(): void
     {
-        $this->createType();
+        $this->createOwner();
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
-        $this->createType();
+        $this->createOwner();
         $this->assertEquals(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
     }
 
@@ -213,14 +213,14 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
 //endregion Public
 
 //region SECTION: Private
-    private function createType(): array
+    private function createOwner(): array
     {
         $query = $this->getDefault();
 
         return $this->post($query);
     }
 
-    private function createTypeSecond(): array
+    private function createOwnerSecond(): array
     {
         $query = $this->getDefault(['brief' => 'ipcng', "description" => "description"]);
 
@@ -246,11 +246,11 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
     public function setUp(): void
     {
         parent::setUp();
-        $this->getUrl      = 'evrinoma/api/code/owner';
-        $this->criteriaUrl = 'evrinoma/api/code/owner/criteria';
-        $this->deleteUrl   = 'evrinoma/api/code/owner/delete';
-        $this->putUrl      = 'evrinoma/api/code/owner/save';
-        $this->postUrl     = 'evrinoma/api/code/owner/create';
+        static::$getUrl      = 'evrinoma/api/code/owner';
+        static::$criteriaUrl = 'evrinoma/api/code/owner/criteria';
+        static::$deleteUrl   = 'evrinoma/api/code/owner/delete';
+        static::$putUrl      = 'evrinoma/api/code/owner/save';
+        static::$postUrl     = 'evrinoma/api/code/owner/create';
     }
 //endregion Getters/Setters
 }
