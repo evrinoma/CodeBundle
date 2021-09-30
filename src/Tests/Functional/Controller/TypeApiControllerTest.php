@@ -20,17 +20,17 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     use ApiBrowserTestTrait, ApiHelperTestTrait;
 
 //region SECTION: Protected
-    protected function getDtoClass(): string
+    protected static function getDtoClass(): string
     {
         return TypeApiDto::class;
     }
 
-    protected function setDefault(): array
+    protected static function setDefault(): array
     {
         return [
             "id"    => 1,
             "brief" => "doc",
-            "class" => $this->getDtoClass(),
+            "class" => static::getDtoClass(),
         ];
     }
 //endregion Protected
@@ -45,12 +45,12 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $this->createTypeSecond();
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
-        $response = $this->criteria(["class" => $this->getDtoClass(), "brief" => "doc"]);
+        $response = $this->criteria(["class" => static::getDtoClass(), "brief" => "doc"]);
         $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         $this->assertArrayHasKey('data', $response);
         $this->assertCount(2, $response['data']);
 
-        $response = $this->criteria(["class" => $this->getDtoClass(), "brief" => "document"]);
+        $response = $this->criteria(["class" => static::getDtoClass(), "brief" => "document"]);
         $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         $this->assertArrayHasKey('data', $response);
         $this->assertCount(1, $response['data']);
@@ -63,7 +63,7 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $this->createTypeSecond();
         $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
-        $response = $this->criteria(["class" => $this->getDtoClass(), "brief" => "ddoc"]);
+        $response = $this->criteria(["class" => static::getDtoClass(), "brief" => "ddoc"]);
         $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
         $this->assertArrayHasKey('data', $response);
     }
@@ -120,7 +120,7 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $this->assertCount(0, array_diff($created['data'], $find['data']));
 
         $query = [
-            "class" => $this->getDtoClass(),
+            "class" => static::getDtoClass(),
             "id"    => $find['data']['id'],
             "brief" => "brief",
         ];
@@ -132,7 +132,7 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     public function testPutNotFound(): void
     {
         $query = [
-            "class"    => $this->getDtoClass(),
+            "class"    => static::getDtoClass(),
             "id"       => "1",
             "brief" => "0987654321"
         ];
@@ -144,7 +144,7 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     public function testPutUnprocessable(): void
     {
         $query = [
-            "class" => $this->getDtoClass(),
+            "class" => static::getDtoClass(),
             "id"    => "",
             "brief" => "draft",
         ];
