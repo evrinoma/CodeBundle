@@ -10,7 +10,6 @@ use Evrinoma\TestUtilsBundle\Browser\ApiBrowserTestTrait;
 use Evrinoma\TestUtilsBundle\Controller\ApiControllerTestInterface;
 use Evrinoma\TestUtilsBundle\Helper\ApiHelperTestInterface;
 use Evrinoma\TestUtilsBundle\Helper\ApiHelperTestTrait;
-use Evrinoma\UtilsBundle\Model\ActiveModel;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -121,9 +120,9 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $this->assertCount(0, array_diff($created['data'], $find['data']));
 
         $query = [
-            "class"    => $this->getDtoClass(),
-            "id"       => $find['data']['id'],
-            "brief"     => "brief",
+            "class" => $this->getDtoClass(),
+            "id"    => $find['data']['id'],
+            "brief" => "brief",
         ];
 
         $this->put($query);
@@ -135,8 +134,7 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $query = [
             "class"    => $this->getDtoClass(),
             "id"       => "1",
-            "identity" => "0987654321",
-            "active"   => ActiveModel::BLOCKED,
+            "brief" => "0987654321"
         ];
 
         $this->put($query);
@@ -159,11 +157,11 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 
         $query = [
             "id"    => "1",
+            "brief" => "draft",
         ];
 
         $this->put($query);
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
-
     }
 
     public function testDeleteNotFound(): void
@@ -201,7 +199,7 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $this->postWrong();
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
 
-        $this->createConstraintBlank();
+        $this->createConstraintBlankBrief();
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
     }
 //endregion Public
@@ -221,12 +219,11 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         return $this->post($query);
     }
 
-
-
-
-    private function createConstraintBlank(): array
+    private function createConstraintBlankBrief(): array
     {
-        return $this->postWrong();
+        $query = $this->getDefault(['brief' => '']);
+
+        return $this->post($query);
     }
 //endregion Private
 

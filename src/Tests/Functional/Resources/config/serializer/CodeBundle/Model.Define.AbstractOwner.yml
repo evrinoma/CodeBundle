@@ -1,0 +1,12 @@
+Evrinoma\CodeBundle\Model\Define\AbstractOwner:
+  exclusion_policy: ALL
+  properties:
+    id:
+      groups: [ api_get_code_owner, api_post_code_owner, api_put_code_owner ]
+      expose: true
+    brief:
+      groups: [ api_get_code_owner, api_post_code_owner, api_put_code_owner ]
+      expose: true
+    description:
+      groups: [ api_get_code_owner, api_post_code_owner, api_put_code_owner ]
+      expose: true
