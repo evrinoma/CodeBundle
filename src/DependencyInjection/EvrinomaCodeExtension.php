@@ -3,6 +3,7 @@
 
 namespace Evrinoma\CodeBundle\DependencyInjection;
 
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\OwnerPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\TypePass;
 use Evrinoma\CodeBundle\Dto\BunchApiDto;
 use Evrinoma\CodeBundle\Dto\CodeApiDto;
@@ -122,6 +123,9 @@ class EvrinomaCodeExtension extends Extension
             switch (true) {
                 case strpos($key, TypePass::CODE_TYPE_CONSTRAINT) !== false :
                     $definition->addTag(TypePass::CODE_TYPE_CONSTRAINT);
+                    break;
+                case strpos($key, OwnerPass::CODE_OWNER_CONSTRAINT) !== false :
+                    $definition->addTag(OwnerPass::CODE_OWNER_CONSTRAINT);
                     break;
             }
         }
