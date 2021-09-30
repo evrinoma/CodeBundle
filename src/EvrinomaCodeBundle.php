@@ -7,6 +7,7 @@ use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\BunchPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\CodePass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\OwnerPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\TypePass;
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\DecoratorPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\MapEntityPass;
 use Evrinoma\CodeBundle\DependencyInjection\EvrinomaCodeExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -33,7 +34,9 @@ class EvrinomaCodeBundle extends Bundle
             ->addCompilerPass(new TypePass())
             ->addCompilerPass(new OwnerPass())
             ->addCompilerPass(new BunchPass())
-            ->addCompilerPass(new CodePass());
+            ->addCompilerPass(new CodePass())
+            ->addCompilerPass(new DecoratorPass())
+        ;
     }
 //endregion Public
 
