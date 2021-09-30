@@ -4,6 +4,7 @@
 namespace Evrinoma\CodeBundle\DependencyInjection;
 
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\BunchPass;
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\CodePass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\OwnerPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\TypePass;
 use Evrinoma\CodeBundle\Dto\BunchApiDto;
@@ -130,6 +131,9 @@ class EvrinomaCodeExtension extends Extension
                     break;
                 case strpos($key, BunchPass::CODE_BUNCH_CONSTRAINT) !== false :
                     $definition->addTag(BunchPass::CODE_BUNCH_CONSTRAINT);
+                    break;
+                case strpos($key, CodePass::CODE_CODE_CONSTRAINT) !== false :
+                    $definition->addTag(CodePass::CODE_CODE_CONSTRAINT);
                     break;
             }
         }

@@ -4,6 +4,7 @@
 namespace Evrinoma\CodeBundle;
 
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\BunchPass;
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\CodePass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\OwnerPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\TypePass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\MapEntityPass;
@@ -31,7 +32,8 @@ class EvrinomaCodeBundle extends Bundle
             ->addCompilerPass(new MapEntityPass($this->getNamespace(), $this->getPath()))
             ->addCompilerPass(new TypePass())
             ->addCompilerPass(new OwnerPass())
-            ->addCompilerPass(new BunchPass());
+            ->addCompilerPass(new BunchPass())
+            ->addCompilerPass(new CodePass());
     }
 //endregion Public
 
