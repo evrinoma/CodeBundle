@@ -84,8 +84,8 @@ class OwnerRepository extends ServiceEntityRepository implements OwnerRepository
 
         if ($dto->hasBrief()) {
             $builder
-                ->andWhere('owner.brief = :brief')
-                ->setParameter('brief', $dto->getBrief());
+                ->andWhere('owner.brief like :brief')
+                ->setParameter('brief', '%'.$dto->getBrief().'%');
         }
 
         if ($dto->hasDescription()) {
