@@ -44,8 +44,10 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('dto_code')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::DTO_BASE_CODE)->info('This option is used for dto class override')->end()
             ->scalarNode('dto_bunch')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::DTO_BASE_BUNCH)->info('This option is used for dto class override')->end()
             ->arrayNode('decorates')->addDefaultsIfNotSet()->children()
-            ->scalarNode('command')->defaultNull()->info('This option is used for command decoration')->end()
-            ->scalarNode('query')->defaultNull()->info('This option is used for query decoration')->end()
+            ->scalarNode('command_code')->defaultNull()->info('This option is used for command code decoration')->end()
+            ->scalarNode('query_code')->defaultNull()->info('This option is used for query code decoration')->end()
+            ->scalarNode('command_bunch')->defaultNull()->info('This option is used for command bunch decoration')->end()
+            ->scalarNode('query_bunch')->defaultNull()->info('This option is used for query bunch decoration')->end()
             ->end()->end()->end();
 
         return $treeBuilder;

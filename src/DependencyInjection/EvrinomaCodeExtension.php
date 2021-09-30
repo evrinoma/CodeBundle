@@ -114,6 +114,21 @@ class EvrinomaCodeExtension extends Extension
         }
 
         $this->wireConstraintTag($container);
+
+        if ($config['decorates']) {
+            $this->remapParametersNamespaces(
+                $container,
+                $config['decorates'],
+                [
+                    '' => [
+                        'command_code' => 'evrinoma.'.$this->getAlias().'.decorates.code.command',
+                        'query_code'   => 'evrinoma.'.$this->getAlias().'.decorates.code.query',
+                        'command_bunch' => 'evrinoma.'.$this->getAlias().'.decorates.bunch.command',
+                        'query_bunch'   => 'evrinoma.'.$this->getAlias().'.decorates.bunch.query',
+                    ],
+                ]
+            );
+        }
     }
 //endregion Public
 
