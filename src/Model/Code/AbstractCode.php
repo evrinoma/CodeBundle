@@ -2,8 +2,8 @@
 
 namespace Evrinoma\CodeBundle\Model\Code;
 
-use Evrinoma\CodeBundle\Model\Bunch\BunchInterface;
 use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
+use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 use Evrinoma\UtilsBundle\Entity\ActiveTrait;
 use Evrinoma\UtilsBundle\Entity\CreateUpdateAtTrait;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class AbstractCode
  *
  * @ORM\MappedSuperclass
- * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_code", columns={"brief", "description", "bunch_id"})})
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_code", columns={"brief", "description", "owner_id"})})
  */
 abstract class AbstractCode implements CodeInterface
 {
@@ -35,12 +35,13 @@ abstract class AbstractCode implements CodeInterface
     protected string $description;
 
     /**
-     * @var BunchInterface
+     * @var TypeInterface
      *
-     * @ORM\ManyToOne(targetEntity="Evrinoma\CodeBundle\Model\Bunch\BunchInterface")
-     * @ORM\JoinColumn(name="bunch_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Evrinoma\CodeBundle\Model\Define\TypeInterface")
+     * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      */
-    protected BunchInterface $bunch;
+    protected TypeInterface $type;
+
 
     /**
      * @var OwnerInterface
@@ -69,11 +70,11 @@ abstract class AbstractCode implements CodeInterface
     }
 
     /**
-     * @return BunchInterface
+     * @return TypeInterface
      */
-    public function getBunch(): BunchInterface
+    public function getType(): TypeInterface
     {
-        return $this->bunch;
+        return $this->type;
     }
 
     /**
@@ -109,13 +110,13 @@ abstract class AbstractCode implements CodeInterface
     }
 
     /**
-     * @param BunchInterface $bunch
+     * @param TypeInterface $type
      *
      * @return CodeInterface
      */
-    public function setBunch(BunchInterface $bunch): CodeInterface
+    public function setType(TypeInterface $type): CodeInterface
     {
-        $this->bunch = $bunch;
+        $this->type = $type;
 
         return $this;
     }

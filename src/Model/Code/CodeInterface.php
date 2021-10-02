@@ -6,6 +6,7 @@ namespace Evrinoma\CodeBundle\Model\Code;
 
 use Evrinoma\CodeBundle\Model\Bunch\BunchInterface;
 use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
+use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 use Evrinoma\UtilsBundle\Entity\ActiveInterface;
 use Evrinoma\UtilsBundle\Entity\CreateUpdateAtInterface;
 use Evrinoma\UtilsBundle\Entity\IdInterface;
@@ -24,9 +25,9 @@ interface CodeInterface extends ActiveInterface, CreateUpdateAtInterface, IdInte
     public function getDescription(): string;
 
     /**
-     * @return BunchInterface
+     * @return TypeInterface
      */
-    public function getBunch(): BunchInterface;
+    public function getType(): TypeInterface;
 
     /**
      * @return OwnerInterface
@@ -48,11 +49,11 @@ interface CodeInterface extends ActiveInterface, CreateUpdateAtInterface, IdInte
     public function setDescription(string $description): CodeInterface;
 
     /**
-     * @param BunchInterface $bunch
+     * @param TypeInterface $type
      *
      * @return CodeInterface
      */
-    public function setBunch(BunchInterface $bunch): CodeInterface;
+    public function setType(TypeInterface $type): CodeInterface;
 
     /**
      * @param OwnerInterface $owner
