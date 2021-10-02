@@ -42,3 +42,13 @@ services:
 
   Evrinoma\CodeBundle\Validator\OwnerValidator:
     alias: evrinoma.code.owner.validator
+
+  evrinoma.code.form.rest.owner:
+    class: Evrinoma\CodeBundle\Form\Rest\OwnerChoiceType
+    arguments:
+      - '@evrinoma.code.owner.query.manager'
+    tags: { - name: form.type }
+
+  Evrinoma\CodeBundle\Form\Rest\OwnerChoiceType:
+    alias: evrinoma.code.form.rest.owner
+    public: true

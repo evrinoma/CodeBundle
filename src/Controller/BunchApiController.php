@@ -259,14 +259,14 @@ final class BunchApiController extends AbstractApiController implements ApiContr
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="type",
+     *         name="type[brief]",
      *         in="query",
      *         description="Type Bunch",
      *         @OA\Schema(
      *              type="array",
      *              @OA\Items(
      *                  type="string",
-     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\TypeChoiceType::class)
+     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\BriefTypeChoiceType::class, options={"data":"brief"})
      *              ),
      *          ),
      *         style="form"

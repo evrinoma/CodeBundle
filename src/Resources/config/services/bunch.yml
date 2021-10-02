@@ -65,3 +65,13 @@ services:
 
   Evrinoma\CodeBundle\Mediator\Bunch\CommandMediatorInterface:
     alias: evrinoma.code.bunch.command.mediator
+
+  evrinoma.code.form.rest.bunch:
+    class: Evrinoma\CodeBundle\Form\Rest\BunchChoiceType
+    arguments:
+      - '@evrinoma.code.bunch.query.manager'
+    tags: { - name: form.type }
+
+  Evrinoma\CodeBundle\Form\Rest\BunchChoiceType:
+    alias: evrinoma.code.form.rest.bunch
+    public: true

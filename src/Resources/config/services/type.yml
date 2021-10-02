@@ -45,6 +45,8 @@ services:
 
   evrinoma.code.form.rest.type:
     class: Evrinoma\CodeBundle\Form\Rest\TypeChoiceType
+    arguments:
+      - '@evrinoma.code.type.query.manager'
     tags: { - name: form.type }
 
   Evrinoma\CodeBundle\Form\Rest\TypeChoiceType:

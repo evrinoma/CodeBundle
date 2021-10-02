@@ -89,14 +89,14 @@ final class CodeApiController extends AbstractApiController implements ApiContro
      *                  "brief":"DR",
      *                  "description":"Пылеудаление.",
      *                  "owner":{ "id":"3" },
-     *                  "bunch":{ "id":"2" },
+     *                  "type":{ "id":"2" },
      *                  },
      *               type="object",
-     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\CodeApiDto"),     *
+     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\CodeApiDto"),
      *               @OA\Property(property="brief",type="string"),
      *               @OA\Property(property="description",type="string"),
-     *               @OA\Property(property="owner",type="string"),
-     *               @OA\Property(property="bunch",type="string"),
+     *               @OA\Property(property="owner",type="string",default="Evrinoma\CodeBundle\Dto\OnwerApiDto"),
+     *               @OA\Property(property="type",type="string",default="Evrinoma\CodeBundle\Dto\TypeApiDto"),
      *            )
      *         )
      *     )
@@ -149,15 +149,15 @@ final class CodeApiController extends AbstractApiController implements ApiContro
      *                  "brief":"DR",
      *                  "description":"Пылеудаление.",
      *                  "owner":{ "id":"3" },
-     *                  "bunch":{ "id":"2" },
+     *                  "type":{ "id":"2" },
      *                  },
      *               type="object",
      *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\CodeApiDto"),
      *               @OA\Property(property="id",type="string"),
      *               @OA\Property(property="brief",type="string"),
      *               @OA\Property(property="description",type="string"),
-     *               @OA\Property(property="owner",type="string"),
-     *               @OA\Property(property="bunch",type="string"),
+     *               @OA\Property(property="owner",type="string",default="Evrinoma\CodeBundle\Dto\OnwerApiDto"),
+     *               @OA\Property(property="type",type="string",default="Evrinoma\CodeBundle\Dto\TypeApiDto"),
      *               @OA\Property(property="active",type="string")
      *            )
      *         )
@@ -292,27 +292,27 @@ final class CodeApiController extends AbstractApiController implements ApiContro
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="bunch",
+     *         name="type[brief]",
      *         in="query",
      *         description="Type Bunch",
      *         @OA\Schema(
      *              type="array",
      *              @OA\Items(
      *                  type="string",
-     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\BunchChoiceType::class)
+     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\TypeChoiceType::class, options={"data":"brief"})
      *              ),
      *          ),
      *         style="form"
      *     ),
      *     @OA\Parameter(
-     *         name="owner",
+     *         name="owner[brief]",
      *         in="query",
      *         description="Type Owner",
      *         @OA\Schema(
      *              type="array",
      *              @OA\Items(
      *                  type="string",
-     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\OwnerChoiceType::class)
+     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\OwnerChoiceType::class, options={"data":"brief"})
      *              ),
      *          ),
      *         style="form"
