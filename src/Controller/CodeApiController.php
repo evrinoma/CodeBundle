@@ -113,7 +113,7 @@ final class CodeApiController extends AbstractApiController implements ApiContro
 
         $this->commandManager->setRestCreated();
         try {
-            if ($codeApiDto->hasId() && $codeApiDto->hasBunchApiDto() && $codeApiDto->getBunchApiDto()->hasId() && $codeApiDto->hasOwnerApiDto() && $codeApiDto->getOwnerApiDto()->hasId()) {
+            if ($codeApiDto->hasId() && $codeApiDto->hasTypeApiDto() && $codeApiDto->getTypeApiDto()->hasId() && $codeApiDto->hasOwnerApiDto() && $codeApiDto->getOwnerApiDto()->hasId()) {
             $json = [];
             $em   = $this->getDoctrine()->getManager();
 
@@ -174,7 +174,7 @@ final class CodeApiController extends AbstractApiController implements ApiContro
         $commandManager = $this->commandManager;
 
         try {
-            if ($codeApiDto->hasId() && $codeApiDto->hasBunchApiDto() && $codeApiDto->getBunchApiDto()->hasId() && $codeApiDto->hasOwnerApiDto() && $codeApiDto->getOwnerApiDto()->hasId()) {
+            if ($codeApiDto->hasId() && $codeApiDto->hasTypeApiDto() && $codeApiDto->getTypeApiDto()->hasId() && $codeApiDto->hasOwnerApiDto() && $codeApiDto->getOwnerApiDto()->hasId()) {
                 $json = [];
                 $em   = $this->getDoctrine()->getManager();
 

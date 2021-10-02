@@ -5,8 +5,8 @@ services:
   evrinoma.code.constraint.code.brief:
     class: Evrinoma\CodeBundle\Constraint\Code\Brief
 
-  evrinoma.code.constraint.code.bunch:
-    class: Evrinoma\CodeBundle\Constraint\Code\Bunch
+  evrinoma.code.constraint.code.type:
+    class: Evrinoma\CodeBundle\Constraint\Code\Type
 
   evrinoma.code.constraint.code.owner:
     class: Evrinoma\CodeBundle\Constraint\Code\Owner
