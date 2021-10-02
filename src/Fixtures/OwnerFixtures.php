@@ -57,7 +57,7 @@ final class OwnerFixtures extends Fixture implements FixtureGroupInterface
     public static function getGroups(): array
     {
         return [
-            FixtureInterface::OWNER_FIXTURES,
+            FixtureInterface::BIND_FIXTURES
         ];
     }
 }
