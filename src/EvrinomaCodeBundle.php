@@ -3,6 +3,7 @@
 
 namespace Evrinoma\CodeBundle;
 
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\BindPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\BunchPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\CodePass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\OwnerPass;
@@ -35,6 +36,7 @@ class EvrinomaCodeBundle extends Bundle
             ->addCompilerPass(new OwnerPass())
             ->addCompilerPass(new BunchPass())
             ->addCompilerPass(new CodePass())
+            ->addCompilerPass(new BindPass())
             ->addCompilerPass(new DecoratorPass())
         ;
     }
