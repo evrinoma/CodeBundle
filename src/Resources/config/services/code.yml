@@ -67,3 +67,15 @@ services:
 
   Evrinoma\CodeBundle\Mediator\Code\CommandMediatorInterface:
     alias: evrinoma.code.code.command.mediator
+
+
+  evrinoma.code.form.rest.code:
+    class: Evrinoma\CodeBundle\Form\Rest\CodeChoiceType
+    arguments:
+      - '@evrinoma.code.code.query.manager'
+    tags: { - name: form.type }
+
+  Evrinoma\CodeBundle\Form\Rest\CodeChoiceType:
+    alias: evrinoma.code.form.rest.code
+    public: true
+
