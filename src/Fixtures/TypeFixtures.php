@@ -58,7 +58,7 @@ final class TypeFixtures extends Fixture implements FixtureGroupInterface
     public static function getGroups(): array
     {
         return [
-            FixtureInterface::TYPE_FIXTURES,
+            FixtureInterface::BIND_FIXTURES
         ];
     }
 }

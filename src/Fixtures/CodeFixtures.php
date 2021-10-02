@@ -4,12 +4,13 @@ namespace Evrinoma\CodeBundle\Fixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Evrinoma\CodeBundle\Entity\Code\BaseCode;
 use Evrinoma\CodeBundle\Entity\Define\BaseOwner;
 use Evrinoma\CodeBundle\Entity\Define\BaseType;
 
-class CodeFixtures extends Fixture implements FixtureGroupInterface
+final class CodeFixtures extends Fixture implements FixtureGroupInterface, DependentFixtureInterface
 {
 
 //region SECTION: Fields
@@ -70,6 +71,13 @@ class CodeFixtures extends Fixture implements FixtureGroupInterface
 
 //region SECTION: Getters/Setters
     public static function getGroups(): array
+    {
+        return [
+            FixtureInterface::BIND_FIXTURES,
+        ];
+    }
+
+    public function getDependencies()
     {
         return [
             FixtureInterface::TYPE_FIXTURES,

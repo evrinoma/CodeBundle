@@ -4,12 +4,13 @@ namespace Evrinoma\CodeBundle\Fixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Evrinoma\CodeBundle\Entity\Bind\BaseBind;
 use Evrinoma\CodeBundle\Entity\Bunch\BaseBunch;
 use Evrinoma\CodeBundle\Entity\Code\BaseCode;
 
-class BindFixtures extends Fixture implements FixtureGroupInterface
+final class BindFixtures extends Fixture implements FixtureGroupInterface, DependentFixtureInterface
 {
 
 //region SECTION: Fields
@@ -76,8 +77,13 @@ class BindFixtures extends Fixture implements FixtureGroupInterface
     public static function getGroups(): array
     {
         return [
-            FixtureInterface::TYPE_FIXTURES,
-            FixtureInterface::OWNER_FIXTURES,
+            FixtureInterface::BIND_FIXTURES,
+        ];
+    }
+
+    public function getDependencies()
+    {
+        return [
             FixtureInterface::CODE_FIXTURES,
             FixtureInterface::BUNCH_FIXTURES,
         ];
