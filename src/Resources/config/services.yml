@@ -3,3 +3,4 @@ imports:
   - { resource: services/type.yml }
   - { resource: services/bunch.yml }
   - { resource: services/code.yml }
+  - { resource: services/bind.yml }
