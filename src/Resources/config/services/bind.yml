@@ -1,0 +1,68 @@
+services:
+  Evrinoma\CodeBundle\Controller\BindApiController:
+    alias: evrinoma.code.bind.api.controller
+    public: true
+
+  evrinoma.code.bind.api.controller:
+    class: Evrinoma\CodeBundle\Controller\BindApiController
+    arguments:
+      - '@jms_serializer'
+      - '@request_stack'
+      - '@evrinoma.dto.factory'
+      - '@evrinoma.code.bind.command.manager'
+      - '@evrinoma.code.bind.query.manager'
+    autowire: true
+
+  evrinoma.code.bind.factory:
+    class: Evrinoma\CodeBundle\Factory\BindFactory
+    public: true
+    arguments:
+
+  evrinoma.code.bind.repository:
+    class: Evrinoma\CodeBundle\Repository\Bind\BindRepository
+    public: true
+    arguments:
+
+  evrinoma.code.bind.command.manager:
+    class: Evrinoma\CodeBundle\Manager\Bind\CommandManager
+    arguments:
+      - '@evrinoma.code.bind.validator'
+      - '@evrinoma.code.bind.repository'
+      - '@evrinoma.code.bind.factory'
+      - '@evrinoma.code.bind.command.mediator'
+      - '@evrinoma.code.type.query.manager'
+
+  evrinoma.code.bind.query.manager:
+    class: Evrinoma\CodeBundle\Manager\Bind\QueryManager
+    arguments:
+      - '@evrinoma.code.bind.repository'
+
+  evrinoma.code.bind.validator:
+    class: Evrinoma\CodeBundle\Validator\BindValidator
+    public: true
+
+  Evrinoma\CodeBundle\Validator\BindValidator:
+    alias: evrinoma.code.bind.validator
+
+  evrinoma.code.bind.query.mediator:
+    class: Evrinoma\CodeBundle\Mediator\Bind\QueryMediator
+    public: true
+    arguments:
+
+  Evrinoma\CodeBundle\Mediator\Bind\QueryMediator:
+    alias: evrinoma.code.bind.query.mediator
+
+  Evrinoma\CodeBundle\Mediator\Bind\QueryMediatorInterface:
+    alias: evrinoma.code.bind.query.mediator
+
+  evrinoma.code.bind.command.mediator:
+    class: Evrinoma\CodeBundle\Mediator\Bind\CommandMediator
+    public: true
+    arguments:
+
+  Evrinoma\CodeBundle\Mediator\Bind\CommandMediator:
+    alias: evrinoma.code.bind.command.mediator
+
+  Evrinoma\CodeBundle\Mediator\Bind\CommandMediatorInterface:
+    alias: evrinoma.code.bind.command.mediator
+

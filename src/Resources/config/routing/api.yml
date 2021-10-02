@@ -13,3 +13,7 @@ code_type_api:
 code_bunch_api:
   resource: "@EvrinomaCodeBundle/Controller/BunchApiController.php"
   type: annotation
+
+code_bind_api:
+  resource: "@EvrinomaCodeBundle/Controller/BindApiController.php"
+  type: annotation
