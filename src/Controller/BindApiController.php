@@ -3,12 +3,12 @@
 namespace Evrinoma\CodeBundle\Controller;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
-use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeSavedException;
-use Evrinoma\CodeBundle\Exception\Bunch\BunchInvalidException;
-use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
-use Evrinoma\CodeBundle\Manager\Bunch\CommandManagerInterface;
-use Evrinoma\CodeBundle\Manager\Bunch\QueryManagerInterface;
+use Evrinoma\CodeBundle\Dto\BindApiDtoInterface;
+use Evrinoma\CodeBundle\Exception\Bind\BindCannotBeSavedException;
+use Evrinoma\CodeBundle\Exception\Bind\BindInvalidException;
+use Evrinoma\CodeBundle\Exception\Bind\BindNotFoundException;
+use Evrinoma\CodeBundle\Manager\Bind\CommandManagerInterface;
+use Evrinoma\CodeBundle\Manager\Bind\QueryManagerInterface;
 use Evrinoma\DtoBundle\Factory\FactoryDtoInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractApiController;
 use Evrinoma\UtilsBundle\Controller\ApiControllerInterface;
@@ -21,7 +21,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use OpenApi\Annotations as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
 
-final class BunchApiController extends AbstractApiController implements ApiControllerInterface
+final class BindApiController extends AbstractApiController implements ApiControllerInterface
 {
 //region SECTION: Fields
     private string $dtoClass;
@@ -58,7 +58,7 @@ final class BunchApiController extends AbstractApiController implements ApiContr
 
 //region SECTION: Public
     /**
-     * @Rest\Post("/api/code/bunch/create", options={"expose"=true}, name="api_create_code_bunch")
+     * @Rest\Post("/api/code/bind/create", options={"expose"=true}, name="api_create_code_bind")
      * @OA\Post(
      *     tags={"code"},
      *     description="the method perform create code type",
@@ -67,109 +67,117 @@ final class BunchApiController extends AbstractApiController implements ApiContr
      *             mediaType="application/json",
      *             @OA\Schema(
      *               example={
-     *                  "class":"Evrinoma\CodeBundle\Dto\BunchApiDto",
-     *                  "description":"Код типа чертежа",
-     *                  "type": {
-     *                            "id":"3"
+     *                  "class":"Evrinoma\CodeBundle\Dto\BindApiDto",
+     *                  "active":"b",
+     *                  "bunch": {
+     *                            "id":"2"
+     *                       },
+     *                  "code": {
+     *                            "id":"1"
      *                       }
      *                  },
      *               type="object",
-     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\BunchApiDto"),
-     *               @OA\Property(property="description",type="string"),
-     *               @OA\Property(property="type",type="string"),
+     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\BindApiDto"),
+     *               @OA\Property(property="active",type="string"),
+     *               @OA\Property(property="bunch",type="string"),
+     *               @OA\Property(property="code",type="string"),
      *            )
      *         )
      *     )
      * )
-     * @OA\Response(response=200,description="Create code bunch")
+     * @OA\Response(response=200,description="Create code bind")
      *
      * @return JsonResponse
      */
     public function postAction(): JsonResponse
     {
-        /** @var BunchApiDtoInterface $bunchApiDto */
-        $bunchApiDto    = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var BindApiDtoInterface $bindApiDto */
+        $bindApiDto     = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
         $commandManager = $this->commandManager;
 
         $this->commandManager->setRestCreated();
         try {
-            if ($bunchApiDto->hasId() && $bunchApiDto->hasTypeApiDto() && $bunchApiDto->getTypeApiDto()->hasId()) {
+            if ($bindApiDto->hasBunchApiDto() && $bindApiDto->getBunchApiDto()->hasId() && $bindApiDto->hasCodeApiDto() && $bindApiDto->getCodeApiDto()->hasId()) {
                 $json = [];
                 $em   = $this->getDoctrine()->getManager();
 
                 $em->transactional(
-                    function () use ($bunchApiDto, $commandManager, &$json) {
-                        $json = $commandManager->post($bunchApiDto);
+                    function () use ($bindApiDto, $commandManager, &$json) {
+                        $json = $commandManager->post($bindApiDto);
                     }
                 );
             } else {
-                throw new BunchInvalidException('The Dto has\'t ID or class invalid');
+                throw new BindInvalidException('The Dto has\'t ID or class invalid');
             }
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->commandManager, $e);
         }
 
-        return $this->setSerializeGroup('api_post_code_bunch')->json(['message' => 'Create code bunch', 'data' => $json], $this->commandManager->getRestStatus());
+        return $this->setSerializeGroup('api_post_code_bind')->json(['message' => 'Create code bind', 'data' => $json], $this->commandManager->getRestStatus());
     }
 
     /**
-     * @Rest\Put("/api/code/bunch/save", options={"expose"=true}, name="api_save_code_bunch")
+     * @Rest\Put("/api/code/bind/save", options={"expose"=true}, name="api_save_code_bind")
      * @OA\Put(
      *     tags={"code"},
-     *     description="the method perform save code bunch for current entity",
+     *     description="the method perform save code bind for current entity",
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",
      *             @OA\Schema(
      *               example={
-     *                  "class":"Evrinoma\CodeBundle\Dto\BunchApiDto",
+     *                  "class":"Evrinoma\CodeBundle\Dto\BindApiDto",
      *                  "id":"3",
-     *                  "description":"Код типа чертежа",
-     *                  "active": "b",
-     *                  "type":{"id":"3"}
+     *                  "active":"b",
+     *                  "bunch": {
+     *                            "id":"2"
+     *                       },
+     *                  "code": {
+     *                            "id":"1"
+     *                       }
      *                  },
      *               type="object",
-     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\BunchApiDto"),
+     *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\BindApiDto"),
      *               @OA\Property(property="id",type="string"),
-     *               @OA\Property(property="description",type="string"),
-     *               @OA\Property(property="type",type="string"),
-     *               @OA\Property(property="active",type="string")
+     *               @OA\Property(property="active",type="string"),
+     *               @OA\Property(property="bunch",type="string"),
+     *               @OA\Property(property="code",type="string"),
      *            )
      *         )
      *     )
      * )
-     * @OA\Response(response=200,description="Save code bunch")
+     * @OA\Response(response=200,description="Save code bind")
      *
      * @return JsonResponse
      */
     public function putAction(): JsonResponse
     {
-        /** @var BunchApiDtoInterface $bunchApiDto */
-        $bunchApiDto    = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var BindApiDtoInterface $bindApiDto */
+        $bindApiDto     = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
         $commandManager = $this->commandManager;
 
         try {
-            if ($bunchApiDto->hasId() && $bunchApiDto->hasTypeApiDto() && $bunchApiDto->getTypeApiDto()->hasId()) {
+            if ($bindApiDto->hasBunchApiDto() && $bindApiDto->getBunchApiDto()->hasId() && $bindApiDto->hasCodeApiDto() && $bindApiDto->getCodeApiDto()->hasId()) {
                 $json = [];
                 $em   = $this->getDoctrine()->getManager();
 
                 $em->transactional(
-                    function () use ($bunchApiDto, $commandManager, &$json) {
-                        $json = $commandManager->put($bunchApiDto);
+                    function () use ($bindApiDto, $commandManager, &$json) {
+                        $json = $commandManager->put($bindApiDto);
                     }
                 );
             } else {
-                throw new BunchInvalidException('The Dto has\'t ID or class invalid');
+                throw new BindInvalidException('The Dto has\'t ID or class invalid');
             }
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->commandManager, $e);
         }
 
-        return $this->setSerializeGroup('api_put_code_bunch')->json(['message' => 'Save code bunch', 'data' => $json], $this->commandManager->getRestStatus());
+        return $this->setSerializeGroup('api_put_code_bind')->json(['message' => 'Save code bind', 'data' => $json], $this->commandManager->getRestStatus());
     }
 
     /**
-     * @Rest\Delete("/api/code/bunch/delete", options={"expose"=true}, name="api_delete_code_bunch")
+     * @Rest\Delete("/api/code/bind/delete", options={"expose"=true}, name="api_delete_code_bind")
      * @OA\Delete(
      *     tags={"code"},
      *     @OA\Parameter(
@@ -179,7 +187,7 @@ final class BunchApiController extends AbstractApiController implements ApiContr
      *         required=true,
      *         @OA\Schema(
      *           type="string",
-     *           default="Evrinoma\CodeBundle\Dto\BunchApiDto",
+     *           default="Evrinoma\CodeBundle\Dto\BindApiDto",
      *           readOnly=true
      *         )
      *     ),
@@ -194,41 +202,41 @@ final class BunchApiController extends AbstractApiController implements ApiContr
      *         )
      *     )
      * )
-     * @OA\Response(response=200,description="Delete code bunch")
+     * @OA\Response(response=200,description="Delete code bind")
      *
      * @return JsonResponse
      */
     public function deleteAction(): JsonResponse
     {
-        /** @var BunchApiDtoInterface $bunchApiDto */
-        $bunchApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var BindApiDtoInterface $bindApiDto */
+        $bindApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         $commandManager = $this->commandManager;
         $this->commandManager->setRestAccepted();
 
         try {
-            if ($bunchApiDto->hasId()) {
+            if ($bindApiDto->hasBunchApiDto() && $bindApiDto->getBunchApiDto()->hasId() && $bindApiDto->hasCodeApiDto() && $bindApiDto->getCodeApiDto()->hasId()) {
                 $json = [];
                 $em   = $this->getDoctrine()->getManager();
 
                 $em->transactional(
-                    function () use ($bunchApiDto, $commandManager, &$json) {
-                        $commandManager->delete($bunchApiDto);
+                    function () use ($bindApiDto, $commandManager, &$json) {
+                        $commandManager->delete($bindApiDto);
                         $json = ['OK'];
                     }
                 );
             } else {
-                throw new BunchInvalidException('The Dto has\'t ID or class invalid');
+                throw new BindInvalidException('The Dto has\'t ID or class invalid');
             }
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->commandManager, $e);
         }
 
-        return $this->json(['message' => 'Delete code bunch', 'data' => $json], $this->commandManager->getRestStatus());
+        return $this->json(['message' => 'Delete code bind', 'data' => $json], $this->commandManager->getRestStatus());
     }
 
     /**
-     * @Rest\Get("/api/code/bunch/criteria", options={"expose"=true}, name="api_code_bunch_criteria")
+     * @Rest\Get("/api/code/bind/criteria", options={"expose"=true}, name="api_code_bind_criteria")
      * @OA\Get(
      *     tags={"code"},
      *     @OA\Parameter(
@@ -238,7 +246,7 @@ final class BunchApiController extends AbstractApiController implements ApiContr
      *         required=true,
      *         @OA\Schema(
      *           type="string",
-     *           default="Evrinoma\CodeBundle\Dto\BunchApiDto",
+     *           default="Evrinoma\CodeBundle\Dto\BindApiDto",
      *           readOnly=true
      *         )
      *     ),
@@ -251,50 +259,76 @@ final class BunchApiController extends AbstractApiController implements ApiContr
      *         )
      *     ),
      *      @OA\Parameter(
-     *         description="description",
+     *         description="active",
      *         in="query",
-     *         name="description",
+     *         name="active",
      *         @OA\Schema(
      *           type="string",
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="type[brief]",
+     *         name="bunch[description]",
      *         in="query",
      *         description="Type Bunch",
      *         @OA\Schema(
      *              type="array",
      *              @OA\Items(
      *                  type="string",
-     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\TypeChoiceType::class, options={"data":"brief"})
+     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\BunchChoiceType::class, options={"data":"brief"})
+     *              ),
+     *          ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
+     *         name="code[brief]",
+     *         in="query",
+     *         description="Type Code Brief",
+     *         @OA\Schema(
+     *              type="array",
+     *              @OA\Items(
+     *                  type="string",
+     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\CodeChoiceType::class, options={"data":"brief"})
+     *              ),
+     *          ),
+     *         style="form"
+     *     ),
+     *     @OA\Parameter(
+     *         name="code[description]",
+     *         in="query",
+     *         description="Type Code Description",
+     *         @OA\Schema(
+     *              type="array",
+     *              @OA\Items(
+     *                  type="string",
+     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\CodeChoiceType::class, options={"data":"description"})
      *              ),
      *          ),
      *         style="form"
      *     )
      * )
-     * @OA\Response(response=200,description="Return code bunch")
+     * @OA\Response(response=200,description="Return code bind")
      *
      * @return JsonResponse
      */
     public function criteriaAction(): JsonResponse
     {
-        /** @var BunchApiDtoInterface $bunchApiDto */
-        $bunchApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var BindApiDtoInterface $bindApiDto */
+        $bindApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         try {
-            $json = $this->queryManager->criteria($bunchApiDto);
+            $json = $this->queryManager->criteria($bindApiDto);
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->queryManager, $e);
         }
 
-        return $this->setSerializeGroup('api_get_code_bunch')->json(['message' => 'Get code bunch', 'data' => $json], $this->queryManager->getRestStatus());
+        return $this->setSerializeGroup('api_get_code_bind')->json(['message' => 'Get code bind', 'data' => $json], $this->queryManager->getRestStatus());
     }
 
 //endregion Public
 
 //region SECTION: Getters/Setters
     /**
-     * @Rest\Get("/api/code/bunch", options={"expose"=true}, name="api_code_bunch")
+     * @Rest\Get("/api/code/bind", options={"expose"=true}, name="api_code_bind")
      * @OA\Get(
      *     tags={"code"},
      *     @OA\Parameter(
@@ -319,37 +353,37 @@ final class BunchApiController extends AbstractApiController implements ApiContr
      *         )
      *     )
      * )
-     * @OA\Response(response=200,description="Return code bunch")
+     * @OA\Response(response=200,description="Return code bind")
      *
      * @return JsonResponse
      */
     public function getAction(): JsonResponse
     {
-        /** @var BunchApiDtoInterface $bunchApiDto */
-        $bunchApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var BindApiDtoInterface $bindApiDto */
+        $bindApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         try {
-            $json = $this->queryManager->get($bunchApiDto);
+            $json = $this->queryManager->get($bindApiDto);
         } catch (\Exception $e) {
             $json = $this->setRestStatus($this->queryManager, $e);
         }
 
-        return $this->setSerializeGroup('api_get_code_bunch')->json(['message' => 'Get code bunch', 'data' => $json], $this->queryManager->getRestStatus());
+        return $this->setSerializeGroup('api_get_code_bind')->json(['message' => 'Get code bind', 'data' => $json], $this->queryManager->getRestStatus());
     }
 
     public function setRestStatus(RestInterface $manager, \Exception $e): array
     {
         switch (true) {
-            case $e instanceof BunchCannotBeSavedException:
+            case $e instanceof BindCannotBeSavedException:
                 $manager->setRestNotImplemented();
                 break;
             case $e instanceof UniqueConstraintViolationException:
                 $manager->setRestConflict();
                 break;
-            case $e instanceof BunchNotFoundException:
+            case $e instanceof BindNotFoundException:
                 $manager->setRestNotFound();
                 break;
-            case $e instanceof BunchInvalidException:
+            case $e instanceof BindInvalidException:
                 $manager->setRestUnprocessableEntity();
                 break;
             default:
