@@ -3,6 +3,7 @@
 namespace Evrinoma\CodeBundle\Form\Rest;
 
 use Evrinoma\CodeBundle\Dto\BunchApiDto;
+use Evrinoma\CodeBundle\Dto\TypeApiDto;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
 use Evrinoma\CodeBundle\Manager\Bunch\QueryManagerInterface;
 use Evrinoma\CodeBundle\Model\ModelInterface;
