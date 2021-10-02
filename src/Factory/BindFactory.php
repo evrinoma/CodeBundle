@@ -3,7 +3,7 @@
 namespace Evrinoma\CodeBundle\Factory;
 
 use Evrinoma\CodeBundle\Dto\BindApiDtoInterface;
-use Evrinoma\CodeBundle\Entity\Bunch\BaseBind;
+use Evrinoma\CodeBundle\Entity\Bind\BaseBind;
 use Evrinoma\CodeBundle\Model\Bind\BindInterface;
 
 class BindFactory implements BindFactoryInterface
