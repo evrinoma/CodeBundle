@@ -40,17 +40,12 @@ interface CodeApiDtoInterface extends DtoInterface
     /**
      * @return bool
      */
-    public function hasBunchApiDto(): bool;
+    public function hasTypeApiDto(): bool;
 
-    public function getBunchApiDto(): BunchApiDto;
+    public function getTypeApiDto(): TypeApiDto;
 //endregion SECTION: Dto
 
 //region SECTION: Getters/Setters
-    /**
-     * @return string
-     */
-    public function getBrief(): string;
-
     /**
      * @return string
      */
