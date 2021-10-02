@@ -12,10 +12,10 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
 {
 //region SECTION: Fields
     /**
-     * @Dto(class="Evrinoma\CodeBundle\Dto\BunchApiDto", generator="genRequestBunchApiDto")
-     * @var BunchApiDto|null
+     * @Dto(class="Evrinoma\CodeBundle\Dto\TypeApiDto", generator="genRequestTypApiDto")
+     * @var TypeApiDto|null
      */
-    private ?BunchApiDto $bunchApiDto = null;
+    private ?TypeApiDto $typeApiDto = null;
     /**
      * @Dto(class="Evrinoma\CodeBundle\Dto\OwnerApiDto", generator="genRequestOwnerApiDto")
      * @var OwnerApiDto|null
@@ -81,13 +81,13 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
     }
 
     /**
-     * @param BunchApiDto $bunchApiDto
+     * @param TypeApiDto $typeApiDto
      *
      * @return CodeApiDto
      */
-    public function setBunchApiDto(BunchApiDto $bunchApiDto): CodeApiDto
+    public function setTypeApiDto(TypeApiDto $typeApiDto): CodeApiDto
     {
-        $this->bunchApiDto = $bunchApiDto;
+        $this->typeApiDto = $typeApiDto;
 
         return $this;
     }
@@ -168,14 +168,14 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
         return $this->ownerApiDto;
     }
 
-    public function hasBunchApiDto(): bool
+    public function hasTypeApiDto(): bool
     {
-        return $this->bunchApiDto !== null;
+        return $this->typeApiDto !== null;
     }
 
-    public function getBunchApiDto(): BunchApiDto
+    public function getTypeApiDto(): TypeApiDto
     {
-        return $this->bunchApiDto;
+        return $this->typeApiDto;
     }
 
     /**
@@ -184,11 +184,11 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
     public function genRequestOwnerApiDto(?Request $request): ?\Generator
     {
         if ($request) {
-            $type = $request->get('owner');
-            if ($type) {
+            $owner = $request->get('owner');
+            if ($owner) {
                 $newRequest                    = $this->getCloneRequest();
-                $type[DtoInterface::DTO_CLASS] = OwnerApiDto::class;
-                $newRequest->request->add($type);
+                $owner[DtoInterface::DTO_CLASS] = OwnerApiDto::class;
+                $newRequest->request->add($owner);
 
                 yield $newRequest;
             }
@@ -198,13 +198,13 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
     /**
      * @return \Generator
      */
-    public function genRequestBunchApiDto(?Request $request): ?\Generator
+    public function genRequestTypApiDto(?Request $request): ?\Generator
     {
         if ($request) {
-            $type = $request->get('bunch');
+            $type = $request->get('type');
             if ($type) {
                 $newRequest                    = $this->getCloneRequest();
-                $type[DtoInterface::DTO_CLASS] = BunchApiDto::class;
+                $type[DtoInterface::DTO_CLASS] = TypeApiDto::class;
                 $newRequest->request->add($type);
 
                 yield $newRequest;

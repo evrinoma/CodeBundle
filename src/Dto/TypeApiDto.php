@@ -51,7 +51,7 @@ final class TypeApiDto extends AbstractDto implements TypeApiDtoInterface
      *
      * @return TypeApiDto
      */
-    private function setBrief(string $brief): TypeApiDto
+    public function setBrief(string $brief): TypeApiDto
     {
         $this->brief = $brief;
 
