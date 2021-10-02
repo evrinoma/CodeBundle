@@ -14,12 +14,14 @@ class CodeFixtures extends Fixture implements FixtureGroupInterface
 
 //region SECTION: Fields
     private array $data = [
-        ['brief' => 'CM', 'description' => 'smeta', 'type' => 1, 'owner' => 2, 'active' => 'a'],
-        ['brief' => 'KJ', 'description' => 'adsdasd', 'type' => 2, 'owner' => 1, 'active' => 'a'],
-        ['brief' => 'RD', 'description' => 'adasdad', 'type' => 1, 'owner' => 2, 'active' => 'a'],
-        ['brief' => 'SP', 'description' => 'sadasd', 'type' => 2, 'owner' => 1, 'active' => 'a'],
-        ['brief' => 'KD', 'description' => 'sdfsdf', 'type' => 1, 'owner' => 2, 'active' => 'a'],
-        ['brief' => 'QW', 'description' => 'rtyrty', 'type' => 3, 'owner' => 1, 'active' => 'd'],
+        ['brief' => 'CM', 'description' => 'smeta', 'type' => 0, 'owner' => 0, 'active' => 'a'], //0
+        ['brief' => 'RD', 'description' => 'adasdad', 'type' => 0, 'owner' => 1, 'active' => 'a'], //1
+        ['brief' => 'KD', 'description' => 'sdfsdf', 'type' => 0, 'owner' => 1, 'active' => 'a'], //2
+        ['brief' => 'KD2', 'description' => 'sdfsdf2', 'type' => 0, 'owner' => 1, 'active' => 'a'], //3
+        ['brief' => 'SP', 'description' => 'sadasd', 'type' => 1, 'owner' => 0, 'active' => 'a'], //4
+        ['brief' => 'KJ', 'description' => 'adsdasd', 'type' => 1, 'owner' => 0, 'active' => 'a'], //5
+        ['brief' => 'KJ2', 'description' => 'adsdasd2', 'type' => 1, 'owner' => 1, 'active' => 'a'], //6
+        ['brief' => 'QW', 'description' => 'rtyrty', 'type' => 2, 'owner' => 0, 'active' => 'd'], //7
     ];
 //endregion Fields
 
