@@ -4,12 +4,12 @@ namespace Evrinoma\CodeBundle\Fixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Evrinoma\CodeBundle\Entity\Bunch\BaseBunch;
 use Evrinoma\CodeBundle\Entity\Define\BaseType;
 
-final class BunchFixtures extends Fixture implements FixtureGroupInterface, DependentFixtureInterface
+final class BunchFixtures extends Fixture implements FixtureGroupInterface, OrderedFixtureInterface
 {
 
 //region SECTION: Fields
@@ -54,7 +54,7 @@ final class BunchFixtures extends Fixture implements FixtureGroupInterface, Depe
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setActive($record['active']);
 
-            $this->addReference($short.'_'.$i, $entity);
+            $this->addReference($short.$i, $entity);
             $manager->persist($entity);
             $i++;
         }
@@ -72,11 +72,8 @@ final class BunchFixtures extends Fixture implements FixtureGroupInterface, Depe
         ];
     }
 
-    public function getDependencies()
+    public function getOrder()
     {
-        return [
-            FixtureInterface::TYPE_FIXTURES,
-            FixtureInterface::OWNER_FIXTURES,
-        ];
+        return 101;
     }
 }

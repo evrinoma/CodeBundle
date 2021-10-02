@@ -4,10 +4,11 @@ namespace Evrinoma\CodeBundle\Fixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Evrinoma\CodeBundle\Entity\Define\BaseOwner;
 
-final class OwnerFixtures extends Fixture implements FixtureGroupInterface
+final class OwnerFixtures extends Fixture implements FixtureGroupInterface, OrderedFixtureInterface
 {
 //region SECTION: Fields
     private array $data = [
@@ -59,5 +60,10 @@ final class OwnerFixtures extends Fixture implements FixtureGroupInterface
         return [
             FixtureInterface::BIND_FIXTURES
         ];
+    }
+
+    public function getOrder()
+    {
+        return 1;
     }
 }
