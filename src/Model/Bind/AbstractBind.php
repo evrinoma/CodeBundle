@@ -24,7 +24,7 @@ abstract class AbstractBind implements BindInterface
     /**
      * @var BunchInterface
      *
-     * @ORM\ManyToOne(targetEntity="Evrinoma\CodeBundle\Model\Define\BunchInterface")
+     * @ORM\ManyToOne(targetEntity="Evrinoma\CodeBundle\Model\Bunch\BunchInterface")
      * @ORM\JoinColumn(name="bunch_id", referencedColumnName="id")
      */
     protected BunchInterface $bunch;
@@ -32,7 +32,7 @@ abstract class AbstractBind implements BindInterface
     /**
      * @var CodeInterface
      *
-     * @ORM\ManyToOne(targetEntity="Evrinoma\CodeBundle\Model\Define\CodeInterface")
+     * @ORM\ManyToOne(targetEntity="Evrinoma\CodeBundle\Model\Code\CodeInterface")
      * @ORM\JoinColumn(name="code_id", referencedColumnName="id")
      */
     protected CodeInterface $code;

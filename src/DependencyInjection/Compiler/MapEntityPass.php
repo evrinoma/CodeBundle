@@ -3,12 +3,14 @@
 namespace Evrinoma\CodeBundle\DependencyInjection\Compiler;
 
 use Evrinoma\CodeBundle\DependencyInjection\EvrinomaCodeExtension;
+use Evrinoma\CodeBundle\Entity\Bind\BaseBind;
 use Evrinoma\CodeBundle\Entity\Bunch\BaseBunch;
 use Evrinoma\CodeBundle\Entity\Code\BaseCode;
 use Evrinoma\CodeBundle\Entity\Define\BaseOwner;
 use Evrinoma\CodeBundle\Entity\Define\BaseType;
+use Evrinoma\CodeBundle\Model\Bind\BindInterface;
 use Evrinoma\CodeBundle\Model\Bunch\BunchInterface;
-use Evrinoma\CodeBundle\Model\Bunch\CodeInterface;
+use Evrinoma\CodeBundle\Model\Code\CodeInterface;
 use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 use Evrinoma\UtilsBundle\DependencyInjection\Compiler\AbstractMapEntity;
@@ -52,6 +54,13 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
         if ((strpos($entityCode, EvrinomaCodeExtension::ENTITY) !== false)) {
             $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Code', '%s/Entity/Code');
             $this->addResolveTargetEntity([BaseCode::class => CodeInterface::class,], false);
+        }
+
+        $entityCode = $container->getParameter('evrinoma.code.entity_bind');
+
+        if ((strpos($entityCode, EvrinomaCodeExtension::ENTITY) !== false)) {
+            $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Bind', '%s/Entity/Bind');
+            $this->addResolveTargetEntity([BaseBind::class => BindInterface::class,], false);
         }
     }
 
