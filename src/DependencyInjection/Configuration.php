@@ -20,8 +20,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder(EvrinomaCodeBundle::CODE_BUNDLE);
-        $rootNode    = $treeBuilder->getRootNode();
+        $treeBuilder      = new TreeBuilder(EvrinomaCodeBundle::CODE_BUNDLE);
+        $rootNode         = $treeBuilder->getRootNode();
         $supportedDrivers = ['orm'];
 
         $rootNode
@@ -35,19 +35,25 @@ class Configuration implements ConfigurationInterface
             ->cannotBeOverwritten()
             ->defaultValue('orm')
             ->end()
+            ->scalarNode('factory_bind')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::ENTITY_FACTORY_BIND)->end()
             ->scalarNode('factory_code')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::ENTITY_FACTORY_CODE)->end()
             ->scalarNode('factory_bunch')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::ENTITY_FACTORY_BUNCH)->end()
             ->scalarNode('entity_code')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::ENTITY_BASE_CODE)->end()
             ->scalarNode('entity_bunch')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::ENTITY_BASE_BUNCH)->end()
+            ->scalarNode('entity_bind')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::ENTITY_BASE_BIND)->end()
             ->scalarNode('constraints_code')->defaultTrue()->info('This option is used for enable/disable basic code constraints')->end()
             ->scalarNode('constraints_bunch')->defaultTrue()->info('This option is used for enable/disable basic bunch constraints')->end()
+            ->scalarNode('constraints_bind')->defaultTrue()->info('This option is used for enable/disable basic bind constraints')->end()
             ->scalarNode('dto_code')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::DTO_BASE_CODE)->info('This option is used for dto class override')->end()
             ->scalarNode('dto_bunch')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::DTO_BASE_BUNCH)->info('This option is used for dto class override')->end()
+            ->scalarNode('dto_bind')->cannotBeEmpty()->defaultValue(EvrinomaCodeExtension::DTO_BASE_BIND)->info('This option is used for dto class override')->end()
             ->arrayNode('decorates')->addDefaultsIfNotSet()->children()
             ->scalarNode('command_code')->defaultNull()->info('This option is used for command code decoration')->end()
             ->scalarNode('query_code')->defaultNull()->info('This option is used for query code decoration')->end()
             ->scalarNode('command_bunch')->defaultNull()->info('This option is used for command bunch decoration')->end()
             ->scalarNode('query_bunch')->defaultNull()->info('This option is used for query bunch decoration')->end()
+            ->scalarNode('command_bind')->defaultNull()->info('This option is used for command bind decoration')->end()
+            ->scalarNode('query_bind')->defaultNull()->info('This option is used for query bind decoration')->end()
             ->end()->end()->end();
 
         return $treeBuilder;

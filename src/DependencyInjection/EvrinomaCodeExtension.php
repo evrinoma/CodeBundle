@@ -3,10 +3,12 @@
 
 namespace Evrinoma\CodeBundle\DependencyInjection;
 
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\BindPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\BunchPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\CodePass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\OwnerPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\TypePass;
+use Evrinoma\CodeBundle\Dto\BindApiDto;
 use Evrinoma\CodeBundle\Dto\BunchApiDto;
 use Evrinoma\CodeBundle\Dto\CodeApiDto;
 use Evrinoma\CodeBundle\Entity\Define\BaseOwner;
@@ -29,10 +31,13 @@ class EvrinomaCodeExtension extends Extension
     public const ENTITY               = 'Evrinoma\CodeBundle\Entity';
     public const ENTITY_FACTORY_CODE  = 'Evrinoma\CodeBundle\Factory\CodeFactory';
     public const ENTITY_FACTORY_BUNCH = 'Evrinoma\CodeBundle\Factory\BunchFactory';
+    public const ENTITY_FACTORY_BIND  = 'Evrinoma\CodeBundle\Factory\BindFactory';
     public const ENTITY_BASE_CODE     = self::ENTITY.'\Code\BaseCode';
     public const ENTITY_BASE_BUNCH    = self::ENTITY.'\Bunch\BaseBunch';
+    public const ENTITY_BASE_BIND     = self::ENTITY.'\Bind\BaseBind';
     public const DTO_BASE_CODE        = CodeApiDto::class;
     public const DTO_BASE_BUNCH       = BunchApiDto::class;
+    public const DTO_BASE_BIND        = BindApiDto::class;
     /**
      * @var array
      */
@@ -66,6 +71,13 @@ class EvrinomaCodeExtension extends Extension
             $definitionFactory->setArgument(0, $config['entity_bunch']);
         }
 
+        if ($config['factory_bind'] !== self::ENTITY_FACTORY_BIND) {
+            $this->wireFactory($container, 'bind', $config['factory_bind'], $config['entity_bind']);
+        } else {
+            $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.bind.factory');
+            $definitionFactory->setArgument(0, $config['entity_bind']);
+        }
+
 
         $doctrineRegistry = null;
 
@@ -86,6 +98,7 @@ class EvrinomaCodeExtension extends Extension
                     'db_driver'    => 'evrinoma.'.$this->getAlias().'.storage',
                     'entity_bunch' => 'evrinoma.'.$this->getAlias().'.entity_bunch',
                     'entity_code'  => 'evrinoma.'.$this->getAlias().'.entity_code',
+                    'entity_bind'  => 'evrinoma.'.$this->getAlias().'.entity_bind',
                 ],
             ]
         );
@@ -95,13 +108,16 @@ class EvrinomaCodeExtension extends Extension
             $this->wineRepository($container, $doctrineRegistry, 'owner', BaseOwner::class);
             $this->wineRepository($container, $doctrineRegistry, 'bunch', $config['entity_bunch']);
             $this->wineRepository($container, $doctrineRegistry, 'code', $config['entity_code']);
+            $this->wineRepository($container, $doctrineRegistry, 'code', $config['entity_bind']);
         }
 
         $this->wireController($container, 'bunch', $config['dto_bunch']);
         $this->wireController($container, 'code', $config['dto_code']);
+        $this->wireController($container, 'bind', $config['dto_bind']);
 
         $this->wireValidator($container, 'bunch', $config['entity_bunch']);
         $this->wireValidator($container, 'code', $config['entity_code']);
+        $this->wireValidator($container, 'bind', $config['dto_bind']);
 
         $loader->load('validation.yml');
 
@@ -113,6 +129,10 @@ class EvrinomaCodeExtension extends Extension
             $loader->load('constraint/code.yml');
         }
 
+        if ($config['constraints_bind']) {
+            $loader->load('constraint/bind.yml');
+        }
+
         $this->wireConstraintTag($container);
 
         if ($config['decorates']) {
@@ -121,10 +141,12 @@ class EvrinomaCodeExtension extends Extension
                 $config['decorates'],
                 [
                     '' => [
-                        'command_code' => 'evrinoma.'.$this->getAlias().'.decorates.code.command',
-                        'query_code'   => 'evrinoma.'.$this->getAlias().'.decorates.code.query',
+                        'command_code'  => 'evrinoma.'.$this->getAlias().'.decorates.code.command',
+                        'query_code'    => 'evrinoma.'.$this->getAlias().'.decorates.code.query',
                         'command_bunch' => 'evrinoma.'.$this->getAlias().'.decorates.bunch.command',
                         'query_bunch'   => 'evrinoma.'.$this->getAlias().'.decorates.bunch.query',
+                        'command_bind' => 'evrinoma.'.$this->getAlias().'.decorates.bind.command',
+                        'query_bind'   => 'evrinoma.'.$this->getAlias().'.decorates.bind.query',
                     ],
                 ]
             );
@@ -149,6 +171,9 @@ class EvrinomaCodeExtension extends Extension
                     break;
                 case strpos($key, CodePass::CODE_CODE_CONSTRAINT) !== false :
                     $definition->addTag(CodePass::CODE_CODE_CONSTRAINT);
+                    break;
+                case strpos($key, BindPass::CODE_BIND_CONSTRAINT) !== false :
+                    $definition->addTag(BindPass::CODE_BIND_CONSTRAINT);
                     break;
             }
         }
