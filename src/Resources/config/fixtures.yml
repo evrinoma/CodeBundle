@@ -1,0 +1,27 @@
+services:
+
+  evrinoma.code.fixtures.bind:
+    class: Evrinoma\CodeBundle\Fixtures\BindFixtures
+    tags:
+      - { name: doctrine.fixture.orm }
+
+  evrinoma.code.fixtures.bunch:
+    class: Evrinoma\CodeBundle\Fixtures\BunchFixtures
+    tags:
+      - { name: doctrine.fixture.orm }
+
+  evrinoma.code.fixtures.code:
+    class: Evrinoma\CodeBundle\Fixtures\CodeFixtures
+    tags:
+      - { name: doctrine.fixture.orm }
+
+  evrinoma.code.fixtures.owner:
+    class: Evrinoma\CodeBundle\Fixtures\OwnerFixtures
+    tags:
+      - { name: doctrine.fixture.orm }
+
+  evrinoma.code.fixtures.type:
+    class: Evrinoma\CodeBundle\Fixtures\TypeFixtures
+    tags:
+      - { name: doctrine.fixture.orm }
+
