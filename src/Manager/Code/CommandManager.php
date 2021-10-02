@@ -10,7 +10,7 @@ use Evrinoma\CodeBundle\Exception\Code\CodeCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Code\CodeInvalidException;
 use Evrinoma\CodeBundle\Exception\Code\CodeNotFoundException;
 use Evrinoma\CodeBundle\Factory\CodeFactoryInterface;
-use Evrinoma\CodeBundle\Manager\Bunch\QueryManagerInterface as BunchQueryManagerInterface;
+use Evrinoma\CodeBundle\Manager\Type\QueryManagerInterface as TypeQueryManagerInterface;
 use Evrinoma\CodeBundle\Manager\Owner\QueryManagerInterface as OwnerQueryManagerInterface;
 use Evrinoma\CodeBundle\Mediator\Code\CommandMediatorInterface;
 use Evrinoma\CodeBundle\Model\Code\CodeInterface;
@@ -30,18 +30,18 @@ final class CommandManager implements CommandManagerInterface, RestInterface
     private CodeFactoryInterface           $factory;
     private CommandMediatorInterface       $mediator;
     private OwnerQueryManagerInterface     $ownerQueryManager;
-    private BunchQueryManagerInterface     $bunchQueryManager;
+    private TypeQueryManagerInterface      $typeQueryManager;
 //endregion Fields
 
 //region SECTION: Constructor
-    public function __construct(ValidatorInterface $validator, CodeCommandRepositoryInterface $repository, CodeFactoryInterface $factory, CommandMediatorInterface $mediator, OwnerQueryManagerInterface $ownerQueryManager, BunchQueryManagerInterface $bunchQueryManager)
+    public function __construct(ValidatorInterface $validator, CodeCommandRepositoryInterface $repository, CodeFactoryInterface $factory, CommandMediatorInterface $mediator, OwnerQueryManagerInterface $ownerQueryManager, TypeQueryManagerInterface $typeQueryManager)
     {
         $this->validator         = $validator;
         $this->repository        = $repository;
         $this->factory           = $factory;
         $this->mediator          = $mediator;
         $this->ownerQueryManager = $ownerQueryManager;
-        $this->bunchQueryManager = $bunchQueryManager;
+        $this->typeQueryManager  = $typeQueryManager;
     }
 //endregion Constructor
 
@@ -69,7 +69,7 @@ final class CommandManager implements CommandManagerInterface, RestInterface
         }
 
         try {
-            $code->setBunch($this->bunchQueryManager->proxy($dto->getBunchApiDto()));
+            $code->setType($this->typeQueryManager->proxy($dto->getTypeApiDto()));
         } catch (\Exception $e) {
             throw new CodeCannotBeCreatedException($e->getMessage());
         }
@@ -115,7 +115,7 @@ final class CommandManager implements CommandManagerInterface, RestInterface
         }
 
         try {
-            $code->setBunch($this->bunchQueryManager->proxy($dto->getBunchApiDto()));
+            $code->setType($this->typeQueryManager->proxy($dto->getTypeApiDto()));
         } catch (\Exception $e) {
             throw new CodeCannotBeCreatedException($e->getMessage());
         }

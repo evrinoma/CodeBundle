@@ -31,7 +31,7 @@ services:
       - '@evrinoma.code.code.factory'
       - '@evrinoma.code.code.command.mediator'
       - '@evrinoma.code.owner.query.manager'
-      - '@evrinoma.code.bunch.query.manager'
+      - '@evrinoma.code.type.query.manager'
 
   evrinoma.code.code.query.manager:
     class: Evrinoma\CodeBundle\Manager\Code\QueryManager
