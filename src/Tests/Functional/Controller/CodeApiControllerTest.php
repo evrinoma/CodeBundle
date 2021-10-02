@@ -39,7 +39,7 @@ class CodeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         return [
             "id"          => 1,
             "owner"       => OwnerApiControllerTest::defaultData(),
-            "bunch"       => BunchApiControllerTest::defaultData(),
+            "type"        => TypeApiControllerTest::defaultData(),
             "brief"       => "brief code",
             "description" => "desc code",
             "class"       => static::getDtoClass(),
@@ -70,7 +70,7 @@ class CodeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
             "description" => "noitpircsed",
             "brief"       => "edoc feirb",
             "owner"       => OwnerApiControllerTest::defaultData(),
-            "bunch"       => BunchApiControllerTest::defaultData(),
+            "type"        => TypeApiControllerTest::defaultData(),
         ];
 
         $saved = $this->put($query);
@@ -154,7 +154,7 @@ class CodeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
             "id"          => "",
             "description" => "0987654321",
             "owner"       => OwnerApiControllerTest::defaultData(),
-            "bunch"       => BunchApiControllerTest::defaultData(),
+            "type"        => TypeApiControllerTest::defaultData(),
             "brief"       => "brief 0987654321",
         ];
 
@@ -168,7 +168,7 @@ class CodeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
             "id"          => "1",
             "description" => "0987654321",
             "owner"       => OwnerApiControllerTest::defaultData(),
-            "bunch"       => BunchApiControllerTest::defaultData(),
+            "type"        => TypeApiControllerTest::defaultData(),
             "brief"       => "brief 0987654321",
         ];
 
@@ -189,7 +189,7 @@ class CodeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
             "id"          => "1",
             "description" => "0987654321",
             "brief"       => "brief 0987654321",
-            "bunch"       => BunchApiControllerTest::defaultData(),
+            "type"        => TypeApiControllerTest::defaultData(),
         ];
 
         $this->put($query);
@@ -290,9 +290,6 @@ class CodeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 
         $type = $this->createType();
         $this->assertArrayHasKey('data', $type);
-
-        $bunch = $this->createBunch();
-        $this->assertArrayHasKey('data', $bunch);
     }
 
     private function createOwner(): array
@@ -313,19 +310,6 @@ class CodeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $query = TypeApiControllerTest::defaultData();
 
         $this->postUrl = TypeApiControllerTest::API_POST;
-
-        $type = $this->post($query);
-
-        $this->postUrl = CodeApiControllerTest::API_POST;
-
-        return $type;
-    }
-
-    private function createBunch(): array
-    {
-        $query = BunchApiControllerTest::defaultData();
-
-        $this->postUrl = BunchApiControllerTest::API_POST;
 
         $type = $this->post($query);
 
