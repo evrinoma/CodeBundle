@@ -4,13 +4,13 @@ namespace Evrinoma\CodeBundle\Fixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Evrinoma\CodeBundle\Entity\Code\BaseCode;
 use Evrinoma\CodeBundle\Entity\Define\BaseOwner;
 use Evrinoma\CodeBundle\Entity\Define\BaseType;
 
-final class CodeFixtures extends Fixture implements FixtureGroupInterface, DependentFixtureInterface
+final class CodeFixtures extends Fixture implements FixtureGroupInterface, OrderedFixtureInterface
 {
 
 //region SECTION: Fields
@@ -59,7 +59,7 @@ final class CodeFixtures extends Fixture implements FixtureGroupInterface, Depen
                 ->setDescription($record['description'])
                 ->setType($this->getReference($shortType.$record['type']))
                 ->setOwner($this->getReference($shortOwner.$record['owner']));
-            $this->addReference($short.'_'.$i, $entity);
+            $this->addReference($short.$i, $entity);
             $manager->persist($entity);
             $i++;
         }
@@ -83,5 +83,10 @@ final class CodeFixtures extends Fixture implements FixtureGroupInterface, Depen
             FixtureInterface::TYPE_FIXTURES,
             FixtureInterface::OWNER_FIXTURES,
         ];
+    }
+
+    public function getOrder()
+    {
+        return 100;
     }
 }
