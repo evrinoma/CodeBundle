@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Evrinoma\CodeBundle\Constraint\Code;
+namespace Evrinoma\CodeBundle\Constraint\Bind;
 
 use Evrinoma\UtilsBundle\Constraint\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
