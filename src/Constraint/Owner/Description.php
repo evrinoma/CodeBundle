@@ -3,22 +3,10 @@
 
 namespace Evrinoma\CodeBundle\Constraint\Owner;
 
+use Evrinoma\CodeBundle\Constraint\Common\DescriptionTrait;
 use Evrinoma\UtilsBundle\Constraint\ConstraintInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class Description implements ConstraintInterface
 {
-//region SECTION: Getters/Setters
-    public function getConstraints(): array
-    {
-        return [
-            new NotBlank(),
-        ];
-    }
-
-    public function getPropertyName(): string
-    {
-        return 'description';
-    }
-//endregion Getters/Setters
+    use DescriptionTrait;
 }
