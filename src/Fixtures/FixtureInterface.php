@@ -8,5 +8,7 @@ interface FixtureInterface
     public const TYPE_FIXTURES  = 'type';
     public const OWNER_FIXTURES = 'owner';
     public const CODE_FIXTURES  = 'code';
+    public const BUNCH_FIXTURES  = 'bunch';
+
 //endregion Fields
 }

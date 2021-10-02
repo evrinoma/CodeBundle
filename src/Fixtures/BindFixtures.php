@@ -5,20 +5,28 @@ namespace Evrinoma\CodeBundle\Fixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
+use Evrinoma\CodeBundle\Entity\Bind\BaseBind;
 use Evrinoma\CodeBundle\Entity\Bunch\BaseBunch;
-use Evrinoma\CodeBundle\Entity\Define\BaseType;
+use Evrinoma\CodeBundle\Entity\Code\BaseCode;
 
-class BunchFixtures extends Fixture implements FixtureGroupInterface
+class BindFixtures extends Fixture implements FixtureGroupInterface
 {
 
 //region SECTION: Fields
     private array $data = [
-        ['description' => 'calc estimate', 'type' => 0, 'active' => 'a'], //0
-        ['description' => 'system', 'type' => 0, 'active' => 'a'], //1
-        ['description' => 'career', 'type' => 0, 'active' => 'a'], //2
-        ['description' => 'work doc', 'type' => 1, 'active' => 'a'], //3
-        ['description' => 'job', 'type' => 1, 'active' => 'a'], //4
-        ['description' => 'lib', 'type' => 2, 'active' => 'd'], //5
+        ['bunch' => 0, 'code' => 0, 'active' => 'a'],
+        ['bunch' => 0, 'code' => 1, 'active' => 'a'],
+        ['bunch' => 0, 'code' => 2, 'active' => 'a'],
+
+        ['bunch' => 1, 'code' => 3, 'active' => 'a'],
+
+        ['bunch' => 2, 'code' => 0, 'active' => 'a'],
+
+        ['bunch' => 3, 'code' => 4, 'active' => 'a'],
+        ['bunch' => 3, 'code' => 5, 'active' => 'd'],
+        ['bunch' => 3, 'code' => 6, 'active' => 'd'],
+
+        ['bunch' => 5, 'code' => 7, 'active' => 'd'],
     ];
 //endregion Fields
 
@@ -41,15 +49,16 @@ class BunchFixtures extends Fixture implements FixtureGroupInterface
     private function createTypes(ObjectManager $manager)
     {
 
-        $short     = (new \ReflectionClass(BaseBunch::class))->getShortName()."_";
-        $shortType = (new \ReflectionClass(BaseType::class))->getShortName()."_";
-        $i         = 0;
+        $short      = (new \ReflectionClass(BaseBind::class))->getShortName()."_";
+        $shortBunch = (new \ReflectionClass(BaseBunch::class))->getShortName()."_";
+        $shortCode  = (new \ReflectionClass(BaseCode::class))->getShortName()."_";
+        $i          = 0;
 
         foreach ($this->data as $record) {
-            $entity = new BaseBunch();
+            $entity = new BaseBind();
             $entity
-                ->setDescription($record['description'])
-                ->setType($this->getReference($shortType.$record['type']))
+                ->setBunch($this->getReference($shortBunch.$record['bunch']))
+                ->setCode($this->getReference($shortCode.$record['code']))
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setActive($record['active']);
 
@@ -69,6 +78,8 @@ class BunchFixtures extends Fixture implements FixtureGroupInterface
         return [
             FixtureInterface::TYPE_FIXTURES,
             FixtureInterface::OWNER_FIXTURES,
+            FixtureInterface::CODE_FIXTURES,
+            FixtureInterface::BUNCH_FIXTURES,
         ];
     }
 }
