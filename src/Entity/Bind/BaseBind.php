@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Evrinoma\CodeBundle\Entity\Bunch;
+namespace Evrinoma\CodeBundle\Entity\Bind;
 
 use Doctrine\ORM\Mapping as ORM;
 use Evrinoma\CodeBundle\Model\Bind\AbstractBind;
