@@ -54,6 +54,10 @@ class EvrinomaCodeExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        if ($container->getParameter('kernel.environment') !== 'prod') {
+            $loader->load('fixtures.yml');
+        }
+
         $configuration = $this->getConfiguration($configs, $container);
         $config        = $this->processConfiguration($configuration, $configs);
 
@@ -145,8 +149,8 @@ class EvrinomaCodeExtension extends Extension
                         'query_code'    => 'evrinoma.'.$this->getAlias().'.decorates.code.query',
                         'command_bunch' => 'evrinoma.'.$this->getAlias().'.decorates.bunch.command',
                         'query_bunch'   => 'evrinoma.'.$this->getAlias().'.decorates.bunch.query',
-                        'command_bind' => 'evrinoma.'.$this->getAlias().'.decorates.bind.command',
-                        'query_bind'   => 'evrinoma.'.$this->getAlias().'.decorates.bind.query',
+                        'command_bind'  => 'evrinoma.'.$this->getAlias().'.decorates.bind.command',
+                        'query_bind'    => 'evrinoma.'.$this->getAlias().'.decorates.bind.query',
                     ],
                 ]
             );
