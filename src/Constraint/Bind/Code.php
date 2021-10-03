@@ -20,7 +20,7 @@ final class Code implements ConstraintInterface
 
     public function getPropertyName(): string
     {
-        return 'bunch';
+        return 'code';
     }
 //endregion Getters/Setters
 }

@@ -3,8 +3,7 @@
 
 namespace Evrinoma\CodeBundle\Validator;
 
-
-use Evrinoma\CodeBundle\Entity\Bunch\BaseBind;
+use Evrinoma\CodeBundle\Entity\Bind\BaseBind;
 use Evrinoma\UtilsBundle\Validator\AbstractValidator;
 
 final class BindValidator extends AbstractValidator
