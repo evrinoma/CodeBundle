@@ -8,8 +8,8 @@ Evrinoma\CodeBundle\Model\Code\AbstractCode:
       type: Evrinoma\CodeBundle\Model\Define\AbstractOwner
       groups: [ api_get_code_code, api_post_code_code, api_put_code_code ]
       expose: true
-    bunch:
-      type: Evrinoma\CodeBundle\Model\Bunch\AbstractBunch
+    type:
+      type: Evrinoma\CodeBundle\Model\Define\AbstractType
       groups: [ api_get_code_code, api_post_code_code, api_put_code_code ]
       expose: true
     description:
