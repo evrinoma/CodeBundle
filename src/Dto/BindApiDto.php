@@ -88,6 +88,40 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
     }
 
     /**
+     * @return \Generator
+     */
+    public function genRequestBunchApiDto(?Request $request): ?\Generator
+    {
+        if ($request) {
+            $type = $request->get('bunch');
+            if ($type) {
+                $newRequest                    = $this->getCloneRequest();
+                $type[DtoInterface::DTO_CLASS] = BunchApiDto::class;
+                $newRequest->request->add($type);
+
+                yield $newRequest;
+            }
+        }
+    }
+
+    /**
+     * @return \Generator
+     */
+    public function genRequestCodeApiDto(?Request $request): ?\Generator
+    {
+        if ($request) {
+            $type = $request->get('code');
+            if ($type) {
+                $newRequest                    = $this->getCloneRequest();
+                $type[DtoInterface::DTO_CLASS] = CodeApiDto::class;
+                $newRequest->request->add($type);
+
+                yield $newRequest;
+            }
+        }
+    }
+
+    /**
      * @return bool
      */
     public function hasBunchApiDto(): bool
