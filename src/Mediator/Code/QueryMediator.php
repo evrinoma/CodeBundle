@@ -20,13 +20,13 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
         $alias = $this->alias();
 
         /** @var $dto CodeApiDtoInterface */
-        if ($dto->hasTypeApiDto() && $dto->getTypeApiDto()->hasBrief()) {
-            $aliasType = MediatorInterface::ALIAS_TYPE;
+        if ($dto->hasBunchApiDto() && $dto->getBunchApiDto()->hasDescription()) {
+            $aliasBunch = MediatorInterface::ALIAS_BUNCH;
             $builder
-                ->leftJoin($alias.'.type', $aliasType)
-                ->addSelect($aliasType)
-                ->andWhere($aliasType.'.brief like :brief')
-                ->setParameter('brief', '%'.$dto->getTypeApiDto()->getBrief().'%');
+                ->leftJoin($alias.'.bunch', $aliasBunch)
+                ->addSelect($aliasBunch)
+                ->andWhere($aliasBunch.'.bunch like :bunch')
+                ->setParameter('bunch', '%'.$dto->getBunchApiDto()->getDescription().'%');
         }
 
         if ($dto->hasOwnerApiDto() && ($dto->getOwnerApiDto()->hasBrief() || $dto->getOwnerApiDto()->hasDescription())) {
@@ -49,10 +49,6 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
                 ->andWhere($alias.'.active = :active')
                 ->setParameter('active', $dto->getActive());
         }
-        if ($dto->hasTypeApiDto() && $dto->getTypeApiDto()->hasId()) {
-            $builder->andWhere($alias.'.type like :type')
-                ->setParameter('type', '%'.$dto->getTypeApiDto()->getId().'%');
-        }
         if ($dto->hasDescription()) {
             $builder->andWhere($alias.'.description like :description')
                 ->setParameter('description', '%'.$dto->getDescription().'%');
@@ -60,10 +56,6 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
         if ($dto->hasOwnerApiDto() && $dto->getOwnerApiDto()->hasId()) {
             $builder->andWhere($alias.'.owner = :owner')
                 ->setParameter('owner', '%'. $dto->getOwnerApiDto()->getId().'%');
-        }
-        if ($dto->hasTypeApiDto() && $dto->getTypeApiDto()->hasId()) {
-            $builder->andWhere($alias.'.type = :type')
-                ->setParameter('type', '%'. $dto->getTypeApiDto()->getId().'%');
         }
     }
 //endregion Public
