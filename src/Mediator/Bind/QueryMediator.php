@@ -11,7 +11,7 @@ use Evrinoma\UtilsBundle\Mediator\AbstractQueryMediator;
 class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterface
 {
 //region SECTION: Fields
-    protected static string $alias = MediatorInterface::ALIAS_BUNCH;
+    protected static string $alias = MediatorInterface::ALIAS_BIND;
 //endregion Fields
 
 //region SECTION: Public
@@ -26,27 +26,35 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
         $alias = $this->alias();
 
         /** @var $dto BindApiDtoInterface */
-        if ($dto->hasTypeApiDto() && $dto->getTypeApiDto()->hasBrief()) {
-            $aliasType = MediatorInterface::ALIAS_TYPE;
+        if ($dto->hasBunchApiDto() && $dto->getBunchApiDto()->hasDescription()) {
+            $aliasBunch = MediatorInterface::ALIAS_BUNCH;
             $builder
-                ->leftJoin($alias.'.type', $aliasType)
-                ->addSelect($aliasType)
-                ->andWhere($aliasType.'.brief like :brief')
-                ->setParameter('brief', '%'.$dto->getTypeApiDto()->getBrief().'%');
+                ->leftJoin($alias.'.bunch', $aliasBunch)
+                ->addSelect($aliasBunch)
+                ->andWhere($aliasBunch.'.description like :descriptionbunch')
+                ->setParameter('descriptionbunch', '%'.$dto->getBunchApiDto()->getDescription().'%');
+        }
+
+        if ($dto->hasCodeApiDto() && ($dto->getCodeApiDto()->hasDescription() || $dto->getCodeApiDto()->hasBrief())) {
+            $aliasCode = MediatorInterface::ALIAS_CODE;
+            $builder
+                ->leftJoin($alias.'.code', $aliasCode)
+                ->addSelect($aliasCode);
+
+            if ($dto->getCodeApiDto()->hasBrief()) {
+                $builder->andWhere($aliasCode.'.brief like :briefCode')
+                    ->setParameter('briefCode', '%'.$dto->getCodeApiDto()->getBrief().'%');
+            }
+            if ($dto->getCodeApiDto()->hasDescription()) {
+                $builder->andWhere($aliasCode.'.description like :descriptionCode')
+                    ->setParameter('descriptionCode', '%'.$dto->getCodeApiDto()->getDescription().'%');
+            }
         }
 
         if ($dto->hasActive()) {
             $builder
                 ->andWhere($alias.'.active = :active')
                 ->setParameter('active', $dto->getActive());
-        }
-        if ($dto->hasDescription()) {
-            $builder->andWhere($alias.'.description like :description')
-                ->setParameter('description', '%'.$dto->getDescription().'%');
-        }
-        if ($dto->hasTypeApiDto() && $dto->getTypeApiDto()->hasId()) {
-            $builder->andWhere($alias.'.type = :type')
-                ->setParameter('type', '%'.$dto->getTypeApiDto()->getId().'%');
         }
     }
 //endregion Public

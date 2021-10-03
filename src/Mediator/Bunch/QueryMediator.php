@@ -25,8 +25,8 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
             $builder
                 ->leftJoin($alias.'.type', $aliasType)
                 ->addSelect($aliasType)
-                ->andWhere($aliasType.'.brief like :brief')
-                ->setParameter('brief', '%'.$dto->getTypeApiDto()->getBrief().'%');
+                ->andWhere($aliasType.'.brief like :briefType')
+                ->setParameter('briefType', '%'.$dto->getTypeApiDto()->getBrief().'%');
         }
 
         if ($dto->hasActive()) {
