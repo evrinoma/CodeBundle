@@ -2,9 +2,9 @@ Evrinoma\CodeBundle\Model\Define\AbstractType:
   exclusion_policy: ALL
   properties:
     id:
-      groups: [ api_get_code_type, api_post_code_type, api_put_code_type, api_get_code_bunch, api_post_code_bunch, api_put_code_bunch, api_get_code_code, api_post_code_code, api_put_code_code ]
+      groups: [ api_get_code_type, api_post_code_type, api_put_code_type, api_get_code_bunch, api_post_code_bunch, api_put_code_bunch, api_get_code_code, api_post_code_code, api_put_code_code, api_get_code_bind, api_post_code_bind, api_put_code_bind ]
       expose: true
     brief:
-      groups: [ api_get_code_type, api_post_code_type, api_put_code_type, api_get_code_bunch, api_post_code_bunch, api_put_code_bunch, api_get_code_code, api_post_code_code, api_put_code_code ]
+      groups: [ api_get_code_type, api_post_code_type, api_put_code_type, api_get_code_bunch, api_post_code_bunch, api_put_code_bunch, api_get_code_code, api_post_code_code, api_put_code_code, api_get_code_bind, api_post_code_bind, api_put_code_bind ]
       expose: true
 

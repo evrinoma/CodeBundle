@@ -2,25 +2,28 @@ Evrinoma\CodeBundle\Model\Code\AbstractCode:
   exclusion_policy: ALL
   properties:
     id:
-      groups: [ api_get_code_code, api_post_code_code, api_put_code_code ]
+      groups: [ api_get_code_code, api_post_code_code, api_put_code_code, api_get_code_bind, api_post_code_bind, api_put_code_bind ]
       expose: true
     owner:
       type: Evrinoma\CodeBundle\Model\Define\AbstractOwner
-      groups: [ api_get_code_code, api_post_code_code, api_put_code_code ]
+      groups: [ api_get_code_code, api_post_code_code, api_put_code_code, api_get_code_bind, api_post_code_bind, api_put_code_bind ]
       expose: true
     type:
       type: Evrinoma\CodeBundle\Model\Define\AbstractType
-      groups: [ api_get_code_code, api_post_code_code, api_put_code_code ]
+      groups: [ api_get_code_code, api_post_code_code, api_put_code_code, api_get_code_bind, api_post_code_bind, api_put_code_bind ]
       expose: true
     description:
-      groups: [ api_get_code_code, api_post_code_code, api_put_code_code ]
+      groups: [ api_get_code_code, api_post_code_code, api_put_code_code, api_get_code_bind, api_post_code_bind, api_put_code_bind ]
+      expose: true
+    brief:
+      groups: [ api_get_code_code, api_post_code_code, api_put_code_code, api_get_code_bind, api_post_code_bind, api_put_code_bind ]
       expose: true
     createdAt:
       type: DateTimeImmutable<'Y-m-d H:i'>
-      groups: [ api_get_code_code, api_post_code_code, api_put_code_code  ]
+      groups: [ api_get_code_code, api_post_code_code, api_put_code_code , api_get_code_bind, api_post_code_bind, api_put_code_bind ]
     updatedAt:
       type: DateTimeImmutable<'Y-m-d H:i'>
-      groups: [ api_get_code_code, api_post_code_code, api_put_code_code ]
+      groups: [ api_get_code_code, api_post_code_code, api_put_code_code, api_get_code_bind, api_post_code_bind, api_put_code_bind ]
     active:
-      groups: [ api_get_code_code, api_post_code_code, api_put_code_code ]
+      groups: [ api_get_code_code, api_post_code_code, api_put_code_code, api_get_code_bind, api_post_code_bind, api_put_code_bind ]
       expose: true
