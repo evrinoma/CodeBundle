@@ -41,6 +41,11 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
             "class" => static::getDtoClass(),
         ];
     }
+
+    protected function getFixtures(): array
+    {
+        return [];
+    }
 //endregion Protected
 
 //region SECTION: Public

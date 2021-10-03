@@ -44,6 +44,10 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
         ];
     }
 
+    protected function getFixtures(): array
+    {
+        return [];
+    }
 //endregion Protected
 //region SECTION: Public
     public function testPostUnprocessable(): void

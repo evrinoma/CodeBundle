@@ -46,6 +46,10 @@ class CodeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         ];
     }
 
+    protected function getFixtures(): array
+    {
+        return [];
+    }
 //endregion Protected
 
 //region SECTION: Public
