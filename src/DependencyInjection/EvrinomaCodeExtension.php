@@ -121,7 +121,7 @@ class EvrinomaCodeExtension extends Extension
 
         $this->wireValidator($container, 'bunch', $config['entity_bunch']);
         $this->wireValidator($container, 'code', $config['entity_code']);
-        $this->wireValidator($container, 'bind', $config['dto_bind']);
+        $this->wireValidator($container, 'bind', $config['entity_bind']);
 
         $loader->load('validation.yml');
 
@@ -211,6 +211,7 @@ class EvrinomaCodeExtension extends Extension
         $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.repository');
 
         switch ($name) {
+            case 'bind':
             case 'code':
             case 'bunch':
                 $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.mediator');

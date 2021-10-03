@@ -30,7 +30,8 @@ services:
       - '@evrinoma.code.bind.repository'
       - '@evrinoma.code.bind.factory'
       - '@evrinoma.code.bind.command.mediator'
-      - '@evrinoma.code.type.query.manager'
+      - '@evrinoma.code.bunch.query.manager'
+      - '@evrinoma.code.code.query.manager'
 
   evrinoma.code.bind.query.manager:
     class: Evrinoma\CodeBundle\Manager\Bind\QueryManager
