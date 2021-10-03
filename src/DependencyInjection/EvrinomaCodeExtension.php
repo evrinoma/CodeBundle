@@ -112,7 +112,7 @@ class EvrinomaCodeExtension extends Extension
             $this->wineRepository($container, $doctrineRegistry, 'owner', BaseOwner::class);
             $this->wineRepository($container, $doctrineRegistry, 'bunch', $config['entity_bunch']);
             $this->wineRepository($container, $doctrineRegistry, 'code', $config['entity_code']);
-            $this->wineRepository($container, $doctrineRegistry, 'code', $config['entity_bind']);
+            $this->wineRepository($container, $doctrineRegistry, 'bind', $config['entity_bind']);
         }
 
         $this->wireController($container, 'bunch', $config['dto_bunch']);
