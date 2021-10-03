@@ -157,7 +157,7 @@ final class BindApiController extends AbstractApiController implements ApiContro
         $commandManager = $this->commandManager;
 
         try {
-            if ($bindApiDto->hasBunchApiDto() && $bindApiDto->getBunchApiDto()->hasId() && $bindApiDto->hasCodeApiDto() && $bindApiDto->getCodeApiDto()->hasId()) {
+            if ($bindApiDto->hasId() && $bindApiDto->hasBunchApiDto() && $bindApiDto->getBunchApiDto()->hasId() && $bindApiDto->hasCodeApiDto() && $bindApiDto->getCodeApiDto()->hasId()) {
                 $json = [];
                 $em   = $this->getDoctrine()->getManager();
 
@@ -215,7 +215,7 @@ final class BindApiController extends AbstractApiController implements ApiContro
         $this->commandManager->setRestAccepted();
 
         try {
-            if ($bindApiDto->hasBunchApiDto() && $bindApiDto->getBunchApiDto()->hasId() && $bindApiDto->hasCodeApiDto() && $bindApiDto->getCodeApiDto()->hasId()) {
+            if ($bindApiDto->hasId()) {
                 $json = [];
                 $em   = $this->getDoctrine()->getManager();
 
