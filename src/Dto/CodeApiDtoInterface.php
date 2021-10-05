@@ -3,32 +3,13 @@
 namespace Evrinoma\CodeBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
+use Evrinoma\DtoCommon\ValueObject\ActiveInterface;
+use Evrinoma\DtoCommon\ValueObject\BriefInterface;
+use Evrinoma\DtoCommon\ValueObject\DescriptionInterface;
+use Evrinoma\DtoCommon\ValueObject\IdInterface;
 
-interface CodeApiDtoInterface extends DtoInterface
+interface CodeApiDtoInterface extends DtoInterface, IdInterface, ActiveInterface, DescriptionInterface, BriefInterface
 {
-
-//region SECTION: Public
-    /**
-     * @return bool
-     */
-    public function hasBrief(): bool;
-
-    /**
-     * @return bool
-     */
-    public function hasDescription(): bool;
-
-    /**
-     * @return bool
-     */
-    public function hasActive(): bool;
-
-    /**
-     * @return bool
-     */
-    public function hasId(): bool;
-//endregion Public
-
 //region SECTION: Dto
     /**
      * @return bool
@@ -44,21 +25,4 @@ interface CodeApiDtoInterface extends DtoInterface
 
     public function getTypeApiDto(): TypeApiDto;
 //endregion SECTION: Dto
-
-//region SECTION: Getters/Setters
-    /**
-     * @return string
-     */
-    public function getId(): string;
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string;
-
-    /**
-     * @return string
-     */
-    public function getActive(): string;
-//endregion Getters/Setters
 }

@@ -5,12 +5,17 @@ namespace Evrinoma\CodeBundle\Dto;
 use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
+use Evrinoma\DtoCommon\ValueObject\ActiveTrait;
+use Evrinoma\DtoCommon\ValueObject\BriefTrait;
+use Evrinoma\DtoCommon\ValueObject\DescriptionTrait;
+use Evrinoma\DtoCommon\ValueObject\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Evrinoma\DtoBundle\Annotation\Dto;
 
 class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
 {
 //region SECTION: Fields
+    use IdTrait, ActiveTrait, DescriptionTrait, BriefTrait;
     /**
      * @Dto(class="Evrinoma\CodeBundle\Dto\TypeApiDto", generator="genRequestTypApiDto")
      * @var TypeApiDto|null
@@ -21,13 +26,6 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
      * @var OwnerApiDto|null
      */
     private ?OwnerApiDto $ownerApiDto = null;
-    private string       $id          = '';
-
-    private string $description = '';
-
-    private string $brief = '';
-
-    private string $active = '';
 //endregion Fields
 
 //region SECTION: Protected
@@ -43,29 +41,6 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
         return $this;
     }
 //endregion Protected
-
-//region SECTION: Public
-    public function hasId(): bool
-    {
-        return $this->id !== '';
-    }
-
-    public function hasActive(): bool
-    {
-        return $this->active !== '';
-    }
-
-    public function hasDescription(): bool
-    {
-        return $this->description !== '';
-    }
-
-    public function hasBrief(): bool
-    {
-        return $this->brief !== '';
-    }
-
-//endregion Public
 
 //region SECTION: Dto
     /**
@@ -212,35 +187,4 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
         }
     }
 //endregion SECTION: Dto
-
-//region SECTION: Getters/Setters
-    /**
-     * @return string
-     */
-    public function getBrief(): string
-    {
-        return $this->brief;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getActive(): string
-    {
-        return $this->active;
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-//endregion Getters/Setters
 }

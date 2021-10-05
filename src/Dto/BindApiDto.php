@@ -5,26 +5,28 @@ namespace Evrinoma\CodeBundle\Dto;
 use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
+use Evrinoma\DtoCommon\ValueObject\ActiveTrait;
+use Evrinoma\DtoCommon\ValueObject\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Evrinoma\DtoBundle\Annotation\Dto;
 
 class BindApiDto extends AbstractDto implements BindApiDtoInterface
 {
 //region SECTION: Fields
+    use IdTrait, ActiveTrait;
+
     /**
      * @Dto(class="Evrinoma\CodeBundle\Dto\BunchApiDto", generator="genRequestBunchApiDto")
      * @var BunchApiDto|null
      */
     private ?BunchApiDto $bunchApiDto = null;
 
-    private string $active = '';
     /**
      * @Dto(class="Evrinoma\CodeBundle\Dto\CodeApiDto", generator="genRequestCodeApiDto")
      * @var CodeApiDto|null
      */
     private ?CodeApiDto $codeApiDto = null;
 
-    private string $id = '';
 //endregion Fields
 
 //region SECTION: Protected
@@ -38,18 +40,6 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
         $this->active = $active;
 
         return $this;
-    }
-//endregion Protected
-
-//region SECTION: Public
-    public function hasActive(): bool
-    {
-        return $this->active !== '';
-    }
-
-    public function hasId(): bool
-    {
-        return $this->id !== '';
     }
 
     /**
@@ -177,23 +167,4 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
         return $this;
     }
 //endregion SECTION: Dto
-
-//region SECTION: Getters/Setters
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getActive(): string
-    {
-        return $this->active;
-    }
-//endregion Getters/Setters
-
 }

@@ -5,33 +5,17 @@ namespace Evrinoma\CodeBundle\Dto;
 use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
+use Evrinoma\DtoCommon\ValueObject\BriefInterface;
+use Evrinoma\DtoCommon\ValueObject\BriefTrait;
+use Evrinoma\DtoCommon\ValueObject\DescriptionInterface;
+use Evrinoma\DtoCommon\ValueObject\DescriptionTrait;
+use Evrinoma\DtoCommon\ValueObject\IdInterface;
+use Evrinoma\DtoCommon\ValueObject\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 final class TypeApiDto extends AbstractDto implements TypeApiDtoInterface
 {
-//region SECTION: Fields
-    private string $id = '';
-
-    private string $brief = '';
-//endregion Fields
-
-//region SECTION: Public
-    /**
-     * @return bool
-     */
-    public function hasId(): bool
-    {
-        return $this->id !== '';
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasBrief(): bool
-    {
-        return $this->brief !== '';
-    }
-//endregion Public
+    use IdTrait, BriefTrait;
 
 //region SECTION: Private
     /**
@@ -80,22 +64,4 @@ final class TypeApiDto extends AbstractDto implements TypeApiDtoInterface
         return $this;
     }
 //endregion SECTION: Dto
-
-//region SECTION: Getters/Setters
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBrief(): string
-    {
-        return $this->brief;
-    }
-//endregion Getters/Setters
 }

@@ -3,25 +3,9 @@
 namespace Evrinoma\CodeBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
+use Evrinoma\DtoCommon\ValueObject\BriefInterface;
+use Evrinoma\DtoCommon\ValueObject\IdInterface;
 
-interface TypeApiDtoInterface extends DtoInterface
+interface TypeApiDtoInterface extends DtoInterface, IdInterface, BriefInterface
 {
-    /**
-     * @return bool
-     */
-    public function hasId(): bool;
-
-    /**
-     * @return bool
-     */
-    public function hasBrief(): bool;
-    /**
-     * @return string
-     */
-    public function getId(): string;
-
-    /**
-     * @return string
-     */
-    public function getBrief(): string;
 }
