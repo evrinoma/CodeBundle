@@ -2,17 +2,24 @@
 
     contractor:
         db_driver: orm модель данных
+        factory_bind: App\Code\Factory\BindFactory фабрика для создания объекта связи, 
+                 не достающие значения можно разрешить на уровне Mediator или переопределив фабрику 
         factory_code: App\Code\Factory\CodeFactory фабрика для создания объекта кода, 
                  не достающие значения можно разрешить на уровне Mediator или переопределив фабрику 
         factory_bunch: App\Code\Factory\BunchFactory фабрика для создания объекта группы, 
                  не достающие значения можно разрешить на уровне Mediator или переопределив фабрику 
+        entity_bind: App\Code\Entity\Bind сущность связи
         entity_code: App\Code\Entity\Code сущность кода
         entity_bunch: App\Code\Entity\Code сущность группы
+        constraints_bind: - включить валидацию по умолчанию для связи
         constraints_code: - включить валидацию по умолчанию для кода
         constraints_bunch:- включить валидацию по умолчанию для группы
+        dto_bind: App\Code\Dto\BindDto класс dto с которым работает сущность связи
         dto_code: App\Code\Dto\CodeDto класс dto с которым работает сущность кода
         dto_bunch: App\Code\Dto\BunchDto класс dto с которым работает сущность группы
         decorates:
+          command_bind - декоратор команд связи
+          query_bind - декоратор запросов связи
           command_code - декоратор команд кода
           query_code - декоратор запросов кода
           command_bunch - декоратор команд группы
