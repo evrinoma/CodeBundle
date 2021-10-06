@@ -28,16 +28,16 @@ class EvrinomaCodeExtension extends Extension
     use HelperTrait;
 
 //region SECTION: Fields
-    public const ENTITY               = 'Evrinoma\CodeBundle\Entity';
-    public const ENTITY_FACTORY_CODE  = 'Evrinoma\CodeBundle\Factory\CodeFactory';
-    public const ENTITY_FACTORY_BUNCH = 'Evrinoma\CodeBundle\Factory\BunchFactory';
-    public const ENTITY_FACTORY_BIND  = 'Evrinoma\CodeBundle\Factory\BindFactory';
-    public const ENTITY_BASE_CODE     = self::ENTITY.'\Code\BaseCode';
-    public const ENTITY_BASE_BUNCH    = self::ENTITY.'\Bunch\BaseBunch';
-    public const ENTITY_BASE_BIND     = self::ENTITY.'\Bind\BaseBind';
-    public const DTO_BASE_CODE        = CodeApiDto::class;
-    public const DTO_BASE_BUNCH       = BunchApiDto::class;
-    public const DTO_BASE_BIND        = BindApiDto::class;
+    public const ENTITY            = 'Evrinoma\CodeBundle\Entity';
+    public const FACTORY_CODE      = 'Evrinoma\CodeBundle\Factory\CodeFactory';
+    public const FACTORY_BUNCH     = 'Evrinoma\CodeBundle\Factory\BunchFactory';
+    public const FACTORY_BIND      = 'Evrinoma\CodeBundle\Factory\BindFactory';
+    public const ENTITY_BASE_CODE  = self::ENTITY.'\Code\BaseCode';
+    public const ENTITY_BASE_BUNCH = self::ENTITY.'\Bunch\BaseBunch';
+    public const ENTITY_BASE_BIND  = self::ENTITY.'\Bind\BaseBind';
+    public const DTO_BASE_CODE     = CodeApiDto::class;
+    public const DTO_BASE_BUNCH    = BunchApiDto::class;
+    public const DTO_BASE_BIND     = BindApiDto::class;
     /**
      * @var array
      */
@@ -61,21 +61,21 @@ class EvrinomaCodeExtension extends Extension
         $configuration = $this->getConfiguration($configs, $container);
         $config        = $this->processConfiguration($configuration, $configs);
 
-        if ($config['factory_code'] !== self::ENTITY_FACTORY_CODE) {
+        if ($config['factory_code'] !== self::FACTORY_CODE) {
             $this->wireFactory($container, 'code', $config['factory_code'], $config['entity_code']);
         } else {
             $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.code.factory');
             $definitionFactory->setArgument(0, $config['entity_code']);
         }
 
-        if ($config['factory_bunch'] !== self::ENTITY_FACTORY_CODE) {
+        if ($config['factory_bunch'] !== self::FACTORY_CODE) {
             $this->wireFactory($container, 'bunch', $config['factory_bunch'], $config['entity_bunch']);
         } else {
             $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.bunch.factory');
             $definitionFactory->setArgument(0, $config['entity_bunch']);
         }
 
-        if ($config['factory_bind'] !== self::ENTITY_FACTORY_BIND) {
+        if ($config['factory_bind'] !== self::FACTORY_BIND) {
             $this->wireFactory($container, 'bind', $config['factory_bind'], $config['entity_bind']);
         } else {
             $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.bind.factory');
