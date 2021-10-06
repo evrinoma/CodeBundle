@@ -35,12 +35,12 @@ final class QueryManager implements QueryManagerInterface, RestInterface
     public function criteria(BindApiDtoInterface $dto): array
     {
         try {
-            $bunch = $this->repository->findByCriteria($dto);
+            $bind = $this->repository->findByCriteria($dto);
         } catch (BindNotFoundException $e) {
             throw $e;
         }
 
-        return $bunch;
+        return $bind;
     }
 
     /**
@@ -52,12 +52,12 @@ final class QueryManager implements QueryManagerInterface, RestInterface
     public function proxy(BindApiDtoInterface $dto): BindInterface
     {
         try {
-            $type = $this->repository->proxy($dto->getId());
+            $bind = $this->repository->proxy($dto->getId());
         } catch (BindProxyException $e) {
             throw $e;
         }
 
-        return $type;
+        return $bind;
     }
 //endregion Public
 
@@ -76,12 +76,12 @@ final class QueryManager implements QueryManagerInterface, RestInterface
     public function get(BindApiDtoInterface $dto): BindInterface
     {
         try {
-            $bunch = $this->repository->find($dto->getId());
+            $bind = $this->repository->find($dto->getId());
         } catch (BindNotFoundException $e) {
             throw $e;
         }
 
-        return $bunch;
+        return $bind;
     }
 //endregion Getters/Setters
 }

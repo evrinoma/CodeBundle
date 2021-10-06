@@ -52,12 +52,12 @@ final class QueryManager implements QueryManagerInterface, RestInterface
     public function proxy(BunchApiDtoInterface $dto): BunchInterface
     {
         try {
-            $type = $this->repository->proxy($dto->getId());
+            $bunch = $this->repository->proxy($dto->getId());
         } catch (BunchProxyException $e) {
             throw $e;
         }
 
-        return $type;
+        return $bunch;
     }
 //endregion Public
 
