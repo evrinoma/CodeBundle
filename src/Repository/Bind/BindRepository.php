@@ -35,16 +35,16 @@ class BindRepository extends ServiceEntityRepository implements BindRepositoryIn
 
 //region SECTION: Public
     /**
-     * @param BindInterface $owner
+     * @param BindInterface $bind
      *
      * @return bool
      * @throws BindCannotBeSavedException
      * @throws ORMException
      */
-    public function save(BindInterface $owner): bool
+    public function save(BindInterface $bind): bool
     {
         try {
-            $this->getEntityManager()->persist($owner);
+            $this->getEntityManager()->persist($bind);
         } catch (ORMInvalidArgumentException $e) {
             throw new BindCannotBeSavedException($e->getMessage());
         }
@@ -53,13 +53,13 @@ class BindRepository extends ServiceEntityRepository implements BindRepositoryIn
     }
 
     /**
-     * @param BindInterface $owner
+     * @param BindInterface $bind
      *
      * @return bool
      */
-    public function remove(BindInterface $owner): bool
+    public function remove(BindInterface $bind): bool
     {
-        $owner->setActiveToDelete();
+        $bind->setActiveToDelete();
 
         return true;
     }

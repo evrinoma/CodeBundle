@@ -4,14 +4,14 @@ namespace Evrinoma\CodeBundle\Mediator\Bind;
 
 use Doctrine\ORM\QueryBuilder;
 use Evrinoma\CodeBundle\Dto\BindApiDtoInterface;
-use Evrinoma\CodeBundle\Mediator\MediatorInterface;
+use Evrinoma\CodeBundle\Repository\AliasInterface;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\UtilsBundle\Mediator\AbstractQueryMediator;
 
 class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterface
 {
 //region SECTION: Fields
-    protected static string $alias = MediatorInterface::ALIAS_BIND;
+    protected static string $alias = AliasInterface::BIND;
 //endregion Fields
 
 //region SECTION: Public
@@ -27,16 +27,16 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
 
         /** @var $dto BindApiDtoInterface */
         if ($dto->hasBunchApiDto() && $dto->getBunchApiDto()->hasDescription()) {
-            $aliasBunch = MediatorInterface::ALIAS_BUNCH;
+            $aliasBunch = AliasInterface::BUNCH;
             $builder
                 ->leftJoin($alias.'.bunch', $aliasBunch)
                 ->addSelect($aliasBunch)
-                ->andWhere($aliasBunch.'.description like :descriptionbunch')
-                ->setParameter('descriptionbunch', '%'.$dto->getBunchApiDto()->getDescription().'%');
+                ->andWhere($aliasBunch.'.description like :descriptionBunch')
+                ->setParameter('descriptionBunch', '%'.$dto->getBunchApiDto()->getDescription().'%');
         }
 
         if ($dto->hasCodeApiDto() && ($dto->getCodeApiDto()->hasDescription() || $dto->getCodeApiDto()->hasBrief())) {
-            $aliasCode = MediatorInterface::ALIAS_CODE;
+            $aliasCode = AliasInterface::CODE;
             $builder
                 ->leftJoin($alias.'.code', $aliasCode)
                 ->addSelect($aliasCode);

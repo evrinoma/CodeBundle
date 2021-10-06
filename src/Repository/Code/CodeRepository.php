@@ -38,13 +38,13 @@ class CodeRepository extends ServiceEntityRepository implements CodeRepositoryIn
     {
         $em = $this->getEntityManager();
 
-        $bunch = $em->getReference($this->getEntityName(), $id);
+        $code = $em->getReference($this->getEntityName(), $id);
 
-        if (!$em->contains($bunch)) {
+        if (!$em->contains($code)) {
             throw new CodeProxyException("Proxy doesn't exist with $id");
         }
 
-        return $bunch;
+        return $code;
     }
 
     /**

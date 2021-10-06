@@ -3,7 +3,7 @@
 namespace Evrinoma\CodeBundle\Mediator\Code;
 
 use Doctrine\ORM\QueryBuilder;
-use Evrinoma\CodeBundle\Mediator\MediatorInterface;
+use Evrinoma\CodeBundle\Repository\AliasInterface;
 use Evrinoma\UtilsBundle\Mediator\AbstractQueryMediator;
 use Evrinoma\CodeBundle\Dto\CodeApiDtoInterface;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
@@ -11,7 +11,7 @@ use Evrinoma\DtoBundle\Dto\DtoInterface;
 class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterface
 {
 //region SECTION: Fields
-    protected static string $alias = MediatorInterface::ALIAS_CODE;
+    protected static string $alias = AliasInterface::CODE;
 //endregion Fields
 
 //region SECTION: Public
@@ -21,26 +21,26 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
 
         /** @var $dto CodeApiDtoInterface */
         if ($dto->hasTypeApiDto() && $dto->getTypeApiDto()->hasBrief()) {
-            $aliasType = MediatorInterface::ALIAS_TYPE;
+            $aliasType = AliasInterface::TYPE;
             $builder
                 ->leftJoin($alias.'.type', $aliasType)
                 ->addSelect($aliasType)
-                ->andWhere($aliasType.'.brief like :brief')
-                ->setParameter('brief', '%'.$dto->getTypeApiDto()->getBrief().'%');
+                ->andWhere($aliasType.'.brief like :briefType')
+                ->setParameter('briefType', '%'.$dto->getTypeApiDto()->getBrief().'%');
         }
 
         if ($dto->hasOwnerApiDto() && ($dto->getOwnerApiDto()->hasBrief() || $dto->getOwnerApiDto()->hasDescription())) {
-            $aliasType = MediatorInterface::ALIAS_OWNER;
+            $aliasOwner = AliasInterface::OWNER;
             $builder
-                ->leftJoin($alias.'.type', $aliasType)
-                ->addSelect($aliasType);
+                ->leftJoin($alias.'.type', $aliasOwner)
+                ->addSelect($aliasOwner);
              if ($dto->getOwnerApiDto()->hasBrief()) {
-                 $builder->andWhere($aliasType.'.brief like :brief')
-                     ->setParameter('description', '%'.$dto->getOwnerApiDto()->getBrief().'%');
+                 $builder->andWhere($aliasOwner.'.brief like :briefOwner')
+                     ->setParameter('briefOwner', '%'.$dto->getOwnerApiDto()->getBrief().'%');
              }
             if ($dto->getOwnerApiDto()->hasDescription()) {
-                $builder->andWhere($aliasType.'.description like :description')
-                    ->setParameter('description', '%'.$dto->getOwnerApiDto()->getDescription().'%');
+                $builder->andWhere($aliasOwner.'.description like :descriptionOwner')
+                    ->setParameter('descriptionOwner', '%'.$dto->getOwnerApiDto()->getDescription().'%');
             }
         }
 

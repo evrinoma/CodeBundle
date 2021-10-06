@@ -34,16 +34,16 @@ class BunchRepository extends ServiceEntityRepository implements BunchRepository
 
 //region SECTION: Public
     /**
-     * @param BunchInterface $owner
+     * @param BunchInterface $bunch
      *
      * @return bool
      * @throws BunchCannotBeSavedException
      * @throws ORMException
      */
-    public function save(BunchInterface $owner): bool
+    public function save(BunchInterface $bunch): bool
     {
         try {
-            $this->getEntityManager()->persist($owner);
+            $this->getEntityManager()->persist($bunch);
         } catch (ORMInvalidArgumentException $e) {
             throw new BunchCannotBeSavedException($e->getMessage());
         }
@@ -52,13 +52,13 @@ class BunchRepository extends ServiceEntityRepository implements BunchRepository
     }
 
     /**
-     * @param BunchInterface $owner
+     * @param BunchInterface $bunch
      *
      * @return bool
      */
-    public function remove(BunchInterface $owner): bool
+    public function remove(BunchInterface $bunch): bool
     {
-        $owner->setActiveToDelete();
+        $bunch->setActiveToDelete();
 
         return true;
     }
