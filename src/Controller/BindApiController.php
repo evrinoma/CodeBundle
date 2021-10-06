@@ -68,7 +68,6 @@ final class BindApiController extends AbstractApiController implements ApiContro
      *             @OA\Schema(
      *               example={
      *                  "class":"Evrinoma\CodeBundle\Dto\BindApiDto",
-     *                  "active":"b",
      *                  "bunch": {
      *                            "id":"2"
      *                       },
@@ -78,7 +77,6 @@ final class BindApiController extends AbstractApiController implements ApiContro
      *                  },
      *               type="object",
      *               @OA\Property(property="class",type="string",default="Evrinoma\CodeBundle\Dto\BindApiDto"),
-     *               @OA\Property(property="active",type="string"),
      *               @OA\Property(property="bunch",type="string"),
      *               @OA\Property(property="code",type="string"),
      *            )
