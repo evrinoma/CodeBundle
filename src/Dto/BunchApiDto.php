@@ -3,13 +3,13 @@
 namespace Evrinoma\CodeBundle\Dto;
 
 use Evrinoma\CodeBundle\Model\ModelInterface;
+use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\ActiveTrait;
 use Evrinoma\DtoCommon\ValueObject\DescriptionTrait;
 use Evrinoma\DtoCommon\ValueObject\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
-use Evrinoma\DtoBundle\Annotation\Dto;
 
 class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
 {
@@ -23,27 +23,26 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
     private ?TypeApiDto $typeApiDto = null;
 //endregion Fields
 
-//region SECTION: Protected
+
+//region SECTION: Private
     /**
      * @param string $active
      *
      * @return BunchApiDto
      */
-    protected function setActive(string $active): BunchApiDto
+    private function setActive(string $active): BunchApiDto
     {
         $this->active = $active;
 
         return $this;
     }
-//endregion Protected
 
-//region SECTION: Private
     /**
-     * @param string $id
+     * @param int|null $id
      *
      * @return BunchApiDto
      */
-    private function setId(string $id): BunchApiDto
+    private function setId(?int $id): BunchApiDto
     {
         $this->id = $id;
 

@@ -3,18 +3,18 @@
 namespace Evrinoma\CodeBundle\Dto;
 
 use Evrinoma\CodeBundle\Model\ModelInterface;
+use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\ActiveTrait;
 use Evrinoma\DtoCommon\ValueObject\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
-use Evrinoma\DtoBundle\Annotation\Dto;
 
 class BindApiDto extends AbstractDto implements BindApiDtoInterface
 {
-//region SECTION: Fields
     use IdTrait, ActiveTrait;
 
+//region SECTION: Fields
     /**
      * @Dto(class="Evrinoma\CodeBundle\Dto\BunchApiDto", generator="genRequestBunchApiDto")
      * @var BunchApiDto|null
@@ -26,16 +26,15 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
      * @var CodeApiDto|null
      */
     private ?CodeApiDto $codeApiDto = null;
-
 //endregion Fields
 
-//region SECTION: Protected
+//region SECTION: Private
     /**
      * @param string $active
      *
      * @return BindApiDto
      */
-    protected function setActive(string $active): BindApiDto
+    private function setActive(string $active): BindApiDto
     {
         $this->active = $active;
 
@@ -43,17 +42,17 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
     }
 
     /**
-     * @param string $id
+     * @param int|null $id
      *
      * @return BindApiDto
      */
-    private function setId(string $id): BindApiDto
+    private function setId(?int $id): BindApiDto
     {
         $this->id = $id;
 
         return $this;
     }
-//endregion Public
+//endregion Private
 
 //region SECTION: Dto
     public function toDto(Request $request): DtoInterface
@@ -62,7 +61,7 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
 
         if ($class === $this->getClass()) {
             $active = $request->get(ModelInterface::ACTIVE);
-            $id          = $request->get(ModelInterface::ID);
+            $id     = $request->get(ModelInterface::ID);
 
             if ($active) {
                 $this->setActive($active);

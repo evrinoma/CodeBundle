@@ -13,25 +13,15 @@ use Symfony\Component\HttpFoundation\Request;
 final class OwnerApiDto extends AbstractDto implements OwnerApiDtoInterface
 {
     use IdTrait, DescriptionTrait, BriefTrait;
-//region SECTION: Fields
-    private string $id = '';
-
-    private string $brief = '';
-
-    private string $description = '';
-//endregion Fields
 
 //region SECTION: Private
+
     /**
-     * @param string $id
-     *
-     * @return OwnerApiDto
+     * @param int|null $id
      */
-    private function setId(string $id): OwnerApiDto
+    private function setId(?int $id): void
     {
         $this->id = $id;
-
-        return $this;
     }
 
     /**

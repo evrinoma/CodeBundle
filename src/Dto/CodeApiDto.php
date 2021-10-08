@@ -3,6 +3,7 @@
 namespace Evrinoma\CodeBundle\Dto;
 
 use Evrinoma\CodeBundle\Model\ModelInterface;
+use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\ActiveTrait;
@@ -10,12 +11,12 @@ use Evrinoma\DtoCommon\ValueObject\BriefTrait;
 use Evrinoma\DtoCommon\ValueObject\DescriptionTrait;
 use Evrinoma\DtoCommon\ValueObject\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
-use Evrinoma\DtoBundle\Annotation\Dto;
 
 class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
 {
 //region SECTION: Fields
     use IdTrait, ActiveTrait, DescriptionTrait, BriefTrait;
+
     /**
      * @Dto(class="Evrinoma\CodeBundle\Dto\TypeApiDto", generator="genRequestTypApiDto")
      * @var TypeApiDto|null
@@ -28,19 +29,56 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
     private ?OwnerApiDto $ownerApiDto = null;
 //endregion Fields
 
-//region SECTION: Protected
+
+//region SECTION: Private
     /**
      * @param string $active
      *
      * @return CodeApiDto
      */
-    protected function setActive(string $active): CodeApiDto
+    private function setActive(string $active): CodeApiDto
     {
         $this->active = $active;
 
         return $this;
     }
-//endregion Protected
+
+    /**
+     * @param string $description
+     *
+     * @return CodeApiDto
+     */
+    private function setDescription(string $description): CodeApiDto
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @param int|null $id
+     *
+     * @return CodeApiDto
+     */
+    private function setId(?int $id): CodeApiDto
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @param string $brief
+     *
+     * @return CodeApiDto
+     */
+    private function setBrief(string $brief): CodeApiDto
+    {
+        $this->brief = $brief;
+
+        return $this;
+    }
+//endregion Private
 
 //region SECTION: Dto
     /**
@@ -97,42 +135,6 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
         return $this;
     }
 
-    /**
-     * @param string $description
-     *
-     * @return CodeApiDto
-     */
-    private function setDescription(string $description): CodeApiDto
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @param string $id
-     *
-     * @return CodeApiDto
-     */
-    private function setId(string $id): CodeApiDto
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @param string $brief
-     *
-     * @return CodeApiDto
-     */
-    private function setBrief(string $brief): CodeApiDto
-    {
-        $this->brief = $brief;
-
-        return $this;
-    }
-
     public function hasOwnerApiDto(): bool
     {
         return $this->ownerApiDto !== null;
@@ -161,7 +163,7 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
         if ($request) {
             $owner = $request->get('owner');
             if ($owner) {
-                $newRequest                    = $this->getCloneRequest();
+                $newRequest                     = $this->getCloneRequest();
                 $owner[DtoInterface::DTO_CLASS] = OwnerApiDto::class;
                 $newRequest->request->add($owner);
 
