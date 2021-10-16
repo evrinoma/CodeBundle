@@ -26,26 +26,18 @@ final class OwnerApiDto extends AbstractDto implements OwnerApiDtoInterface
 
     /**
      * @param string $brief
-     *
-     * @return OwnerApiDto
      */
-    private function setBrief(string $brief): OwnerApiDto
+    private function setBrief(string $brief): void
     {
         $this->brief = $brief;
-
-        return $this;
     }
 
     /**
      * @param string $description
-     *
-     * @return OwnerApiDto
      */
-    private function setDescription(string $description): OwnerApiDto
+    private function setDescription(string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 //endregion Private
 

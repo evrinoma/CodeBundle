@@ -17,14 +17,10 @@ final class TypeApiDto extends AbstractDto implements TypeApiDtoInterface
 
     /**
      * @param string $id
-     *
-     * @return TypeApiDto
      */
-    private function setId(string $id): TypeApiDto
+    private function setId(string $id): void
     {
         $this->id = $id;
-
-        return $this;
     }
 //endregion Private
 
@@ -53,14 +49,10 @@ final class TypeApiDto extends AbstractDto implements TypeApiDtoInterface
 //region SECTION: Getters/Setters
     /**
      * @param string $brief
-     *
-     * @return TypeApiDto
      */
-    public function setBrief(string $brief): TypeApiDto
+    public function setBrief(string $brief): void
     {
         $this->brief = $brief;
-
-        return $this;
     }
 //endregion Getters/Setters
 }

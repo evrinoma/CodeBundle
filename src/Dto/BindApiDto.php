@@ -31,26 +31,18 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
 //region SECTION: Private
     /**
      * @param string $active
-     *
-     * @return BindApiDto
      */
-    private function setActive(string $active): BindApiDto
+    private function setActive(string $active): void
     {
         $this->active = $active;
-
-        return $this;
     }
 
     /**
      * @param int|null $id
-     *
-     * @return BindApiDto
      */
-    private function setId(?int $id): BindApiDto
+    private function setId(?int $id): void
     {
         $this->id = $id;
-
-        return $this;
     }
 //endregion Private
 
@@ -128,14 +120,10 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
 
     /**
      * @param BunchApiDto $bunchApiDto
-     *
-     * @return BindApiDto
      */
-    public function setBunchApiDto(BunchApiDto $bunchApiDto): BindApiDto
+    public function setBunchApiDto(BunchApiDto $bunchApiDto): void
     {
         $this->bunchApiDto = $bunchApiDto;
-
-        return $this;
     }
 
     /**
@@ -156,14 +144,10 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
 
     /**
      * @param CodeApiDto $codeApiDto
-     *
-     * @return BindApiDto
      */
-    public function setCodeApiDto(CodeApiDto $codeApiDto): BindApiDto
+    public function setCodeApiDto(CodeApiDto $codeApiDto): void
     {
         $this->codeApiDto = $codeApiDto;
-
-        return $this;
     }
 //endregion SECTION: Dto
 }

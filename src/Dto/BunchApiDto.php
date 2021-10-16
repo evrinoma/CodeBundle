@@ -27,52 +27,36 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
 //region SECTION: Private
     /**
      * @param string $active
-     *
-     * @return BunchApiDto
      */
-    private function setActive(string $active): BunchApiDto
+    private function setActive(string $active): void
     {
         $this->active = $active;
-
-        return $this;
     }
 
     /**
      * @param int|null $id
-     *
-     * @return BunchApiDto
      */
-    private function setId(?int $id): BunchApiDto
+    private function setId(?int $id): void
     {
         $this->id = $id;
-
-        return $this;
     }
 
     /**
      * @param string $description
-     *
-     * @return BunchApiDto
      */
-    private function setDescription(string $description): BunchApiDto
+    private function setDescription(string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 //endregion Private
 
 //region SECTION: Dto
     /**
      * @param TypeApiDto $typeApiDto
-     *
-     * @return BunchApiDto
      */
-    public function setTypeApiDto(TypeApiDto $typeApiDto): BunchApiDto
+    public function setTypeApiDto(TypeApiDto $typeApiDto): void
     {
         $this->typeApiDto = $typeApiDto;
-
-        return $this;
     }
 
     public function toDto(Request $request): DtoInterface

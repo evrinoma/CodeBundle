@@ -33,76 +33,52 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
 //region SECTION: Private
     /**
      * @param string $active
-     *
-     * @return CodeApiDto
      */
-    private function setActive(string $active): CodeApiDto
+    private function setActive(string $active): void
     {
         $this->active = $active;
-
-        return $this;
     }
 
     /**
      * @param string $description
-     *
-     * @return CodeApiDto
      */
-    private function setDescription(string $description): CodeApiDto
+    private function setDescription(string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
      * @param int|null $id
-     *
-     * @return CodeApiDto
      */
-    private function setId(?int $id): CodeApiDto
+    private function setId(?int $id): void
     {
         $this->id = $id;
-
-        return $this;
     }
 
     /**
      * @param string $brief
-     *
-     * @return CodeApiDto
      */
-    private function setBrief(string $brief): CodeApiDto
+    private function setBrief(string $brief): void
     {
         $this->brief = $brief;
-
-        return $this;
     }
 //endregion Private
 
 //region SECTION: Dto
     /**
      * @param OwnerApiDto $ownerApiDto
-     *
-     * @return CodeApiDto
      */
-    public function setOwnerApiDto(OwnerApiDto $ownerApiDto): CodeApiDto
+    public function setOwnerApiDto(OwnerApiDto $ownerApiDto): void
     {
         $this->ownerApiDto = $ownerApiDto;
-
-        return $this;
     }
 
     /**
      * @param TypeApiDto $typeApiDto
-     *
-     * @return CodeApiDto
      */
-    public function setTypeApiDto(TypeApiDto $typeApiDto): CodeApiDto
+    public function setTypeApiDto(TypeApiDto $typeApiDto): void
     {
         $this->typeApiDto = $typeApiDto;
-
-        return $this;
     }
 
     public function toDto(Request $request): DtoInterface
