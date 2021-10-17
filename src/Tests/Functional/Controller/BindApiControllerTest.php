@@ -30,7 +30,7 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     use ApiBrowserTestTrait, ApiHelperTestTrait;
 
 //region SECTION: Protected
-    protected static function getDtoClass(): string
+    public static function getDtoClass(): string
     {
         return BindApiDto::class;
     }
@@ -40,7 +40,7 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         return [FixtureInterface::BIND_FIXTURES];
     }
 
-    protected static function defaultData(): array
+    public static function defaultData(): array
     {
         return [
             "id"     => 9,

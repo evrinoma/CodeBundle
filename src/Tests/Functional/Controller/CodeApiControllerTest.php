@@ -29,12 +29,12 @@ class CodeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     use ApiBrowserTestTrait, ApiHelperTestTrait;
 
 //region SECTION: Protected
-    protected static function getDtoClass(): string
+    public static function getDtoClass(): string
     {
         return CodeApiDto::class;
     }
 
-    protected static function defaultData(): array
+    public static function defaultData(): array
     {
         return [
             "id"          => 1,
