@@ -108,11 +108,11 @@ class EvrinomaCodeExtension extends Extension
         );
 
         if ($doctrineRegistry) {
-            $this->wineRepository($container, $doctrineRegistry, 'type', BaseType::class);
-            $this->wineRepository($container, $doctrineRegistry, 'owner', BaseOwner::class);
-            $this->wineRepository($container, $doctrineRegistry, 'bunch', $config['entity_bunch']);
-            $this->wineRepository($container, $doctrineRegistry, 'code', $config['entity_code']);
-            $this->wineRepository($container, $doctrineRegistry, 'bind', $config['entity_bind']);
+            $this->wireRepository($container, $doctrineRegistry, 'type', BaseType::class);
+            $this->wireRepository($container, $doctrineRegistry, 'owner', BaseOwner::class);
+            $this->wireRepository($container, $doctrineRegistry, 'bunch', $config['entity_bunch']);
+            $this->wireRepository($container, $doctrineRegistry, 'code', $config['entity_code']);
+            $this->wireRepository($container, $doctrineRegistry, 'bind', $config['entity_bind']);
         }
 
         $this->wireController($container, 'bunch', $config['dto_bunch']);
@@ -206,7 +206,7 @@ class EvrinomaCodeExtension extends Extension
         $definitionApiController->setArgument(0, $class);
     }
 
-    private function wineRepository(ContainerBuilder $container, Reference $doctrineRegistry, string $name, string $class): void
+    private function wireRepository(ContainerBuilder $container, Reference $doctrineRegistry, string $name, string $class): void
     {
         $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.repository');
 
