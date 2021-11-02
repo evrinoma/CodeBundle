@@ -61,7 +61,6 @@ release 2.0.1<br>
 у каждой группы есть свой тип<br>
 коды объединяются в группы в промежуточной таблице<br>
 
-
 сущность Code 
 
     создание:
@@ -83,14 +82,14 @@ release 2.0.1<br>
 сущность Bunch
 
     создание:
-        код создан HTTP_CREATED 201
+        группа создана HTTP_CREATED 201
     обновление:
-        код обновление HTTP_OK 200
+        группа обновлена HTTP_OK 200
     удаление:
-        код удален HTTP_ACCEPTED 202 
-        при удалениисущность помечается как d
+        группа удалена HTTP_ACCEPTED 202 
+        при удалении сущность помечается как d
     получение:
-        код(ы) найдены HTTP_OK 200
+        группа(ы) найдены HTTP_OK 200
     ошибки:
         если группа не найдена BunchNotFoundException возвращает HTTP_NOT_FOUND 404
         если группа не уникалена UniqueConstraintViolationException возвращает HTTP_CONFLICT 409
@@ -101,30 +100,30 @@ release 2.0.1<br>
 сущность Owner
 
     создание:
-        код создан HTTP_CREATED 201
+        владелец создан HTTP_CREATED 201
     обновление:
-        код обновление HTTP_OK 200
+        владелец обновление HTTP_OK 200
     удаление:
-        код удален HTTP_ACCEPTED 202
+        владелец удален HTTP_ACCEPTED 202
     получение:
-        код(ы) найдены HTTP_OK 200
+        владелец(ы) найдены HTTP_OK 200
     ошибки:
-        если владалец не найден OwnerNotFoundException возвращает HTTP_NOT_FOUND 404
-        если владалец не уникален UniqueConstraintViolationException возвращает HTTP_CONFLICT 409
-        если владалец не прошел валидацию OwnerInvalidException возвращает HTTP_UNPROCESSABLE_ENTITY 422
-        если владалец не может быть сохранен OwnerCannotBeSavedException возвращает HTTP_NOT_IMPLEMENTED 501
+        если владелец не найден OwnerNotFoundException возвращает HTTP_NOT_FOUND 404
+        если владелец не уникален UniqueConstraintViolationException возвращает HTTP_CONFLICT 409
+        если владелец не прошел валидацию OwnerInvalidException возвращает HTTP_UNPROCESSABLE_ENTITY 422
+        если владелец не может быть сохранен OwnerCannotBeSavedException возвращает HTTP_NOT_IMPLEMENTED 501
         все остальные ошибки возвращаются как HTTP_BAD_REQUEST 400
 
 сущность Type
 
     создание:
-        код создан HTTP_CREATED 201
+        тип создан HTTP_CREATED 201
     обновление:
-        код обновление HTTP_OK 200
+        тип обновление HTTP_OK 200
     удаление:
-        код удален HTTP_ACCEPTED 202
+        тип удален HTTP_ACCEPTED 202
     получение:
-        код(ы) найдены HTTP_OK 200
+        тип(ы) найдены HTTP_OK 200
     ошибки:
         если тип не найден TypeNotFoundException возвращает HTTP_NOT_FOUND 404
         если тип не уникален UniqueConstraintViolationException возвращает HTTP_CONFLICT 409
