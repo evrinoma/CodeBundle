@@ -23,6 +23,7 @@ final class CodeFixtures extends Fixture implements FixtureGroupInterface, Order
         ['brief' => 'KJ', 'description' => 'adsdasd', 'type' => 1, 'owner' => 0, 'active' => 'a'], //5
         ['brief' => 'KJ2', 'description' => 'adsdasd2', 'type' => 1, 'owner' => 1, 'active' => 'a'], //6
         ['brief' => 'QW', 'description' => 'rtyrty', 'type' => 2, 'owner' => 0, 'active' => 'd'], //7
+        ['brief' => 'XXX', 'description' => 'xxxxx', 'type' => 0, 'owner' => 0, 'active' => 'a'], //8
     ];
 //endregion Fields
 

@@ -15,7 +15,7 @@ final class BindFixtures extends Fixture implements FixtureGroupInterface, Order
 
 //region SECTION: Fields
     private array $data = [
-        ['bunch' => 0, 'code' => 0, 'active' => 'a'],
+        ['bunch' => 0, 'code' => 8, 'active' => 'a'],
         ['bunch' => 0, 'code' => 1, 'active' => 'a'],
         ['bunch' => 0, 'code' => 2, 'active' => 'a'],
 

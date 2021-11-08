@@ -53,6 +53,14 @@ class CodeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 //endregion Protected
 
 //region SECTION: Public
+    public function testPost(): void
+    {
+        $this->init();
+
+        $this->createCode();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+    }
+
     public function testPut(): void
     {
         $this->init();

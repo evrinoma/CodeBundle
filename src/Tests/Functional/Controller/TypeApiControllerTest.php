@@ -49,6 +49,12 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 //endregion Protected
 
 //region SECTION: Public
+    public function testPost(): void
+    {
+        $created = $this->createType();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+    }
+
     public function testCriteria(): void
     {
         $this->createType();

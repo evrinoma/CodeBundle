@@ -50,6 +50,15 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
     }
 //endregion Protected
 //region SECTION: Public
+    public function testPost(): void
+    {
+        $type = $this->createType();
+        $this->assertArrayHasKey('data', $type);
+
+        $created = $this->createBunch();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+    }
+
     public function testPostUnprocessable(): void
     {
         $this->postWrong();

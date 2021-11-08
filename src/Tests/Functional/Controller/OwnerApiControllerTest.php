@@ -48,6 +48,12 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
 //endregion Protected
 
 //region SECTION: Public
+    public function testPost(): void
+    {
+        $created = $this->createOwner();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+    }
+
     public function testPut(): void
     {
         $created = $this->createOwner();

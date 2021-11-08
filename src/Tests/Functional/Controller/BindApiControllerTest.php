@@ -53,6 +53,11 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 
 //endregion Protected
 //region SECTION: Public
+    public function testPost(): void
+    {
+        $created = $this->createCode();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+    }
 
     public function testCriteria(): void
     {
@@ -180,6 +185,8 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 
     public function testPostDuplicate(): void
     {
+        $created = $this->createCode();
+        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
         $this->createCodeDuplicate();
         $this->assertEquals(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
     }
@@ -243,6 +250,13 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     private function createCodeDuplicate(): array
     {
         $query = $this->getDefault(['id' => 1]);
+
+        return $this->post($query);
+    }
+
+    private function createCode(): array
+    {
+        $query = $this->getDefault();
 
         return $this->post($query);
     }
