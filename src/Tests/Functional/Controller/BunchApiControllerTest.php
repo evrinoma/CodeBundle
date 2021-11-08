@@ -44,7 +44,7 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
         ];
     }
 
-    protected function getFixtures(): array
+    public static function getFixtures(): array
     {
         return [];
     }
@@ -219,7 +219,7 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
 
     public function testPutNotFound(): void
     {
-        $this->put($this->getDefault(["description" => "0987654321",]));
+        $this->put(static::getDefault(["description" => "0987654321",]));
         $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
@@ -260,28 +260,28 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
 //region SECTION: Private
     private function createBunch(): array
     {
-        $query = $this->getDefault();
+        $query = static::getDefault();
 
         return $this->post($query);
     }
 
     private function createBunchSecond(): array
     {
-        $query = $this->getDefault(["description" => "description"]);
+        $query = static::getDefault(["description" => "description"]);
 
         return $this->post($query);
     }
 
     private function createConstraintBlankType(): array
     {
-        $query = $this->getDefault(['type' => '']);
+        $query = static::getDefault(['type' => '']);
 
         return $this->post($query);
     }
 
     private function createConstraintBlankDescription(): array
     {
-        $query = $this->getDefault(['description' => '']);
+        $query = static::getDefault(['description' => '']);
 
         return $this->post($query);
     }

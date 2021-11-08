@@ -41,7 +41,7 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
         ];
     }
 
-    protected function getFixtures(): array
+    public static function getFixtures(): array
     {
         return [];
     }
@@ -228,28 +228,28 @@ class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterf
 //region SECTION: Private
     private function createOwner(): array
     {
-        $query = $this->getDefault();
+        $query = static::getDefault();
 
         return $this->post($query);
     }
 
     private function createOwnerSecond(): array
     {
-        $query = $this->getDefault(['brief' => 'ipcng', "description" => "description"]);
+        $query = static::getDefault(['brief' => 'ipcng', "description" => "description"]);
 
         return $this->post($query);
     }
 
     private function createConstraintBlankBrief(): array
     {
-        $query = $this->getDefault(['brief' => '']);
+        $query = static::getDefault(['brief' => '']);
 
         return $this->post($query);
     }
 
     private function createConstraintBlankDescription(): array
     {
-        $query = $this->getDefault(['description' => '']);
+        $query = static::getDefault(['description' => '']);
 
         return $this->post($query);
     }

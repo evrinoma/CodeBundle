@@ -35,7 +35,7 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         return BindApiDto::class;
     }
 
-    protected function getFixtures(): array
+    public static function getFixtures(): array
     {
         return [FixtureInterface::BIND_FIXTURES];
     }
@@ -101,7 +101,7 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     {
         $find = $this->assertGet(6);
 
-        $updated = $this->put($this->getDefault(['id' => 6, 'code' => ['id' => 4]]));
+        $updated = $this->put(static::getDefault(['id' => 6, 'code' => ['id' => 4]]));
         $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         $this->assertNotEquals($find['data']['code']['id'], $updated['data']['code']['id']);
@@ -113,24 +113,24 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 
     public function testPutUnprocessable(): void
     {
-        $query = $this->getDefault(['id' => '']);
+        $query = static::getDefault(['id' => '']);
 
         $this->put($query);
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
 
-        $query = $this->getDefault(['bunch' => '']);
+        $query = static::getDefault(['bunch' => '']);
 
         $this->put($query);
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
 
         $bunch       = BunchApiControllerTest::defaultData();
         $bunch['id'] = '';
-        $query       = $this->getDefault(['bunch' => $bunch]);
+        $query       = static::getDefault(['bunch' => $bunch]);
 
         $this->put($query);
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
 
-        $query = $this->getDefault(['code' => '']);
+        $query = static::getDefault(['code' => '']);
 
         $this->put($query);
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
@@ -138,7 +138,7 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $code       = CodeApiControllerTest::defaultData();
         $code['id'] = '';
 
-        $query = $this->getDefault(['code' => $code]);
+        $query = static::getDefault(['code' => $code]);
 
         $this->put($query);
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
@@ -146,7 +146,7 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 
     public function testPutNotFound(): void
     {
-        $this->put($this->getDefault(["id" => 100, "description" => "0987654321",]));
+        $this->put(static::getDefault(["id" => 100, "description" => "0987654321",]));
         $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
@@ -235,28 +235,28 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 
     private function createConstraintBlankBunch(): array
     {
-        $query = $this->getDefault(['bunch' => '']);
+        $query = static::getDefault(['bunch' => '']);
 
         return $this->post($query);
     }
 
     private function createConstraintBlankCode(): array
     {
-        $query = $this->getDefault(['code' => '']);
+        $query = static::getDefault(['code' => '']);
 
         return $this->post($query);
     }
 
     private function createCodeDuplicate(): array
     {
-        $query = $this->getDefault(['id' => 1]);
+        $query = static::getDefault(['id' => 1]);
 
         return $this->post($query);
     }
 
     private function createCode(): array
     {
-        $query = $this->getDefault();
+        $query = static::getDefault();
 
         return $this->post($query);
     }

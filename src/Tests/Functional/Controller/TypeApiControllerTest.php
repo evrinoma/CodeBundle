@@ -42,7 +42,7 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         ];
     }
 
-    protected function getFixtures(): array
+    public static function getFixtures(): array
     {
         return [];
     }
@@ -224,21 +224,21 @@ class TypeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 //region SECTION: Private
     private function createType(): array
     {
-        $query = $this->getDefault();
+        $query = static::getDefault();
 
         return $this->post($query);
     }
 
     private function createTypeSecond(): array
     {
-        $query = $this->getDefault(['brief' => 'document']);
+        $query = static::getDefault(['brief' => 'document']);
 
         return $this->post($query);
     }
 
     private function createConstraintBlankBrief(): array
     {
-        $query = $this->getDefault(['brief' => '']);
+        $query = static::getDefault(['brief' => '']);
 
         return $this->post($query);
     }

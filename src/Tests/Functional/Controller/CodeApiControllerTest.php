@@ -46,7 +46,7 @@ class CodeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         ];
     }
 
-    protected function getFixtures(): array
+    public static function getFixtures(): array
     {
         return [];
     }
@@ -239,7 +239,7 @@ class CodeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 
     public function testPutNotFound(): void
     {
-        $this->put($this->getDefault(["description" => "0987654321",]));
+        $this->put(static::getDefault(["description" => "0987654321",]));
         $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
@@ -269,28 +269,28 @@ class CodeApiControllerTest extends CaseTest implements ApiControllerTestInterfa
 //region SECTION: Private
     private function createCode(): array
     {
-        $query = $this->getDefault();
+        $query = static::getDefault();
 
         return $this->post($query);
     }
 
     private function createCodeSecond(): array
     {
-        $query = $this->getDefault(["description" => "description"]);
+        $query = static::getDefault(["description" => "description"]);
 
         return $this->post($query);
     }
 
     private function createConstraintBlankBrief(): array
     {
-        $query = $this->getDefault(['brief' => '']);
+        $query = static::getDefault(['brief' => '']);
 
         return $this->post($query);
     }
 
     private function createConstraintBlankDescription(): array
     {
-        $query = $this->getDefault(['description' => '']);
+        $query = static::getDefault(['description' => '']);
 
         return $this->post($query);
     }
