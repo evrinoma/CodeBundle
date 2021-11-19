@@ -8,15 +8,16 @@ use Evrinoma\CodeBundle\Tests\Functional\CaseTest;
 use Evrinoma\TestUtilsBundle\Browser\ApiBrowserTestInterface;
 use Evrinoma\TestUtilsBundle\Browser\ApiBrowserTestTrait;
 use Evrinoma\TestUtilsBundle\Controller\ApiControllerTestInterface;
-use Evrinoma\TestUtilsBundle\Helper\ApiHelperTestInterface;
-use Evrinoma\TestUtilsBundle\Helper\ApiHelperTestTrait;
+use Evrinoma\TestUtilsBundle\Helper\ApiMethodTestInterface;
+use Evrinoma\TestUtilsBundle\Helper\ApiMethodTestTrait;
+use Evrinoma\TestUtilsBundle\Helper\ResponseStatusTestTrait;
 use Evrinoma\UtilsBundle\Model\ActiveModel;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @group functional
  */
-class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiHelperTestInterface
+class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiMethodTestInterface
 {
 //region SECTION: Fields
     public const API_GET      = 'evrinoma/api/code/bunch';
@@ -26,7 +27,7 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
     public const API_POST     = 'evrinoma/api/code/bunch/create';
 //endregion Fields
 
-    use ApiBrowserTestTrait, ApiHelperTestTrait;
+    use ApiBrowserTestTrait, ApiMethodTestTrait, ResponseStatusTestTrait;
 
 //region SECTION: Protected
     public static function getDtoClass(): string
@@ -56,19 +57,19 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
         $this->assertArrayHasKey('data', $type);
 
         $created = $this->createBunch();
-        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusCreated();
     }
 
     public function testPostUnprocessable(): void
     {
         $this->postWrong();
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
 
         $this->createConstraintBlankType();
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
 
         $this->createConstraintBlankDescription();
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
     }
 
     public function testGet(): void
@@ -77,10 +78,10 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
         $this->assertArrayHasKey('data', $type);
 
         $created = $this->createBunch();
-        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusCreated();
 
         $find = $this->get(1);
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
 
         $this->assertArrayHasKey('data', $created);
         $this->assertArrayHasKey('data', $find);
@@ -97,20 +98,20 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
         $this->assertArrayHasKey('data', $type);
 
         $created = $this->createBunch();
-        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusCreated();
 
         $find = $this->get(1);
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
 
         $this->assertArrayHasKey('data', $created);
         $this->assertArrayHasKey('data', $find);
         $this->assertArrayHasKey('active', $find['data']);
 
         $this->delete('1');
-        $this->assertEquals(Response::HTTP_ACCEPTED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusAccepted();
 
         $delete = $this->get(1);
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
 
         $this->assertArrayHasKey('data', $delete);
         $this->assertArrayHasKey('active', $delete['data']);
@@ -131,10 +132,10 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
         ];
 
         $this->put($query);
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
 
         $this->createBunch();
-        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusCreated();
 
         $query = [
             "id"          => "1",
@@ -143,7 +144,7 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
         ];
 
         $this->put($query);
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
 
         $query = [
             "id"          => "1",
@@ -151,7 +152,7 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
         ];
 
         $this->put($query);
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
     }
 
     public function testCriteriaNotFound(): void
@@ -160,12 +161,12 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
         $this->assertArrayHasKey('data', $type);
 
         $this->createBunch();
-        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusCreated();
         $this->createBunchSecond();
-        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusCreated();
 
         $response = $this->criteria(["class" => static::getDtoClass(), "description" => "ddes"]);
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusNotFound();
         $this->assertArrayHasKey('data', $response);
     }
 
@@ -175,10 +176,10 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
         $this->assertArrayHasKey('data', $type);
 
         $created = $this->createBunch();
-        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusCreated();
 
         $find = $this->get(1);
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
 
         $this->assertArrayHasKey('data', $created);
         $this->assertArrayHasKey('data', $find);
@@ -196,7 +197,7 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
         ];
 
         $saved = $this->put($query);
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
         $this->assertArrayHasKey('data', $saved);
         $this->assertArrayHasKey('updated_at', $saved['data']);
     }
@@ -207,12 +208,12 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
         $this->assertArrayHasKey('data', $type);
 
         $this->createBunch();
-        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusCreated();
         $this->createBunchSecond();
-        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusCreated();
 
         $response = $this->criteria(["class" => static::getDtoClass(), "description" => "desc",]);
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
         $this->assertArrayHasKey('data', $response);
         $this->assertCount(2, $response['data']);
     }
@@ -220,28 +221,28 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
     public function testPutNotFound(): void
     {
         $this->put(static::getDefault(["description" => "0987654321",]));
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusNotFound();
     }
 
     public function testDeleteNotFound(): void
     {
         $response = $this->delete('1');
         $this->assertArrayHasKey('data', $response);
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusNotFound();
     }
 
     public function testDeleteUnprocessable(): void
     {
         $response = $this->delete('');
         $this->assertArrayHasKey('data', $response);
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
     }
 
     public function testGetNotFound(): void
     {
         $response = $this->get(1);
         $this->assertArrayHasKey('data', $response);
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusNotFound();
     }
 
     public function testPostDuplicate(): void
@@ -250,10 +251,10 @@ class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterf
         $this->assertArrayHasKey('data', $type);
 
         $this->createBunch();
-        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusCreated();
 
         $this->createBunch();
-        $this->assertEquals(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusConflict();
     }
 //endregion Public
 

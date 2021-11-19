@@ -9,15 +9,16 @@ use Evrinoma\CodeBundle\Tests\Functional\CaseTest;
 use Evrinoma\TestUtilsBundle\Browser\ApiBrowserTestInterface;
 use Evrinoma\TestUtilsBundle\Browser\ApiBrowserTestTrait;
 use Evrinoma\TestUtilsBundle\Controller\ApiControllerTestInterface;
-use Evrinoma\TestUtilsBundle\Helper\ApiHelperTestInterface;
-use Evrinoma\TestUtilsBundle\Helper\ApiHelperTestTrait;
+use Evrinoma\TestUtilsBundle\Helper\ApiMethodTestInterface;
+use Evrinoma\TestUtilsBundle\Helper\ApiMethodTestTrait;
+use Evrinoma\TestUtilsBundle\Helper\ResponseStatusTestTrait;
 use Evrinoma\UtilsBundle\Model\ActiveModel;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @group functional
  */
-class BindApiControllerTest extends CaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiHelperTestInterface
+class BindApiControllerTest extends CaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiMethodTestInterface
 {
 //region SECTION: Fields
     public const API_GET      = 'evrinoma/api/code/bind';
@@ -27,7 +28,7 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     public const API_POST     = 'evrinoma/api/code/bind/create';
 //endregion Fields
 
-    use ApiBrowserTestTrait, ApiHelperTestTrait;
+    use ApiBrowserTestTrait, ApiMethodTestTrait, ResponseStatusTestTrait;
 
 //region SECTION: Protected
     public static function getDtoClass(): string
@@ -56,44 +57,44 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     public function testPost(): void
     {
         $created = $this->createCode();
-        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusCreated();
     }
 
     public function testCriteria(): void
     {
         $find = $this->criteria(["class" => static::getDtoClass(), "active" => "a", "code" => ["brief" => 'KD', "description" => 'sdf'], "bunch" => ["description" => 'ca'] ]);
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
         $this->assertCount(1, $find['data']);
 
         $find = $this->criteria(["class" => static::getDtoClass(), "active" => "d"]);
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
         $this->assertCount(3, $find['data']);
 
         $find = $this->criteria(["class" => static::getDtoClass(), "active" => "a", "bunch" => ["description" => 'ca'] ]);
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
         $this->assertCount(4, $find['data']);
 
         $find = $this->criteria(["class" => static::getDtoClass(), "active" => "a", "code" => ["description" => 'asd'] ]);
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
         $this->assertCount(2, $find['data']);
 
         $find = $this->criteria(["class" => static::getDtoClass(), "active" => "a", "code" => ["brief" => 'KD'] ]);
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
         $this->assertCount(2, $find['data']);
 
         $find = $this->criteria(["class" => static::getDtoClass(), "active" => "a", "code" => ["brief" => 'KD'], "bunch" => ["description" => 'ca'] ]);
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
         $this->assertCount(1, $find['data']);
     }
 
     public function testCriteriaNotFound(): void
     {
         $find = $this->criteria(["class" => static::getDtoClass(), "active" => "b"]);
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusNotFound();
         $this->assertArrayHasKey('data', $find);
 
         $find = $this->criteria(["class" => static::getDtoClass(), "active" => "a", "code" => ["brief" => 'KD', "description" => 'sdf'], "bunch" => ["description" => 'v'] ]);
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusNotFound();
         $this->assertArrayHasKey('data', $find);
     }
 
@@ -102,7 +103,7 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $find = $this->assertGet(6);
 
         $updated = $this->put(static::getDefault(['id' => 6, 'code' => ['id' => 4]]));
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
 
         $this->assertNotEquals($find['data']['code']['id'], $updated['data']['code']['id']);
         $this->assertEquals(4, $updated['data']['code']['id']);
@@ -116,24 +117,24 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $query = static::getDefault(['id' => '']);
 
         $this->put($query);
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
 
         $query = static::getDefault(['bunch' => '']);
 
         $this->put($query);
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
 
         $bunch       = BunchApiControllerTest::defaultData();
         $bunch['id'] = '';
         $query       = static::getDefault(['bunch' => $bunch]);
 
         $this->put($query);
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
 
         $query = static::getDefault(['code' => '']);
 
         $this->put($query);
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
 
         $code       = CodeApiControllerTest::defaultData();
         $code['id'] = '';
@@ -141,20 +142,20 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $query = static::getDefault(['code' => $code]);
 
         $this->put($query);
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
     }
 
     public function testPutNotFound(): void
     {
         $this->put(static::getDefault(["id" => 100, "description" => "0987654321",]));
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusNotFound();
     }
 
     public function testDeleteNotFound(): void
     {
         $response = $this->delete(100);
         $this->assertArrayHasKey('data', $response);
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusNotFound();
     }
 
     public function testDelete(): void
@@ -164,7 +165,7 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
         $this->assertEquals(ActiveModel::ACTIVE, $find['data']['active']);
 
         $this->delete(2);
-        $this->assertEquals(Response::HTTP_ACCEPTED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusAccepted();
 
         $delete = $this->assertGet(2);
 
@@ -174,35 +175,35 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     public function testPostUnprocessable(): void
     {
         $this->postWrong();
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
 
         $this->createConstraintBlankBunch();
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
 
         $this->createConstraintBlankCode();
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
     }
 
     public function testPostDuplicate(): void
     {
         $created = $this->createCode();
-        $this->assertEquals(Response::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusCreated();
         $this->createCodeDuplicate();
-        $this->assertEquals(Response::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusConflict();
     }
 
     public function testGetNotFound(): void
     {
         $response = $this->get(100);
         $this->assertArrayHasKey('data', $response);
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusNotFound();
     }
 
     public function testDeleteUnprocessable(): void
     {
         $response = $this->delete('');
         $this->assertArrayHasKey('data', $response);
-        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusUnprocessable();
     }
 
     public function testGet(): void
@@ -217,7 +218,7 @@ class BindApiControllerTest extends CaseTest implements ApiControllerTestInterfa
     private function assertGet(int $id): array
     {
         $find = $this->get($id);
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->testResponseStatusOK();
 
         $this->checkResult($find);
 
