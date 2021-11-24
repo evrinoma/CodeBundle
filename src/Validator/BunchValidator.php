@@ -18,8 +18,6 @@ final class BunchValidator extends AbstractValidator
 
 //region SECTION: Constructor
     /**
-     * ContractorValidator constructor.
-     *
      * @param string $entityClass
      */
     public function __construct(string $entityClass)

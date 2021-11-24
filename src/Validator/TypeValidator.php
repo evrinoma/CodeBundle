@@ -17,9 +17,6 @@ final class TypeValidator extends AbstractValidator
 //endregion Fields
 
 //region SECTION: Constructor
-    /**
-     * ContractorValidator constructor.
-     */
     public function __construct()
     {
         parent::__construct(self::$entityClass);
