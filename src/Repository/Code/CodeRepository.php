@@ -16,6 +16,8 @@ use Evrinoma\CodeBundle\Model\Code\CodeInterface;
 
 class CodeRepository extends ServiceEntityRepository implements CodeRepositoryInterface
 {
+    private QueryMediatorInterface $mediator;
+
     /**
      * @param ManagerRegistry        $registry
      * @param string                 $entityClass
