@@ -10,19 +10,19 @@ interface BunchCommandRepositoryInterface
 {
 //region SECTION: Public
     /**
-     * @param BunchInterface $owner
+     * @param BunchInterface $bunch
      *
      * @return bool
      * @throws BunchCannotBeSavedException
      */
-    public function save(BunchInterface $owner): bool;
+    public function save(BunchInterface $bunch): bool;
 
     /**
-     * @param BunchInterface $owner
+     * @param BunchInterface $bunch
      *
      * @return bool
      * @throws BunchCannotBeRemovedException
      */
-    public function remove(BunchInterface $owner): bool;
+    public function remove(BunchInterface $bunch): bool;
 //endregion Public
 }

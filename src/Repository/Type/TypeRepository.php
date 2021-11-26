@@ -15,6 +15,13 @@ class TypeRepository extends ServiceEntityRepository implements TypeRepositoryIn
 {
 
 //region SECTION: Public
+    /**
+     * @param TypeInterface $type
+     *
+     * @return bool
+     * @throws TypeCannotBeSavedException
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function save(TypeInterface $type): bool
     {
         try {
@@ -26,6 +33,13 @@ class TypeRepository extends ServiceEntityRepository implements TypeRepositoryIn
         return true;
     }
 
+    /**
+     * @param TypeInterface $type
+     *
+     * @return bool
+     * @throws TypeCannotBeRemovedException
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function remove(TypeInterface $type): bool
     {
         try {
@@ -37,6 +51,13 @@ class TypeRepository extends ServiceEntityRepository implements TypeRepositoryIn
         return true;
     }
 
+    /**
+     * @param string $id
+     *
+     * @return TypeInterface
+     * @throws TypeProxyException
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function proxy(string $id): TypeInterface
     {
         $em = $this->getEntityManager();
@@ -52,6 +73,12 @@ class TypeRepository extends ServiceEntityRepository implements TypeRepositoryIn
 //endregion Public
 
 //region SECTION: Find Filters Repository
+    /**
+     * @param TypeApiDtoInterface $dto
+     *
+     * @return array
+     * @throws TypeNotFoundException
+     */
     public function findByCriteria(TypeApiDtoInterface $dto): array
     {
         $builder = $this->createQueryBuilder('type');
@@ -71,6 +98,14 @@ class TypeRepository extends ServiceEntityRepository implements TypeRepositoryIn
         return $type;
     }
 
+    /**
+     * @param mixed|string $id
+     * @param null         $lockMode
+     * @param null         $lockVersion
+     *
+     * @return TypeInterface
+     * @throws TypeNotFoundException
+     */
     public function find($id, $lockMode = null, $lockVersion = null): TypeInterface
     {
         /** @var TypeInterface $type */

@@ -9,18 +9,18 @@ use Evrinoma\CodeBundle\Model\Bind\BindInterface;
 interface BindCommandRepositoryInterface
 {
     /**
-     * @param BindInterface $owner
+     * @param BindInterface $bind
      *
      * @return bool
      * @throws BindCannotBeSavedException
      */
-    public function save(BindInterface $owner): bool;
+    public function save(BindInterface $bind): bool;
 
     /**
-     * @param BindInterface $owner
+     * @param BindInterface $bind
      *
      * @return bool
      * @throws BindCannotBeRemovedException
      */
-    public function remove(BindInterface $owner): bool;
+    public function remove(BindInterface $bind): bool;
 }
