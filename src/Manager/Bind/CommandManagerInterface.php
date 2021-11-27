@@ -3,6 +3,7 @@
 namespace Evrinoma\CodeBundle\Manager\Bind;
 
 use Evrinoma\CodeBundle\Dto\BindApiDtoInterface;
+use Evrinoma\CodeBundle\Exception\Bind\BindCannotBeCreatedException;
 use Evrinoma\CodeBundle\Exception\Bind\BindCannotBeRemovedException;
 use Evrinoma\CodeBundle\Exception\Bind\BindCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Bind\BindInvalidException;
@@ -26,7 +27,7 @@ interface CommandManagerInterface
      *
      * @return BindInterface
      * @throws BindNotFoundException
-     * @throws BindCannotBeSavedException
+     * @throws BindCannotBeCreatedException
      * @throws BindInvalidException
      */
     public function post(BindApiDtoInterface $dto): BindInterface;

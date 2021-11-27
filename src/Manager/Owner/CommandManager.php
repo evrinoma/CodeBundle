@@ -3,6 +3,7 @@
 namespace Evrinoma\CodeBundle\Manager\Owner;
 
 use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
+use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeCreatedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeRemovedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerInvalidException;
@@ -45,7 +46,7 @@ final class CommandManager implements CommandManagerInterface, RestInterface
      * @param OwnerApiDtoInterface $dto
      *
      * @return OwnerInterface
-     * @throws OwnerCannotBeSavedException
+     * @throws OwnerCannotBeCreatedException
      * @throws OwnerInvalidException
      */
     public function post(OwnerApiDtoInterface $dto): OwnerInterface

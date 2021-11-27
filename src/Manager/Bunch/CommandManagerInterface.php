@@ -3,6 +3,7 @@
 namespace Evrinoma\CodeBundle\Manager\Bunch;
 
 use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
+use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeCreatedException;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeRemovedException;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchInvalidException;
@@ -26,7 +27,7 @@ interface CommandManagerInterface
      *
      * @return BunchInterface
      * @throws BunchNotFoundException
-     * @throws BunchCannotBeSavedException
+     * @throws BunchCannotBeCreatedException
      * @throws BunchInvalidException
      */
     public function post(BunchApiDtoInterface $dto): BunchInterface;

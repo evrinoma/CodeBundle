@@ -4,6 +4,7 @@ namespace Evrinoma\CodeBundle\Manager\Type;
 
 use Evrinoma\CodeBundle\Dto\TypeApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Type\TypeCannotBeRemovedException;
+use Evrinoma\CodeBundle\Exception\Type\TypeCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Type\TypeInvalidException;
 use Evrinoma\CodeBundle\Exception\Type\TypeNotFoundException;
 use Evrinoma\CodeBundle\Factory\TypeFactoryInterface;
@@ -43,6 +44,7 @@ final class CommandManager implements CommandManagerInterface, RestInterface
      *
      * @return TypeInterface
      * @throws TypeInvalidException
+     * @throws TypeCannotBeSavedException
      */
     public function post(TypeApiDtoInterface $dto): TypeInterface
     {

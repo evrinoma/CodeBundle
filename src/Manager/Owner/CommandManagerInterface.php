@@ -4,6 +4,8 @@ namespace Evrinoma\CodeBundle\Manager\Owner;
 
 
 use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
+use Evrinoma\CodeBundle\Exception\Code\CodeCannotBeCreatedException;
+use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeCreatedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeRemovedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerCannotBeSavedException;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerInvalidException;
@@ -26,7 +28,7 @@ interface CommandManagerInterface
      * @return OwnerInterface
      * @throws OwnerInvalidException
      * @throws OwnerNotFoundException
-     * @throws OwnerCannotBeSavedException
+     * @throws OwnerCannotBeCreatedException
      */
     public function put(OwnerApiDtoInterface $dto): OwnerInterface;
     /**

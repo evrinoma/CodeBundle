@@ -110,14 +110,14 @@ final class CommandManager implements CommandManagerInterface, RestInterface
             /** @var $bind BindInterface */
             $bind->setBunch($this->bunchQueryManager->proxy($dto->getBunchApiDto()));
         } catch (\Exception $e) {
-            throw new BindCannotBeSavedException($e->getMessage());
+            throw new BindCannotBeCreatedException($e->getMessage());
         }
 
         try {
             /** @var $bind BindInterface */
             $bind->setCode($this->codeQueryManager->proxy($dto->getCodeApiDto()));
         } catch (\Exception $e) {
-            throw new BindCannotBeSavedException($e->getMessage());
+            throw new BindCannotBeCreatedException($e->getMessage());
         }
 
         $this->mediator->onCreate($dto, $bind);
