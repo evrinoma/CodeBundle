@@ -68,7 +68,7 @@ class EvrinomaCodeExtension extends Extension
             $definitionFactory->setArgument(0, $config['entity_code']);
         }
 
-        if ($config['factory_bunch'] !== self::FACTORY_CODE) {
+        if ($config['factory_bunch'] !== self::FACTORY_BUNCH) {
             $this->wireFactory($container, 'bunch', $config['factory_bunch'], $config['entity_bunch']);
         } else {
             $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.bunch.factory');
