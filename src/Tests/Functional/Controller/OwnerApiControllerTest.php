@@ -4,19 +4,18 @@ namespace Evrinoma\CodeBundle\Tests\Functional\Controller;
 
 
 use Evrinoma\CodeBundle\Dto\OwnerApiDto;
-use Evrinoma\CodeBundle\Tests\Functional\CaseTest;
 use Evrinoma\TestUtilsBundle\Browser\ApiBrowserTestInterface;
 use Evrinoma\TestUtilsBundle\Browser\ApiBrowserTestTrait;
 use Evrinoma\TestUtilsBundle\Controller\ApiControllerTestInterface;
 use Evrinoma\TestUtilsBundle\Helper\ApiMethodTestInterface;
 use Evrinoma\TestUtilsBundle\Helper\ApiMethodTestTrait;
 use Evrinoma\TestUtilsBundle\Helper\ResponseStatusTestTrait;
-use Symfony\Component\HttpFoundation\Response;
+use Evrinoma\TestUtilsBundle\Web\AbstractWebCaseTest;
 
 /**
  * @group functional
  */
-class OwnerApiControllerTest extends CaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiMethodTestInterface
+class OwnerApiControllerTest extends AbstractWebCaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiMethodTestInterface
 {
     public const API_GET      = 'evrinoma/api/code/owner';
     public const API_CRITERIA = 'evrinoma/api/code/owner/criteria';

@@ -4,20 +4,19 @@ namespace Evrinoma\CodeBundle\Tests\Functional\Controller;
 
 
 use Evrinoma\CodeBundle\Dto\BunchApiDto;
-use Evrinoma\CodeBundle\Tests\Functional\CaseTest;
 use Evrinoma\TestUtilsBundle\Browser\ApiBrowserTestInterface;
 use Evrinoma\TestUtilsBundle\Browser\ApiBrowserTestTrait;
 use Evrinoma\TestUtilsBundle\Controller\ApiControllerTestInterface;
 use Evrinoma\TestUtilsBundle\Helper\ApiMethodTestInterface;
 use Evrinoma\TestUtilsBundle\Helper\ApiMethodTestTrait;
 use Evrinoma\TestUtilsBundle\Helper\ResponseStatusTestTrait;
+use Evrinoma\TestUtilsBundle\Web\AbstractWebCaseTest;
 use Evrinoma\UtilsBundle\Model\ActiveModel;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @group functional
  */
-class BunchApiControllerTest extends CaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiMethodTestInterface
+class BunchApiControllerTest extends AbstractWebCaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiMethodTestInterface
 {
 //region SECTION: Fields
     public const API_GET      = 'evrinoma/api/code/bunch';
