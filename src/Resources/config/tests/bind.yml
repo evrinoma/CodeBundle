@@ -1,0 +1,9 @@
+services:
+  evrinoma.code.bind.test.functional.action.bind:
+    class: Evrinoma\CodeBundle\Tests\Functional\Action\Bind\BaseBind
+    public: true
+    arguments:
+
+  Evrinoma\CodeBundle\Tests\Functional\Action\Bind\BaseBind:
+    alias: evrinoma.code.bind.test.functional.action.bind
+    public: true

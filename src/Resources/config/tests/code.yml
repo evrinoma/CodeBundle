@@ -1,0 +1,9 @@
+services:
+  evrinoma.code.code.test.functional.action.code:
+    class: Evrinoma\CodeBundle\Tests\Functional\Action\Code\BaseCode
+    public: true
+    arguments:
+
+  Evrinoma\CodeBundle\Tests\Functional\Action\Code\BaseCode:
+    alias: evrinoma.code.code.test.functional.action.code
+    public: true

@@ -1,0 +1,9 @@
+services:
+  evrinoma.code.owner.test.functional.action.owner:
+    class: Evrinoma\CodeBundle\Tests\Functional\Action\Owner\BaseOwner
+    public: true
+    arguments:
+
+  Evrinoma\CodeBundle\Tests\Functional\Action\Owner\BaseOwner:
+    alias: evrinoma.code.owner.test.functional.action.owner
+    public: true

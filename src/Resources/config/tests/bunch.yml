@@ -1,0 +1,9 @@
+services:
+  evrinoma.code.bunch.test.functional.action.bunch:
+    class: Evrinoma\CodeBundle\Tests\Functional\Action\Bunch\BaseBunch
+    public: true
+    arguments:
+
+  Evrinoma\CodeBundle\Tests\Functional\Action\Bunch\BaseBunch:
+    alias: evrinoma.code.bunch.test.functional.action.bunch
+    public: true

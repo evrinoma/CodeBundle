@@ -1,0 +1,6 @@
+imports:
+  - { resource: tests/type.yml }
+  - { resource: tests/owner.yml }
+  - { resource: tests/code.yml }
+  - { resource: tests/bunch.yml }
+  - { resource: tests/bind.yml }
