@@ -9,7 +9,7 @@ use Evrinoma\CodeBundle\Model\Define\AbstractOwner;
 /**
  * Class BaseCode
  *
- * @ORM\Table(name="code_owner")
+ * @ORM\Table(name="e_code_owner")
  * @ORM\Entity()
  */
 class BaseOwner extends AbstractOwner

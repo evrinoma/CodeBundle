@@ -10,7 +10,7 @@ use Evrinoma\CodeBundle\Model\Define\AbstractType;
  * Class BaseCode
  *
  * @package Evrinoma\CodeBundle\Entity\Define
- * @ORM\Table(name="code_type")
+ * @ORM\Table(name="e_code_type")
  * @ORM\Entity()
  */
 class BaseType extends AbstractType
