@@ -168,7 +168,7 @@ class BaseBunch extends AbstractServiceTest implements BaseBunchTestInterface
         Assert::assertArrayHasKey('type', $created['data']);
         Assert::assertArrayHasKey('type', $find['data']);
 
-        Assert::assertCount(0, array_diff($created['data']['type'], $find['data']['type']));
+        Assert::assertTrue($created['data']['type'] == $find['data']['type']);
 
         $query = [
             "class"       => static::getDtoClass(),

@@ -47,7 +47,7 @@ class BaseOwner extends AbstractServiceTest implements BaseOwnerTestInterface
         Assert::assertArrayHasKey('data', $created);
         Assert::assertArrayHasKey('data', $find);
 
-        Assert::assertCount(0, array_diff($created['data'], $find['data']));
+        Assert::assertTrue($created['data'] == $find['data']);
 
         $query = [
             "class"       => static::getDtoClass(),
@@ -148,7 +148,7 @@ class BaseOwner extends AbstractServiceTest implements BaseOwnerTestInterface
         Assert::assertArrayHasKey('data', $created);
         Assert::assertArrayHasKey('data', $find);
 
-        Assert::assertCount(0, array_diff($created['data'], $find['data']));
+        Assert::assertTrue($created['data'] == $find['data']);
     }
 
     public function actionPutNotFound(): void
