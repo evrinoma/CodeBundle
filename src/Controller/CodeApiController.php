@@ -76,7 +76,7 @@ final class CodeApiController extends AbstractApiController implements ApiContro
 //endregion Constructor
 //region SECTION: Public
     /**
-     * @Rest\Post("/api/code/create", options={"expose"=true}, name="api_create_code")
+     * @Rest\Post("/api/code/create", options={"expose"=true}, name="api_code_create")
      * @OA\Post(
      *     tags={"code"},
      *     description="the method perform create code",
@@ -134,7 +134,7 @@ final class CodeApiController extends AbstractApiController implements ApiContro
     }
 
     /**
-     * @Rest\Put("/api/code/save", options={"expose"=true}, name="api_save_code")
+     * @Rest\Put("/api/code/save", options={"expose"=true}, name="api_code_save")
      * @OA\Put(
      *     tags={"code"},
      *     description="the method perform save code for current entity",
@@ -196,7 +196,7 @@ final class CodeApiController extends AbstractApiController implements ApiContro
     }
 
     /**
-     * @Rest\Delete("/api/code/delete", options={"expose"=true}, name="api_delete_code")
+     * @Rest\Delete("/api/code/delete", options={"expose"=true}, name="api_code_delete")
      * @OA\Delete(
      *     tags={"code"},
      *     @OA\Parameter(

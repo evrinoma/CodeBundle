@@ -58,7 +58,7 @@ final class BunchApiController extends AbstractApiController implements ApiContr
 
 //region SECTION: Public
     /**
-     * @Rest\Post("/api/code/bunch/create", options={"expose"=true}, name="api_create_code_bunch")
+     * @Rest\Post("/api/code/bunch/create", options={"expose"=true}, name="api_code_bunch_create")
      * @OA\Post(
      *     tags={"code"},
      *     description="the method perform create code type",
@@ -113,7 +113,7 @@ final class BunchApiController extends AbstractApiController implements ApiContr
     }
 
     /**
-     * @Rest\Put("/api/code/bunch/save", options={"expose"=true}, name="api_save_code_bunch")
+     * @Rest\Put("/api/code/bunch/save", options={"expose"=true}, name="api_code_bunch_save")
      * @OA\Put(
      *     tags={"code"},
      *     description="the method perform save code bunch for current entity",
@@ -169,7 +169,7 @@ final class BunchApiController extends AbstractApiController implements ApiContr
     }
 
     /**
-     * @Rest\Delete("/api/code/bunch/delete", options={"expose"=true}, name="api_delete_code_bunch")
+     * @Rest\Delete("/api/code/bunch/delete", options={"expose"=true}, name="api_code_bunch_delete")
      * @OA\Delete(
      *     tags={"code"},
      *     @OA\Parameter(

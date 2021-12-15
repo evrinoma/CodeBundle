@@ -73,7 +73,7 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
 
 //region SECTION: Public
     /**
-     * @Rest\Post("/api/code/owner/create", options={"expose"=true}, name="api_create_code_owner")
+     * @Rest\Post("/api/code/owner/create", options={"expose"=true}, name="api_code_owner_create")
      * @OA\Post(
      *     tags={"code"},
      *     description="the method perform create code owner",
@@ -122,7 +122,7 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
     }
 
     /**
-     * @Rest\Put("/api/code/owner/save", options={"expose"=true}, name="api_save_code_owner")
+     * @Rest\Put("/api/code/owner/save", options={"expose"=true}, name="api_code_owner_save")
      * @OA\Put(
      *     tags={"code"},
      *     description="the method perform save code owner for current entity",
@@ -176,7 +176,7 @@ final class OwnerApiController extends AbstractApiController implements ApiContr
     }
 
     /**
-     * @Rest\Delete("/api/code/owner/delete", options={"expose"=true}, name="api_delete_code_owner")
+     * @Rest\Delete("/api/code/owner/delete", options={"expose"=true}, name="api_code_owner_delete")
      * @OA\Delete(
      *     tags={"code"},
      *     @OA\Parameter(

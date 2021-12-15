@@ -58,7 +58,7 @@ final class BindApiController extends AbstractApiController implements ApiContro
 
 //region SECTION: Public
     /**
-     * @Rest\Post("/api/code/bind/create", options={"expose"=true}, name="api_create_code_bind")
+     * @Rest\Post("/api/code/bind/create", options={"expose"=true}, name="api_code_bind_create")
      * @OA\Post(
      *     tags={"code"},
      *     description="the method perform create code type",
@@ -115,7 +115,7 @@ final class BindApiController extends AbstractApiController implements ApiContro
     }
 
     /**
-     * @Rest\Put("/api/code/bind/save", options={"expose"=true}, name="api_save_code_bind")
+     * @Rest\Put("/api/code/bind/save", options={"expose"=true}, name="api_code_bind_save")
      * @OA\Put(
      *     tags={"code"},
      *     description="the method perform save code bind for current entity",
@@ -175,7 +175,7 @@ final class BindApiController extends AbstractApiController implements ApiContro
     }
 
     /**
-     * @Rest\Delete("/api/code/bind/delete", options={"expose"=true}, name="api_delete_code_bind")
+     * @Rest\Delete("/api/code/bind/delete", options={"expose"=true}, name="api_code_bind_delete")
      * @OA\Delete(
      *     tags={"code"},
      *     @OA\Parameter(

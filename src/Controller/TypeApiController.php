@@ -58,7 +58,7 @@ final class TypeApiController extends AbstractApiController implements ApiContro
 
 //region SECTION: Public
     /**
-     * @Rest\Post("/api/code/type/create", options={"expose"=true}, name="api_create_code_type")
+     * @Rest\Post("/api/code/type/create", options={"expose"=true}, name="api_code_type_create")
      * @OA\Post(
      *     tags={"code"},
      *     description="the method perform create code type",
@@ -105,7 +105,7 @@ final class TypeApiController extends AbstractApiController implements ApiContro
     }
 
     /**
-     * @Rest\Put("/api/code/type/save", options={"expose"=true}, name="api_save_code_type")
+     * @Rest\Put("/api/code/type/save", options={"expose"=true}, name="api_code_type_save")
      * @OA\Put(
      *     tags={"code"},
      *     description="the method perform save code type for current entity",
@@ -157,7 +157,7 @@ final class TypeApiController extends AbstractApiController implements ApiContro
     }
 
     /**
-     * @Rest\Delete("/api/code/type/delete", options={"expose"=true}, name="api_delete_code_type")
+     * @Rest\Delete("/api/code/type/delete", options={"expose"=true}, name="api_code_type_delete")
      * @OA\Delete(
      *     tags={"code"},
      *     @OA\Parameter(
