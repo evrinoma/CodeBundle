@@ -1,4 +1,4 @@
-#Configuration
+# Configuration
 
     contractor:
         db_driver: orm модель данных
@@ -26,7 +26,7 @@
           query_bunch - декоратор запросов группы
 
 
-#CQRS model
+# CQRS model
 
 Actions в контроллере разбиты на две группы
 создание, редактирование, удаление данных
@@ -51,7 +51,7 @@ Actions в контроллере разбиты на две группы
         api_get_code_type, api_post_code_type, api_put_code_type
         api_get_code_owner, api_post_code_owner, api_put_code_owner
 
-#Статусы:
+# Статусы:
 
 release 1.0.1<br>
 коды объединяются в группы у каждой группы есть свой тип у каждого кода есть свой владелец
@@ -131,8 +131,12 @@ release 2.0.1<br>
         если тип не может быть сохранен TypeCannotBeSavedException возвращает HTTP_NOT_IMPLEMENTED 501
         все остальные ошибки возвращаются как HTTP_BAD_REQUEST 400
 
-#Тесты:
-    
+# Тесты:
+
     composer install --dev
-    /usr/bin/php vendor/phpunit/phpunit/phpunit --bootstrap src/Tests/bootstrap.php --configuration phpunit.xml.dist src/Tests/Functional/Controller/ --teamcity
+### run all tests
+    /usr/bin/php vendor/phpunit/phpunit/phpunit --bootstrap src/Tests/bootstrap.php --configuration phpunit.xml.dist src/Tests --teamcity
+
+### run personal test for example testPost
+    /usr/bin/php vendor/phpunit/phpunit/phpunit --bootstrap src/Tests/bootstrap.php --configuration phpunit.xml.dist src/Tests/Functional/Controller/TypeApiControllerTest.php --filter "/::testPost( .*)?$/" 
 
