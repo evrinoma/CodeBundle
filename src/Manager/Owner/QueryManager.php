@@ -64,11 +64,15 @@ final class QueryManager implements QueryManagerInterface, RestInterface
     public function proxy(OwnerApiDtoInterface $dto): OwnerInterface
     {
         try {
-            $type = $this->repository->proxy($dto->getId());
+            if ($dto->hasId()) {
+                $owner = $this->repository->proxy($dto->getId());
+            } else {
+                throw new OwnerProxyException("Id value is not set while trying get proxy object");
+            }
         } catch (OwnerProxyException $e) {
             throw $e;
         }
 
-        return $type;
+        return $owner;
     }
 }

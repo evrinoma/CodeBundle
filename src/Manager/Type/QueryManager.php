@@ -76,7 +76,11 @@ final class QueryManager implements QueryManagerInterface, RestInterface
     public function proxy(TypeApiDtoInterface $dto): TypeInterface
     {
         try {
-            $type = $this->repository->proxy($dto->getId());
+            if ($dto->hasId()) {
+                $type = $this->repository->proxy($dto->getId());
+            } else {
+                throw new TypeProxyException("Id value is not set while trying get proxy object");
+            }
         } catch (TypeProxyException $e) {
             throw $e;
         }

@@ -52,7 +52,11 @@ final class QueryManager implements QueryManagerInterface, RestInterface
     public function proxy(BindApiDtoInterface $dto): BindInterface
     {
         try {
-            $bind = $this->repository->proxy($dto->getId());
+            if ($dto->hasId()) {
+                $bind = $this->repository->proxy($dto->getId());
+            } else {
+                throw new BindProxyException("Id value is not set while trying get proxy object");
+            }
         } catch (BindProxyException $e) {
             throw $e;
         }

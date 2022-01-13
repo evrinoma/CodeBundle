@@ -52,7 +52,11 @@ final class QueryManager implements QueryManagerInterface, RestInterface
     public function proxy(BunchApiDtoInterface $dto): BunchInterface
     {
         try {
-            $bunch = $this->repository->proxy($dto->getId());
+            if ($dto->hasId()) {
+                $bunch = $this->repository->proxy($dto->getId());
+            } else {
+                throw new BunchProxyException("Id value is not set while trying get proxy object");
+            }
         } catch (BunchProxyException $e) {
             throw $e;
         }
