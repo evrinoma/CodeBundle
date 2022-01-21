@@ -6,26 +6,15 @@ namespace Evrinoma\CodeBundle\Model\Bunch;
 use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 use Evrinoma\UtilsBundle\Entity\ActiveInterface;
 use Evrinoma\UtilsBundle\Entity\CreateUpdateAtInterface;
+use Evrinoma\UtilsBundle\Entity\DescriptionInterface;
 use Evrinoma\UtilsBundle\Entity\IdInterface;
 
-interface BunchInterface extends ActiveInterface, CreateUpdateAtInterface, IdInterface
+interface BunchInterface extends ActiveInterface, CreateUpdateAtInterface, IdInterface, DescriptionInterface
 {
     /**
      * @return TypeInterface
      */
     public function getType(): TypeInterface;
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string;
-
-    /**
-     * @param string $description
-     *
-     * @return BunchInterface
-     */
-    public function setDescription(string $description): BunchInterface;
 
     /**
      * @param TypeInterface $type

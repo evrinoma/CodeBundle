@@ -6,6 +6,7 @@ use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 use Evrinoma\UtilsBundle\Entity\ActiveTrait;
 use Evrinoma\UtilsBundle\Entity\CreateUpdateAtTrait;
+use Evrinoma\UtilsBundle\Entity\DescriptionTrait;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class AbstractCode implements CodeInterface
 {
-    use IdTrait, ActiveTrait, CreateUpdateAtTrait;
+    use IdTrait, ActiveTrait, CreateUpdateAtTrait, DescriptionTrait;
 
 //region SECTION: Fields
     /**
@@ -26,13 +27,6 @@ abstract class AbstractCode implements CodeInterface
      * @ORM\Column(name="brief", type="string", length=63, nullable=false)
      */
     protected string $brief;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=255, nullable=false)
-     */
-    protected string $description;
 
     /**
      * @var TypeInterface
@@ -62,14 +56,6 @@ abstract class AbstractCode implements CodeInterface
     }
 
     /**
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    /**
      * @return TypeInterface
      */
     public function getType(): TypeInterface
@@ -93,18 +79,6 @@ abstract class AbstractCode implements CodeInterface
     public function setBrief(string $brief): CodeInterface
     {
         $this->brief = $brief;
-
-        return $this;
-    }
-
-    /**
-     * @param string $description
-     *
-     * @return CodeInterface
-     */
-    public function setDescription(string $description): CodeInterface
-    {
-        $this->description = $description;
 
         return $this;
     }

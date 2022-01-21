@@ -11,4 +11,11 @@ interface TypeInterface extends IdInterface
      * @return string
      */
     public function getBrief(): string;
+
+    /**
+     * @param string $brief
+     *
+     * @return AbstractType
+     */
+    public function setBrief(string $brief): self;
 }

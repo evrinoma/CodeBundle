@@ -9,6 +9,5 @@ interface ModelInterface
     public const BRIEF       = 'brief';
     public const ACTIVE      = 'active';
     public const DESCRIPTION = 'description';
-
 //endregion Fields
 }

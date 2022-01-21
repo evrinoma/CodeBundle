@@ -6,6 +6,7 @@ namespace Evrinoma\CodeBundle\Model\Bunch;
 use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 use Evrinoma\UtilsBundle\Entity\ActiveTrait;
 use Evrinoma\UtilsBundle\Entity\CreateUpdateAtTrait;
+use Evrinoma\UtilsBundle\Entity\DescriptionTrait;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class AbstractBunch implements BunchInterface
 {
-    use IdTrait, ActiveTrait, CreateUpdateAtTrait;
+    use IdTrait, ActiveTrait, CreateUpdateAtTrait, DescriptionTrait;
 
 //region SECTION: Fields
     /**
@@ -46,14 +47,6 @@ abstract class AbstractBunch implements BunchInterface
     }
 
     /**
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    /**
      * @param TypeInterface $type
      *
      * @return self
@@ -61,18 +54,6 @@ abstract class AbstractBunch implements BunchInterface
     public function setType(TypeInterface $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * @param string $description
-     *
-     * @return self
-     */
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
 
         return $this;
     }

@@ -20,11 +20,6 @@ interface CodeInterface extends ActiveInterface, CreateUpdateAtInterface, IdInte
     public function getBrief(): string;
 
     /**
-     * @return string
-     */
-    public function getDescription(): string;
-
-    /**
      * @return TypeInterface
      */
     public function getType(): TypeInterface;
@@ -40,13 +35,6 @@ interface CodeInterface extends ActiveInterface, CreateUpdateAtInterface, IdInte
      * @return CodeInterface
      */
     public function setBrief(string $brief): CodeInterface;
-
-    /**
-     * @param string $description
-     *
-     * @return CodeInterface
-     */
-    public function setDescription(string $description): CodeInterface;
 
     /**
      * @param TypeInterface $type

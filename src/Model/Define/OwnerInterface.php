@@ -3,9 +3,10 @@
 
 namespace Evrinoma\CodeBundle\Model\Define;
 
+use Evrinoma\UtilsBundle\Entity\DescriptionInterface;
 use Evrinoma\UtilsBundle\Entity\IdInterface;
 
-interface OwnerInterface extends IdInterface
+interface OwnerInterface extends IdInterface, DescriptionInterface
 {
     /**
      * @return string
@@ -13,7 +14,9 @@ interface OwnerInterface extends IdInterface
     public function getBrief(): string;
 
     /**
-     * @return string
+     * @param string $brief
+     *
+     * @return AbstractOwner
      */
-    public function getDescription(): string;
+    public function setBrief(string $brief): self;
 }
