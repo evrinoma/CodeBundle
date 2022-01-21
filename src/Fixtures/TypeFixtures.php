@@ -7,11 +7,12 @@ use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Evrinoma\CodeBundle\Entity\Define\BaseType;
+use Evrinoma\TestUtilsBundle\Fixtures\AbstractFixture;
 
-final class TypeFixtures extends Fixture implements FixtureGroupInterface, OrderedFixtureInterface
+class TypeFixtures extends AbstractFixture implements FixtureGroupInterface, OrderedFixtureInterface
 {
 //region SECTION: Fields
-    private array $data = [
+    protected static array $data = [
         ['brief' => 'draft'],
         ['brief' => 'doc'],
         ['brief' => 'xls',],
@@ -19,30 +20,22 @@ final class TypeFixtures extends Fixture implements FixtureGroupInterface, Order
         ['brief' => 'gost'],
         ['brief' => 'sys'],
     ];
+
+    protected static string $class = BaseType::class;
 //endregion Fields
 
-//region SECTION: Public
-    /**
-     * Load data fixtures with the passed EntityManager
-     *
-     * @param ObjectManager $manager
-     */
-    public function load(ObjectManager $manager)
-    {
-        $this->createTypes($manager);
-
-        $manager->flush();
-    }
-//endregion Public
-//endregion Public
-
 //region SECTION: Private
-    private function createTypes(ObjectManager $manager)
+    /**
+     * @param ObjectManager $manager
+     *
+     * @return $this
+     */
+    protected function create(ObjectManager $manager): self
     {
-        $short = (new \ReflectionClass(BaseType::class))->getShortName()."_";
+        $short = self::getReferenceName();
         $i     = 0;
 
-        foreach ($this->data as $record) {
+        foreach (static::$data as $record) {
             $entity = new BaseType();
             $entity->setBrief($record['brief']);
             $this->addReference($short.$i, $entity);
@@ -52,14 +45,13 @@ final class TypeFixtures extends Fixture implements FixtureGroupInterface, Order
 
         return $this;
     }
-
 //endregion Private
 
 //region SECTION: Getters/Setters
     public static function getGroups(): array
     {
         return [
-            FixtureInterface::BIND_FIXTURES
+            FixtureInterface::BIND_FIXTURES,
         ];
     }
 

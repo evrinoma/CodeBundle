@@ -9,12 +9,13 @@ use Doctrine\Persistence\ObjectManager;
 use Evrinoma\CodeBundle\Entity\Code\BaseCode;
 use Evrinoma\CodeBundle\Entity\Define\BaseOwner;
 use Evrinoma\CodeBundle\Entity\Define\BaseType;
+use Evrinoma\TestUtilsBundle\Fixtures\AbstractFixture;
 
-final class CodeFixtures extends Fixture implements FixtureGroupInterface, OrderedFixtureInterface
+class CodeFixtures extends AbstractFixture implements FixtureGroupInterface, OrderedFixtureInterface
 {
 
 //region SECTION: Fields
-    private array $data = [
+    protected static array $data = [
         ['brief' => 'CM', 'description' => 'smeta', 'type' => 0, 'owner' => 0, 'active' => 'a'], //0
         ['brief' => 'RD', 'description' => 'adasdad', 'type' => 0, 'owner' => 1, 'active' => 'a'], //1
         ['brief' => 'KD', 'description' => 'sdfsdf', 'type' => 0, 'owner' => 1, 'active' => 'a'], //2
@@ -25,33 +26,24 @@ final class CodeFixtures extends Fixture implements FixtureGroupInterface, Order
         ['brief' => 'QW', 'description' => 'rtyrty', 'type' => 2, 'owner' => 0, 'active' => 'd'], //7
         ['brief' => 'XXX', 'description' => 'xxxxx', 'type' => 0, 'owner' => 0, 'active' => 'a'], //8
     ];
+
+    protected static string $class = BaseCode::class;
 //endregion Fields
 
-
-//region SECTION: Public
-    /**
-     * Load data fixtures with the passed EntityManager
-     *
-     * @param ObjectManager $manager
-     */
-    public function load(ObjectManager $manager)
-    {
-        $this->createTypes($manager);
-
-        $manager->flush();
-    }
-//endregion Public
-
 //region SECTION: Private
-    private function createTypes(ObjectManager $manager)
+    /**
+     * @param ObjectManager $manager
+     *
+     * @return $this
+     */
+    protected function create(ObjectManager $manager): self
     {
-
-        $short      = (new \ReflectionClass(BaseCode::class))->getShortName()."_";
-        $shortType  = (new \ReflectionClass(BaseType::class))->getShortName()."_";
-        $shortOwner = (new \ReflectionClass(BaseOwner::class))->getShortName()."_";
+        $short      = self::getReferenceName();
+        $shortType  = TypeFixtures::getReferenceName();
+        $shortOwner = OwnerFixtures::getReferenceName();
         $i          = 0;
 
-        foreach ($this->data as $record) {
+        foreach (static::$data as $record) {
             $entity = new BaseCode();
             $entity
                 ->setCreatedAt(new \DateTimeImmutable())
@@ -67,7 +59,6 @@ final class CodeFixtures extends Fixture implements FixtureGroupInterface, Order
 
         return $this;
     }
-
 //endregion Private
 
 //region SECTION: Getters/Setters

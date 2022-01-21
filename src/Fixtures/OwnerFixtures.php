@@ -7,11 +7,12 @@ use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Evrinoma\CodeBundle\Entity\Define\BaseOwner;
+use Evrinoma\TestUtilsBundle\Fixtures\AbstractFixture;
 
-final class OwnerFixtures extends Fixture implements FixtureGroupInterface, OrderedFixtureInterface
+class OwnerFixtures extends AbstractFixture implements FixtureGroupInterface, OrderedFixtureInterface
 {
 //region SECTION: Fields
-    private array $data = [
+    protected static array $data = [
         ['brief' => 'ipc', 'description' => 'ипц'],
         ['brief' => 'zapzap', 'description' => 'зап'],
         ['brief' => 'ite', 'description' => 'ите'],
@@ -19,29 +20,22 @@ final class OwnerFixtures extends Fixture implements FixtureGroupInterface, Orde
         ['brief' => 'c2m', 'description' => 'центр'],
         ['brief' => 'spb', 'description' => 'питер'],
     ];
+
+    protected static string $class = BaseOwner::class;
 //endregion Fields
 
-//region SECTION: Public
-    /**
-     * Load data fixtures with the passed EntityManager
-     *
-     * @param ObjectManager $manager
-     */
-    public function load(ObjectManager $manager)
-    {
-        $this->createTypes($manager);
-
-        $manager->flush();
-    }
-//endregion Public
-
 //region SECTION: Private
-    private function createTypes(ObjectManager $manager)
+    /**
+     * @param ObjectManager $manager
+     *
+     * @return $this
+     */
+    protected function create(ObjectManager $manager): self
     {
-        $short = (new \ReflectionClass(BaseOwner::class))->getShortName()."_";
+        $short = self::getReferenceName();
         $i     = 0;
 
-        foreach ($this->data as $record) {
+        foreach (static::$data as $record) {
             $entity = new BaseOwner();
             $entity->setBrief($record['brief'])->setDescription($record['description']);
             $this->addReference($short.$i, $entity);
@@ -51,14 +45,13 @@ final class OwnerFixtures extends Fixture implements FixtureGroupInterface, Orde
 
         return $this;
     }
-
 //endregion Private
 
 //region SECTION: Getters/Setters
     public static function getGroups(): array
     {
         return [
-            FixtureInterface::BIND_FIXTURES
+            FixtureInterface::BIND_FIXTURES,
         ];
     }
 

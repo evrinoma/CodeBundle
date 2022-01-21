@@ -8,12 +8,13 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Evrinoma\CodeBundle\Entity\Bunch\BaseBunch;
 use Evrinoma\CodeBundle\Entity\Define\BaseType;
+use Evrinoma\TestUtilsBundle\Fixtures\AbstractFixture;
 
-final class BunchFixtures extends Fixture implements FixtureGroupInterface, OrderedFixtureInterface
+class BunchFixtures extends AbstractFixture implements FixtureGroupInterface, OrderedFixtureInterface
 {
 
 //region SECTION: Fields
-    private array $data = [
+    protected static array $data = [
         ['description' => 'calc estimate', 'type' => 0, 'active' => 'a'], //0
         ['description' => 'system', 'type' => 0, 'active' => 'a'], //1
         ['description' => 'career', 'type' => 0, 'active' => 'a'], //2
@@ -21,32 +22,23 @@ final class BunchFixtures extends Fixture implements FixtureGroupInterface, Orde
         ['description' => 'job', 'type' => 1, 'active' => 'a'], //4
         ['description' => 'lib', 'type' => 2, 'active' => 'd'], //5
     ];
+
+    protected static string $class = BaseBunch::class;
 //endregion Fields
 
-
-//region SECTION: Public
-    /**
-     * Load data fixtures with the passed EntityManager
-     *
-     * @param ObjectManager $manager
-     */
-    public function load(ObjectManager $manager)
-    {
-        $this->createTypes($manager);
-
-        $manager->flush();
-    }
-//endregion Public
-
 //region SECTION: Private
-    private function createTypes(ObjectManager $manager)
+    /**
+     * @param ObjectManager $manager
+     *
+     * @return $this
+     */
+    protected function create(ObjectManager $manager):self
     {
-
-        $short     = (new \ReflectionClass(BaseBunch::class))->getShortName()."_";
-        $shortType = (new \ReflectionClass(BaseType::class))->getShortName()."_";
+        $short      = self::getReferenceName();
+        $shortType  = TypeFixtures::getReferenceName();
         $i         = 0;
 
-        foreach ($this->data as $record) {
+        foreach (static::$data as $record) {
             $entity = new BaseBunch();
             $entity
                 ->setDescription($record['description'])

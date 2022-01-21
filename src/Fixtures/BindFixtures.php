@@ -2,19 +2,18 @@
 
 namespace Evrinoma\CodeBundle\Fixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Evrinoma\CodeBundle\Entity\Bind\BaseBind;
 use Evrinoma\CodeBundle\Entity\Bunch\BaseBunch;
 use Evrinoma\CodeBundle\Entity\Code\BaseCode;
+use Evrinoma\TestUtilsBundle\Fixtures\AbstractFixture;
 
-final class BindFixtures extends Fixture implements FixtureGroupInterface, OrderedFixtureInterface
+class BindFixtures extends AbstractFixture implements FixtureGroupInterface, OrderedFixtureInterface
 {
-
 //region SECTION: Fields
-    private array $data = [
+    protected static array $data = [
         ['bunch' => 0, 'code' => 8, 'active' => 'a'],
         ['bunch' => 0, 'code' => 1, 'active' => 'a'],
         ['bunch' => 0, 'code' => 2, 'active' => 'a'],
@@ -29,33 +28,24 @@ final class BindFixtures extends Fixture implements FixtureGroupInterface, Order
 
         ['bunch' => 5, 'code' => 7, 'active' => 'd'],
     ];
+
+    protected static string $class = BaseBind::class;
 //endregion Fields
 
-
-//region SECTION: Public
-    /**
-     * Load data fixtures with the passed EntityManager
-     *
-     * @param ObjectManager $manager
-     */
-    public function load(ObjectManager $manager)
-    {
-        $this->createTypes($manager);
-
-        $manager->flush();
-    }
-//endregion Public
-
 //region SECTION: Private
-    private function createTypes(ObjectManager $manager)
+    /**
+     * @param ObjectManager $manager
+     *
+     * @return $this
+     */
+    protected function create(ObjectManager $manager): self
     {
-
         $short      = (new \ReflectionClass(BaseBind::class))->getShortName()."_";
         $shortBunch = (new \ReflectionClass(BaseBunch::class))->getShortName()."_";
         $shortCode  = (new \ReflectionClass(BaseCode::class))->getShortName()."_";
         $i          = 0;
 
-        foreach ($this->data as $record) {
+        foreach (static::$data as $record) {
             $entity = new BaseBind();
             $entity
                 ->setBunch($this->getReference($shortBunch.$record['bunch']))
@@ -70,7 +60,6 @@ final class BindFixtures extends Fixture implements FixtureGroupInterface, Order
 
         return $this;
     }
-
 //endregion Private
 
 //region SECTION: Getters/Setters
