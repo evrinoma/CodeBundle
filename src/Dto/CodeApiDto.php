@@ -18,7 +18,7 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
     use IdTrait, ActiveTrait, DescriptionTrait, BriefTrait;
 
     /**
-     * @Dto(class="Evrinoma\CodeBundle\Dto\TypeApiDto", generator="genRequestTypApiDto")
+     * @Dto(class="Evrinoma\CodeBundle\Dto\TypeApiDto", generator="genRequestTypeApiDto")
      * @var TypeApiDto|null
      */
     private ?TypeApiDto $typeApiDto = null;
@@ -151,7 +151,7 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
     /**
      * @return \Generator
      */
-    public function genRequestTypApiDto(?Request $request): ?\Generator
+    public function genRequestTypeApiDto(?Request $request): ?\Generator
     {
         if ($request) {
             $type = $request->get('type');
