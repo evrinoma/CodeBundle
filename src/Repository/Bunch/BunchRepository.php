@@ -58,7 +58,9 @@ class BunchRepository extends ServiceEntityRepository implements BunchRepository
      */
     public function remove(BunchInterface $bunch): bool
     {
-        $bunch->setActiveToDelete();
+        $bunch
+            ->setUpdatedAt(new \DateTimeImmutable())
+            ->setActiveToDelete();
 
         return true;
     }

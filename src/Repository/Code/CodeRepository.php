@@ -74,7 +74,9 @@ class CodeRepository extends ServiceEntityRepository implements CodeRepositoryIn
      */
     public function remove(CodeInterface $code): bool
     {
-        $code->setActiveToDelete();
+        $code
+            ->setUpdatedAt(new \DateTimeImmutable())
+            ->setActiveToDelete();
 
         return true;
     }

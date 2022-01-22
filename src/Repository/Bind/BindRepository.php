@@ -59,7 +59,9 @@ class BindRepository extends ServiceEntityRepository implements BindRepositoryIn
      */
     public function remove(BindInterface $bind): bool
     {
-        $bind->setActiveToDelete();
+        $bind
+            ->setUpdatedAt(new \DateTimeImmutable())
+            ->setActiveToDelete();
 
         return true;
     }
