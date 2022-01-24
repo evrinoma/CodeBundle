@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Evrinoma\CodeBundle\Constraint\Bind;
+namespace Evrinoma\CodeBundle\Constraint\Property\Code;
 
 use Evrinoma\UtilsBundle\Constraint\Property\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 
-final class Bunch implements ConstraintInterface
+final class Owner implements ConstraintInterface
 {
 //region SECTION: Getters/Setters
     public function getConstraints(): array
@@ -20,7 +20,7 @@ final class Bunch implements ConstraintInterface
 
     public function getPropertyName(): string
     {
-        return 'bunch';
+        return 'owner';
     }
 //endregion Getters/Setters
 }

@@ -1,12 +1,15 @@
 <?php
 
-namespace Evrinoma\CodeBundle\Constraint\Common;
 
+namespace Evrinoma\CodeBundle\Constraint\Property\Bind;
+
+use Evrinoma\UtilsBundle\Constraint\Property\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 
-trait TypeTrait
+final class Bunch implements ConstraintInterface
 {
+//region SECTION: Getters/Setters
     public function getConstraints(): array
     {
         return [
@@ -17,6 +20,7 @@ trait TypeTrait
 
     public function getPropertyName(): string
     {
-        return 'type';
+        return 'bunch';
     }
+//endregion Getters/Setters
 }

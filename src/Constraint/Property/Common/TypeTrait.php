@@ -1,15 +1,12 @@
 <?php
 
+namespace Evrinoma\CodeBundle\Constraint\Property\Common;
 
-namespace Evrinoma\CodeBundle\Constraint\Code;
-
-use Evrinoma\UtilsBundle\Constraint\Property\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 
-final class Owner implements ConstraintInterface
+trait TypeTrait
 {
-//region SECTION: Getters/Setters
     public function getConstraints(): array
     {
         return [
@@ -20,7 +17,6 @@ final class Owner implements ConstraintInterface
 
     public function getPropertyName(): string
     {
-        return 'owner';
+        return 'type';
     }
-//endregion Getters/Setters
 }
