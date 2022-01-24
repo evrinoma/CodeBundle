@@ -3,11 +3,11 @@
 
 namespace Evrinoma\CodeBundle;
 
-use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\BindPass;
-use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\BunchPass;
-use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\CodePass;
-use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\OwnerPass;
-use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\TypePass;
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\Property\BindPass;
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\Property\BunchPass;
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\Property\CodePass;
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\Property\OwnerPass;
+use Evrinoma\CodeBundle\DependencyInjection\Compiler\Constraint\Property\TypePass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\DecoratorPass;
 use Evrinoma\CodeBundle\DependencyInjection\Compiler\MapEntityPass;
 use Evrinoma\CodeBundle\DependencyInjection\EvrinomaCodeExtension;
