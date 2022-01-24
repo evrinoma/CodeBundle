@@ -1,8 +1,8 @@
 services:
-  evrinoma.code.constraint.bind.bunch:
-    class: Evrinoma\CodeBundle\Constraint\Bind\Bunch
+  evrinoma.code.constraint.bind.property.bunch:
+    class: Evrinoma\CodeBundle\Constraint\Property\Bind\Bunch
 
-  evrinoma.code.constraint.bind.code:
-    class: Evrinoma\CodeBundle\Constraint\Bind\Code
+  evrinoma.code.constraint.bind.property.code:
+    class: Evrinoma\CodeBundle\Constraint\Property\Bind\Code
 
 

@@ -1,8 +1,8 @@
 services:
-  evrinoma.code.constraint.owner.brief:
-    class: Evrinoma\CodeBundle\Constraint\Owner\Brief
+  evrinoma.code.constraint.owner.property.brief:
+    class: Evrinoma\CodeBundle\Constraint\Property\Owner\Brief
 
-  evrinoma.code.constraint.owner.description:
-    class: Evrinoma\CodeBundle\Constraint\Owner\Description
+  evrinoma.code.constraint.owner.property.description:
+    class: Evrinoma\CodeBundle\Constraint\Property\Owner\Description
 
 
