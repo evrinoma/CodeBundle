@@ -39,6 +39,7 @@ services:
     class: Evrinoma\CodeBundle\Validator\TypeValidator
     public: true
     arguments:
+      - '@validator'
 
   Evrinoma\CodeBundle\Validator\TypeValidator:
     alias: evrinoma.code.type.validator

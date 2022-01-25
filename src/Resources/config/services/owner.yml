@@ -39,6 +39,7 @@ services:
     class: Evrinoma\CodeBundle\Validator\OwnerValidator
     public: true
     arguments:
+      - '@validator'
 
   Evrinoma\CodeBundle\Validator\OwnerValidator:
     alias: evrinoma.code.owner.validator
