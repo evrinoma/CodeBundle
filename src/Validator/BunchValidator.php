@@ -6,6 +6,7 @@ namespace Evrinoma\CodeBundle\Validator;
 
 use Evrinoma\CodeBundle\Entity\Bunch\BaseBunch;
 use Evrinoma\UtilsBundle\Validator\AbstractValidator;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class BunchValidator extends AbstractValidator
 {
@@ -18,11 +19,12 @@ final class BunchValidator extends AbstractValidator
 
 //region SECTION: Constructor
     /**
-     * @param string $entityClass
+     * @param ValidatorInterface $validator
+     * @param string             $entityClass
      */
-    public function __construct(string $entityClass)
+    public function __construct(ValidatorInterface $validator, string $entityClass)
     {
-        parent::__construct($entityClass);
+        parent::__construct($validator, $entityClass);
     }
 //endregion Constructor
 }

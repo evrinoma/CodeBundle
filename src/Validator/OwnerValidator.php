@@ -6,6 +6,7 @@ namespace Evrinoma\CodeBundle\Validator;
 
 use Evrinoma\CodeBundle\Entity\Define\BaseOwner;
 use Evrinoma\UtilsBundle\Validator\AbstractValidator;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class OwnerValidator extends AbstractValidator
 {
@@ -17,9 +18,12 @@ final class OwnerValidator extends AbstractValidator
 //endregion Fields
 
 //region SECTION: Constructor
-    public function __construct()
+    /**
+     * @param ValidatorInterface $validator
+     */
+    public function __construct(ValidatorInterface $validator)
     {
-        parent::__construct(self::$entityClass);
+        parent::__construct($validator, self::$entityClass);
     }
 //endregion Constructor
 }
