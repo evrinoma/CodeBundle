@@ -2,18 +2,17 @@
 
 namespace Evrinoma\CodeBundle\Form\Rest;
 
-use Evrinoma\CodeBundle\Dto\TypeApiDto;
-use Evrinoma\CodeBundle\Exception\Type\TypeNotFoundException;
-use Evrinoma\CodeBundle\Manager\Type\QueryManagerInterface;
+use Evrinoma\CodeBundle\Dto\OwnerApiDto;
+use Evrinoma\CodeBundle\Exception\Owner\OwnerNotFoundException;
+use Evrinoma\CodeBundle\Manager\Owner\QueryManagerInterface;
 use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\UtilsBundle\Form\Rest\RestChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TypeChoiceType extends AbstractType
+class CodeOwnerChoiceType extends AbstractType
 {
-
 //region SECTION: Fields
     private QueryManagerInterface $queryManager;
 //endregion Fields
@@ -32,11 +31,16 @@ class TypeChoiceType extends AbstractType
             $value = [];
             try {
                 if ($options->offsetExists('data')) {
-                    $criteria = $this->queryManager->criteria(new TypeApiDto());
-                    switch($options->offsetGet('data')) {
+                    $criteria = $this->queryManager->criteria(new OwnerApiDto());
+                    switch ($options->offsetGet('data')) {
                         case  ModelInterface::BRIEF:
                             foreach ($criteria as $entity) {
                                 $value[] = $entity->getBrief();
+                            }
+                            break;
+                        case  ModelInterface::DESCRIPTION:
+                            foreach ($criteria as $entity) {
+                                $value[] = $entity->getDescription();
                             }
                             break;
                         default:
@@ -45,16 +49,16 @@ class TypeChoiceType extends AbstractType
                             }
                     }
                 } else {
-                    throw new TypeNotFoundException();
+                    throw new OwnerNotFoundException();
                 }
-            } catch (TypeNotFoundException $e) {
+            } catch (OwnerNotFoundException $e) {
                 $value = RestChoiceType::REST_CHOICES_DEFAULT;
             }
 
             return $value;
         };
-        $resolver->setDefault(RestChoiceType::REST_COMPONENT_NAME, 'type');
-        $resolver->setDefault(RestChoiceType::REST_DESCRIPTION, 'typeList');
+        $resolver->setDefault(RestChoiceType::REST_COMPONENT_NAME, 'owner');
+        $resolver->setDefault(RestChoiceType::REST_DESCRIPTION, 'ownerList');
         $resolver->setDefault(RestChoiceType::REST_CHOICES, $callback);
     }
 //endregion Public

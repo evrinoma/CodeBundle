@@ -70,12 +70,12 @@ services:
 
 
   evrinoma.code.form.rest.code:
-    class: Evrinoma\CodeBundle\Form\Rest\CodeChoiceType
+    class: Evrinoma\CodeBundle\Form\Rest\CodeCodeChoiceType
     arguments:
       - '@evrinoma.code.code.query.manager'
     tags: { - name: form.type }
 
-  Evrinoma\CodeBundle\Form\Rest\CodeChoiceType:
+  Evrinoma\CodeBundle\Form\Rest\CodeCodeChoiceType:
     alias: evrinoma.code.form.rest.code
     public: true
 

@@ -272,7 +272,7 @@ final class BindApiController extends AbstractApiController implements ApiContro
      *              type="array",
      *              @OA\Items(
      *                  type="string",
-     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\BunchChoiceType::class, options={"data":"brief"})
+     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\CodeBunchChoiceType::class, options={"data":"brief"})
      *              ),
      *          ),
      *         style="form"
@@ -285,7 +285,7 @@ final class BindApiController extends AbstractApiController implements ApiContro
      *              type="array",
      *              @OA\Items(
      *                  type="string",
-     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\CodeChoiceType::class, options={"data":"brief"})
+     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\CodeCodeChoiceType::class, options={"data":"brief"})
      *              ),
      *          ),
      *         style="form"
@@ -298,7 +298,7 @@ final class BindApiController extends AbstractApiController implements ApiContro
      *              type="array",
      *              @OA\Items(
      *                  type="string",
-     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\CodeChoiceType::class, options={"data":"description"})
+     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\CodeCodeChoiceType::class, options={"data":"description"})
      *              ),
      *          ),
      *         style="form"

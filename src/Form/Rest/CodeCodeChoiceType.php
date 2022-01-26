@@ -2,17 +2,17 @@
 
 namespace Evrinoma\CodeBundle\Form\Rest;
 
-use Evrinoma\CodeBundle\Dto\BunchApiDto;
-use Evrinoma\CodeBundle\Dto\TypeApiDto;
-use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
-use Evrinoma\CodeBundle\Manager\Bunch\QueryManagerInterface;
+use Evrinoma\CodeBundle\Dto\CodeApiDto;
+use Evrinoma\CodeBundle\Exception\Code\CodeNotFoundException;
+use Evrinoma\CodeBundle\Manager\Code\QueryManagerInterface;
+use Evrinoma\CodeBundle\Model\Code\CodeInterface;
 use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\UtilsBundle\Form\Rest\RestChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BunchChoiceType extends AbstractType
+class CodeCodeChoiceType extends AbstractType
 {
 //region SECTION: Fields
     private QueryManagerInterface $queryManager;
@@ -31,11 +31,17 @@ class BunchChoiceType extends AbstractType
             $value = [];
             try {
                 if ($options->offsetExists('data')) {
-                    $criteria = $this->queryManager->criteria(new BunchApiDto());
+                    /** @var CodeInterface[] $criteria */
+                    $criteria = $this->queryManager->criteria(new CodeApiDto());
                     switch ($options->offsetGet('data')) {
                         case  ModelInterface::DESCRIPTION:
                             foreach ($criteria as $entity) {
                                 $value[] = $entity->getDescription();
+                            }
+                            break;
+                        case  ModelInterface::BRIEF:
+                            foreach ($criteria as $entity) {
+                                $value[] = $entity->getBrief();
                             }
                             break;
                         default:
@@ -44,16 +50,16 @@ class BunchChoiceType extends AbstractType
                             }
                     }
                 } else {
-                    throw new BunchNotFoundException();
+                    throw new CodeNotFoundException();
                 }
-            } catch (BunchNotFoundException $e) {
+            } catch (CodeNotFoundException $e) {
                 $value = RestChoiceType::REST_CHOICES_DEFAULT;
             }
 
             return $value;
         };
-        $resolver->setDefault(RestChoiceType::REST_COMPONENT_NAME, 'bunch');
-        $resolver->setDefault(RestChoiceType::REST_DESCRIPTION, 'bunchList');
+        $resolver->setDefault(RestChoiceType::REST_COMPONENT_NAME, 'code');
+        $resolver->setDefault(RestChoiceType::REST_DESCRIPTION, 'codeList');
         $resolver->setDefault(RestChoiceType::REST_CHOICES, $callback);
     }
 //endregion Public

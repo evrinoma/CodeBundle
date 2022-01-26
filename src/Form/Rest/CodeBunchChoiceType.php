@@ -2,16 +2,17 @@
 
 namespace Evrinoma\CodeBundle\Form\Rest;
 
-use Evrinoma\CodeBundle\Dto\OwnerApiDto;
-use Evrinoma\CodeBundle\Exception\Owner\OwnerNotFoundException;
-use Evrinoma\CodeBundle\Manager\Owner\QueryManagerInterface;
+use Evrinoma\CodeBundle\Dto\BunchApiDto;
+use Evrinoma\CodeBundle\Dto\TypeApiDto;
+use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
+use Evrinoma\CodeBundle\Manager\Bunch\QueryManagerInterface;
 use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\UtilsBundle\Form\Rest\RestChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OwnerChoiceType extends AbstractType
+class CodeBunchChoiceType extends AbstractType
 {
 //region SECTION: Fields
     private QueryManagerInterface $queryManager;
@@ -23,7 +24,6 @@ class OwnerChoiceType extends AbstractType
         $this->queryManager = $queryManager;
     }
 //endregion Constructor
-
 //region SECTION: Public
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -31,13 +31,8 @@ class OwnerChoiceType extends AbstractType
             $value = [];
             try {
                 if ($options->offsetExists('data')) {
-                    $criteria = $this->queryManager->criteria(new OwnerApiDto());
+                    $criteria = $this->queryManager->criteria(new BunchApiDto());
                     switch ($options->offsetGet('data')) {
-                        case  ModelInterface::BRIEF:
-                            foreach ($criteria as $entity) {
-                                $value[] = $entity->getBrief();
-                            }
-                            break;
                         case  ModelInterface::DESCRIPTION:
                             foreach ($criteria as $entity) {
                                 $value[] = $entity->getDescription();
@@ -49,16 +44,16 @@ class OwnerChoiceType extends AbstractType
                             }
                     }
                 } else {
-                    throw new OwnerNotFoundException();
+                    throw new BunchNotFoundException();
                 }
-            } catch (OwnerNotFoundException $e) {
+            } catch (BunchNotFoundException $e) {
                 $value = RestChoiceType::REST_CHOICES_DEFAULT;
             }
 
             return $value;
         };
-        $resolver->setDefault(RestChoiceType::REST_COMPONENT_NAME, 'owner');
-        $resolver->setDefault(RestChoiceType::REST_DESCRIPTION, 'ownerList');
+        $resolver->setDefault(RestChoiceType::REST_COMPONENT_NAME, 'bunch');
+        $resolver->setDefault(RestChoiceType::REST_DESCRIPTION, 'bunchList');
         $resolver->setDefault(RestChoiceType::REST_CHOICES, $callback);
     }
 //endregion Public

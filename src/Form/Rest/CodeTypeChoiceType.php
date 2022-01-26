@@ -2,18 +2,18 @@
 
 namespace Evrinoma\CodeBundle\Form\Rest;
 
-use Evrinoma\CodeBundle\Dto\CodeApiDto;
-use Evrinoma\CodeBundle\Exception\Code\CodeNotFoundException;
-use Evrinoma\CodeBundle\Manager\Code\QueryManagerInterface;
-use Evrinoma\CodeBundle\Model\Code\CodeInterface;
+use Evrinoma\CodeBundle\Dto\TypeApiDto;
+use Evrinoma\CodeBundle\Exception\Type\TypeNotFoundException;
+use Evrinoma\CodeBundle\Manager\Type\QueryManagerInterface;
 use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\UtilsBundle\Form\Rest\RestChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CodeChoiceType extends AbstractType
+class CodeTypeChoiceType extends AbstractType
 {
+
 //region SECTION: Fields
     private QueryManagerInterface $queryManager;
 //endregion Fields
@@ -24,6 +24,7 @@ class CodeChoiceType extends AbstractType
         $this->queryManager = $queryManager;
     }
 //endregion Constructor
+
 //region SECTION: Public
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -31,14 +32,8 @@ class CodeChoiceType extends AbstractType
             $value = [];
             try {
                 if ($options->offsetExists('data')) {
-                    /** @var CodeInterface[] $criteria */
-                    $criteria = $this->queryManager->criteria(new CodeApiDto());
-                    switch ($options->offsetGet('data')) {
-                        case  ModelInterface::DESCRIPTION:
-                            foreach ($criteria as $entity) {
-                                $value[] = $entity->getDescription();
-                            }
-                            break;
+                    $criteria = $this->queryManager->criteria(new TypeApiDto());
+                    switch($options->offsetGet('data')) {
                         case  ModelInterface::BRIEF:
                             foreach ($criteria as $entity) {
                                 $value[] = $entity->getBrief();
@@ -50,16 +45,16 @@ class CodeChoiceType extends AbstractType
                             }
                     }
                 } else {
-                    throw new CodeNotFoundException();
+                    throw new TypeNotFoundException();
                 }
-            } catch (CodeNotFoundException $e) {
+            } catch (TypeNotFoundException $e) {
                 $value = RestChoiceType::REST_CHOICES_DEFAULT;
             }
 
             return $value;
         };
-        $resolver->setDefault(RestChoiceType::REST_COMPONENT_NAME, 'code');
-        $resolver->setDefault(RestChoiceType::REST_DESCRIPTION, 'codeList');
+        $resolver->setDefault(RestChoiceType::REST_COMPONENT_NAME, 'type');
+        $resolver->setDefault(RestChoiceType::REST_DESCRIPTION, 'typeList');
         $resolver->setDefault(RestChoiceType::REST_CHOICES, $callback);
     }
 //endregion Public

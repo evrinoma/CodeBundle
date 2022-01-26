@@ -299,7 +299,7 @@ final class CodeApiController extends AbstractApiController implements ApiContro
      *              type="array",
      *              @OA\Items(
      *                  type="string",
-     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\TypeChoiceType::class, options={"data":"brief"})
+     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\CodeTypeChoiceType::class, options={"data":"brief"})
      *              ),
      *          ),
      *         style="form"
@@ -312,7 +312,7 @@ final class CodeApiController extends AbstractApiController implements ApiContro
      *              type="array",
      *              @OA\Items(
      *                  type="string",
-     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\OwnerChoiceType::class, options={"data":"brief"})
+     *                  ref=@Model(type=Evrinoma\CodeBundle\Form\Rest\CodeOwnerChoiceType::class, options={"data":"brief"})
      *              ),
      *          ),
      *         style="form"

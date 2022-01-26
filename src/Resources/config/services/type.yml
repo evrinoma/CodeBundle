@@ -45,11 +45,11 @@ services:
     alias: evrinoma.code.type.validator
 
   evrinoma.code.form.rest.type:
-    class: Evrinoma\CodeBundle\Form\Rest\TypeChoiceType
+    class: Evrinoma\CodeBundle\Form\Rest\CodeTypeChoiceType
     arguments:
       - '@evrinoma.code.type.query.manager'
     tags: { - name: form.type }
 
-  Evrinoma\CodeBundle\Form\Rest\TypeChoiceType:
+  Evrinoma\CodeBundle\Form\Rest\CodeTypeChoiceType:
     alias: evrinoma.code.form.rest.type
     public: true
