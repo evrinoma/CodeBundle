@@ -46,21 +46,21 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
         $entityBunch = $container->getParameter('evrinoma.code.entity_bunch');
         if ((strpos($entityBunch, EvrinomaCodeExtension::ENTITY) !== false)) {
             $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Bunch', '%s/Entity/Bunch');
-            $this->addResolveTargetEntity([BaseBunch::class => BunchInterface::class,], false);
+            $this->addResolveTargetEntity([BaseBunch::class => [BunchInterface::class => []],], false);
         }
 
         $entityCode = $container->getParameter('evrinoma.code.entity_code');
 
         if ((strpos($entityCode, EvrinomaCodeExtension::ENTITY) !== false)) {
             $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Code', '%s/Entity/Code');
-            $this->addResolveTargetEntity([BaseCode::class => CodeInterface::class,], false);
+            $this->addResolveTargetEntity([BaseCode::class => [CodeInterface::class => []],], false);
         }
 
         $entityCode = $container->getParameter('evrinoma.code.entity_bind');
 
         if ((strpos($entityCode, EvrinomaCodeExtension::ENTITY) !== false)) {
             $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Bind', '%s/Entity/Bind');
-            $this->addResolveTargetEntity([BaseBind::class => BindInterface::class,], false);
+            $this->addResolveTargetEntity([BaseBind::class => [BindInterface::class => []],], false);
         }
     }
 
