@@ -113,15 +113,15 @@ final class CodeApiController extends AbstractApiController implements ApiContro
 
         $this->commandManager->setRestCreated();
         try {
-            if ($codeApiDto->hasId() && $codeApiDto->hasTypeApiDto() && $codeApiDto->getTypeApiDto()->hasId() && $codeApiDto->hasOwnerApiDto() && $codeApiDto->getOwnerApiDto()->hasId()) {
-            $json = [];
-            $em   = $this->getDoctrine()->getManager();
+            if ($codeApiDto->hasTypeApiDto() && $codeApiDto->getTypeApiDto()->hasId() && $codeApiDto->hasOwnerApiDto() && $codeApiDto->getOwnerApiDto()->hasId()) {
+                $json = [];
+                $em   = $this->getDoctrine()->getManager();
 
-            $em->transactional(
-                function () use ($codeApiDto, $commandManager, &$json) {
-                    $json = $commandManager->post($codeApiDto);
-                }
-            );
+                $em->transactional(
+                    function () use ($codeApiDto, $commandManager, &$json) {
+                        $json = $commandManager->post($codeApiDto);
+                    }
+                );
             } else {
                 throw new CodeInvalidException('The Dto has\'t ID or class invalid');
             }

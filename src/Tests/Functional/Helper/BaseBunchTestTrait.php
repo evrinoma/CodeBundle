@@ -11,7 +11,7 @@ trait BaseBunchTestTrait
 //region SECTION: Protected
     protected function createBunch(): array
     {
-        $query = static::getDefault();
+        $query = static::getDefault(["id" => '']);
 
         return $this->post($query);
     }

@@ -93,7 +93,7 @@ final class BunchApiController extends AbstractApiController implements ApiContr
 
         $this->commandManager->setRestCreated();
         try {
-            if ($bunchApiDto->hasId() && $bunchApiDto->hasTypeApiDto() && $bunchApiDto->getTypeApiDto()->hasId()) {
+            if ($bunchApiDto->hasTypeApiDto() && $bunchApiDto->getTypeApiDto()->hasId()) {
                 $json = [];
                 $em   = $this->getDoctrine()->getManager();
 

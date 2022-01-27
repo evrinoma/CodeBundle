@@ -8,7 +8,7 @@ trait BaseTypeTestTrait
 //region SECTION: Protected
     protected function createType(): array
     {
-        $query = static::getDefault();
+        $query = static::getDefault(["id" => '']);
 
         return $this->post($query);
     }
