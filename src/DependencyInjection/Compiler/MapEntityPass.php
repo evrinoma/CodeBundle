@@ -37,8 +37,8 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
         $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Define', '%s/Entity/Define');
         $this->addResolveTargetEntity(
             [
-                BaseOwner::class => OwnerInterface::class,
-                BaseType::class  => TypeInterface::class,
+                BaseOwner::class => [OwnerInterface::class => [],],
+                BaseType::class  => [TypeInterface::class => [],],
             ],
             false
         );
