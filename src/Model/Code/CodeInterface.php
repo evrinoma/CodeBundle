@@ -3,15 +3,14 @@
 
 namespace Evrinoma\CodeBundle\Model\Code;
 
-
-use Evrinoma\CodeBundle\Model\Bunch\BunchInterface;
 use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 use Evrinoma\CodeBundle\Model\Define\TypeInterface;
 use Evrinoma\UtilsBundle\Entity\ActiveInterface;
 use Evrinoma\UtilsBundle\Entity\CreateUpdateAtInterface;
 use Evrinoma\UtilsBundle\Entity\IdInterface;
+use Evrinoma\UtilsBundle\Entity\DescriptionInterface;
 
-interface CodeInterface extends ActiveInterface, CreateUpdateAtInterface, IdInterface
+interface CodeInterface extends ActiveInterface, CreateUpdateAtInterface, IdInterface, DescriptionInterface
 {
 //region SECTION: Getters/Setters
     /**
