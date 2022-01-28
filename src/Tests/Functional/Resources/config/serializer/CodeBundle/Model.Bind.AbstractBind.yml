@@ -33,4 +33,4 @@ Evrinoma\CodeBundle\Model\Bind\AbstractBind:
           api_get_code_bind, api_post_code_bind, api_put_code_bind
       ]
       expose: true
-    
+
