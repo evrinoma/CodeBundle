@@ -2,11 +2,23 @@ Evrinoma\CodeBundle\Model\Define\AbstractOwner:
   exclusion_policy: ALL
   properties:
     id:
-      groups: [ api_get_code_owner, api_post_code_owner, api_put_code_owner, api_get_code_code, api_post_code_code, api_put_code_code, api_get_code_bind, api_post_code_bind, api_put_code_bind ]
+      groups: [
+          api_get_code_owner, api_post_code_owner, api_put_code_owner,
+          api_get_code_code, api_post_code_code, api_put_code_code,
+          api_get_code_bind, api_post_code_bind, api_put_code_bind
+      ]
       expose: true
     brief:
-      groups: [ api_get_code_owner, api_post_code_owner, api_put_code_owner, api_get_code_code, api_post_code_code, api_put_code_code, api_get_code_bind, api_post_code_bind, api_put_code_bind ]
+      groups: [
+          api_get_code_owner, api_post_code_owner, api_put_code_owner,
+          api_get_code_code, api_post_code_code, api_put_code_code,
+          api_get_code_bind, api_post_code_bind, api_put_code_bind
+      ]
       expose: true
     description:
-      groups: [ api_get_code_owner, api_post_code_owner, api_put_code_owner, api_get_code_code, api_post_code_code, api_put_code_code, api_get_code_bind, api_post_code_bind, api_put_code_bind ]
+      groups: [
+          api_get_code_owner, api_post_code_owner, api_put_code_owner,
+          api_get_code_code, api_post_code_code, api_put_code_code,
+          api_get_code_bind, api_post_code_bind, api_put_code_bind
+      ]
       expose: true

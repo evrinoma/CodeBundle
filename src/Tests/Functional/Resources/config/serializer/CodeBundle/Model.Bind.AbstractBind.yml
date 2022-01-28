@@ -2,22 +2,35 @@ Evrinoma\CodeBundle\Model\Bind\AbstractBind:
   exclusion_policy: ALL
   properties:
     id:
-      groups: [ api_get_code_bind, api_post_code_bind, api_put_code_bind ]
+      groups: [
+          api_get_code_bind, api_post_code_bind, api_put_code_bind
+      ]
       expose: true
     bunch:
       type: Evrinoma\CodeBundle\Model\Bunch\AbstractBunch
-      groups: [ api_get_code_bind, api_post_code_bind, api_put_code_bind ]
+      groups: [
+          api_get_code_bind, api_post_code_bind, api_put_code_bind
+      ]
       expose: true
     code:
       type: Evrinoma\CodeBundle\Model\Code\AbstractCode
-      groups: [ api_get_code_bind, api_post_code_bind, api_put_code_bind ]
+      groups: [
+          api_get_code_bind, api_post_code_bind, api_put_code_bind
+      ]
       expose: true
     createdAt:
       type: DateTimeImmutable<'Y-m-d H:i'>
-      groups: [ api_get_code_bind, api_post_code_bind, api_put_code_bind ]
+      groups: [
+          api_get_code_bind, api_post_code_bind, api_put_code_bind
+      ]
     updatedAt:
       type: DateTimeImmutable<'Y-m-d H:i'>
-      groups: [ api_get_code_bind, api_post_code_bind, api_put_code_bind ]
+      groups: [
+          api_get_code_bind, api_post_code_bind, api_put_code_bind
+      ]
     active:
-      groups: [ api_get_code_bind, api_post_code_bind, api_put_code_bind ]
+      groups: [
+          api_get_code_bind, api_post_code_bind, api_put_code_bind
+      ]
       expose: true
+    
