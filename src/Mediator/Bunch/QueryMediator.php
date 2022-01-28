@@ -40,7 +40,7 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
         }
         if ($dto->hasTypeApiDto() && $dto->getTypeApiDto()->hasId()) {
             $builder->andWhere($alias.'.type = :type')
-                ->setParameter('type', '%'.$dto->getTypeApiDto()->getId().'%');
+                ->setParameter('type', $dto->getTypeApiDto()->getId());
         }
     }
 //endregion Public
