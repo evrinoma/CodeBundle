@@ -124,6 +124,9 @@ class EvrinomaCodeExtension extends Extension
         $this->wireController($container, 'code', $config['dto_code']);
         $this->wireController($container, 'bind', $config['dto_bind']);
 
+        $this->wireForm($container, 'code', $config['dto_code']);
+        $this->wireForm($container, 'bunch', $config['dto_bunch']);
+
         $this->wireValidator($container, 'bunch', $config['entity_bunch']);
         $this->wireValidator($container, 'code', $config['entity_code']);
         $this->wireValidator($container, 'bind', $config['entity_bind']);
@@ -203,6 +206,13 @@ class EvrinomaCodeExtension extends Extension
     {
         $definitionApiController = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.api.controller');
         $definitionApiController->setArgument(5, $class);
+    }
+
+
+    private function wireForm(ContainerBuilder $container, string $name, string $class): void
+    {
+        $definitionForm = $container->getDefinition('evrinoma.'.$this->getAlias().'.form.rest.'.$name);
+        $definitionForm->setArgument(1, $class);
     }
 
     private function wireValidator(ContainerBuilder $container, string $name, string $class): void

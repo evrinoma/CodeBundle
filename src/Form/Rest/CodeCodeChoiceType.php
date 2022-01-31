@@ -16,11 +16,13 @@ class CodeCodeChoiceType extends AbstractType
 {
 //region SECTION: Fields
     private QueryManagerInterface $queryManager;
+    private static string         $dtoClass = CodeApiDto::class;
 //endregion Fields
 
 //region SECTION: Constructor
-    public function __construct(QueryManagerInterface $queryManager)
+    public function __construct(QueryManagerInterface $queryManager, string $entityClass)
     {
+        self::$dtoClass     = $entityClass;
         $this->queryManager = $queryManager;
     }
 //endregion Constructor
@@ -32,7 +34,7 @@ class CodeCodeChoiceType extends AbstractType
             try {
                 if ($options->offsetExists('data')) {
                     /** @var CodeInterface[] $criteria */
-                    $criteria = $this->queryManager->criteria(new CodeApiDto());
+                    $criteria = $this->queryManager->criteria(new self::$dtoClass);
                     switch ($options->offsetGet('data')) {
                         case  ModelInterface::DESCRIPTION:
                             foreach ($criteria as $entity) {

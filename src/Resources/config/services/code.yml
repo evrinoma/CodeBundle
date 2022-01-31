@@ -68,7 +68,6 @@ services:
   Evrinoma\CodeBundle\Mediator\Code\CommandMediatorInterface:
     alias: evrinoma.code.code.command.mediator
 
-
   evrinoma.code.form.rest.code:
     class: Evrinoma\CodeBundle\Form\Rest\CodeCodeChoiceType
     arguments:

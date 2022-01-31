@@ -3,7 +3,6 @@
 namespace Evrinoma\CodeBundle\Form\Rest;
 
 use Evrinoma\CodeBundle\Dto\BunchApiDto;
-use Evrinoma\CodeBundle\Dto\TypeApiDto;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
 use Evrinoma\CodeBundle\Manager\Bunch\QueryManagerInterface;
 use Evrinoma\CodeBundle\Model\ModelInterface;
@@ -16,11 +15,13 @@ class CodeBunchChoiceType extends AbstractType
 {
 //region SECTION: Fields
     private QueryManagerInterface $queryManager;
+    private static string         $dtoClass = BunchApiDto::class;
 //endregion Fields
 
 //region SECTION: Constructor
-    public function __construct(QueryManagerInterface $queryManager)
+    public function __construct(QueryManagerInterface $queryManager, string $entityClass)
     {
+        self::$dtoClass     = $entityClass;
         $this->queryManager = $queryManager;
     }
 //endregion Constructor
@@ -31,7 +32,7 @@ class CodeBunchChoiceType extends AbstractType
             $value = [];
             try {
                 if ($options->offsetExists('data')) {
-                    $criteria = $this->queryManager->criteria(new BunchApiDto());
+                    $criteria = $this->queryManager->criteria(new self::$dtoClass);
                     switch ($options->offsetGet('data')) {
                         case  ModelInterface::DESCRIPTION:
                             foreach ($criteria as $entity) {
