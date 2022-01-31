@@ -13,6 +13,8 @@ use Evrinoma\CodeBundle\Model\Bunch\BunchInterface;
 use Evrinoma\CodeBundle\Model\Code\CodeInterface;
 use Evrinoma\CodeBundle\Model\Define\OwnerInterface;
 use Evrinoma\CodeBundle\Model\Define\TypeInterface;
+use Evrinoma\ContractBundle\DependencyInjection\EvrinomaContractExtension;
+use Evrinoma\ContractBundle\Model\Contract\ContractInterface;
 use Evrinoma\UtilsBundle\DependencyInjection\Compiler\AbstractMapEntity;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -46,22 +48,23 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
         $entityBunch = $container->getParameter('evrinoma.code.entity_bunch');
         if ((strpos($entityBunch, EvrinomaCodeExtension::ENTITY) !== false)) {
             $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Bunch', '%s/Entity/Bunch');
-            $this->addResolveTargetEntity([BaseBunch::class => [BunchInterface::class => []],], false);
         }
+        $this->addResolveTargetEntity([$entityBunch => [BunchInterface::class => []],], false);
 
         $entityCode = $container->getParameter('evrinoma.code.entity_code');
 
         if ((strpos($entityCode, EvrinomaCodeExtension::ENTITY) !== false)) {
             $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Code', '%s/Entity/Code');
-            $this->addResolveTargetEntity([BaseCode::class => [CodeInterface::class => []],], false);
         }
+        $this->addResolveTargetEntity([$entityCode => [CodeInterface::class => []],], false);
 
-        $entityCode = $container->getParameter('evrinoma.code.entity_bind');
+        $entityBind = $container->getParameter('evrinoma.code.entity_bind');
 
-        if ((strpos($entityCode, EvrinomaCodeExtension::ENTITY) !== false)) {
+        if ((strpos($entityBind, EvrinomaCodeExtension::ENTITY) !== false)) {
             $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Bind', '%s/Entity/Bind');
-            $this->addResolveTargetEntity([BaseBind::class => [BindInterface::class => []],], false);
         }
+
+        $this->addResolveTargetEntity([$entityBind => [BindInterface::class => []],], false);
     }
 
 
