@@ -9,35 +9,31 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class DecoratorPass extends AbstractRecursivePass
 {
+    private $servises = ['code', 'bunch', 'bind'];
 //region SECTION: Public
+
     /**
      * @inheritDoc
      */
     public function process(ContainerBuilder $container)
     {
-        $decoratorQuery = $container->getParameter('evrinoma.'.EvrinomaCodeBundle::CODE_BUNDLE.'.decorates.code.query');
-        if ($decoratorQuery) {
-            $queryMediator = $container->getDefinition($decoratorQuery);
-            $repository    = $container->getDefinition('evrinoma.'.EvrinomaCodeBundle::CODE_BUNDLE.'.code.repository');
-            $repository->setArgument(2, $queryMediator);
+        foreach ($this->servises as $alias) {
+            $this->wireDecorates($container, $alias);
         }
-        $decoratorCommand = $container->getParameter('evrinoma.'.EvrinomaCodeBundle::CODE_BUNDLE.'.decorates.code.command');
-        if ($decoratorCommand) {
-            $commandMediator = $container->getDefinition($decoratorCommand);
-            $commandManager  = $container->getDefinition('evrinoma.'.EvrinomaCodeBundle::CODE_BUNDLE.'.code.command.manager');
-            $commandManager->setArgument(3, $commandMediator);
-        }
+    }
 
-        $decoratorQuery = $container->getParameter('evrinoma.'.EvrinomaCodeBundle::CODE_BUNDLE.'.decorates.bunch.query');
+    private function wireDecorates(ContainerBuilder $container, string $name)
+    {
+        $decoratorQuery = $container->getParameter('evrinoma.'.EvrinomaCodeBundle::CODE_BUNDLE.'.decorates.'.$name.'.query');
         if ($decoratorQuery) {
             $queryMediator = $container->getDefinition($decoratorQuery);
-            $repository    = $container->getDefinition('evrinoma.'.EvrinomaCodeBundle::CODE_BUNDLE.'.bunch.repository');
+            $repository    = $container->getDefinition('evrinoma.'.EvrinomaCodeBundle::CODE_BUNDLE.'.'.$name.'.repository');
             $repository->setArgument(2, $queryMediator);
         }
-        $decoratorCommand = $container->getParameter('evrinoma.'.EvrinomaCodeBundle::CODE_BUNDLE.'.decorates.bunch.command');
+        $decoratorCommand = $container->getParameter('evrinoma.'.EvrinomaCodeBundle::CODE_BUNDLE.'.decorates.'.$name.'.command');
         if ($decoratorCommand) {
             $commandMediator = $container->getDefinition($decoratorCommand);
-            $commandManager  = $container->getDefinition('evrinoma.'.EvrinomaCodeBundle::CODE_BUNDLE.'.bunch.command.manager');
+            $commandManager  = $container->getDefinition('evrinoma.'.EvrinomaCodeBundle::CODE_BUNDLE.'.'.$name.'.command.manager');
             $commandManager->setArgument(3, $commandMediator);
         }
     }
