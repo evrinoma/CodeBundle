@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class AbstractCode
  *
  * @ORM\MappedSuperclass
- * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_code", columns={"brief", "description", "owner_id"})})
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="idx_code", columns={"brief", "description", "owner_id", "type_id"})})
  */
 abstract class AbstractCode implements CodeInterface
 {
