@@ -3,8 +3,8 @@
 namespace Evrinoma\CodeBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\ActiveInterface;
-use Evrinoma\DtoCommon\ValueObject\IdInterface;
+use Evrinoma\DtoCommon\ValueObject\Immutable\ActiveInterface;
+use Evrinoma\DtoCommon\ValueObject\Immutable\IdInterface;
 
 interface BindApiDtoInterface extends DtoInterface, IdInterface, ActiveInterface
 {
@@ -12,6 +12,7 @@ interface BindApiDtoInterface extends DtoInterface, IdInterface, ActiveInterface
      * @return bool
      */
     public function hasBunchApiDto(): bool;
+
     /**
      * @return bool
      */

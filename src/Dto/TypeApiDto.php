@@ -4,8 +4,8 @@ namespace Evrinoma\CodeBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\BriefTrait;
-use Evrinoma\DtoCommon\ValueObject\IdTrait;
+use Evrinoma\DtoCommon\ValueObject\Immutable\BriefTrait;
+use Evrinoma\DtoCommon\ValueObject\Immutable\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 final class TypeApiDto extends AbstractDto implements TypeApiDtoInterface

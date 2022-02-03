@@ -5,9 +5,9 @@ namespace Evrinoma\CodeBundle\Dto;
 use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\ActiveTrait;
-use Evrinoma\DtoCommon\ValueObject\DescriptionTrait;
-use Evrinoma\DtoCommon\ValueObject\IdTrait;
+use Evrinoma\DtoCommon\ValueObject\Immutable\ActiveTrait;
+use Evrinoma\DtoCommon\ValueObject\Immutable\DescriptionTrait;
+use Evrinoma\DtoCommon\ValueObject\Immutable\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class BunchApiDto extends AbstractDto implements BunchApiDtoInterface

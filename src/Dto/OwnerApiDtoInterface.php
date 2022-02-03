@@ -3,9 +3,9 @@
 namespace Evrinoma\CodeBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\BriefInterface;
-use Evrinoma\DtoCommon\ValueObject\DescriptionInterface;
-use Evrinoma\DtoCommon\ValueObject\IdInterface;
+use Evrinoma\DtoCommon\ValueObject\Immutable\BriefInterface;
+use Evrinoma\DtoCommon\ValueObject\Immutable\DescriptionInterface;
+use Evrinoma\DtoCommon\ValueObject\Immutable\IdInterface;
 
 interface OwnerApiDtoInterface extends DtoInterface, IdInterface, DescriptionInterface, BriefInterface
 {

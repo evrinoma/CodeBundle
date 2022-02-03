@@ -5,8 +5,8 @@ namespace Evrinoma\CodeBundle\Dto;
 use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\ActiveTrait;
-use Evrinoma\DtoCommon\ValueObject\IdTrait;
+use Evrinoma\DtoCommon\ValueObject\Immutable\ActiveTrait;
+use Evrinoma\DtoCommon\ValueObject\Immutable\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class BindApiDto extends AbstractDto implements BindApiDtoInterface
@@ -26,24 +26,6 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
      */
     private ?CodeApiDto $codeApiDto = null;
 //endregion Fields
-
-//region SECTION: Private
-    /**
-     * @param string $active
-     */
-    private function setActive(string $active): void
-    {
-        $this->active = $active;
-    }
-
-    /**
-     * @param int|null $id
-     */
-    private function setId(?int $id): void
-    {
-        $this->id = $id;
-    }
-//endregion Private
 
 //region SECTION: Dto
     public function toDto(Request $request): DtoInterface

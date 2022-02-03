@@ -3,15 +3,16 @@
 namespace Evrinoma\CodeBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\ActiveInterface;
-use Evrinoma\DtoCommon\ValueObject\BriefInterface;
-use Evrinoma\DtoCommon\ValueObject\DescriptionInterface;
-use Evrinoma\DtoCommon\ValueObject\IdInterface;
+use Evrinoma\DtoCommon\ValueObject\Immutable\ActiveInterface;
+use Evrinoma\DtoCommon\ValueObject\Immutable\BriefInterface;
+use Evrinoma\DtoCommon\ValueObject\Immutable\DescriptionInterface;
+use Evrinoma\DtoCommon\ValueObject\Immutable\IdInterface;
 
 interface CodeApiDtoInterface extends DtoInterface, IdInterface, ActiveInterface, DescriptionInterface, BriefInterface
 {
     public const CODE = 'code';
 //region SECTION: Dto
+
     /**
      * @return bool
      */
