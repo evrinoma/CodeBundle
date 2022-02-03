@@ -5,8 +5,8 @@ namespace Evrinoma\CodeBundle\Dto;
 use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\Immutable\ActiveTrait;
-use Evrinoma\DtoCommon\ValueObject\Immutable\IdTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\ActiveTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class BindApiDto extends AbstractDto implements BindApiDtoInterface
