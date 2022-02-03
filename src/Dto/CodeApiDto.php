@@ -5,10 +5,10 @@ namespace Evrinoma\CodeBundle\Dto;
 use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\Immutable\ActiveTrait;
-use Evrinoma\DtoCommon\ValueObject\Immutable\BriefTrait;
-use Evrinoma\DtoCommon\ValueObject\Immutable\DescriptionTrait;
-use Evrinoma\DtoCommon\ValueObject\Immutable\IdTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\ActiveTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\BriefTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\DescriptionTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
@@ -29,55 +29,30 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
 //endregion Fields
 
 
-//region SECTION: Private
-    /**
-     * @param string $active
-     */
-    private function setActive(string $active): void
-    {
-        $this->active = $active;
-    }
-
-    /**
-     * @param string $description
-     */
-    private function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @param int|null $id
-     */
-    private function setId(?int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @param string $brief
-     */
-    private function setBrief(string $brief): void
-    {
-        $this->brief = $brief;
-    }
-//endregion Private
-
 //region SECTION: Dto
+
     /**
      * @param OwnerApiDto $ownerApiDto
+     *
+     * @return DtoInterface
      */
-    public function setOwnerApiDto(OwnerApiDto $ownerApiDto): void
+    public function setOwnerApiDto(OwnerApiDto $ownerApiDto): DtoInterface
     {
         $this->ownerApiDto = $ownerApiDto;
+
+        return $this;
     }
 
     /**
      * @param TypeApiDto $typeApiDto
+     *
+     * @return DtoInterface
      */
-    public function setTypeApiDto(TypeApiDto $typeApiDto): void
+    public function setTypeApiDto(TypeApiDto $typeApiDto): DtoInterface
     {
         $this->typeApiDto = $typeApiDto;
+
+        return $this;
     }
 
     public function toDto(Request $request): DtoInterface

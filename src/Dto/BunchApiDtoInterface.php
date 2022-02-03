@@ -11,7 +11,6 @@ interface BunchApiDtoInterface extends DtoInterface, IdInterface, ActiveInterfac
 {
     public const BUNCH = 'bunch';
 //region SECTION: Dto
-
     /**
      * @return bool
      */

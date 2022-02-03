@@ -5,9 +5,9 @@ namespace Evrinoma\CodeBundle\Dto;
 use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\Immutable\ActiveTrait;
-use Evrinoma\DtoCommon\ValueObject\Immutable\DescriptionTrait;
-use Evrinoma\DtoCommon\ValueObject\Immutable\IdTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\ActiveTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\DescriptionTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
@@ -22,40 +22,17 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
     private ?TypeApiDto $typeApiDto = null;
 //endregion Fields
 
-
-//region SECTION: Private
-    /**
-     * @param string $active
-     */
-    private function setActive(string $active): void
-    {
-        $this->active = $active;
-    }
-
-    /**
-     * @param int|null $id
-     */
-    private function setId(?int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @param string $description
-     */
-    private function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-//endregion Private
-
 //region SECTION: Dto
     /**
      * @param TypeApiDto $typeApiDto
+     *
+     * @return DtoInterface
      */
-    public function setTypeApiDto(TypeApiDto $typeApiDto): void
+    public function setTypeApiDto(TypeApiDto $typeApiDto): DtoInterface
     {
         $this->typeApiDto = $typeApiDto;
+
+        return $this;
     }
 
     public function toDto(Request $request): DtoInterface

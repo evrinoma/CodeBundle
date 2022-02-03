@@ -102,9 +102,11 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
     /**
      * @param BunchApiDto $bunchApiDto
      */
-    public function setBunchApiDto(BunchApiDto $bunchApiDto): void
+    public function setBunchApiDto(BunchApiDto $bunchApiDto): DtoInterface
     {
         $this->bunchApiDto = $bunchApiDto;
+
+        return $this;
     }
 
     /**
@@ -126,9 +128,11 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
     /**
      * @param CodeApiDto $codeApiDto
      */
-    public function setCodeApiDto(CodeApiDto $codeApiDto): void
+    public function setCodeApiDto(CodeApiDto $codeApiDto): DtoInterface
     {
         $this->codeApiDto = $codeApiDto;
+
+        return $this;
     }
 //endregion SECTION: Dto
 }
