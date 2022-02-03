@@ -9,6 +9,7 @@ use Evrinoma\DtoCommon\ValueObject\IdInterface;
 
 interface BunchApiDtoInterface extends DtoInterface, IdInterface, ActiveInterface, DescriptionInterface
 {
+    public const BUNCH = 'bunch';
 //region SECTION: Dto
     /**
      * @return bool

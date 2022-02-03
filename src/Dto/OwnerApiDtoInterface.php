@@ -9,4 +9,5 @@ use Evrinoma\DtoCommon\ValueObject\IdInterface;
 
 interface OwnerApiDtoInterface extends DtoInterface, IdInterface, DescriptionInterface, BriefInterface
 {
+    public const OWNER = 'owner';
 }

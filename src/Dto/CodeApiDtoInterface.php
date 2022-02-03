@@ -10,6 +10,7 @@ use Evrinoma\DtoCommon\ValueObject\IdInterface;
 
 interface CodeApiDtoInterface extends DtoInterface, IdInterface, ActiveInterface, DescriptionInterface, BriefInterface
 {
+    public const CODE = 'code';
 //region SECTION: Dto
     /**
      * @return bool

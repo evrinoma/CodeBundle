@@ -3,9 +3,9 @@
 namespace Evrinoma\CodeBundle\Form\Rest;
 
 use Evrinoma\CodeBundle\Dto\BunchApiDto;
+use Evrinoma\CodeBundle\Dto\BunchApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Bunch\BunchNotFoundException;
 use Evrinoma\CodeBundle\Manager\Bunch\QueryManagerInterface;
-use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\UtilsBundle\Form\Rest\RestChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
@@ -34,7 +34,7 @@ class CodeBunchChoiceType extends AbstractType
                 if ($options->offsetExists('data')) {
                     $criteria = $this->queryManager->criteria(new self::$dtoClass);
                     switch ($options->offsetGet('data')) {
-                        case  ModelInterface::DESCRIPTION:
+                        case  BunchApiDtoInterface::DESCRIPTION:
                             foreach ($criteria as $entity) {
                                 $value[] = $entity->getDescription();
                             }

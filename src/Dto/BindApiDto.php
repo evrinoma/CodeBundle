@@ -2,7 +2,6 @@
 
 namespace Evrinoma\CodeBundle\Dto;
 
-use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
@@ -52,8 +51,8 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
         $class = $request->get(DtoInterface::DTO_CLASS);
 
         if ($class === $this->getClass()) {
-            $active = $request->get(ModelInterface::ACTIVE);
-            $id     = $request->get(ModelInterface::ID);
+            $active = $request->get(BindApiDtoInterface::ACTIVE);
+            $id     = $request->get(BindApiDtoInterface::ID);
 
             if ($active) {
                 $this->setActive($active);
@@ -74,7 +73,7 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
     public function genRequestBunchApiDto(?Request $request): ?\Generator
     {
         if ($request) {
-            $type = $request->get('bunch');
+            $type = $request->get(BunchApiDtoInterface::BUNCH);
             if ($type) {
                 $newRequest                    = $this->getCloneRequest();
                 $type[DtoInterface::DTO_CLASS] = BunchApiDto::class;
@@ -91,7 +90,7 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
     public function genRequestCodeApiDto(?Request $request): ?\Generator
     {
         if ($request) {
-            $type = $request->get('code');
+            $type = $request->get(CodeApiDtoInterface::CODE);
             if ($type) {
                 $newRequest                    = $this->getCloneRequest();
                 $type[DtoInterface::DTO_CLASS] = CodeApiDto::class;

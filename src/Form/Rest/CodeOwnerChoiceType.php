@@ -3,9 +3,9 @@
 namespace Evrinoma\CodeBundle\Form\Rest;
 
 use Evrinoma\CodeBundle\Dto\OwnerApiDto;
+use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Owner\OwnerNotFoundException;
 use Evrinoma\CodeBundle\Manager\Owner\QueryManagerInterface;
-use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\UtilsBundle\Form\Rest\RestChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
@@ -33,12 +33,12 @@ class CodeOwnerChoiceType extends AbstractType
                 if ($options->offsetExists('data')) {
                     $criteria = $this->queryManager->criteria(new OwnerApiDto());
                     switch ($options->offsetGet('data')) {
-                        case  ModelInterface::BRIEF:
+                        case  OwnerApiDtoInterface::BRIEF:
                             foreach ($criteria as $entity) {
                                 $value[] = $entity->getBrief();
                             }
                             break;
-                        case  ModelInterface::DESCRIPTION:
+                        case  OwnerApiDtoInterface::DESCRIPTION:
                             foreach ($criteria as $entity) {
                                 $value[] = $entity->getDescription();
                             }

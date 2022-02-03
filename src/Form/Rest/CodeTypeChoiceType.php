@@ -3,9 +3,9 @@
 namespace Evrinoma\CodeBundle\Form\Rest;
 
 use Evrinoma\CodeBundle\Dto\TypeApiDto;
+use Evrinoma\CodeBundle\Dto\TypeApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Type\TypeNotFoundException;
 use Evrinoma\CodeBundle\Manager\Type\QueryManagerInterface;
-use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\UtilsBundle\Form\Rest\RestChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
@@ -34,7 +34,7 @@ class CodeTypeChoiceType extends AbstractType
                 if ($options->offsetExists('data')) {
                     $criteria = $this->queryManager->criteria(new TypeApiDto());
                     switch($options->offsetGet('data')) {
-                        case  ModelInterface::BRIEF:
+                        case  TypeApiDtoInterface::BRIEF:
                             foreach ($criteria as $entity) {
                                 $value[] = $entity->getBrief();
                             }

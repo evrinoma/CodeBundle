@@ -2,7 +2,6 @@
 
 namespace Evrinoma\CodeBundle\Dto;
 
-use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
@@ -86,10 +85,10 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
         $class = $request->get(DtoInterface::DTO_CLASS);
 
         if ($class === $this->getClass()) {
-            $id          = $request->get(ModelInterface::ID);
-            $brief       = $request->get(ModelInterface::BRIEF);
-            $description = $request->get(ModelInterface::DESCRIPTION);
-            $active      = $request->get(ModelInterface::ACTIVE);
+            $id          = $request->get(CodeApiDtoInterface::ID);
+            $brief       = $request->get(CodeApiDtoInterface::BRIEF);
+            $description = $request->get(CodeApiDtoInterface::DESCRIPTION);
+            $active      = $request->get(CodeApiDtoInterface::ACTIVE);
 
             if ($active) {
                 $this->setActive($active);
@@ -137,7 +136,7 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
     public function genRequestOwnerApiDto(?Request $request): ?\Generator
     {
         if ($request) {
-            $owner = $request->get('owner');
+            $owner = $request->get(OwnerApiDtoInterface::OWNER);
             if ($owner) {
                 $newRequest                     = $this->getCloneRequest();
                 $owner[DtoInterface::DTO_CLASS] = OwnerApiDto::class;
@@ -154,7 +153,7 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
     public function genRequestTypeApiDto(?Request $request): ?\Generator
     {
         if ($request) {
-            $type = $request->get('type');
+            $type = $request->get(TypeApiDtoInterface::TYPE);
             if ($type) {
                 $newRequest                    = $this->getCloneRequest();
                 $type[DtoInterface::DTO_CLASS] = TypeApiDto::class;

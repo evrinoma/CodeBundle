@@ -2,7 +2,6 @@
 
 namespace Evrinoma\CodeBundle\Dto;
 
-use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\BriefTrait;
@@ -47,9 +46,9 @@ final class OwnerApiDto extends AbstractDto implements OwnerApiDtoInterface
         $class = $request->get(DtoInterface::DTO_CLASS);
 
         if ($class === $this->getClass()) {
-            $id          = $request->get(ModelInterface::ID);
-            $brief       = $request->get(ModelInterface::BRIEF);
-            $description = $request->get(ModelInterface::DESCRIPTION);
+            $id          = $request->get(OwnerApiDtoInterface::ID);
+            $brief       = $request->get(OwnerApiDtoInterface::BRIEF);
+            $description = $request->get(OwnerApiDtoInterface::DESCRIPTION);
 
             if ($brief) {
                 $this->setBrief($brief);

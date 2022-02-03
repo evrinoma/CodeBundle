@@ -3,10 +3,10 @@
 namespace Evrinoma\CodeBundle\Form\Rest;
 
 use Evrinoma\CodeBundle\Dto\CodeApiDto;
+use Evrinoma\CodeBundle\Dto\CodeApiDtoInterface;
 use Evrinoma\CodeBundle\Exception\Code\CodeNotFoundException;
 use Evrinoma\CodeBundle\Manager\Code\QueryManagerInterface;
 use Evrinoma\CodeBundle\Model\Code\CodeInterface;
-use Evrinoma\CodeBundle\Model\ModelInterface;
 use Evrinoma\UtilsBundle\Form\Rest\RestChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
@@ -36,12 +36,12 @@ class CodeCodeChoiceType extends AbstractType
                     /** @var CodeInterface[] $criteria */
                     $criteria = $this->queryManager->criteria(new self::$dtoClass);
                     switch ($options->offsetGet('data')) {
-                        case  ModelInterface::DESCRIPTION:
+                        case  CodeApiDtoInterface::DESCRIPTION:
                             foreach ($criteria as $entity) {
                                 $value[] = $entity->getDescription();
                             }
                             break;
-                        case  ModelInterface::BRIEF:
+                        case  CodeApiDtoInterface::BRIEF:
                             foreach ($criteria as $entity) {
                                 $value[] = $entity->getBrief();
                             }
