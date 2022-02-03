@@ -1,7 +1,8 @@
 <?php
 
-namespace Evrinoma\CodeBundle\Dto;
+namespace Evrinoma\CodeBundle\Dto\Preserve;
 
+use Evrinoma\CodeBundle\Dto\CodeApiDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\ActiveInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdInterface;
