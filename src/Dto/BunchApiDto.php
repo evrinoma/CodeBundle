@@ -17,18 +17,18 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
 
     /**
      * @Dto(class="Evrinoma\CodeBundle\Dto\TypeApiDto", generator="genRequestTypeApiDto")
-     * @var TypeApiDto|null
+     * @var TypeApiDtoInterface|null
      */
-    private ?TypeApiDto $typeApiDto = null;
+    private ?TypeApiDtoInterface $typeApiDto = null;
 //endregion Fields
 
 //region SECTION: Dto
     /**
-     * @param TypeApiDto $typeApiDto
+     * @param TypeApiDtoInterface $typeApiDto
      *
      * @return DtoInterface
      */
-    public function setTypeApiDto(TypeApiDto $typeApiDto): DtoInterface
+    public function setTypeApiDto(TypeApiDtoInterface $typeApiDto): DtoInterface
     {
         $this->typeApiDto = $typeApiDto;
 
@@ -61,9 +61,9 @@ class BunchApiDto extends AbstractDto implements BunchApiDtoInterface
     }
 
     /**
-     * @return TypeApiDto
+     * @return TypeApiDtoInterface
      */
-    public function getTypeApiDto(): TypeApiDto
+    public function getTypeApiDto(): TypeApiDtoInterface
     {
         return $this->typeApiDto;
     }

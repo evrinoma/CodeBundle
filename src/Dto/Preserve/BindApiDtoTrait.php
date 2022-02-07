@@ -2,28 +2,27 @@
 
 namespace Evrinoma\CodeBundle\Dto\Preserve;
 
-use Evrinoma\CodeBundle\Dto\CodeApiDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 
 trait BindApiDtoTrait
 {
 //region SECTION: Dto
     /**
-     * @param CodeApiDto $codeApiDto
+     * @param CodeApiDtoInterface $codeApiDto
      *
      * @return self|DtoInterface
      */
-    public function setCodeApiDto(CodeApiDto $codeApiDto): DtoInterface
+    public function setCodeApiDto(CodeApiDtoInterface $codeApiDto): DtoInterface
     {
         return parent::setCodeApiDto($codeApiDto);
     }
 
     /**
-     * @param BunchApiDto $bunchApiDto
+     * @param BunchApiDtoInterface $bunchApiDto
      *
      * @return self|DtoInterface
      */
-    public function setBunchApiDto(BunchApiDto $bunchApiDto): DtoInterface
+    public function setBunchApiDto(BunchApiDtoInterface $bunchApiDto): DtoInterface
     {
         return parent::setBunchApiDto($bunchApiDto);
     }

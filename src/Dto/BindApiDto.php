@@ -16,15 +16,15 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
 //region SECTION: Fields
     /**
      * @Dto(class="Evrinoma\CodeBundle\Dto\BunchApiDto", generator="genRequestBunchApiDto")
-     * @var BunchApiDto|null
+     * @var BunchApiDtoInterface|null
      */
-    private ?BunchApiDto $bunchApiDto = null;
+    private ?BunchApiDtoInterface $bunchApiDto = null;
 
     /**
      * @Dto(class="Evrinoma\CodeBundle\Dto\CodeApiDto", generator="genRequestCodeApiDto")
-     * @var CodeApiDto|null
+     * @var CodeApiDtoInterface|null
      */
-    private ?CodeApiDto $codeApiDto = null;
+    private ?CodeApiDtoInterface $codeApiDto = null;
 //endregion Fields
 
 //region SECTION: Dto
@@ -100,9 +100,11 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
     }
 
     /**
-     * @param BunchApiDto $bunchApiDto
+     * @param BunchApiDtoInterface $bunchApiDto
+     *
+     * @return DtoInterface
      */
-    public function setBunchApiDto(BunchApiDto $bunchApiDto): DtoInterface
+    public function setBunchApiDto(BunchApiDtoInterface $bunchApiDto): DtoInterface
     {
         $this->bunchApiDto = $bunchApiDto;
 
@@ -110,25 +112,27 @@ class BindApiDto extends AbstractDto implements BindApiDtoInterface
     }
 
     /**
-     * @return BunchApiDto
+     * @return BunchApiDtoInterface
      */
-    public function getBunchApiDto(): BunchApiDto
+    public function getBunchApiDto(): BunchApiDtoInterface
     {
         return $this->bunchApiDto;
     }
 
     /**
-     * @return CodeApiDto
+     * @return CodeApiDtoInterface
      */
-    public function getCodeApiDto(): CodeApiDto
+    public function getCodeApiDto(): CodeApiDtoInterface
     {
         return $this->codeApiDto;
     }
 
     /**
-     * @param CodeApiDto $codeApiDto
+     * @param CodeApiDtoInterface $codeApiDto
+     *
+     * @return DtoInterface
      */
-    public function setCodeApiDto(CodeApiDto $codeApiDto): DtoInterface
+    public function setCodeApiDto(CodeApiDtoInterface $codeApiDto): DtoInterface
     {
         $this->codeApiDto = $codeApiDto;
 

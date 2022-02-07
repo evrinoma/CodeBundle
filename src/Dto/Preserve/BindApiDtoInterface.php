@@ -2,7 +2,6 @@
 
 namespace Evrinoma\CodeBundle\Dto\Preserve;
 
-use Evrinoma\CodeBundle\Dto\CodeApiDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\ActiveInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdInterface;
@@ -11,17 +10,17 @@ interface BindApiDtoInterface extends IdInterface, ActiveInterface
 {
 //region SECTION: Dto
     /**
-     * @param CodeApiDto $codeApiDto
+     * @param CodeApiDtoInterface $codeApiDto
      *
      * @return self|DtoInterface
      */
-    public function setCodeApiDto(CodeApiDto $codeApiDto): DtoInterface;
+    public function setCodeApiDto(CodeApiDtoInterface $codeApiDto): DtoInterface;
 
     /**
-     * @param BunchApiDto $bunchApiDto
+     * @param BunchApiDtoInterface $bunchApiDto
      *
      * @return self|DtoInterface
      */
-    public function setBunchApiDto(BunchApiDto $bunchApiDto): DtoInterface;
+    public function setBunchApiDto(BunchApiDtoInterface $bunchApiDto): DtoInterface;
 //endregion SECTION: Dto
 }

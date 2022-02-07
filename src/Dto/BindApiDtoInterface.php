@@ -19,11 +19,12 @@ interface BindApiDtoInterface extends DtoInterface, IdInterface, ActiveInterface
     public function hasCodeApiDto(): bool;
 
     /**
-     * @return BunchApiDto
+     * @return BunchApiDtoInterface
      */
-    public function getBunchApiDto(): BunchApiDto;
+    public function getBunchApiDto(): BunchApiDtoInterface;
+
     /**
-     * @return CodeApiDto
+     * @return CodeApiDtoInterface
      */
-    public function getCodeApiDto(): CodeApiDto;
+    public function getCodeApiDto(): CodeApiDtoInterface;
 }

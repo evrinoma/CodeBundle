@@ -18,25 +18,25 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
 
     /**
      * @Dto(class="Evrinoma\CodeBundle\Dto\TypeApiDto", generator="genRequestTypeApiDto")
-     * @var TypeApiDto|null
+     * @var TypeApiDtoInterface|null
      */
-    private ?TypeApiDto $typeApiDto = null;
+    private ?TypeApiDtoInterface $typeApiDto = null;
     /**
      * @Dto(class="Evrinoma\CodeBundle\Dto\OwnerApiDto", generator="genRequestOwnerApiDto")
-     * @var OwnerApiDto|null
+     * @var OwnerApiDtoInterface|null
      */
-    private ?OwnerApiDto $ownerApiDto = null;
+    private ?OwnerApiDtoInterface $ownerApiDto = null;
 //endregion Fields
 
 
 //region SECTION: Dto
 
     /**
-     * @param OwnerApiDto $ownerApiDto
+     * @param OwnerApiDtoInterface $ownerApiDto
      *
      * @return DtoInterface
      */
-    public function setOwnerApiDto(OwnerApiDto $ownerApiDto): DtoInterface
+    public function setOwnerApiDto(OwnerApiDtoInterface $ownerApiDto): DtoInterface
     {
         $this->ownerApiDto = $ownerApiDto;
 
@@ -48,7 +48,7 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
      *
      * @return DtoInterface
      */
-    public function setTypeApiDto(TypeApiDto $typeApiDto): DtoInterface
+    public function setTypeApiDto(TypeApiDtoInterface $typeApiDto): DtoInterface
     {
         $this->typeApiDto = $typeApiDto;
 
@@ -90,7 +90,7 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
         return $this->ownerApiDto !== null;
     }
 
-    public function getOwnerApiDto(): OwnerApiDto
+    public function getOwnerApiDto(): OwnerApiDtoInterface
     {
         return $this->ownerApiDto;
     }
@@ -100,7 +100,7 @@ class CodeApiDto extends AbstractDto implements CodeApiDtoInterface
         return $this->typeApiDto !== null;
     }
 
-    public function getTypeApiDto(): TypeApiDto
+    public function getTypeApiDto(): TypeApiDtoInterface
     {
         return $this->typeApiDto;
     }

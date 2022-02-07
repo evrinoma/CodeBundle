@@ -18,13 +18,13 @@ interface CodeApiDtoInterface extends DtoInterface, IdInterface, ActiveInterface
      */
     public function hasOwnerApiDto(): bool;
 
-    public function getOwnerApiDto(): OwnerApiDto;
+    public function getOwnerApiDto(): OwnerApiDtoInterface;
 
     /**
      * @return bool
      */
     public function hasTypeApiDto(): bool;
 
-    public function getTypeApiDto(): TypeApiDto;
+    public function getTypeApiDto(): TypeApiDtoInterface;
 //endregion SECTION: Dto
 }

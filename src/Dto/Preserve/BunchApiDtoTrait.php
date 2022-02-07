@@ -2,8 +2,6 @@
 
 namespace Evrinoma\CodeBundle\Dto\Preserve;
 
-
-use Evrinoma\CodeBundle\Dto\TypeApiDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 
 trait BunchApiDtoTrait
@@ -11,11 +9,11 @@ trait BunchApiDtoTrait
 
 //region SECTION: Dto
     /**
-     * @param TypeApiDto $typeApiDto
+     * @param TypeApiDtoInterface $typeApiDto
      *
      * @return DtoInterface
      */
-    public function setTypeApiDto(TypeApiDto $typeApiDto): DtoInterface
+    public function setTypeApiDto(TypeApiDtoInterface $typeApiDto): DtoInterface
     {
         return parent::setTypeApiDto($typeApiDto);
     }

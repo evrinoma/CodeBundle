@@ -16,6 +16,6 @@ interface BunchApiDtoInterface extends DtoInterface, IdInterface, ActiveInterfac
      */
     public function hasTypeApiDto(): bool;
 
-    public function getTypeApiDto(): TypeApiDto;
+    public function getTypeApiDto(): TypeApiDtoInterface;
 //endregion SECTION: Dto
 }
