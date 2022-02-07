@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Evrinoma\FcrBundle\Dto\Preserve;
+namespace Evrinoma\CodeBundle\Dto\Preserve;
 
 
 use Evrinoma\CodeBundle\Dto\OwnerApiDto;
