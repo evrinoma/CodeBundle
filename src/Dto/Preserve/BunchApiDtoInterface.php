@@ -6,15 +6,16 @@ use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\ActiveInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\DescriptionInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdInterface;
+use Evrinoma\CodeBundle\Dto\TypeApiDtoInterface as BaseTypeApiDtoInterface;
 
 interface BunchApiDtoInterface extends IdInterface, ActiveInterface, DescriptionInterface
 {
 //region SECTION: Dto
     /**
-     * @param TypeApiDtoInterface $typeApiDto
+     * @param BaseTypeApiDtoInterface $typeApiDto
      *
      * @return DtoInterface
      */
-    public function setTypeApiDto(TypeApiDtoInterface $typeApiDto): DtoInterface;
+    public function setTypeApiDto(BaseTypeApiDtoInterface $typeApiDto): DtoInterface;
 //endregion SECTION: Dto
 }

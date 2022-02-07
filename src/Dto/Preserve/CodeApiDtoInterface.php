@@ -3,7 +3,8 @@
 
 namespace Evrinoma\CodeBundle\Dto\Preserve;
 
-
+use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface as BaseOwnerApiDtoInterface;
+use Evrinoma\CodeBundle\Dto\TypeApiDtoInterface as BaseTypeApiDtoInterface;
 use Evrinoma\CodeBundle\Dto\OwnerApiDtoInterface;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\ActiveInterface;
@@ -15,17 +16,17 @@ interface CodeApiDtoInterface extends IdInterface, ActiveInterface, DescriptionI
 {
 //region SECTION: Dto
     /**
-     * @param OwnerApiDtoInterface $ownerApiDto
+     * @param BaseOwnerApiDtoInterface $ownerApiDto
      *
      * @return DtoInterface
      */
-    public function setOwnerApiDto(OwnerApiDtoInterface $ownerApiDto): DtoInterface;
+    public function setOwnerApiDto(BaseOwnerApiDtoInterface $ownerApiDto): DtoInterface;
 
     /**
-     * @param TypeApiDtoInterface $typeApiDto
+     * @param BaseTypeApiDtoInterface $typeApiDto
      *
      * @return DtoInterface
      */
-    public function setTypeApiDto(TypeApiDtoInterface $typeApiDto): DtoInterface;
+    public function setTypeApiDto(BaseTypeApiDtoInterface $typeApiDto): DtoInterface;
 //endregion SECTION: Dto
 }

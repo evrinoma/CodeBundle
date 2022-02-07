@@ -6,19 +6,6 @@ use Evrinoma\DtoBundle\Dto\DtoInterface;
 
 trait BunchApiDtoTrait
 {
-
-//region SECTION: Dto
-    /**
-     * @param TypeApiDtoInterface $typeApiDto
-     *
-     * @return DtoInterface
-     */
-    public function setTypeApiDto(TypeApiDtoInterface $typeApiDto): DtoInterface
-    {
-        return parent::setTypeApiDto($typeApiDto);
-    }
-//endregion SECTION: Dto
-
 //region SECTION: Getters/Setters
     /**
      * @param string $active

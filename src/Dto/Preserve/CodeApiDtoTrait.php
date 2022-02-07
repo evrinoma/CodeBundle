@@ -8,28 +8,6 @@ use Evrinoma\DtoBundle\Dto\DtoInterface;
 
 trait CodeApiDtoTrait
 {
-//region SECTION: Dto
-    /**
-     * @param OwnerApiDtoInterface $ownerApiDto
-     *
-     * @return DtoInterface
-     */
-    public function setOwnerApiDto(OwnerApiDtoInterface $ownerApiDto): DtoInterface
-    {
-        return parent::setOwnerApiDto($ownerApiDto);
-    }
-
-    /**
-     * @param TypeApiDtoInterface $typeApiDto
-     *
-     * @return DtoInterface
-     */
-    public function setTypeApiDto(TypeApiDtoInterface $typeApiDto): DtoInterface
-    {
-        return parent::setTypeApiDto($typeApiDto);
-    }
-//endregion SECTION: Dto
-
 //region SECTION: Getters/Setters
     /**
      * @param string $active
