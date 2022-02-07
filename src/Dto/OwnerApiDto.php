@@ -4,41 +4,14 @@ namespace Evrinoma\CodeBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\Immutable\BriefTrait;
-use Evrinoma\DtoCommon\ValueObject\Immutable\DescriptionTrait;
-use Evrinoma\DtoCommon\ValueObject\Immutable\IdTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\BriefTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\DescriptionTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
-final class OwnerApiDto extends AbstractDto implements OwnerApiDtoInterface
+class OwnerApiDto extends AbstractDto implements OwnerApiDtoInterface
 {
     use IdTrait, DescriptionTrait, BriefTrait;
-
-//region SECTION: Private
-
-    /**
-     * @param int|null $id
-     */
-    private function setId(?int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @param string $brief
-     */
-    private function setBrief(string $brief): void
-    {
-        $this->brief = $brief;
-    }
-
-    /**
-     * @param string $description
-     */
-    private function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-//endregion Private
 
 //region SECTION: Dto
     public function toDto(Request $request): DtoInterface
