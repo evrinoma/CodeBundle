@@ -1,6 +1,6 @@
 <?php
 
-namespace Evrinoma\ContractBundle\Dto\Preserve;
+namespace Evrinoma\CodeBundle\Dto\Preserve;
 
 use Evrinoma\DtoCommon\ValueObject\Mutable\BriefInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdInterface;
