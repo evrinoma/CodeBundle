@@ -28,43 +28,45 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $this->setContainer($container);
+        if ('orm' === $container->getParameter('evrinoma.code.storage')) {
+            $this->setContainer($container);
 
-        $driver                    = $container->findDefinition('doctrine.orm.default_metadata_driver');
-        $referenceAnnotationReader = new Reference('annotations.reader');
+            $driver                    = $container->findDefinition('doctrine.orm.default_metadata_driver');
+            $referenceAnnotationReader = new Reference('annotations.reader');
 
-        $this->cleanMetadata($driver, [EvrinomaCodeExtension::ENTITY]);
+            $this->cleanMetadata($driver, [EvrinomaCodeExtension::ENTITY]);
 
-        /** load default entities*/
-        $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Define', '%s/Entity/Define');
-        $this->addResolveTargetEntity(
-            [
-                BaseOwner::class => [OwnerInterface::class => [],],
-                BaseType::class  => [TypeInterface::class => [],],
-            ],
-            false
-        );
+            /** load default entities*/
+            $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Define', '%s/Entity/Define');
+            $this->addResolveTargetEntity(
+                [
+                    BaseOwner::class => [OwnerInterface::class => [],],
+                    BaseType::class  => [TypeInterface::class => [],],
+                ],
+                false
+            );
 
-        $entityBunch = $container->getParameter('evrinoma.code.entity_bunch');
-        if ((strpos($entityBunch, EvrinomaCodeExtension::ENTITY) !== false)) {
-            $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Bunch', '%s/Entity/Bunch');
+            $entityBunch = $container->getParameter('evrinoma.code.entity_bunch');
+            if ((strpos($entityBunch, EvrinomaCodeExtension::ENTITY) !== false)) {
+                $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Bunch', '%s/Entity/Bunch');
+            }
+            $this->addResolveTargetEntity([$entityBunch => [BunchInterface::class => []],], false);
+
+            $entityCode = $container->getParameter('evrinoma.code.entity_code');
+
+            if ((strpos($entityCode, EvrinomaCodeExtension::ENTITY) !== false)) {
+                $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Code', '%s/Entity/Code');
+            }
+            $this->addResolveTargetEntity([$entityCode => [CodeInterface::class => []],], false);
+
+            $entityBind = $container->getParameter('evrinoma.code.entity_bind');
+
+            if ((strpos($entityBind, EvrinomaCodeExtension::ENTITY) !== false)) {
+                $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Bind', '%s/Entity/Bind');
+            }
+
+            $this->addResolveTargetEntity([$entityBind => [BindInterface::class => []],], false);
         }
-        $this->addResolveTargetEntity([$entityBunch => [BunchInterface::class => []],], false);
-
-        $entityCode = $container->getParameter('evrinoma.code.entity_code');
-
-        if ((strpos($entityCode, EvrinomaCodeExtension::ENTITY) !== false)) {
-            $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Code', '%s/Entity/Code');
-        }
-        $this->addResolveTargetEntity([$entityCode => [CodeInterface::class => []],], false);
-
-        $entityBind = $container->getParameter('evrinoma.code.entity_bind');
-
-        if ((strpos($entityBind, EvrinomaCodeExtension::ENTITY) !== false)) {
-            $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Bind', '%s/Entity/Bind');
-        }
-
-        $this->addResolveTargetEntity([$entityBind => [BindInterface::class => []],], false);
     }
 
 

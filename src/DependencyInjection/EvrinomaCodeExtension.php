@@ -90,7 +90,7 @@ class EvrinomaCodeExtension extends Extension
 
         $doctrineRegistry = null;
 
-        if (isset(self::$doctrineDrivers[$config['db_driver']])) {
+        if (isset(self::$doctrineDrivers[$config['db_driver']]) && 'orm' === $config['db_driver']) {
             $loader->load('doctrine.yml');
             $container->setAlias('evrinoma.'.$this->getAlias().'.doctrine_registry', new Alias(self::$doctrineDrivers[$config['db_driver']]['registry'], false));
             $doctrineRegistry = new Reference('evrinoma.'.$this->getAlias().'.doctrine_registry');
